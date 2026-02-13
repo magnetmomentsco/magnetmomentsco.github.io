@@ -1,0 +1,11 @@
+{
+  "name": "Magnet Moments Co.",
+  "short_name": "Magnet Moments",
+  "icons": [
+    { "src": "/assets/images/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/images/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#C77D8A",
+  "background_color": "#FFF8F0",
+  "display": "standalone"
+}

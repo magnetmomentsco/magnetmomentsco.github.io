@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#F5EDE4"/>
+    </linearGradient>
+    <linearGradient id="magnet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C77D8A"/>
+      <stop offset="100%" stop-color="#A25B6A"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded background -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <!-- Horseshoe magnet shape -->
+  <path d="M20 18 C20 18 14 18 14 30 C14 43 24 50 32 50 C40 50 50 43 50 30 C50 18 44 18 44 18 L44 28 C44 28 46 28 46 32 C46 40 40 45 32 45 C24 45 18 40 18 32 C18 28 20 28 20 28 Z" fill="url(#magnet)"/>
+  <!-- Magnetic field lines (sparkle accents) -->
+  <circle cx="32" cy="14" r="1.5" fill="#D4A574" opacity="0.8"/>
+  <circle cx="25" cy="11" r="1" fill="#D4A574" opacity="0.6"/>
+  <circle cx="39" cy="11" r="1" fill="#D4A574" opacity="0.6"/>
+  <!-- Poles (tips of magnet) -->
+  <rect x="16" y="16" width="8" height="5" rx="1.5" fill="#7A9D54"/>
+  <rect x="40" y="16" width="8" height="5" rx="1.5" fill="#7A9D54"/>
+</svg>
