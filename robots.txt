@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://magnetmomentsco.us/sitemap.xml
+
+# Disallow backup folder
+Disallow: /old-web-backup/

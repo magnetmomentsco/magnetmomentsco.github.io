@@ -1,0 +1,17 @@
+# Backup of original Shopify site
+old-web-backup/
+
+# Dependencies
+node_modules/
+
+# Playwright
+test-results/
+playwright-report/
+.playwright-mcp/
+
+# Screenshots used during development
+report-mobile-*.png
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Website Rebuild Report — Magnet Moments Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Design Tokens (same as main site) ── */
+    :root {
+      --color-primary: #C77D8A;
+      --color-primary-light: #E8B4BC;
+      --color-primary-dark: #A25B6A;
+      --color-secondary: #7A9D54;
+      --color-secondary-light: #A3C47E;
+      --color-accent: #D4A574;
+      --color-cream: #FFF8F0;
+      --color-cream-dark: #F5EDE0;
+      --color-charcoal: #2D2D2D;
+      --color-text: #4A4A4A;
+      --color-text-light: #7A7A7A;
+      --color-white: #FFFFFF;
+      --color-border: #E8E0D8;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-accent: 'Cormorant Garamond', Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-cream);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Report Header ── */
+    .report-header {
+      background: linear-gradient(135deg, var(--color-charcoal) 0%, #3d2e32 100%);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .report-header .badge {
+      display: inline-block;
+      background: var(--color-primary);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.25rem;
+    }
+    .report-header h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .report-header .subtitle {
+      font-family: var(--font-accent);
+      font-size: 1.2rem;
+      opacity: 0.7;
+      font-style: italic;
+    }
+    .report-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      max-width: 800px;
+      margin: -1.5rem auto 0;
+      background: var(--color-white);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 2;
+    }
+    .toc h2 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--color-charcoal);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+      columns: 2;
+      column-gap: 2rem;
+    }
+    .toc li {
+      counter-increment: toc;
+      padding: 0.3rem 0;
+    }
+    .toc li::before {
+      content: "0" counter(toc) ".";
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+      font-family: var(--font-mono);
+    }
+    .toc a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: var(--color-primary); }
+
+    /* ── Main content ── */
+    .report { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 2rem;
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      color: var(--color-charcoal);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--color-border);
+    }
+    .section h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--color-charcoal);
+      margin: 1.75rem 0 0.5rem;
+    }
+    .section p { margin-bottom: 1rem; }
+
+    /* ── Comparison cards ── */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .compare-card {
+      background: var(--color-white);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      border-left: 4px solid var(--color-border);
+    }
+    .compare-card.before { border-left-color: var(--color-text-light); }
+    .compare-card.after  { border-left-color: var(--color-secondary); }
+    .compare-card .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .compare-card.before .label { color: var(--color-text-light); }
+    .compare-card.after  .label { color: var(--color-secondary); }
+    .compare-card ul {
+      list-style: none;
+      font-size: 0.88rem;
+    }
+    .compare-card li {
+      padding: 0.2rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .compare-card.before li::before { content: "✗"; position: absolute; left: 0; color: #c0392b; font-weight: 700; }
+    .compare-card.after  li::before { content: "✓"; position: absolute; left: 0; color: var(--color-secondary); font-weight: 700; }
+
+    /* ── Color swatches ── */
+    .swatches {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0 1.5rem;
+    }
+    .swatch {
+      text-align: center;
+    }
+    .swatch-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto 0.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 3px solid white;
+    }
+    .swatch-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+    }
+    .swatch-hex {
+      font-size: 0.65rem;
+      color: var(--color-text-light);
+      font-family: var(--font-mono);
+    }
+
+    /* ── Tech stack list ── */
+    .tech-stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .tech-item {
+      background: var(--color-white);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--color-border);
+    }
+    .tech-item strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--color-charcoal);
+      margin-bottom: 0.15rem;
+    }
+    .tech-item span {
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+    }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--color-charcoal);
+      color: #e0e0e0;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.8;
+      overflow-x: auto;
+      white-space: pre;
+      margin: 1rem 0;
+      position: relative;
+    }
+    .code-block .label {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+    }
+    .code-block .cm  { color: #6a9955; }  /* comment */
+    .code-block .kw  { color: #c586c0; }  /* keyword */
+    .code-block .fn  { color: #dcdcaa; }  /* function */
+    .code-block .str { color: #ce9178; }  /* string */
+    .code-block .num { color: #b5cea8; }  /* number */
+    .code-block .op  { color: #d4d4d4; }  /* operator */
+
+    /* ── Diagram ── */
+    .diagram {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .diagram-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .diagram-box {
+      background: var(--color-cream);
+      border: 2px solid var(--color-border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      min-width: 120px;
+    }
+    .diagram-box.highlight {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: var(--color-primary-dark);
+    }
+    .diagram-box.green {
+      background: #e8f5e1;
+      border-color: var(--color-secondary);
+      color: #3d6b1e;
+    }
+    .diagram-box.gold {
+      background: #fdf3e7;
+      border-color: var(--color-accent);
+      color: #8a6530;
+    }
+    .diagram-arrow {
+      font-size: 1.2rem;
+      color: var(--color-text-light);
+    }
+    .diagram-caption {
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--color-white);
+      border-left: 4px solid var(--color-primary);
+      border-radius: 0 10px 10px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      font-size: 0.92rem;
+    }
+    .callout.idea { border-left-color: var(--color-accent); }
+    .callout.success { border-left-color: var(--color-secondary); }
+    .callout.warning { border-left-color: #e74c3c; }
+    .callout .callout-title {
+      font-weight: 700;
+      color: var(--color-charcoal);
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* ── Pros/Cons table ── */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .pros, .cons {
+      background: var(--color-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .pros { border-top: 3px solid var(--color-secondary); }
+    .cons { border-top: 3px solid var(--color-primary); }
+    .pros h4, .cons h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .pros h4 { color: var(--color-secondary); }
+    .cons h4 { color: var(--color-primary); }
+    .pros li, .cons li {
+      font-size: 0.85rem;
+      padding: 0.2rem 0;
+    }
+
+    /* ── File tree ── */
+    .file-tree {
+      background: var(--color-charcoal);
+      color: #ccc;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.8;
+      white-space: pre;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    .file-tree .dir { color: var(--color-accent); }
+    .file-tree .file { color: #9cdcfe; }
+    .file-tree .comment { color: #6a9955; }
+
+    /* ── Table ── */
+    .report table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+      background: var(--color-white);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .report th {
+      background: var(--color-cream-dark);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--color-charcoal);
+    }
+    .report td {
+      padding: 0.65rem 1rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── Table responsive wrapper ── */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0;
+    }
+    .table-wrap table { margin: 0; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .compare, .pros-cons { grid-template-columns: 1fr; }
+      .toc ol { columns: 1; }
+      .toc { padding: 1.25rem 1rem; }
+      .report-header { padding: 2.5rem 1rem 2rem; }
+      .report-header h1 { font-size: 1.6rem; }
+      .report-meta { flex-direction: column; gap: 0.25rem; }
+      .report { padding: 2rem 1rem 4rem; }
+      .diagram-flow { flex-direction: column; }
+      .diagram-arrow { transform: rotate(90deg); }
+      .callout { padding: 1rem; }
+      .section h2 { font-size: 1.3rem; }
+      .report th, .report td { padding: 0.5rem 0.6rem; font-size: 0.78rem; }
+      .color-palette { gap: 0.5rem; }
+      .color-swatch { width: 48px; height: 48px; }
+      .tech-stack { grid-template-columns: 1fr; }
+      .code-block { font-size: 0.75rem; padding: 1rem; }
+      code { word-break: break-all; }
+      .file-tree { font-size: 0.7rem; padding: 1rem; }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .report-header { background: white; color: black; border-bottom: 2px solid #ccc; }
+      .toc { box-shadow: none; border: 1px solid #ccc; }
+      body { background: white; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- HEADER                                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <header class="report-header">
+    <span class="badge">Internal Document</span>
+    <h1>Website Rebuild Report</h1>
+    <p class="subtitle">Magnet Moments Co. — From Shopify Theme to Modern Static Site</p>
+    <div class="report-meta">
+      <span>Prepared: February 13, 2026</span>
+      <span>For: Alyssa </span>
+      <span>By: AJ </span>
+      <span>Version: 1.0</span>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- TABLE OF CONTENTS                            -->
+  <!-- ════════════════════════════════════════════ -->
+  <nav class="toc">
+    <h2>Contents</h2>
+    <p style="margin-bottom:0.5rem; font-size:0.9rem;"><span style="color:var(--color-primary); font-weight:700; font-family:var(--font-mono); font-size:0.8rem; margin-right:0.5rem;">00.</span><a href="#summary" style="color:var(--color-charcoal); text-decoration:none;">Summary — The Big Picture</a></p>
+    <ol>
+      <li><a href="#current-state">The Original Website (Before)</a></li>
+      <li><a href="#improvements">What We Improved</a></li>
+      <li><a href="#design">Design Decisions — Colors, Theme &amp; Typography</a></li>
+      <li><a href="#tech">Technology Stack &amp; Why We Chose It</a></li>
+      <li><a href="#backend">What's Happening in the Backend</a></li>
+      <li><a href="#shopify-redirect">Why Custom Magnets Redirect to Shopify</a></li>
+      <li><a href="#future">Discussion: Self-Hosted Image Uploads</a></li>
+      <li><a href="#no-shopify">Discussion: Removing Shopify Entirely</a></li>
+      <li><a href="#testing">Accessibility &amp; Mobile Testing Results</a></li>
+    </ol>
+  </nav>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- REPORT BODY                                  -->
+  <!-- ════════════════════════════════════════════ -->
+  <main class="report">
+
+    <!-- ── 00. Summary ── -->
+    <section class="section" id="summary">
+      <span class="section-num">00</span>
+      <h2>Summary — The Big Picture</h2>
+
+      <p>
+        Hi Alyssa! Here's the short version of everything I did, why I did it, and where things stand.
+      </p>
+
+      <h3>What I built</h3>
+      <p>
+        I took your Magnet Moments Co. website off of Shopify's built-in storefront (which cost $39/month and looked generic) 
+        and rebuilt it from scratch as a beautiful, custom-designed website. The new site has <strong>12 pages</strong> — 
+        including a full Shop, Events booking, Wholesale inquiry, your About story, FAQ, Contact, and 4 policy pages — 
+        all designed to match your brand's warm, handcrafted personality.
+      </p>
+
+      <h3>How shopping works now</h3>
+      <p>
+        Customers can browse and add products to their cart directly on your website — no more bouncing to a separate Shopify page. 
+        A slide-out cart drawer shows what they've added, and when they're ready to pay, they go to Shopify's secure checkout. 
+        <strong>Shopify still handles all payments and orders</strong> — you still see everything in your Shopify admin, 
+        print shipping labels there, and manage inventory the same way. Nothing changes on your end.
+      </p>
+      <p>
+        The only exception: the 2 custom photo magnet products still link to Shopify's product page, because customers need to 
+        upload their photos there. The other 8 products work entirely on-site.
+      </p>
+
+      <h3>What it costs</h3>
+      <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>Website hosting</strong></td>
+            <td><strong>$0/month</strong> — hosted free on GitHub Pages</td>
+          </tr>
+          <tr>
+            <td><strong>Shopify</strong></td>
+            <td>Still needed for checkout &amp; payments (via their free Storefront API)</td>
+          </tr>
+          <tr>
+            <td><strong>Domain</strong></td>
+            <td>magnetmomentsco.us — you already own this, no extra cost</td>
+          </tr>
+          <tr>
+            <td><strong>Forms</strong></td>
+            <td>Contact, Events, &amp; Wholesale forms email you directly — free</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>What's different for you day-to-day?</h3>
+      <p>
+        <strong>Nothing changes about how you run the business.</strong> Orders still come through Shopify. 
+        You still manage products, print labels, and handle customer service the same way. 
+        The website is just the "front door" — it's prettier, faster, and free to host.
+      </p>
+
+      <h3>Future options (discussed in this report)</h3>
+      <ul style="font-size:0.92rem; line-height:1.8;">
+        <li><strong>Self-hosted image uploads</strong> (Section 07) — If you want custom magnet customers to upload photos 
+        directly on your site instead of going to Shopify. Would need a small server (~$5–6/month).</li>
+        <li><strong>Removing Shopify entirely</strong> (Section 08) — If you ever want to ditch Shopify completely, 
+        we could use Stripe for payments (same fees: 2.9% + 30¢). Would need a server + about 1–2 weeks of development.</li>
+      </ul>
+      <p>
+        Neither of these is urgent — they're options for the future if you want them.
+      </p>
+
+      <h3>Quality &amp; accessibility</h3>
+      <p>
+        The site was tested with <strong>205 automated tests</strong> across desktop, mobile, and small-screen devices. 
+        All tests passed. The site meets WCAG 2.1 AA accessibility standards, meaning it works well for 
+        people using screen readers, keyboard navigation, or other assistive technologies.
+      </p>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        You now have a professional, fast, mobile-friendly website that costs $0/month to host, 
+        looks and feels like <em>your</em> brand (not a Shopify template), and keeps all your existing 
+        Shopify checkout &amp; order management working exactly as before.
+      </div>
+    </section>
+
+    <!-- ── Demo Link ── -->
+    <div style="text-align:center; margin: 2.5rem auto 3rem; padding: 2rem 1.5rem; background: linear-gradient(135deg, var(--color-white), var(--color-cream)); border: 2px solid var(--color-primary-light); border-radius: 16px; max-width: 540px;">
+      <p style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-charcoal); margin-bottom: 0.5rem; font-weight: 600;">✨ See it live</p>
+      <p style="font-size: 0.92rem; color: var(--color-text-light); margin-bottom: 1.25rem; line-height: 1.6;">Here's the link to the website demo — take a look around!<br>Scroll down for a detailed breakdown of every change.</p>
+      <a href="index.html" style="display: inline-block; background: var(--color-primary); color: #fff; padding: 0.85rem 2.25rem; border-radius: 50px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; text-decoration: none; letter-spacing: 0.02em; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 14px rgba(199,125,138,0.35);" onmouseover="this.style.background='var(--color-primary-dark)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='var(--color-primary)'; this.style.transform='translateY(0)';">Visit the Website →</a>
+    </div>
+
+    <!-- ── 01. Current State ── -->
+    <section class="section" id="current-state">
+      <span class="section-num">01</span>
+      <h2>The Original Website (Before)</h2>
+      <p>
+        The original <strong>magnetmomentsco.us</strong> was a standard Shopify storefront using the <em>Starter</em> theme.
+        While Shopify is excellent for e-commerce, the default theme left little room for brand storytelling — the site felt like
+        a generic product catalog rather than a warm, personality-driven small business.
+      </p>
+
+      <h3>What the old site had</h3>
+      <div class="compare">
+        <div class="compare-card before">
+          <span class="label">❌ Limitations</span>
+          <ul>
+            <li>Default Shopify Starter theme — minimal customization</li>
+            <li>No dedicated About page telling Alyssa's story</li>
+            <li>No Events page (event magnets are a major revenue stream)</li>
+            <li>No Wholesale inquiry page</li>
+            <li>No FAQ page — common questions unanswered</li>
+            <li>No SEO structured data (JSON-LD schemas)</li>
+            <li>Limited control over page speed &amp; Core Web Vitals</li>
+            <li>Paying for Shopify hosting ($39/mo) for mostly static content</li>
+            <li>Entire site locked inside Shopify's ecosystem</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">✓ What it did have</span>
+          <ul>
+            <li>Working product catalog with 11 products</li>
+            <li>Shopify checkout &amp; payment processing</li>
+            <li>Shopify inventory management</li>
+            <li>Basic analytics (GA4 + Facebook Pixel installed)</li>
+            <li>Custom domain: magnetmomentsco.us</li>
+            <li>SSL certificate</li>
+            <li>Photo upload functionality for custom magnets</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">📊 Key Takeaway</div>
+        The old site worked as a shop, but it was missing the <em>brand experience</em> —
+        the events page, the wholesale funnel, the founder's story, and the SEO infrastructure needed for organic growth.
+      </div>
+    </section>
+
+    <!-- ── 02. Improvements ── -->
+    <section class="section" id="improvements">
+      <span class="section-num">02</span>
+      <h2>What We Improved</h2>
+
+      <h3>New pages built from scratch</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Page</th><th>Purpose</th><th>Key Features</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Homepage</strong></td><td>Brand experience &amp; conversion</td><td>Hero with stats, value propositions, featured products, testimonials, newsletter popup</td></tr>
+          <tr><td><strong>Shop</strong></td><td>Product browsing &amp; add-to-cart</td><td>Category filters, 10 products (8 Add to Cart + 2 custom magnet links), in-page cart drawer</td></tr>
+          <tr><td><strong>Events</strong></td><td>Event booking funnel</td><td>4 pricing tiers, 3-step process, booking form</td></tr>
+          <tr><td><strong>Wholesale</strong></td><td>B2B lead generation</td><td>Benefits grid, use cases, bulk quote form</td></tr>
+          <tr><td><strong>About</strong></td><td>Brand storytelling</td><td>Alyssa's story, company values, lifestyle imagery</td></tr>
+          <tr><td><strong>Contact</strong></td><td>Customer support</td><td>Contact form, business info, response times</td></tr>
+          <tr><td><strong>FAQ</strong></td><td>Self-service support</td><td>9 questions, accordion UI, FAQPage schema for Google</td></tr>
+          <tr><td><strong>4 Policy Pages</strong></td><td>Legal compliance</td><td>Shipping, Refund, Terms, Privacy</td></tr>
+          <tr><td><strong>404 Page</strong></td><td>Error handling</td><td>Branded 404 with navigation back</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Technical improvements</h3>
+      <div class="compare">
+        <div class="compare-card before">
+          <span class="label">Before</span>
+          <ul>
+            <li>Shopify-hosted storefront — $39/mo Basic plan (entire site lived on Shopify)</li>
+            <li>No structured data / JSON-LD</li>
+            <li>No sitemap control</li>
+            <li>No robots.txt control</li>
+            <li>Generic meta tags</li>
+            <li>No scroll animations or micro-interactions</li>
+            <li>No newsletter popup</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">After</span>
+          <ul>
+            <li>GitHub Pages — $0/mo hosting (Shopify still handles checkout &amp; payments via free Storefront API)</li>
+            <li>Organization + LocalBusiness + FAQPage schemas</li>
+            <li>Custom sitemap.xml with page priorities</li>
+            <li>Custom robots.txt</li>
+            <li>Full OG / Twitter Card meta on every page</li>
+            <li>IntersectionObserver scroll animations</li>
+            <li>FREESHIP newsletter popup with form</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Shopping experience</h3>
+      <div class="compare">
+        <div class="compare-card before">
+          <span class="label">Before</span>
+          <ul>
+            <li>Users click "Shop Now" → leaves to Shopify domain</li>
+            <li>Two separate browsing experiences</li>
+            <li>Brand inconsistency between sites</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">After</span>
+          <ul>
+            <li>"Add to Cart" works directly on our pages</li>
+            <li>Slide-out cart drawer shows items, quantities, subtotal</li>
+            <li>Only final checkout redirects to Shopify (PCI requirement)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>File structure</h3>
+      <div class="file-tree">
+<span class="dir">magnetmomentsco.github.io/</span>
+├── <span class="file">index.html</span>             <span class="comment">← Homepage (hero, products, testimonials)</span>
+├── <span class="dir">shop/</span><span class="file">index.html</span>        <span class="comment">← Full product catalog + filters</span>
+├── <span class="dir">events/</span><span class="file">index.html</span>      <span class="comment">← Event booking page</span>
+├── <span class="dir">wholesale/</span><span class="file">index.html</span>   <span class="comment">← Bulk orders &amp; wholesale inquiry</span>
+├── <span class="dir">about/</span><span class="file">index.html</span>       <span class="comment">← Alyssa's story</span>
+├── <span class="dir">contact/</span><span class="file">index.html</span>     <span class="comment">← Contact form</span>
+├── <span class="dir">faq/</span><span class="file">index.html</span>         <span class="comment">← 9-question FAQ</span>
+├── <span class="dir">policies/</span>
+│   ├── <span class="dir">shipping/</span><span class="file">index.html</span>
+│   ├── <span class="dir">refund/</span><span class="file">index.html</span>
+│   ├── <span class="dir">terms/</span><span class="file">index.html</span>
+│   └── <span class="dir">privacy/</span><span class="file">index.html</span>
+├── <span class="dir">assets/</span>
+│   ├── <span class="dir">css/</span><span class="file">style.css</span>      <span class="comment">← ~2,190 lines, full design system</span>
+│   └── <span class="dir">js/</span>
+│       ├── <span class="file">main.js</span>          <span class="comment">← Nav, animations, FAQ accordion, popup</span>
+│       └── <span class="file">shopify-cart.js</span>  <span class="comment">← Cart API integration (GraphQL)</span>
+├── <span class="file">404.html</span>
+├── <span class="file">robots.txt</span>
+├── <span class="file">sitemap.xml</span>
+├── <span class="file">CNAME</span>                   <span class="comment">← magnetmomentsco.us</span>
+└── <span class="comment">← Full wget mirror of original site (644 MB)</span>
+      </div>
+    </section>
+
+    <!-- ── 03. Design Decisions ── -->
+    <section class="section" id="design">
+      <span class="section-num">03</span>
+      <h2>Design Decisions — Colors, Theme &amp; Typography</h2>
+
+      <h3>Color palette</h3>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#C77D8A;"></div>
+          <div class="swatch-name">Dusty Rose</div>
+          <div class="swatch-hex">#C77D8A</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#A25B6A;"></div>
+          <div class="swatch-name">Deep Rose</div>
+          <div class="swatch-hex">#A25B6A</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#7A9D54;"></div>
+          <div class="swatch-name">Sage Green</div>
+          <div class="swatch-hex">#7A9D54</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#D4A574;"></div>
+          <div class="swatch-name">Warm Gold</div>
+          <div class="swatch-hex">#D4A574</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#FFF8F0;"></div>
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-hex">#FFF8F0</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#2D2D2D;"></div>
+          <div class="swatch-name">Charcoal</div>
+          <div class="swatch-hex">#2D2D2D</div>
+        </div>
+      </div>
+
+      <h3>Why these colors?</h3>
+      <p>
+        <strong>Dusty Rose (#C77D8A)</strong> is the primary brand color. It was chosen because Magnet Moments Co. is a 
+        family-run business with a warm, feminine, handcrafted feel. Dusty rose communicates approachability, creativity, and care —
+        without being overly "girly." It's the most common color in the original product photography (packaging, backgrounds, accents on magnets), 
+        so it creates visual continuity between the site and the products.
+      </p>
+      <p>
+        <strong>Sage Green (#7A9D54)</strong> provides earthy contrast. It's used for CTAs that need to stand apart from the primary buttons 
+        (like "Book an Event" vs "Shop Now"), and it evokes the natural, handmade quality of the products. Sage + dusty rose is a classic pairing 
+        in lifestyle branding — it feels like a cozy kitchen or a well-curated fridge.
+      </p>
+      <p>
+        <strong>Warm Gold (#D4A574)</strong> is the accent used sparingly for badges, highlights, and hover states. 
+        It adds a subtle premium feel without the "luxury brand" coldness of pure gold. It complements the warm cream background.
+      </p>
+      <p>
+        <strong>Cream (#FFF8F0)</strong> replaces harsh white as the background color. Pure white (#FFF) feels clinical and stark — 
+        cream feels warm, inviting, and "homey," which matches the brand's personality. The slight warmth also makes the product photos 
+        (which are shot in warm lighting) feel more natural.
+      </p>
+
+      <h3>Typography</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Font</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Headings</strong></td>
+            <td>Playfair Display</td>
+            <td>Elegant serif with personality. Feels editorial and refined but not stuffy. Perfect for a creative brand that wants to be taken seriously.</td>
+          </tr>
+          <tr>
+            <td><strong>Body text</strong></td>
+            <td>Inter</td>
+            <td>The gold standard of UI sans-serifs. Highly legible at small sizes, excellent on screens, and feels modern without being trendy.</td>
+          </tr>
+          <tr>
+            <td><strong>Accents</strong></td>
+            <td>Cormorant Garamond</td>
+            <td>Used for the hero subtitle, pull quotes, and italic accents. Adds a handwritten elegance that complements Playfair. Pairs beautifully with the serif+sans combo.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Overall theme rationale</h3>
+      <p>
+        The design system follows a <strong>"warm minimalism"</strong> philosophy. The site should feel like walking into a cozy, 
+        well-lit craft studio — not a Silicon Valley startup landing page and not a cluttered Etsy shop. 
+        Every design choice was made to support three goals:
+      </p>
+      <ol style="margin: 0.5rem 0 1rem 1.5rem; font-size: 0.92rem;">
+        <li><strong>Trust</strong> — clean layout, consistent spacing, professional typography</li>
+        <li><strong>Warmth</strong> — cream backgrounds, soft colors, rounded corners, gentle animations</li>
+        <li><strong>Conversion</strong> — clear CTAs, product-first layout, minimal friction to cart/checkout</li>
+      </ol>
+    </section>
+
+    <!-- ── 04. Technology ── -->
+    <section class="section" id="tech">
+      <span class="section-num">04</span>
+      <h2>Technology Stack &amp; Why We Chose It</h2>
+
+      <div class="tech-stack">
+        <div class="tech-item">
+          <strong>HTML5 + CSS3 + Vanilla JS</strong>
+          <span>Zero build step, zero framework. Just files.</span>
+        </div>
+        <div class="tech-item">
+          <strong>GitHub Pages</strong>
+          <span>Free hosting, CDN, SSL, deploys on git push</span>
+        </div>
+        <div class="tech-item">
+          <strong>Shopify Storefront API</strong>
+          <span>Cart &amp; checkout via GraphQL</span>
+        </div>
+        <div class="tech-item">
+          <strong>Formsubmit.co</strong>
+          <span>Contact / booking forms — no server needed</span>
+        </div>
+        <div class="tech-item">
+          <strong>Google Fonts</strong>
+          <span>Playfair Display, Inter, Cormorant Garamond</span>
+        </div>
+        <div class="tech-item">
+          <strong>GA4 + Facebook Pixel</strong>
+          <span>Analytics carried over from original site</span>
+        </div>
+      </div>
+
+      <h3>Why vanilla HTML/CSS/JS over React, Next.js, etc.?</h3>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>✓ Pros of our approach</h4>
+          <ul>
+            <li>Zero build step — edit HTML, push to GitHub, done</li>
+            <li>No Node.js, npm, webpack, or framework updates to maintain</li>
+            <li>Loads in &lt;1 second — no JavaScript framework overhead</li>
+            <li>Anyone can edit — no React/TypeScript knowledge needed</li>
+            <li>GitHub Pages = $0/month hosting forever</li>
+            <li>No dependency vulnerabilities to patch</li>
+            <li>Perfect Lighthouse scores achievable</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>✗ Trade-offs</h4>
+          <ul>
+            <li>Repeating navbar/footer HTML across 12 files</li>
+            <li>No component reuse (no &lt;Header /&gt; component)</li>
+            <li>Adding a new page means copying boilerplate</li>
+            <li>CSS file is large (~2,190 lines) — no CSS modules</li>
+            <li>No server-side rendering or dynamic routes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">💡 Why this was the right call</div>
+        For a small business with ~12 pages, the simplicity wins outweigh the trade-offs. 
+        There are no API routes to maintain, no Node runtime to keep updated, no build pipeline to break. 
+        Alyssa or any future developer can open any HTML file, understand it immediately, and make changes. 
+        The site will still work exactly the same in 5 years with zero maintenance.
+      </div>
+    </section>
+
+    <!-- ── 05. Backend ── -->
+    <section class="section" id="backend">
+      <span class="section-num">05</span>
+      <h2>What's Happening in the Backend</h2>
+
+      <p>
+        The site is "static" — there is no traditional backend server. But there <em>is</em> backend logic happening, 
+        it just runs in two places: the <strong>browser</strong> and <strong>Shopify's servers</strong>.
+      </p>
+
+      <h3>How the cart works (Shopify Storefront API)</h3>
+      <p>
+        When a user lands on any page, our <code>shopify-cart.js</code> makes a GraphQL request to Shopify's Storefront API 
+        to either <strong>create a new cart</strong> or <strong>restore an existing one</strong> from <code>localStorage</code>.
+      </p>
+
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">User visits page</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">shopify-cart.js</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Shopify Storefront API<br><small>GraphQL @ 2025-01</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Cart created / restored</div>
+        </div>
+        <div class="diagram-caption">On page load: cart is created via <code>cartCreate</code> mutation or fetched via <code>cart</code> query</div>
+      </div>
+
+      <h3>The add-to-cart flow</h3>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">Click "Add to Cart"</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">cartLinesAdd<br><small>GraphQL mutation</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Shopify returns<br>updated cart</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Cart drawer opens<br>with item details</div>
+        </div>
+        <div class="diagram-caption">Each button has a <code>data-variant-id</code> attribute with the Shopify variant GID</div>
+      </div>
+
+      <h3>The checkout flow</h3>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">Click "Checkout →"</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">cart.checkoutUrl</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Shopify Checkout<br><small>magnetmomentsco.us/cart/c/…</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Payment processed<br>by Shopify</div>
+        </div>
+        <div class="diagram-caption">The <code>checkoutUrl</code> is returned by Shopify when the cart is created. This is the only time users leave our site.</div>
+      </div>
+
+      <h3>GraphQL mutations we use</h3>
+      <div class="code-block">
+        <span class="label">GraphQL</span>
+<span class="cm"># 1. Create a new empty cart</span>
+<span class="kw">mutation</span> { <span class="fn">cartCreate</span>(input: {}) {
+  cart { id checkoutUrl lines(first: 50) { edges { node { ... } } } }
+} }
+
+<span class="cm"># 2. Add an item</span>
+<span class="kw">mutation</span>($cartId: ID!, $lines: [CartLineInput!]!) {
+  <span class="fn">cartLinesAdd</span>(cartId: $cartId, lines: $lines) {
+    cart { ...CartFields }
+  }
+}
+
+<span class="cm"># 3. Update quantity</span>
+<span class="kw">mutation</span> { <span class="fn">cartLinesUpdate</span>(cartId: $cartId, lines: $lines) { ... } }
+
+<span class="cm"># 4. Remove item</span>
+<span class="kw">mutation</span> { <span class="fn">cartLinesRemove</span>(cartId: $cartId, lineIds: $lineIds) { ... } }
+      </div>
+
+      <h3>Authentication</h3>
+      <p>
+        All API calls include a <strong>Storefront Access Token</strong> in the HTTP header. This is a <em>public</em> token 
+        (safe to include in client-side JavaScript) — it can only read product data and manage carts, not access admin functions.
+      </p>
+      <div class="code-block">
+        <span class="label">HTTP Header</span>
+X-Shopify-Storefront-Access-Token: <span class="str">3ed866388b8a983188443f1d808fd561</span>
+      </div>
+
+      <h3>Forms (contact, events, wholesale)</h3>
+      <p>
+        All forms submit to <strong>Formsubmit.co</strong>, a free service that accepts POST form data and forwards it as an email 
+        to <code>alyssa@magnetmomentsco.us</code>. Features include honeypot spam protection, CAPTCHA, custom redirect after submission, 
+        and email templating — all with zero backend code.
+      </p>
+
+      <h3>Why we had to ditch the JS Buy SDK</h3>
+      <div class="callout">
+        <div class="callout-title">🐛 Bug we discovered &amp; fixed</div>
+        We initially used Shopify's official <strong>JS Buy SDK v2</strong> (<code>sdks.shopifycdn.com/js-buy-sdk/v2/latest/</code>), 
+        but it silently failed — the "Add to Cart" button showed "Adding…" but the cart never populated.
+        <br><br>
+        <strong>Root cause:</strong> The JS Buy SDK v2 internally uses the <code>checkoutCreate</code> GraphQL mutation, which 
+        <strong>Shopify removed entirely</strong> from API version <code>2025-01</code>. The SDK was sending mutations to a dead endpoint.
+        <br><br>
+        <strong>Fix:</strong> We replaced the SDK with direct <code>fetch()</code> calls to the Storefront GraphQL API using the 
+        modern <strong>Cart API</strong> (<code>cartCreate</code>, <code>cartLinesAdd</code>, etc.). This also eliminated the ~40KB SDK 
+        dependency — the entire cart module is now 310 lines of vanilla JS with zero external dependencies.
+      </div>
+    </section>
+
+    <!-- ── 06. Shopify Redirect ── -->
+    <section class="section" id="shopify-redirect">
+      <span class="section-num">06</span>
+      <h2>Why Custom Magnets Redirect to Shopify</h2>
+
+      <p>
+        Of the 10 products on our site, <strong>two are custom photo magnets</strong> (2×2 and 2×3 sets). These require customers to
+        <strong>upload their own photos</strong> before ordering. Unlike the pre-made sets (Golden Girls, The Office, etc.) 
+        which have a fixed design and can be added to cart with a single click, custom magnets need a file upload step.
+      </p>
+
+      <h3>Why we can't do this on our static site</h3>
+      <div class="compare">
+        <div class="compare-card before">
+          <span class="label">The problem</span>
+          <ul>
+            <li>GitHub Pages is static — no server to receive file uploads</li>
+            <li>Shopify's Storefront API does not support file attachments on line items</li>
+            <li>Custom magnets need the photos <em>attached to the order</em> so Alyssa can print them</li>
+            <li>Shopify's product page handles this with their built-in file upload field</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">Our solution</span>
+          <ul>
+            <li>Pre-made products → "Add to Cart" button (stays on-site)</li>
+            <li>Custom photo magnets → "View &amp; Customize →" link (opens Shopify)</li>
+            <li>Clear visual distinction between the two button types</li>
+            <li>After checkout, all orders appear in the same Shopify admin</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="diagram">
+        <p style="font-weight:600; margin-bottom:0.75rem; font-size:0.9rem;">Pre-made magnets (8 products)</p>
+        <div class="diagram-flow">
+          <div class="diagram-box green">Our site</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Add to Cart</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Cart drawer</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Shopify Checkout</div>
+        </div>
+        <br>
+        <p style="font-weight:600; margin-bottom:0.75rem; font-size:0.9rem;">Custom photo magnets (2 products)</p>
+        <div class="diagram-flow">
+          <div class="diagram-box green">Our site</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">"View &amp; Customize →"</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Shopify product page<br><small>(photo upload here)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Shopify Checkout</div>
+        </div>
+        <div class="diagram-caption">Only 2 out of 10 products leave the site early. The other 8 stay fully on-site until checkout.</div>
+      </div>
+    </section>
+
+    <!-- ── 07. Future Discussion ── -->
+    <section class="section" id="future">
+      <span class="section-num">07</span>
+      <h2>Discussion: Self-Hosted Image Uploads</h2>
+
+      <div class="callout idea">
+        <div class="callout-title">💬 The question</div>
+        "Can we handle photo uploads ourselves? If we have a web server with the domain, we could have a database and store images there, 
+        right? Then users would never have to leave our site."
+      </div>
+
+      <h3>Short answer: Yes — with a real web server</h3>
+      <p>
+        Right now the site is hosted on <strong>GitHub Pages</strong>, which is a <strong>static file host</strong>. 
+        It serves HTML/CSS/JS files, but it cannot execute server-side code, receive file uploads, or connect to a database.
+        That's the constraint.
+      </p>
+      <p>
+        If we moved to (or added) a proper web server, we could absolutely handle the full custom magnet flow in-house.
+        Here's what that would look like:
+      </p>
+
+      <h3>Architecture: Self-hosted custom magnets</h3>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box green">User selects<br>"Custom Magnets"</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Upload form<br><small>(on our site)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Our server<br><small>(receives files)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Store images<br><small>(DB / S3 / disk)</small></div>
+        </div>
+        <div class="diagram-caption">With a backend server, we can receive file uploads and store them ourselves</div>
+      </div>
+
+      <h3>What we would need</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Options</th><th>Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Web server</strong></td>
+            <td>Node.js (Express), Python (Flask/Django), PHP, or Go</td>
+            <td>
+              $5–$12/mo VPS (DigitalOcean, Hetzner, Railway)<br>
+              <small style="color:#7A9D54;">Free alternatives: Render, Railway free tier, Vercel/Netlify serverless, InfinityFree (PHP + MySQL)</small>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Image storage</strong></td>
+            <td>AWS S3, Cloudflare R2, or local disk on the VPS</td>
+            <td>$0–$5/mo (R2 is free up to 10GB)</td>
+          </tr>
+          <tr>
+            <td><strong>Database</strong></td>
+            <td>SQLite (free, on disk), PostgreSQL, or MySQL</td>
+            <td>$0 (SQLite) to $5/mo</td>
+          </tr>
+          <tr>
+            <td><strong>Domain / DNS</strong></td>
+            <td>Point magnetmomentsco.us to the VPS instead of GitHub Pages</td>
+            <td>Already have the domain — $0 extra</td>
+          </tr>
+          <tr>
+            <td><strong>SSL</strong></td>
+            <td>Let's Encrypt (free, auto-renewing)</td>
+            <td>$0</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>How it would work</h3>
+      <div class="code-block">
+        <span class="label">Conceptual Flow</span>
+<span class="cm">// 1. User fills out the custom magnet form on our site</span>
+<span class="cm">//    - Selects size (2x2 or 2x3), quantity (6/9/12)</span>
+<span class="cm">//    - Drags & drops their photos</span>
+
+<span class="cm">// 2. JavaScript uploads photos to OUR server</span>
+<span class="kw">POST</span> /api/upload  →  Server saves images to S3/R2/disk
+                   →  Returns image URLs + order reference ID
+
+<span class="cm">// 3. We create a Shopify cart with the custom line item</span>
+<span class="cm">//    Shopify line items support "customAttributes" (key/value pairs)</span>
+<span class="kw">mutation</span> {
+  <span class="fn">cartLinesAdd</span>(cartId: $cartId, lines: [{
+    merchandiseId: <span class="str">"gid://shopify/ProductVariant/532274..."</span>,
+    quantity: <span class="num">1</span>,
+    attributes: [
+      { key: <span class="str">"_uploaded_photos"</span>, value: <span class="str">"https://our-server.com/uploads/abc123"</span> },
+      { key: <span class="str">"_photo_count"</span>, value: <span class="str">"6"</span> }
+    ]
+  }])
+}
+
+<span class="cm">// 4. Alyssa sees the order in Shopify admin with a link to the photos</span>
+<span class="cm">// 5. She clicks the link, downloads the photos, prints the magnets</span>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Key insight: Shopify line items support custom attributes</div>
+        The Storefront API's <code>cartLinesAdd</code> mutation accepts an <code>attributes</code> array on each line item. 
+        We can attach a URL pointing to the uploaded photos — so even though the images live on our server, 
+        the order in Shopify admin will contain a clickable link to them. Alyssa's workflow wouldn't change at all.
+      </div>
+
+      <h3>Pros &amp; cons of self-hosting</h3>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>✓ Advantages</h4>
+          <ul>
+            <li>Users never leave our site — 100% on-brand experience</li>
+            <li>Custom upload UI (drag &amp; drop, preview, crop, arrange)</li>
+            <li>Photo validation before checkout (size, resolution, format)</li>
+            <li>Could offer live magnet preview with uploaded photos</li>
+            <li>Full control over the data pipeline</li>
+            <li>No Shopify dependency for the upload step</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>✗ Trade-offs</h4>
+          <ul>
+            <li>Requires a server ($5–12/mo, or free-tier with limits) — no longer purely static</li>
+            <li>Server maintenance: updates, security patches, uptime monitoring</li>
+            <li>Need to handle file validation, size limits, malware scanning</li>
+            <li>Image storage grows over time — need cleanup policy</li>
+            <li>More complex deployment (not just git push anymore)</li>
+            <li>SSL setup &amp; renewal (though Let's Encrypt automates this)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Easiest path to get there</h3>
+      <p>If we decide to go this route, here's the simplest approach:</p>
+
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Step</th><th>Action</th><th>Difficulty</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Set up a small VPS (DigitalOcean $6/mo droplet, Railway free tier, or Render free tier)</td>
+            <td>Easy — 30 min</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Write a minimal Node.js/Express server with one endpoint: <code>POST /api/upload</code></td>
+            <td>Easy — 1 hour</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Use Cloudflare R2 for image storage (free up to 10GB/mo, S3-compatible)</td>
+            <td>Easy — 30 min</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Build a custom upload UI on the shop page (drag &amp; drop with preview)</td>
+            <td>Medium — 3 hours</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Attach uploaded image URLs to Shopify cart line items via <code>attributes</code></td>
+            <td>Easy — already supported by our cart code</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Point DNS to the VPS and serve the static site + API from the same server</td>
+            <td>Easy — 15 min</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="callout idea">
+        <div class="callout-title">🤔 Hybrid approach (keep it simple for now)</div>
+        We could also keep GitHub Pages for the static site and run just the upload API on a separate subdomain 
+        like <code>api.magnetmomentsco.us</code>. This way the main site stays free and zero-maintenance, 
+        and only the upload endpoint needs a server. Best of both worlds.
+        <br><br>
+        <strong>Total estimated cost:</strong> $5–6/month (tiny VPS) + $0 (Cloudflare R2 free tier) = <strong>$5–6/month</strong>.
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-title">⚠️ What about 000webhost (free PHP/MySQL hosting)?</div>
+        <p>
+          <strong>000webhost shut down in 2024.</strong> Founded in 2007 as Hostinger's free hosting brand, 000webhost was officially 
+          discontinued after 17 years of operation. The domain now redirects to 
+          <a href="https://www.hostinger.com/special/000webhost" target="_blank">hostinger.com</a>.
+        </p>
+        <p>
+          000webhost <em>did</em> offer free PHP + MySQL hosting with a control panel — exactly what we'd need. 
+          However, it had significant drawbacks even before shutdown: forced ads, 1GB storage, 
+          1-hour daily sleep, no SSH, no custom domains on the free tier, and a 
+          <a href="https://en.wikipedia.org/wiki/Hostinger#Criticism" target="_blank">major 2015 data breach</a> 
+          (13 million plaintext passwords leaked).
+        </p>
+        <p><strong>Current alternatives with free tiers:</strong></p>
+        <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Stack</th><th>Database</th><th>Storage</th><th>Cost</th><th>Catch</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>InfinityFree</strong></td>
+              <td>PHP 8.x</td>
+              <td>MySQL ✓</td>
+              <td>5 GB</td>
+              <td>Free</td>
+              <td>Forced ads, no SSH, rate limits</td>
+            </tr>
+            <tr>
+              <td><strong>Render</strong></td>
+              <td>Node.js, Python, Go</td>
+              <td>PostgreSQL ✓ (90 days free)</td>
+              <td>Ephemeral disk</td>
+              <td>Free tier</td>
+              <td>Spins down after 15 min idle, cold starts</td>
+            </tr>
+            <tr>
+              <td><strong>Railway</strong></td>
+              <td>Node.js, Python, Go</td>
+              <td>PostgreSQL, MySQL ✓</td>
+              <td>1 GB</td>
+              <td>Free trial ($5 credit)</td>
+              <td>Credit runs out, then pay-as-you-go</td>
+            </tr>
+            <tr>
+              <td><strong>Vercel / Netlify</strong></td>
+              <td>Serverless functions (Node.js)</td>
+              <td>None built-in</td>
+              <td>N/A</td>
+              <td>Free tier</td>
+              <td>Functions only, not a full server; need external DB</td>
+            </tr>
+            <tr>
+              <td><strong>Hostinger</strong> <small>(replaces 000webhost)</small></td>
+              <td>PHP, Node.js</td>
+              <td>MySQL ✓</td>
+              <td>20–50 GB SSD</td>
+              <td>$1.99–$2.99/mo</td>
+              <td>Paid only — no free tier; renewal at $10.99–$16.99/mo</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="margin-top:.75rem;">
+          <strong>Bottom line:</strong> There is no truly free hosting that provides a database, decent storage, and no forced ads. 
+          <strong>InfinityFree</strong> comes closest but has limitations that would hurt a customer-facing upload experience. 
+          For reliability, Render free tier (Node.js + Cloudflare R2) or a $6/mo DigitalOcean droplet remain the best options.
+        </p>
+      </div>
+
+      <h3>Verdict</h3>
+      <p>
+        <strong>For now</strong>, the current setup works well. Only 2 out of 10 products redirect to Shopify, and those are the products 
+        that genuinely need a special interaction (photo upload). The other 8 products are fully on-site.
+      </p>
+      <p>
+        <strong>When it makes sense to upgrade:</strong> If custom photo magnets become a larger share of revenue, or if Alyssa wants 
+        a custom upload experience (live preview, cropping, etc.), spinning up a small Node.js server with Cloudflare R2 is a 
+        couple of days project. Note: this approach keeps Shopify for checkout/payments — see Section 08 for the fully Shopify-free option.
+      </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 08 — REMOVING SHOPIFY ENTIRELY                       -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="no-shopify">
+      <div class="section-num">08</div>
+      <h2>Discussion: Removing Shopify Entirely</h2>
+
+      <div class="callout idea">
+        <div class="callout-title">💬 The question</div>
+        "What if we don't want Shopify at all? Can we handle payments, cart, checkout, and image uploads 
+        100% ourselves — so we're not dependent on any third-party platform?"
+      </div>
+
+      <h3>Short answer: Yes — but you become responsible for everything Shopify currently handles</h3>
+      <p>
+        Right now Shopify gives us three things for free (via the Storefront API):
+      </p>
+      <ol>
+        <li><strong>Payment processing</strong> — credit cards, Apple Pay, Google Pay, Shop Pay</li>
+        <li><strong>Cart &amp; checkout</strong> — PCI-compliant payment form, order confirmation, receipts</li>
+        <li><strong>Order management</strong> — Alyssa sees orders in Shopify Admin, prints shipping labels, manages inventory</li>
+      </ol>
+      <p>
+        To remove Shopify, we need to replace all three. Here's what that looks like:
+      </p>
+
+      <h3>What replaces Shopify?</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Shopify Feature</th><th>Self-Hosted Replacement</th><th>Cost</th><th>Difficulty</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Payment processing</strong></td>
+            <td><a href="https://stripe.com" target="_blank">Stripe</a> — industry standard, excellent API, handles PCI compliance for you</td>
+            <td>2.9% + 30¢ per transaction (same as Shopify)</td>
+            <td>Medium</td>
+          </tr>
+          <tr>
+            <td><strong>Checkout page</strong></td>
+            <td>Stripe Checkout (hosted) or Stripe Elements (embedded on our site)</td>
+            <td>Included with Stripe</td>
+            <td>Easy (hosted) / Medium (embedded)</td>
+          </tr>
+          <tr>
+            <td><strong>Cart system</strong></td>
+            <td>Custom cart stored in browser (localStorage) or on our server (sessions/DB)</td>
+            <td>$0 — just code</td>
+            <td>Medium — 1-2 days to build</td>
+          </tr>
+          <tr>
+            <td><strong>Order management</strong></td>
+            <td>Stripe Dashboard (free) or custom admin panel</td>
+            <td>$0 — Stripe Dashboard works out of the box</td>
+            <td>Easy (Stripe Dashboard) / Hard (custom admin)</td>
+          </tr>
+          <tr>
+            <td><strong>Email receipts</strong></td>
+            <td>Stripe sends automatic receipts, or use SendGrid / Mailgun</td>
+            <td>$0 (Stripe) or $0–$15/mo (email service)</td>
+            <td>Easy</td>
+          </tr>
+          <tr>
+            <td><strong>Inventory tracking</strong></td>
+            <td>Simple database table or spreadsheet, updated via webhook on each sale</td>
+            <td>$0 — just code</td>
+            <td>Medium</td>
+          </tr>
+          <tr>
+            <td><strong>Shipping labels</strong></td>
+            <td><a href="https://www.pirateship.com" target="_blank">Pirate Ship</a> (free), <a href="https://www.shippo.com" target="_blank">Shippo</a>, or <a href="https://www.easypost.com" target="_blank">EasyPost</a></td>
+            <td>$0 platform fee (pay only postage)</td>
+            <td>Easy — Pirate Ship is free &amp; simple</td>
+          </tr>
+          <tr>
+            <td><strong>Image uploads</strong></td>
+            <td>Our server + Cloudflare R2 (as discussed in Section 07)</td>
+            <td>$0–6/mo</td>
+            <td>Medium</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Architecture: fully independent stack</h3>
+      <div class="diagram">
+        <p style="font-weight:600; margin-bottom:0.75rem; font-size:0.9rem;">Current flow (with Shopify)</p>
+        <div class="diagram-flow">
+          <div class="diagram-box green">Our site<br><small>(GitHub Pages)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Add to Cart<br><small>(Shopify API)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Shopify Checkout<br><small>(payment here)</small></div>
+        </div>
+        <p style="font-weight:600; margin:1.5rem 0 0.75rem; font-size:0.9rem;">Shopify-free flow</p>
+        <div class="diagram-flow">
+          <div class="diagram-box green">Our site<br><small>(our server)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Add to Cart<br><small>(localStorage or DB)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Our Checkout Page<br><small>(Stripe Elements)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Stripe<br><small>(processes payment)</small></div>
+        </div>
+        <div class="diagram-caption">With Stripe, we never touch raw credit card data — Stripe's JavaScript handles that, keeping us PCI compliant</div>
+      </div>
+
+      <h3>How Stripe Checkout works (simplest option)</h3>
+      <div class="code-block">
+        <span class="label">Server-side: create a Stripe Checkout session</span>
+<span class="cm">// Node.js / Express — just one endpoint</span>
+<span class="kw">const</span> stripe = <span class="fn">require</span>(<span class="str">'stripe'</span>)(<span class="str">'sk_live_...'</span>);
+
+app.<span class="fn">post</span>(<span class="str">'/api/checkout'</span>, <span class="kw">async</span> (req, res) => {
+  <span class="kw">const</span> session = <span class="kw">await</span> stripe.checkout.sessions.<span class="fn">create</span>({
+    line_items: req.body.items.<span class="fn">map</span>(item => ({
+      price_data: {
+        currency: <span class="str">'usd'</span>,
+        product_data: { name: item.name, images: [item.image] },
+        unit_amount: item.price, <span class="cm">// in cents: $12.00 = 1200</span>
+      },
+      quantity: item.quantity,
+    })),
+    mode: <span class="str">'payment'</span>,
+    success_url: <span class="str">'https://magnetmomentsco.us/thank-you'</span>,
+    cancel_url: <span class="str">'https://magnetmomentsco.us/shop'</span>,
+    shipping_address_collection: { allowed_countries: [<span class="str">'US'</span>] },
+  });
+  res.<span class="fn">json</span>({ url: session.url });
+});
+      </div>
+
+      <div class="code-block">
+        <span class="label">Client-side: redirect to Stripe Checkout</span>
+<span class="cm">// When user clicks "Checkout" in the cart drawer</span>
+<span class="kw">const</span> response = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/checkout'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+  body: JSON.<span class="fn">stringify</span>({ items: cartItems }),
+});
+<span class="kw">const</span> { url } = <span class="kw">await</span> response.<span class="fn">json</span>();
+window.location.href = url; <span class="cm">// → Stripe's hosted checkout page</span>
+      </div>
+
+      <h3>Pros &amp; cons of going Shopify-free</h3>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>✓ Advantages</h4>
+          <ul>
+            <li>Zero monthly platform fees — only pay per transaction (2.9% + 30¢)</li>
+            <li>100% control over the entire customer experience</li>
+            <li>No vendor lock-in — can switch payment processors anytime</li>
+            <li>Custom photo uploads, live preview, cropping — all on our site</li>
+            <li>Single domain, single brand, no redirects anywhere</li>
+            <li>Stripe Dashboard replaces Shopify Admin for free</li>
+            <li>Can add features Shopify doesn't support (custom magnet builder, etc.)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>✗ Trade-offs</h4>
+          <ul>
+            <li>Need a web server (no longer static GitHub Pages) — $5–12/mo</li>
+            <li>We build &amp; maintain the cart, checkout flow, and order management</li>
+            <li>Responsible for server security, uptime, backups</li>
+            <li>No built-in inventory management (need to build or use a spreadsheet)</li>
+            <li>Shipping label integration is separate (Pirate Ship is free though)</li>
+            <li>Tax calculation — need Stripe Tax ($0.50 per transaction) or manual</li>
+            <li>More development time upfront (estimate: 1–2 weeks to build everything)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Cost comparison</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th></th><th>Current Setup<br><small>(GitHub Pages + Shopify)</small></th><th>Self-Hosted + Stripe<br><small>(no Shopify)</small></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Monthly hosting</strong></td>
+            <td>$0 (GitHub Pages)</td>
+            <td>$5–12/mo (VPS or Render/Railway)</td>
+          </tr>
+          <tr>
+            <td><strong>Platform fee</strong></td>
+            <td>$0 (Storefront API is free)</td>
+            <td>$0 (Stripe has no monthly fee)</td>
+          </tr>
+          <tr>
+            <td><strong>Transaction fee</strong></td>
+            <td>2.9% + 30¢ (Shopify Payments)</td>
+            <td>2.9% + 30¢ (Stripe)</td>
+          </tr>
+          <tr>
+            <td><strong>Image storage</strong></td>
+            <td>N/A (Shopify handles uploads)</td>
+            <td>$0 (Cloudflare R2 free tier)</td>
+          </tr>
+          <tr>
+            <td><strong>Shipping labels</strong></td>
+            <td>Shopify Shipping (discounted rates)</td>
+            <td>Pirate Ship (free, USPS/UPS discounted rates)</td>
+          </tr>
+          <tr>
+            <td><strong>Email receipts</strong></td>
+            <td>Automatic (Shopify)</td>
+            <td>Automatic (Stripe)</td>
+          </tr>
+          <tr>
+            <td><strong>Total monthly cost</strong></td>
+            <td><strong>$0/mo</strong> + transaction fees</td>
+            <td><strong>$5–12/mo</strong> + same transaction fees</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Key insight: the transaction fees are identical</div>
+        Whether you use Shopify Payments or Stripe directly, you pay <strong>2.9% + 30¢ per sale</strong>. 
+        The only extra cost of going Shopify-free is the <strong>$5–12/month server</strong>. 
+        In return, you get full control, no platform dependency, and the ability to build any custom feature you want.
+      </div>
+
+      <h3>Implementation roadmap</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>What</th><th>Time</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 1</strong></td>
+            <td>Set up VPS, move site from GitHub Pages to our server (Node.js + Express)</td>
+            <td>1 day</td>
+            <td>Site works exactly as before, but on our server</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong></td>
+            <td>Replace Shopify cart with localStorage cart + our own cart drawer logic</td>
+            <td>1–2 days</td>
+            <td>Cart works without Shopify API calls</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 3</strong></td>
+            <td>Add Stripe Checkout — create <code>/api/checkout</code> endpoint, redirect to Stripe</td>
+            <td>1 day</td>
+            <td>Payments work through Stripe instead of Shopify</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 4</strong></td>
+            <td>Build image upload endpoint (<code>/api/upload</code>) + Cloudflare R2 storage</td>
+            <td>1–2 days</td>
+            <td>Custom magnet photos uploaded to our server</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 5</strong></td>
+            <td>Order management — Stripe webhooks notify us of sales, store in DB</td>
+            <td>1 day</td>
+            <td>Orders visible in Stripe Dashboard + optional custom admin</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 6</strong></td>
+            <td>Polish: thank-you page, order confirmation emails, error handling</td>
+            <td>1–2 days</td>
+            <td>Complete, professional checkout experience</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="callout idea">
+        <div class="callout-title">⏱️ Total estimated build time: 6–10 days</div>
+        This is a real project, not a weekend hack. But once built, the site is <strong>100% yours</strong> — 
+        no Shopify account, no API tokens that could be revoked, no platform policy changes to worry about. 
+        The only third-party dependency is Stripe for payment processing, which is the industry standard 
+        used by companies from startups to Fortune 500s.
+      </div>
+
+      <h3>Verdict</h3>
+      <p>
+        <strong>Removing Shopify is absolutely doable</strong> and makes financial sense if you want full independence. 
+        The transaction fees are identical (2.9% + 30¢), the only added cost is a small server ($5–12/mo), 
+        and Stripe's free Dashboard replaces Shopify Admin for order management.
+      </p>
+      <p>
+        <strong>When it makes sense:</strong> If Shopify ever introduces fees on the Storefront API, 
+        if you want a fully custom checkout experience, or if you simply don't want to depend on any 
+        e-commerce platform. The migration could be done incrementally — start with Phase 1–3 (payments), 
+        then add image uploads (Phase 4) when ready.
+      </p>
+      <p>
+        <strong>When it doesn't make sense:</strong> If the current setup works fine and Shopify's free 
+        Storefront API continues to meet your needs. "If it ain't broke, don't fix it" is valid — 
+        but now you know exactly what the alternative looks like.
+      </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 09 — ACCESSIBILITY & MOBILE TESTING                  -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="testing">
+      <div class="section-num">09</div>
+      <h2>Accessibility &amp; Mobile Testing Results</h2>
+
+      <p>
+        After building the site and applying accessibility + mobile fixes, we wrote a comprehensive automated test suite 
+        using <strong>Playwright</strong> and <strong>axe-core</strong> to verify compliance with WCAG 2.1 AA standards across all pages 
+        and multiple viewport sizes.
+      </p>
+
+      <h3>Test Framework</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>@playwright/test</strong></td>
+            <td>Browser automation — loads each page, interacts with UI elements, checks DOM structure</td>
+          </tr>
+          <tr>
+            <td><strong>@axe-core/playwright</strong></td>
+            <td>Automated accessibility scanning — tests against WCAG 2.0/2.1 A &amp; AA rules</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Viewports Tested</h3>
+      <p>Every test runs across <strong>3 viewport configurations</strong> to catch responsive/mobile issues:</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Project</th><th>Viewport</th><th>Use Case</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>desktop-chromium</td>
+            <td>1280 × 800</td>
+            <td>Standard desktop/laptop</td>
+          </tr>
+          <tr>
+            <td>mobile-375</td>
+            <td>375 × 812</td>
+            <td>iPhone SE / standard mobile</td>
+          </tr>
+          <tr>
+            <td>mobile-320</td>
+            <td>320 × 568</td>
+            <td>Smallest supported width (iPhone 5/SE1)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Pages Tested</h3>
+      <p>All <strong>11 pages</strong> on the site are tested:</p>
+      <div style="column-count:2; column-gap:2rem; margin:1rem 0;">
+        <ul style="margin:0;">
+          <li>Home (<code>/</code>)</li>
+          <li>Shop (<code>/shop/</code>)</li>
+          <li>Events (<code>/events/</code>)</li>
+          <li>Wholesale (<code>/wholesale/</code>)</li>
+          <li>About (<code>/about/</code>)</li>
+          <li>Contact (<code>/contact/</code>)</li>
+          <li>FAQ (<code>/faq/</code>)</li>
+          <li>Shipping Policy (<code>/policies/shipping/</code>)</li>
+          <li>Refund Policy (<code>/policies/refund/</code>)</li>
+          <li>Terms of Service (<code>/policies/terms/</code>)</li>
+          <li>Privacy Policy (<code>/policies/privacy/</code>)</li>
+        </ul>
+      </div>
+
+      <h3>Test Categories (13 groups)</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Category</th><th>What It Checks</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Axe accessibility scan</strong></td>
+            <td>Full WCAG 2.1 AA automated audit on every page — landmarks, ARIA, roles, labels, headings, etc.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Page load status</strong></td>
+            <td>Every page returns HTTP 200 (no broken pages)</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>404 page</strong></td>
+            <td>Non-existent URLs return our custom 404 page with a link home</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Structural semantics</strong></td>
+            <td>Skip-to-content link, <code>&lt;main&gt;</code> landmark, <code>&lt;nav&gt;</code>, single <code>&lt;h1&gt;</code> per page</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Mobile nav toggle</strong></td>
+            <td>Hamburger opens/closes nav, sets <code>aria-expanded</code>, Escape key closes it</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>No horizontal overflow</strong></td>
+            <td>No page scrolls horizontally at 375px or 320px (common mobile bug)</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Cart drawer focus management</strong></td>
+            <td>Cart opens with <code>role="dialog"</code>, <code>aria-modal</code>, focus moves into drawer, Escape closes it</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>FAQ accordion</strong></td>
+            <td>Answers toggle on click, <code>aria-expanded</code> updates correctly</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Shop filter buttons</strong></td>
+            <td>Category filters have <code>aria-pressed</code> and update on click</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>Product button labels</strong></td>
+            <td>All Add to Cart buttons have unique <code>aria-label</code> identifying the product name</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>Image alt text</strong></td>
+            <td>Every <code>&lt;img&gt;</code> has a non-empty <code>alt</code> attribute</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>Cart dialog role</strong></td>
+            <td>Cart drawer has <code>role="dialog"</code> and <code>aria-label</code></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><strong>Footer presence</strong></td>
+            <td>Every page includes a <code>&lt;footer&gt;</code> element</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Results</h3>
+      <div class="callout success">
+        <div class="callout-title">✅ All tests passed</div>
+        <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr>
+              <td><strong style="color:#22c55e; font-size:1.5rem;">205</strong></td>
+              <td>Tests passed</td>
+              <td>Every accessibility, structure, and interaction test passed across all 3 viewports</td>
+            </tr>
+            <tr>
+              <td><strong style="color:#7A9D54; font-size:1.5rem;">14</strong></td>
+              <td>Tests skipped</td>
+              <td>Expected — mobile-only tests skip on desktop viewport, cart toggle test skips on mobile (cart icon inside collapsed nav)</td>
+            </tr>
+            <tr>
+              <td><strong style="color:#22c55e; font-size:1.5rem;">0</strong></td>
+              <td>Tests failed</td>
+              <td>Zero failures</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <h3>Key Accessibility Fixes Applied</h3>
+      <p>These fixes were applied across all 12 HTML pages, CSS, and JS files before testing:</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>HTML &amp; Semantics</h4>
+          <ul>
+            <li>Skip-to-content link on every page</li>
+            <li><code>&lt;main&gt;</code> landmark wrapping page content</li>
+            <li>All decorative SVGs have <code>aria-hidden="true"</code></li>
+            <li><code>role="dialog"</code> + <code>aria-modal</code> on cart drawer &amp; popup</li>
+            <li>Heading hierarchy corrected (no skipped levels)</li>
+            <li>Unique <code>aria-label</code> on every product button</li>
+            <li>FAQ accordion: <code>aria-controls</code> + matching <code>id</code>s</li>
+            <li>Shop filters: <code>aria-pressed</code> toggle state</li>
+            <li>Honeypot fields use <code>autocomplete="off"</code> + <code>tabindex="-1"</code></li>
+          </ul>
+        </div>
+        <div class="cons" style="border-left-color:#3b82f6;">
+          <h4>CSS &amp; JavaScript</h4>
+          <ul>
+            <li><code>:focus-visible</code> outlines on all interactive elements</li>
+            <li>Nav toggle updates <code>aria-expanded</code> + Escape key closes menu</li>
+            <li>Cart drawer: focus trap, Escape key close, focus restoration</li>
+            <li>Form validation uses <code>role="alert"</code> for screen readers</li>
+            <li>No horizontal overflow at 320px width</li>
+            <li>Touch targets ≥ 44×44px on mobile</li>
+            <li>Inline links have <code>text-decoration: underline</code> for non-color identification</li>
+            <li>Footer social links enlarged for mobile touch</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <span class="label">Run the tests yourself</span>
+<span class="cm"># Install dependencies (first time only)</span>
+npm install
+npx playwright install chromium
+
+<span class="cm"># Run the full test suite</span>
+npx playwright test
+
+<span class="cm"># Run with visible browser</span>
+npx playwright test --headed
+
+<span class="cm"># View the HTML report</span>
+npx playwright show-report
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
