@@ -457,11 +457,169 @@
       .file-tree { font-size: 0.7rem; padding: 1rem; }
     }
 
+    /* ── Screenshot Carousel ── */
+    .carousel-section {
+      margin: 0 auto 3rem;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+    .carousel-section .section-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .carousel-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      color: var(--color-charcoal);
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--color-border);
+    }
+    .carousel-section > p {
+      font-size: 0.92rem;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+    }
+    .carousel-container {
+      position: relative;
+      background: var(--color-white);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .carousel-page-name {
+      text-align: center;
+      padding: 1rem 1rem 0.5rem;
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+    }
+    .carousel-slide {
+      display: none;
+    }
+    .carousel-slide.active {
+      display: block;
+    }
+    .carousel-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 0.75rem 1.25rem 1rem;
+    }
+    .carousel-img-wrap {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: #f5f5f5;
+    }
+    .carousel-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .carousel-label {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 50px;
+      backdrop-filter: blur(8px);
+    }
+    .carousel-label.before {
+      background: rgba(122,122,122,0.85);
+      color: #fff;
+    }
+    .carousel-label.after {
+      background: rgba(122,157,84,0.9);
+      color: #fff;
+    }
+    /* Nav arrows */
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      transition: background 0.2s, transform 0.15s;
+      z-index: 5;
+    }
+    .carousel-nav:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-50%) scale(1.08);
+    }
+    .carousel-nav.prev { left: 0.75rem; }
+    .carousel-nav.next { right: 0.75rem; }
+    /* Dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem 1.25rem;
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--color-border);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      padding: 0;
+    }
+    .carousel-dot.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+    .carousel-dot:hover {
+      border-color: var(--color-primary-light);
+    }
+    /* Mobile carousel */
+    @media (max-width: 640px) {
+      .carousel-images {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 0.5rem 0.75rem 0.75rem;
+      }
+      .carousel-nav {
+        width: 34px;
+        height: 34px;
+        font-size: 0.95rem;
+      }
+      .carousel-nav.prev { left: 0.4rem; }
+      .carousel-nav.next { right: 0.4rem; }
+      .carousel-section { padding: 0 1rem; }
+      .carousel-section h2 { font-size: 1.3rem; }
+    }
+
     /* ── Print ── */
     @media print {
       .report-header { background: white; color: black; border-bottom: 2px solid #ccc; }
       .toc { box-shadow: none; border: 1px solid #ccc; }
       body { background: white; }
+      .carousel-nav { display: none; }
+      .carousel-slide { display: block !important; page-break-inside: avoid; }
     }
   </style>
 </head>
@@ -488,6 +646,7 @@
   <nav class="toc">
     <h2>Contents</h2>
     <p style="margin-bottom:0.5rem; font-size:0.9rem;"><span style="color:var(--color-primary); font-weight:700; font-family:var(--font-mono); font-size:0.8rem; margin-right:0.5rem;">00.</span><a href="#summary" style="color:var(--color-charcoal); text-decoration:none;">Summary — The Big Picture</a></p>
+    <p style="margin-bottom:0.5rem; font-size:0.9rem;"><span style="color:var(--color-primary); font-weight:700; font-family:var(--font-mono); font-size:0.8rem; margin-right:0.5rem;">📸</span><a href="#before-after" style="color:var(--color-charcoal); text-decoration:none;">Before &amp; After — Page by Page</a></p>
     <ol>
       <li><a href="#current-state">The Original Website (Before)</a></li>
       <li><a href="#improvements">What We Improved</a></li>
@@ -597,6 +756,135 @@
       <p style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-charcoal); margin-bottom: 0.5rem; font-weight: 600;">✨ See it live</p>
       <p style="font-size: 0.92rem; color: var(--color-text-light); margin-bottom: 1.25rem; line-height: 1.6;">Here's the link to the website demo — take a look around!<br>Scroll down for a detailed breakdown of every change.</p>
       <a href="index.html" style="display: inline-block; background: var(--color-primary); color: #fff; padding: 0.85rem 2.25rem; border-radius: 50px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; text-decoration: none; letter-spacing: 0.02em; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 14px rgba(199,125,138,0.35);" onmouseover="this.style.background='var(--color-primary-dark)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='var(--color-primary)'; this.style.transform='translateY(0)';">Visit the Website →</a>
+    </div>
+
+    <!-- ── Before / After Screenshot Carousel ── -->
+    <div class="carousel-section" id="before-after">
+      <span class="section-num">📸</span>
+      <h2>Before &amp; After — Page by Page</h2>
+      <p>Swipe through each page to see the transformation from the old Shopify theme to the new custom-designed site.</p>
+
+      <div class="carousel-container" id="screenshotCarousel">
+        <!-- Nav arrows -->
+        <button class="carousel-nav prev" onclick="carouselPrev()" aria-label="Previous page">‹</button>
+        <button class="carousel-nav next" onclick="carouselNext()" aria-label="Next page">›</button>
+
+        <!-- Slide 1: Home -->
+        <div class="carousel-slide active" data-slide="0">
+          <div class="carousel-page-name">🏠 Home Page</div>
+          <div class="carousel-images">
+            <div class="carousel-img-wrap">
+              <span class="carousel-label before">Before</span>
+              <img src="assets/images/screenshots/old-home.jpg" alt="Old Magnet Moments Co. home page — generic Shopify Starter theme" loading="lazy">
+            </div>
+            <div class="carousel-img-wrap">
+              <span class="carousel-label after">After</span>
+              <img src="assets/images/screenshots/new-home.jpg" alt="New Magnet Moments Co. home page — custom designed with brand personality" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Shop -->
+        <div class="carousel-slide" data-slide="1">
+          <div class="carousel-page-name">🛍️ Shop Page</div>
+          <div class="carousel-images">
+            <div class="carousel-img-wrap">
+              <span class="carousel-label before">Before</span>
+              <img src="assets/images/screenshots/old-shop.jpg" alt="Old shop page — basic Shopify product grid" loading="lazy">
+            </div>
+            <div class="carousel-img-wrap">
+              <span class="carousel-label after">After</span>
+              <img src="assets/images/screenshots/new-shop.jpg" alt="New shop page — custom product cards with on-site cart" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Events -->
+        <div class="carousel-slide" data-slide="2">
+          <div class="carousel-page-name">🎉 Events Page</div>
+          <div class="carousel-images">
+            <div class="carousel-img-wrap">
+              <span class="carousel-label before">Before</span>
+              <img src="assets/images/screenshots/old-events.jpg" alt="Old events page — basic Shopify content page" loading="lazy">
+            </div>
+            <div class="carousel-img-wrap">
+              <span class="carousel-label after">After</span>
+              <img src="assets/images/screenshots/new-events.jpg" alt="New events page — custom design with booking form" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Wholesale -->
+        <div class="carousel-slide" data-slide="3">
+          <div class="carousel-page-name">📦 Wholesale Page</div>
+          <div class="carousel-images">
+            <div class="carousel-img-wrap">
+              <span class="carousel-label before">Before</span>
+              <img src="assets/images/screenshots/old-wholesale.jpg" alt="Old wholesale page — basic Shopify content page" loading="lazy">
+            </div>
+            <div class="carousel-img-wrap">
+              <span class="carousel-label after">After</span>
+              <img src="assets/images/screenshots/new-wholesale.jpg" alt="New wholesale page — professional inquiry form with pricing tiers" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: About -->
+        <div class="carousel-slide" data-slide="4">
+          <div class="carousel-page-name">💜 About Page</div>
+          <div class="carousel-images">
+            <div class="carousel-img-wrap">
+              <span class="carousel-label before">Before</span>
+              <img src="assets/images/screenshots/old-about.jpg" alt="Old about page — minimal Shopify about section" loading="lazy">
+            </div>
+            <div class="carousel-img-wrap">
+              <span class="carousel-label after">After</span>
+              <img src="assets/images/screenshots/new-about.jpg" alt="New about page — full brand story with founder section" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Contact -->
+        <div class="carousel-slide" data-slide="5">
+          <div class="carousel-page-name">📬 Contact Page</div>
+          <div class="carousel-images">
+            <div class="carousel-img-wrap">
+              <span class="carousel-label before">Before</span>
+              <img src="assets/images/screenshots/old-contact.jpg" alt="Old contact page — basic Shopify contact form" loading="lazy">
+            </div>
+            <div class="carousel-img-wrap">
+              <span class="carousel-label after">After</span>
+              <img src="assets/images/screenshots/new-contact.jpg" alt="New contact page — styled form with social links" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: FAQ -->
+        <div class="carousel-slide" data-slide="6">
+          <div class="carousel-page-name">❓ FAQ Page</div>
+          <div class="carousel-images">
+            <div class="carousel-img-wrap">
+              <span class="carousel-label before">Before</span>
+              <img src="assets/images/screenshots/old-faq.jpg" alt="Old FAQ page — basic Shopify page" loading="lazy">
+            </div>
+            <div class="carousel-img-wrap">
+              <span class="carousel-label after">After</span>
+              <img src="assets/images/screenshots/new-faq.jpg" alt="New FAQ page — accordion-style with categorized questions" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Dots -->
+        <div class="carousel-dots" id="carouselDots">
+          <button class="carousel-dot active" data-dot="0" aria-label="Home page"></button>
+          <button class="carousel-dot" data-dot="1" aria-label="Shop page"></button>
+          <button class="carousel-dot" data-dot="2" aria-label="Events page"></button>
+          <button class="carousel-dot" data-dot="3" aria-label="Wholesale page"></button>
+          <button class="carousel-dot" data-dot="4" aria-label="About page"></button>
+          <button class="carousel-dot" data-dot="5" aria-label="Contact page"></button>
+          <button class="carousel-dot" data-dot="6" aria-label="FAQ page"></button>
+        </div>
+      </div>
     </div>
 
     <!-- ── 01. Current State ── -->
@@ -1886,6 +2174,60 @@ npx playwright show-report
     </section>
 
   </main>
+
+  <!-- ── Carousel Script ── -->
+  <script>
+  (function() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const total = slides.length;
+    let current = 0;
+
+    function goTo(index) {
+      if (index < 0) index = total - 1;
+      if (index >= total) index = 0;
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    window.carouselNext = function() { goTo(current + 1); };
+    window.carouselPrev = function() { goTo(current - 1); };
+
+    // Dot clicks
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-dot')));
+      });
+    });
+
+    // Keyboard navigation when carousel is in view
+    document.addEventListener('keydown', function(e) {
+      var carousel = document.getElementById('screenshotCarousel');
+      var rect = carousel.getBoundingClientRect();
+      var inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+      if (e.key === 'ArrowRight') { goTo(current + 1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+    });
+
+    // Touch / swipe support
+    var touchStartX = 0;
+    var carousel = document.getElementById('screenshotCarousel');
+    carousel.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', function(e) {
+      var diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) goTo(current + 1);
+        else goTo(current - 1);
+      }
+    }, { passive: true });
+  })();
+  </script>
 
 </body>
 </html>
