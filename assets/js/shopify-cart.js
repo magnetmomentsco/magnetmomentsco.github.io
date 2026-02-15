@@ -337,9 +337,96 @@
     }
   }
 
+  // ─── Custom product modal ─────────────────────────────
+  // When a user has items in their Storefront cart and clicks a custom
+  // product link (which goes to Shopify's hosted page), warn them that
+  // the two carts are separate and offer to checkout first.
+  function isCustomProductLink(el) {
+    var link = el.closest('a[href*="myshopify.com/products/"]');
+    if (!link) return null;
+    // Only for custom photo product links (not footer links etc.)
+    if (link.classList.contains('product-card-btn') || link.classList.contains('pdp-cta')) {
+      return link;
+    }
+    return null;
+  }
+
+  function showCustomCartModal(customUrl) {
+    // Remove any existing modal
+    var existing = document.getElementById('custom-cart-modal');
+    if (existing) existing.remove();
+
+    var itemCount = cart.lines.reduce(function (s, l) { return s + l.quantity; }, 0);
+    var itemWord = itemCount === 1 ? 'item' : 'items';
+
+    var modal = document.createElement('div');
+    modal.id = 'custom-cart-modal';
+    modal.className = 'custom-cart-modal-overlay';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Cart notice');
+    modal.innerHTML =
+      '<div class="custom-cart-modal">' +
+        '<button class="custom-cart-modal-close" aria-label="Close">&times;</button>' +
+        '<div class="custom-cart-modal-icon">' +
+          '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+            '<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>' +
+            '<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>' +
+          '</svg>' +
+        '</div>' +
+        '<h3 class="custom-cart-modal-title">Heads up!</h3>' +
+        '<p class="custom-cart-modal-text">' +
+          'You have <strong>' + itemCount + ' ' + itemWord + '</strong> in your cart. ' +
+          'Custom photo magnets are ordered on a separate page, so your current cart won\u2019t carry over there.' +
+        '</p>' +
+        '<div class="custom-cart-modal-actions">' +
+          '<a href="' + cart.checkoutUrl + '" class="btn btn-primary custom-cart-modal-btn">Checkout Cart First</a>' +
+          '<a href="' + customUrl + '" target="_blank" rel="noopener" class="btn btn-outline custom-cart-modal-btn">Continue to Custom Magnets</a>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+    // Animate in
+    requestAnimationFrame(function () { modal.classList.add('open'); });
+
+    // Focus first button
+    var firstBtn = modal.querySelector('.custom-cart-modal-btn');
+    if (firstBtn) firstBtn.focus();
+
+    // Close handlers
+    modal.querySelector('.custom-cart-modal-close').addEventListener('click', function () {
+      closeCustomCartModal();
+    });
+    modal.addEventListener('click', function (ev) {
+      if (ev.target === modal) closeCustomCartModal();
+    });
+    document.addEventListener('keydown', function handler(ev) {
+      if (ev.key === 'Escape') {
+        closeCustomCartModal();
+        document.removeEventListener('keydown', handler);
+      }
+    });
+  }
+
+  function closeCustomCartModal() {
+    var modal = document.getElementById('custom-cart-modal');
+    if (modal) {
+      modal.classList.remove('open');
+      setTimeout(function () { modal.remove(); }, 300);
+    }
+  }
+
   // ─── Event binding ────────────────────────────────────
   function bindCartEvents() {
     document.addEventListener('click', function (e) {
+      // Intercept custom product links when cart has items
+      var customLink = isCustomProductLink(e.target);
+      if (customLink && cart && cart.lines && cart.lines.length > 0) {
+        e.preventDefault();
+        showCustomCartModal(customLink.href);
+        return;
+      }
+
       // Open cart
       if (e.target.closest('.cart-toggle')) {
         e.preventDefault();
