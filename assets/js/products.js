@@ -252,6 +252,7 @@
     }
 
     card.innerHTML =
+      '<a href="/shop/' + (product.handle || '') + '/" class="product-card-link" aria-label="' + title + '">' +
       '<div class="product-card-image">' +
         (imageUrl ? '<img src="' + imageUrl + '" alt="' + escapeHtml(imageAlt) + '" width="600" height="600" loading="lazy">' : '') +
         badgeHtml +
@@ -259,6 +260,9 @@
       '<div class="product-card-body">' +
         '<h3 class="product-card-title">' + title + '</h3>' +
         '<p class="product-card-price">' + priceHtml + '</p>' +
+      '</div>' +
+      '</a>' +
+      '<div class="product-card-actions">' +
         ctaHtml +
       '</div>';
 
@@ -278,6 +282,42 @@
 
   // ─── Main sync logic ───────────────────────────────
 
+  function updateProductDetailPage(liveProducts) {
+    // Check if we're on a PDP (product detail page)
+    var pdpSection = document.querySelector('.pdp[data-product-id]');
+    if (!pdpSection) return;
+
+    var productId = pdpSection.getAttribute('data-product-id');
+    var product = null;
+    liveProducts.forEach(function (p) { if (p.id === productId) product = p; });
+
+    if (!product) return;
+
+    // Update price
+    var priceEl = pdpSection.querySelector('.pdp-price');
+    if (priceEl) {
+      priceEl.innerHTML = formatPrice(product);
+    }
+
+    // Update availability
+    var ctaBtn = pdpSection.querySelector('.pdp-cta');
+    if (ctaBtn) {
+      if (!product.availableForSale) {
+        if (ctaBtn.tagName === 'BUTTON') {
+          ctaBtn.disabled = true;
+          ctaBtn.textContent = 'Sold Out';
+        }
+      } else {
+        if (ctaBtn.tagName === 'BUTTON' && ctaBtn.disabled) {
+          ctaBtn.disabled = false;
+          ctaBtn.textContent = ctaBtn.getAttribute('data-original-text') || 'Add to Cart';
+        }
+      }
+    }
+
+    console.log('[ProductSync] PDP updated for: ' + product.title);
+  }
+
   function syncProducts() {
     fetchLiveProducts()
       .then(function (liveProducts) {
@@ -285,6 +325,9 @@
           console.log('[ProductSync] No products returned or API error — using static HTML');
           return;
         }
+
+        // Update PDP (product detail page) if present
+        updateProductDetailPage(liveProducts);
 
         // Update existing cards (prices, availability)
         var newProducts = updateExistingCards(liveProducts);

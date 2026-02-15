@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-15T18:15:40.737733+00:00",
+  "lastUpdated": "2026-02-15T19:29:31.181547+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 11,
   "products": [
@@ -8,6 +8,7 @@
       "handle": "valentines-day-color-your-own-magnet-favor-kits",
       "title": "Valentine's Day Color-Your-Own Magnet Favor Kits",
       "description": "Make this Valentine\u2019s Day creative and fun with our Color-Your-Own Magnet Favors! These kits are the perfect candy-free alternative for classroom exchanges, parties, or neighbor gifts. Each kit com...",
+      "descriptionHtml": "<p><span>Make this Valentine\u2019s Day creative and fun with our </span><span>Color-Your-Own Magnet Favors</span><span>! These kits are the perfect candy-free alternative for classroom exchanges, parties, or neighbor gifts.</span></p>\n<p><span>Each kit comes individually packaged and \"gift ready\"\u2014saving you time and stress!</span></p>\n<p><span>What's Included in Each Kit:</span></p>\n<p><span>\u2022 \ud83c\udfa8 </span><span>1 Custom Outline Magnet:</span><span> (2x2 size) featuring a fun Valentine's design ready to be colored.</span></p>\n<p><span>\u2022 \ud83d\udd8d\ufe0f </span><span>2 Mini Markers:</span><span> (Colors may vary).</span></p>\n<p><span>\u2022 \ud83d\udc8c </span><span>\"You're Magnetic\" Gift Card:</span><span> Includes a \"To/From\" section for easy personalization. Designs will vary on bulk orders</span></p>\n<p><span>\u2022 \u2728 </span><span>Clear Packaging:</span><span> All items are sealed in a crisp clear bag, ready to hand out.</span></p>\n<p><span>Perfect For:</span></p>\n<p><span>\u2022 School Classroom Exchanges (Pre-K to Elementary!)</span></p>\n<p><span>\u2022 Party Favors</span></p>\n<p><span>\u2022 Grandkids &amp; Neighbors</span></p>\n<p><span>Note: Markers are washable, but supervision is recommended for younger children.</span></p>",
       "productType": "",
       "tags": [
         "Bulk favors",
@@ -24,6 +25,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/valentines-day-color-your-own-magnet-favor-kits",
       "createdAt": "2026-01-20T19:55:58Z",
       "updatedAt": "2026-02-09T15:37:35Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "5.0",
@@ -146,6 +151,7 @@
       "handle": "modern-valentine-postage-stamp-magnet-set-bold-red-pink-refrigerator-decor-set-of-4",
       "title": "Modern Valentine Postage Stamp Magnet Set | Bold Red & Pink Refrigerator Decor | Set of 4",
       "description": "Deliver a bold statement of love! Our \"Love Notes\" Stamp Magnet Set brings a modern, graphic twist to the classic postage stamp. Featuring vibrant pops of cherry red and soft pink, these magnets ar...",
+      "descriptionHtml": "<p><span>Deliver a bold statement of love!</span></p>\n<p><span>Our </span><span>\"Love Notes\" Stamp Magnet Set</span><span> brings a modern, graphic twist to the classic postage stamp. Featuring vibrant pops of cherry red and soft pink, these magnets are the perfect way to \"mail\" a little affection to your fridge, locker, or office whiteboard.</span></p>\n<p><span>Each magnet is handcrafted by </span><span>Magnet Moments Co.</span><span> with a focus on durability and a high-quality finish, ensuring your favorite memories (or just your grocery list) stay exactly where they belong.</span></p>\n<p><span>Product Highlights:</span></p>\n<p><span>-Set of 4 Unique Designs:</span><span> Includes the \"Sealed with a Kiss\" lips, Cupid\u2019s Heart, Sweet Cupcake, and the iconic \"LOVE\" block print.</span></p>\n<p><span>-Perfectly Sized:</span><span> Each magnet measures </span><span>2\" x 2\"</span><span>, fitting seamlessly into your collection.</span></p>\n<p><span>-Handmade Quality:</span><span> Crafted with care to provide a professional, polished look for your home.</span></p>\n<p><span>-Gift-Ready:</span><span> An ideal choice for Galentine\u2019s Day, classroom teacher gifts, or as a sweet surprise for a partner.</span></p>",
       "productType": "",
       "tags": [
         "2x2 Magnets",
@@ -172,6 +178,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/modern-valentine-postage-stamp-magnet-set-bold-red-pink-refrigerator-decor-set-of-4",
       "createdAt": "2026-01-28T13:11:14Z",
       "updatedAt": "2026-02-09T15:33:52Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "13.99",
@@ -246,6 +256,7 @@
       "handle": "golden-girls-magnet-set",
       "title": "Golden Girls Magnet Set (Set of 4)",
       "description": "Stay golden! This cute Golden Girls magnet set features all four ladies with their classic quotes. A fun, nostalgic addition to any fridge or workspace\u2014and the perfect gift for fans of the show.",
+      "descriptionHtml": "<p><span>Stay golden! This cute Golden Girls magnet set features all four ladies with their classic quotes. A fun, nostalgic addition to any fridge or workspace\u2014and the perfect gift for fans of the show.</span></p>",
       "productType": "",
       "tags": [
         "Christmas",
@@ -256,6 +267,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/golden-girls-magnet-set",
       "createdAt": "2025-11-26T22:22:02Z",
       "updatedAt": "2026-02-09T15:40:00Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "14.0",
@@ -312,6 +327,7 @@
       "handle": "custom-photo-magnets",
       "title": "2x2 Custom Photo Magnets",
       "description": "Don\u2019t let your favorite memories stay stuck on your phone. Bring your camera roll to life with our Custom Photo Magnets. Whether it\u2019s a candid shot of the kids, a wedding portrait, or a goofy pictu...",
+      "descriptionHtml": "<p data-path-to-node=\"5\"><b data-path-to-node=\"5\" data-index-in-node=\"13\">Don\u2019t let your favorite memories stay stuck on your phone.</b> Bring your camera roll to life with our <b data-path-to-node=\"5\" data-index-in-node=\"112\">Custom Photo Magnets</b>. Whether it\u2019s a candid shot of the kids, a wedding portrait, or a goofy picture of your pet, these 2x2\" magnets turn your fridge into a gallery of the moments that matter most.</p>\n<p data-path-to-node=\"6\">Each magnet is printed with high-definition clarity and built to last, making them the perfect addition to your kitchen, office locker, or magnetic board.<b data-path-to-node=\"9\" data-index-in-node=\"0\"></b></p>\n<p data-path-to-node=\"11\"><b data-path-to-node=\"11\" data-index-in-node=\"0\">Make your moments stick today!</b></p>",
       "productType": "",
       "tags": [
         "2x2 Magnets",
@@ -335,6 +351,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/custom-photo-magnets",
       "createdAt": "2025-11-13T19:27:19Z",
       "updatedAt": "2026-02-14T22:14:31Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "18.99",
@@ -429,6 +449,7 @@
       "handle": "watercolor-valentine-postage-stamp-magnet-set-set-of-6-coquette-fridge-magnets",
       "title": "Watercolor Valentine Postage Stamp Magnet Set | Set of 6 Coquette Fridge Magnets",
       "description": "Send a little love to their fridge! Add a touch of vintage charm and modern \"coquette\" aesthetic to your home with our Valentine Postage Stamp Magnet Set. Featuring delicate watercolor illustration...",
+      "descriptionHtml": "<p><span>Send a little love to their fridge!</span></p>\n<p><span>Add a touch of vintage charm and modern \"coquette\" aesthetic to your home with our </span><span>Valentine Postage Stamp Magnet Set</span><span>. Featuring delicate watercolor illustrations of bows, floral hearts, and the sweetest little goose, these magnets are designed to look like timeless stamps delivered straight from the heart.</span></p>\n<p><span>Each magnet is handcrafted with a premium gloss finish and a strong magnetic backing, making them as durable as they are beautiful. Perfect for holding up photos of your favorite moments or simply adding a romantic flair to your kitchen or office.</span></p>\n<p><span>Product Highlights:</span></p>\n<p><span>-Set Includes:</span><span> 6 unique watercolor stamp designs (Gift Box, Floral Heart, Chocolates, Roses, Pink Bow, and \"Love\" Goose).</span></p>\n<p><span>-Signature Size:</span><span> Each magnet is a perfect </span><span>2\u201d x 2\u201d square</span><span>.</span></p>\n<p><span>-High-Quality Finish:</span><span> Vibrant colors with a professional, polished look.</span></p>\n<p><span>-Perfect For:</span><span> Galentine\u2019s gifts, long-distance relationship \"thinking of you\" tokens, or a sweet treat for yourself.</span></p>",
       "productType": "",
       "tags": [
         "Coquette Aesthetic",
@@ -447,6 +468,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/watercolor-valentine-postage-stamp-magnet-set-set-of-6-coquette-fridge-magnets",
       "createdAt": "2026-01-28T13:06:54Z",
       "updatedAt": "2026-02-09T15:43:06Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "20.99",
@@ -515,6 +540,7 @@
       "handle": "custom-2-x-3-photo-magnets-set-of-6",
       "title": "2x3 Custom Photo Magnets",
       "description": "Moments that Stick, Now in Widescreen! Sometimes a square just isn't enough. Our new 2\" x 3\" Rectangle Magnets offer a larger canvas for your favorite photos, meaning less cropping and more context...",
+      "descriptionHtml": "<p data-path-to-node=\"6\"><b data-index-in-node=\"0\" data-path-to-node=\"6\">Moments that Stick, Now in Widescreen!</b> Sometimes a square just isn't enough. Our new <b data-index-in-node=\"85\" data-path-to-node=\"6\">2\" x 3\" Rectangle Magnets</b> offer a larger canvas for your favorite photos, meaning less cropping and more context. Whether it\u2019s a breathtaking sunset from your vacation, a full-length wedding shot, or a family portrait, this size preserves the details that matter most.</p>\n<p data-path-to-node=\"7\">Hand-crafted with the same high-quality materials you love, these magnets are designed to turn your fridge, filing cabinet, or locker into a curated gallery of your life.</p>\n<p data-path-to-node=\"8\"><b data-index-in-node=\"0\" data-path-to-node=\"8\">Why You\u2019ll Love the 2x3 Size:</b></p>\n<p data-path-to-node=\"9,0,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,0,0\">Versatile Orientation:</b> Works perfectly for both horizontal (landscape) and vertical (portrait) photos.</p>\n<p data-path-to-node=\"9,1,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,1,0\">No Compromise Cropping:</b> Great for group shots where you don't want to cut anyone out of the frame!</p>\n<p data-path-to-node=\"9,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,2,0\">Strong Grip:</b> Durable magnetic backing ensures your photos stay put.</p>\n<p data-path-to-node=\"12\"><b data-index-in-node=\"0\" data-path-to-node=\"12\">How it Works:</b></p>\n<p><b data-index-in-node=\"0\" data-path-to-node=\"13,0,0\"><meta charset=\"utf-8\">1. Select your set size</b> from the menu above.</p>\n<p><b data-index-in-node=\"0\" data-path-to-node=\"13,1,0\">2. Upload your photos</b></p>\n<p data-path-to-node=\"13,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"13,2,0\">3. Sit back and relax:</b> We will professionally crop, print, and press your magnets and ship them straight to your door.</p>\n<p data-path-to-node=\"14\"><b data-index-in-node=\"0\" data-path-to-node=\"14\">The Details:</b></p>\n<p data-path-to-node=\"15,0,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,0,0\">Dimensions:</b> 2 inches x 3 inches.</p>\n<p data-path-to-node=\"15,1,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,1,0\">Finish:</b> Glossy protective coating.</p>\n<p data-path-to-node=\"15,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,2,0\">Origin:</b> Handmade in Austin, TX by Magnet Moments Co.</p>",
       "productType": "",
       "tags": [],
       "availableForSale": true,
@@ -522,6 +548,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/custom-2-x-3-photo-magnets-set-of-6",
       "createdAt": "2026-01-21T05:02:27Z",
       "updatedAt": "2026-02-15T00:38:21Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "21.99",
@@ -610,6 +640,7 @@
       "handle": "chicago-football-good-better-best-magnet-set-set-of-6",
       "title": "Chicago Football \u201cGood, Better, Best\u201d Magnet Set (Set of 6)",
       "description": "Bring the spirit of Soldier Field right to your kitchen! Whether you are celebrating the 1985 glory days or surviving another season of \"cardiac arrest\" football, this set is the perfect way to sho...",
+      "descriptionHtml": "<p><span>Bring the spirit of Soldier Field right to your kitchen! Whether you are celebrating the 1985 glory days or surviving another season of \"cardiac arrest\" football, this set is the perfect way to show your Chi-Town pride.</span></p>\n<p><span>This 6-piece collection captures the true essence of being a Chicago fan\u2014the history, the hustle, and the humor. Featuring iconic \"Bear Down\" slogans, vintage helmet artwork, and the classic motivational quote to keep your spirits high, these magnets are a touchdown for any man cave, office, or fridge.</span></p>\n<p><span>The \"Monsters of the Midway\" Collection Includes:</span></p>\n<p><span>\u2022 </span><span>The Classic Roar:</span><span> Iconic Bear head logo.</span></p>\n<p><span>\u2022 </span><span>The Reality Check:</span><span> \"Rebuilding Since 1985\" (Funny because it\u2019s true!).</span></p>\n<p><span>\u2022 </span><span>The Fan Life:</span><span> \"Good. Better. Best. Cardiac Arrest\" \u2013 for the games that keep you on the edge of your seat.</span></p>\n<p><span>\u2022 </span><span>The History:</span><span> Vintage-style \"Chicago Football 1920\" with helmet graphic.</span></p>\n<p><span>\u2022 </span><span>The Motivation:</span><span> Two variations of the legendary \"Good, Better, Best\" quote.</span></p>\n<p><span>Product Details:</span></p>\n<p><span>\u2022 </span><span>Quantity:</span><span> Set of 6 Magnets</span></p>\n<p><span>\u2022 </span><span>Size:</span><span> 2\" x 2\" (Square)</span></p>\n<p><span>\u2022 </span><span>Material:</span><span> High-quality durable finish with a strong magnetic backing.</span></p>\n<p><span>\u2022 </span><span>Use:</span><span> Perfect for holding up photos, game schedules, or tickets on any magnetic surface.</span></p>\n<p><span>Why You\u2019ll Love Them:</span></p>\n<p><span>At </span><span>Magnet Moments Co.</span><span>, we believe in \"Moments that Stick!\" These aren't just magnets; they are a badge of honor for the loyal fan who sticks by their team through the good, the bad, and the rebuilding years. Grab a set for yourself or gift one to the die-hard fan in your life!</span></p>",
       "productType": "",
       "tags": [
         "Chi town",
@@ -624,6 +655,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/chicago-football-good-better-best-magnet-set-set-of-6",
       "createdAt": "2025-12-15T23:42:16Z",
       "updatedAt": "2026-02-09T15:38:45Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "22.0",
@@ -680,6 +715,7 @@
       "handle": "vintage-valentine-postage-stamp-magnet-set-watercolor-love-collection-set-of-6",
       "title": "Vintage Valentine Postage Stamp Magnet Set | Watercolor Love Collection | Set of 6",
       "description": "Send a little love to your fridge this season. Our \"Love Letters\" Collection brings the nostalgic charm of vintage postage and hand-painted watercolors to your home. Featuring delicate shades of bl...",
+      "descriptionHtml": "<p><span>Send a little love to your fridge this season.</span></p>\n<p><span>Our </span><span>\"Love Letters\" Collection</span><span> brings the nostalgic charm of vintage postage and hand-painted watercolors to your home. Featuring delicate shades of blush, crimson, and gold, each magnet is designed to look like a tiny work of art.</span></p>\n<p><span>Whether you\u2019re pinning up a favorite photo of your boys or leaving a sweet note for your partner, these magnets add a touch of romance to any magnetic surface.</span></p>\n<p><span>What\u2019s Included:</span></p>\n<p><span>This set features 6 unique stamp-inspired designs:</span></p>\n<p><span>-The \"Love\" Postmark</span></p>\n<p><span>-Heart-Shaped Key to My Heart</span></p>\n<p><span>-Vintage Red Car with Heart Balloons</span></p>\n<p><span>-Floral Red Mailbox</span></p>\n<p><span>-Heart Balloon Illustration</span></p>\n<p><span>-Scalloped \"XOXO\" Design</span></p>\n<p><span>Product Features &amp; Materials</span></p>\n<p><span>-High-Quality Finish:</span><span> Each magnet features a vibrant, high-resolution print with a protective coating to prevent fading or scratches.</span></p>\n<p><span>-Strong &amp; Durable:</span><span> Sturdy enough to hold up photos, invitations, and children\u2019s artwork without sliding.</span></p>\n<p><span>-Handmade Aesthetic:</span><span> Designed with a scalloped \"stamp\" border and gold-toned accents for a premium look.</span></p>\n<p><span>-Perfect Size:</span><span> Available in our signature sizes, designed to fit perfectly on refrigerators, office whiteboards, or tiered trays.</span></p>",
       "productType": "",
       "tags": [],
       "availableForSale": true,
@@ -687,6 +723,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/vintage-valentine-postage-stamp-magnet-set-watercolor-love-collection-set-of-6",
       "createdAt": "2026-01-28T13:15:25Z",
       "updatedAt": "2026-02-09T15:33:23Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "24.99",
@@ -755,6 +795,7 @@
       "handle": "seasonal-holiday-magnets-copy",
       "title": "Retro Wildflower Magnet Set (Set of 8)",
       "description": "Bring a touch of eternal spring to your kitchen! This Retro Wildflower Magnet Set features a curated collection of groovy blooms and botanical patterns in warm, nostalgic tones. From terracotta ora...",
+      "descriptionHtml": "<p data-path-to-node=\"4\">Bring a touch of eternal spring to your kitchen! This <b data-path-to-node=\"4\" data-index-in-node=\"67\">Retro Wildflower Magnet Set</b> features a curated collection of groovy blooms and botanical patterns in warm, nostalgic tones.</p>\n<p data-path-to-node=\"5\">From terracotta oranges to dusty pinks and calming blues, these magnets aren't just for holding up grocery lists\u2014they are miniature pieces of art. Whether you are decorating your fridge, office locker, or magnetic whiteboard, these blooms add a pop of color that never fades.<b data-path-to-node=\"6\" data-index-in-node=\"0\"></b></p>",
       "productType": "",
       "tags": [
         "70s Style",
@@ -781,6 +822,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/seasonal-holiday-magnets-copy",
       "createdAt": "2026-01-01T17:12:37Z",
       "updatedAt": "2026-02-09T15:38:01Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "25.0",
@@ -837,6 +882,7 @@
       "handle": "the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
       "title": "\"The Office\" Collection- (Set of 9)",
       "description": "\"Bears. Beets. Battlestar Galactica.\" Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotab...",
+      "descriptionHtml": "<p><strong>\"Bears. Beets. Battlestar Galactica.\"</strong></p>\n<p><span>Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotable moments from The Office (US).</span></p>\n<p><span>Whether you are a superstitious (or just a little stitious) fan of Michael Scott\u2019s management style, or you appreciate the simpler things in life like Schrute Farms agritourism, this set is the perfect addition to your home or cubicle.</span></p>\n<p><span>They are strong enough to hold up your important memos from corporate, but funny enough to make you smile every time you go for a snack.</span></p>\n<p><strong>The Perfect Gift for the Superfan</strong></p>\n<p><span>These make an excellent gift for birthdays, holidays, or just because you want to tell someone they are the \"World's Best Boss.\"</span><strong></strong></p>",
       "productType": "",
       "tags": [
         "Dunder Mifflin",
@@ -851,6 +897,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
       "createdAt": "2025-12-22T21:27:27Z",
       "updatedAt": "2026-02-09T15:38:23Z",
+      "seo": {
+        "title": null,
+        "description": "\"Bears. Beets. Battlestar Galactica.\" Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotable moments from The Office (US). Whether you are a superstitious (or just a little stitious) fan of Michael Scott\u2019s management style, or you appreciate the simpler things in life like Schrute Farms agritourism, this set is the perfect addition to your home or cubicle. They are strong enough to hold up your important memos from corporate, but funny enough to make you smile every time you go for a snack. The Perfect Gift for the Superfan These make an excellent gift for birthdays, holidays, or just because you want to tell someone they are the \"World's Best Boss.\" What\u2019s Included in the 9-Piece Set: \u2022 Schrute Farms Logo \u2022 Bears. Beets. Battlestar Galactica. Text \u2022 Dundie Award Winner \u2022 \"I feel God in this Chili\u2019s tonight\" Pam quote \u2022 Dwight \"Ignorant Slut\" CPR Training \u2022 Dwight\u2019s CPR Dummy Face Mask \u2022 Prison Mike (\"Da Belle of da Ball\") \u2022 Wayne Gretzky / Michael Scott Inspirational Quote \u2022 World\u2019s Best Boss Mug Product Details: \u2022 Set includes 9 individual square magnets. \u2022 Dimensions: Each magnet measures approximately 2x2 inches. \u2022 Glossy, durable finish. \u2022 Strong magnetic backing"
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "28.0",
@@ -913,6 +963,7 @@
       "handle": "the-eras-stamp-collection",
       "title": "The Eras Stamp Collection (Set of 12)",
       "description": "Capture the magic of every era with this exclusive collection of postage-stamp style magnets. Whether you are in your Reputation era or feeling the Folklore vibes, these magnets are the perfect way...",
+      "descriptionHtml": "<p><span>Capture the magic of every era with this exclusive collection of postage-stamp style magnets. Whether you are in your Reputation era or feeling the Folklore vibes, these magnets are the perfect way to display your fandom on your fridge, locker, or whiteboard.</span></p>\n<p><span>Each magnet features a hand-drawn, minimalist icon representing a specific chapter of the journey\u2014from the cowboy boots and guitars of the beginning to the typewriter of the Tortured Poets Department.</span></p>\n<p><span>Why You\u2019ll Love Them:</span></p>\n<p><span>\u2022 </span><span>The Full Set:</span><span> Includes designs representing all the iconic albums, including the latest TTPD and Life of a Showgirl motifs.</span></p>\n<p><span>\u2022 </span><span>Unique Design:</span><span> The postage stamp border adds a vintage, collectible aesthetic that stands out from standard photo magnets.</span></p>\n<p><span>\u2022 </span><span>Strong Grip:</span><span> Perfect for holding up your concert tickets, Polaroids, or grocery lists.</span><span></span></p>",
       "productType": "",
       "tags": [
         "Eras Tour Merch",
@@ -924,6 +975,10 @@
       "onlineStoreUrl": "https://magnetmomentsco.us/products/the-eras-stamp-collection",
       "createdAt": "2025-12-09T03:15:34Z",
       "updatedAt": "2026-02-09T15:39:00Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
       "priceRange": {
         "minVariantPrice": {
           "amount": "32.0",
