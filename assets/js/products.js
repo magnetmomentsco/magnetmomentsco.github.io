@@ -243,7 +243,8 @@
 
     var ctaHtml;
     if (isCustom) {
-      var shopifyUrl = product.onlineStoreUrl || ('https://' + SHOPIFY_DOMAIN + '/products/' + product.handle);
+      // Always use myshopify.com domain — custom domain will point to GH Pages after DNS migration
+      var shopifyUrl = 'https://' + SHOPIFY_DOMAIN + '/products/' + product.handle;
       ctaHtml = '<a href="' + escapeHtml(shopifyUrl) + '" class="product-card-btn" target="_blank" rel="noopener">View &amp; Customize →</a>';
     } else if (!available) {
       ctaHtml = '<button class="product-card-btn" data-variant-id="' + escapeHtml(variantId) + '" data-original-text="Add to Cart" aria-label="Add ' + title + ' to cart" disabled>Sold Out</button>';

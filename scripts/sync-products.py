@@ -228,7 +228,8 @@ def build_product_card(product, is_shop_page=True):
 
     # CTA button/link
     if is_custom:
-        shopify_url = product.get('onlineStoreUrl') or f'https://{SHOPIFY_DOMAIN}/products/{handle}'
+        # Always use myshopify.com domain — custom domain will point to GH Pages after DNS migration
+        shopify_url = f'https://{SHOPIFY_DOMAIN}/products/{handle}'
         cta = f'<a href="{escape(shopify_url)}" class="product-card-btn" target="_blank" rel="noopener">View &amp; Customize →</a>'
     elif not available:
         cta = f'<button class="product-card-btn" data-variant-id="{escape(variant_id)}" data-original-text="Add to Cart" aria-label="Add {title} to cart" disabled>Sold Out</button>'
@@ -340,7 +341,8 @@ def build_product_page_html(product, all_products):
 
     # CTA
     if is_custom:
-        shopify_url = product.get('onlineStoreUrl') or f'https://{SHOPIFY_DOMAIN}/products/{handle}'
+        # Always use myshopify.com domain — custom domain will point to GH Pages after DNS migration
+        shopify_url = f'https://{SHOPIFY_DOMAIN}/products/{handle}'
         cta_html = f'<a href="{escape(shopify_url)}" class="btn btn-primary btn-lg pdp-cta" target="_blank" rel="noopener">Customize &amp; Order →</a>'
     elif not available:
         cta_html = f'<button class="btn btn-primary btn-lg pdp-cta" data-variant-id="{escape(variant_id)}" data-original-text="Add to Cart" disabled>Sold Out</button>'
