@@ -1,0 +1,985 @@
+{
+  "lastUpdated": "2026-02-15T17:46:37.983269+00:00",
+  "shopifyDomain": "dbx3hf-qe.myshopify.com",
+  "productCount": 11,
+  "products": [
+    {
+      "id": "gid://shopify/Product/14936830247278",
+      "handle": "valentines-day-color-your-own-magnet-favor-kits",
+      "title": "Valentine's Day Color-Your-Own Magnet Favor Kits",
+      "description": "Make this Valentine\u2019s Day creative and fun with our Color-Your-Own Magnet Favors! These kits are the perfect candy-free alternative for classroom exchanges, parties, or neighbor gifts. Each kit com...",
+      "productType": "",
+      "tags": [
+        "Bulk favors",
+        "Classroom gifts",
+        "DIY Kit",
+        "Kids crafts",
+        "Magnet Favors",
+        "Non-candy gift",
+        "Non-candy valentine",
+        "Valentine\u2019s Day"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/valentines-day-color-your-own-magnet-favor-kits",
+      "createdAt": "2026-01-20T19:55:58Z",
+      "updatedAt": "2026-02-09T15:37:35Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "5.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "175.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/8CBFA002-A030-4875-8C73-ED86899CA610.png?v=1768937986",
+        "altText": "Valentine's Day card with a gnome magnet and markers on a wooden surface",
+        "width": 1792,
+        "height": 2400
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/8CBFA002-A030-4875-8C73-ED86899CA610.png?v=1768937986",
+            "altText": "Valentine's Day card with a gnome magnet and markers on a wooden surface",
+            "width": 1792,
+            "height": 2400
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/B2FE73C5-D918-4D6D-B2AF-9BB083C98BD7.png?v=1768937986",
+            "altText": "Valentines Day with card and markers on wooden surface ",
+            "width": 1792,
+            "height": 2400
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53223663108462",
+            "title": "Single favor",
+            "price": {
+              "amount": "5.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53223663141230",
+            "title": "5 pack",
+            "price": {
+              "amount": "22.5",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53223663173998",
+            "title": "10 pack",
+            "price": {
+              "amount": "45.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53223663206766",
+            "title": "20 pack",
+            "price": {
+              "amount": "85.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53223663239534",
+            "title": "30 pack",
+            "price": {
+              "amount": "120.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53223663272302",
+            "title": "40 pack",
+            "price": {
+              "amount": "160.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53223663305070",
+            "title": "50 pack",
+            "price": {
+              "amount": "175.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14942570578286",
+      "handle": "modern-valentine-postage-stamp-magnet-set-bold-red-pink-refrigerator-decor-set-of-4",
+      "title": "Modern Valentine Postage Stamp Magnet Set | Bold Red & Pink Refrigerator Decor | Set of 4",
+      "description": "Deliver a bold statement of love! Our \"Love Notes\" Stamp Magnet Set brings a modern, graphic twist to the classic postage stamp. Featuring vibrant pops of cherry red and soft pink, these magnets ar...",
+      "productType": "",
+      "tags": [
+        "2x2 Magnets",
+        "Custom Magnets",
+        "Custom Photo Magnets",
+        "Fridge Magnets",
+        "Galentine's Day Idea",
+        "Gift for Her",
+        "Gifts for Mom",
+        "Handmade Magnets",
+        "Kitchen Decor",
+        "Non-candy gift",
+        "Non-candy valentine",
+        "Personalized Gifts",
+        "Postage Stamp Magnets",
+        "Refrigerator Decor",
+        "Retro",
+        "Stocking Stuffer",
+        "Valentine\u2019s Day",
+        "Valentine\u2019s Day Gift"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/modern-valentine-postage-stamp-magnet-set-bold-red-pink-refrigerator-decor-set-of-4",
+      "createdAt": "2026-01-28T13:11:14Z",
+      "updatedAt": "2026-02-09T15:33:52Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "13.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "13.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/4DCE5C64-1297-43E7-AC4D-ACC6AF3D1FF3.png?v=1769605892",
+        "altText": null,
+        "width": 1184,
+        "height": 864
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/4DCE5C64-1297-43E7-AC4D-ACC6AF3D1FF3.png?v=1769605892",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/25802145-341B-425D-9CEA-DB4A27E41791.png?v=1769605893",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/B4EB70D7-E724-4A0A-9267-17E1F289CA74.png?v=1769605893",
+            "altText": null,
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/5F1BDD92-47D6-47FF-9E8A-0237DC41F58B.png?v=1769605893",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53247123456366",
+            "title": "Default Title",
+            "price": {
+              "amount": "13.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14894449459566",
+      "handle": "golden-girls-magnet-set",
+      "title": "Golden Girls Magnet Set (Set of 4)",
+      "description": "Stay golden! This cute Golden Girls magnet set features all four ladies with their classic quotes. A fun, nostalgic addition to any fridge or workspace\u2014and the perfect gift for fans of the show.",
+      "productType": "",
+      "tags": [
+        "Christmas",
+        "Golden Girls"
+      ],
+      "availableForSale": true,
+      "totalInventory": 199,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/golden-girls-magnet-set",
+      "createdAt": "2025-11-26T22:22:02Z",
+      "updatedAt": "2026-02-09T15:40:00Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "14.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "14.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/6AAD4B73-32FC-4F3F-BEF6-DDD2FBA70AC4.jpg?v=1764515325",
+        "altText": "Four square magnets with the Golden Girls and quotes on a light gray background with eucalyptus leaves and a spoon.",
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/6AAD4B73-32FC-4F3F-BEF6-DDD2FBA70AC4.jpg?v=1764515325",
+            "altText": "Four square magnets with the Golden Girls and quotes on a light gray background with eucalyptus leaves and a spoon.",
+            "width": 2400,
+            "height": 1792
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53030049448302",
+            "title": "Default Title",
+            "price": {
+              "amount": "14.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 199
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14879723127150",
+      "handle": "custom-photo-magnets",
+      "title": "2x2 Custom Photo Magnets",
+      "description": "Don\u2019t let your favorite memories stay stuck on your phone. Bring your camera roll to life with our Custom Photo Magnets. Whether it\u2019s a candid shot of the kids, a wedding portrait, or a goofy pictu...",
+      "productType": "",
+      "tags": [
+        "2x2 Magnets",
+        "Custom Magnets",
+        "Custom Photo Magnets",
+        "Fridge Magnets",
+        "Gifts for Mom",
+        "Instagram Magnets",
+        "Kitchen Decor",
+        "Made in Texas",
+        "Magnet Moments Co",
+        "Personalized Gifts",
+        "Pet Magnets",
+        "Photo Gifts",
+        "Save the Date",
+        "Stocking Stuffers",
+        "Wedding Favors"
+      ],
+      "availableForSale": true,
+      "totalInventory": 93,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/custom-photo-magnets",
+      "createdAt": "2025-11-13T19:27:19Z",
+      "updatedAt": "2026-02-14T22:14:31Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "18.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
+        "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
+            "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_h5svbch5svbch5sv.png?v=1768674199",
+            "altText": "Set of six custom photo magnets arranged on a stainless steel refrigerator featuring wedding, family, and pet portraits.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/4052B3AD-FFBB-46EB-86F2-1960C9A96D50.jpg?v=1768576518",
+            "altText": "Four square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/742F7A2A-17D4-450B-8216-D737D6D1D4FB.jpg?v=1764563633",
+            "altText": "Five square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
+            "width": 1856,
+            "height": 2304
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53227461247342",
+            "title": "Set of 6",
+            "price": {
+              "amount": "18.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 93
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461280110",
+            "title": "Set of 9",
+            "price": {
+              "amount": "24.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461312878",
+            "title": "Set of 12",
+            "price": {
+              "amount": "29.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14942568284526",
+      "handle": "watercolor-valentine-postage-stamp-magnet-set-set-of-6-coquette-fridge-magnets",
+      "title": "Watercolor Valentine Postage Stamp Magnet Set | Set of 6 Coquette Fridge Magnets",
+      "description": "Send a little love to their fridge! Add a touch of vintage charm and modern \"coquette\" aesthetic to your home with our Valentine Postage Stamp Magnet Set. Featuring delicate watercolor illustration...",
+      "productType": "",
+      "tags": [
+        "Coquette Aesthetic",
+        "Galentine's Day Idea",
+        "Handmade Magnets",
+        "Magnet Moments",
+        "Pink Bow Decor",
+        "Postage Stamp Magnets",
+        "Refrigerator Decor",
+        "Small Business Gifts",
+        "Valentine\u2019s Day Gift",
+        "Watercolor Magnets"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/watercolor-valentine-postage-stamp-magnet-set-set-of-6-coquette-fridge-magnets",
+      "createdAt": "2026-01-28T13:06:54Z",
+      "updatedAt": "2026-02-09T15:43:06Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "20.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "20.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/FD698091-A310-423C-B943-FA5A9AA4921A.png?v=1769605639",
+        "altText": null,
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/FD698091-A310-423C-B943-FA5A9AA4921A.png?v=1769605639",
+            "altText": null,
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/DE2C6464-9D47-4CC6-86D7-F4F4BC87B997.png?v=1769605637",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/D6253123-19F9-4547-8F65-FC15C6E829B5.png?v=1769605637",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53247121424750",
+            "title": "Default Title",
+            "price": {
+              "amount": "20.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14937248924014",
+      "handle": "custom-2-x-3-photo-magnets-set-of-6",
+      "title": "2x3 Custom Photo Magnets",
+      "description": "Moments that Stick, Now in Widescreen! Sometimes a square just isn't enough. Our new 2\" x 3\" Rectangle Magnets offer a larger canvas for your favorite photos, meaning less cropping and more context...",
+      "productType": "",
+      "tags": [],
+      "availableForSale": true,
+      "totalInventory": -3,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/custom-2-x-3-photo-magnets-set-of-6",
+      "createdAt": "2026-01-21T05:02:27Z",
+      "updatedAt": "2026-02-15T00:38:21Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "21.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "39.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/C3E1744D-08F9-48AF-84DB-79A3CCE59E3C.png?v=1769023157",
+        "altText": null,
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/C3E1744D-08F9-48AF-84DB-79A3CCE59E3C.png?v=1769023157",
+            "altText": null,
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/82D20BCC-F977-4CB9-BCBA-A51B86330991.png?v=1769023129",
+            "altText": null,
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/32DA8024-0458-45D9-A649-8E8C088181DE.png?v=1769023129",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53227452137838",
+            "title": "Set of 6",
+            "price": {
+              "amount": "21.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": -1
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227452170606",
+            "title": "Set of 9",
+            "price": {
+              "amount": "31.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": -1
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227452203374",
+            "title": "Set of 12",
+            "price": {
+              "amount": "39.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": -1
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14905943654766",
+      "handle": "chicago-football-good-better-best-magnet-set-set-of-6",
+      "title": "Chicago Football \u201cGood, Better, Best\u201d Magnet Set (Set of 6)",
+      "description": "Bring the spirit of Soldier Field right to your kitchen! Whether you are celebrating the 1985 glory days or surviving another season of \"cardiac arrest\" football, this set is the perfect way to sho...",
+      "productType": "",
+      "tags": [
+        "Chi town",
+        "Chicago",
+        "Chicago Bears",
+        "Da Bears",
+        "Good Better Best",
+        "Monsters of the midway"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/chicago-football-good-better-best-magnet-set-set-of-6",
+      "createdAt": "2025-12-15T23:42:16Z",
+      "updatedAt": "2026-02-09T15:38:45Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "22.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "22.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/A8326654-E9DF-4E97-B875-7554082C6139.png?v=1765842218",
+        "altText": null,
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/A8326654-E9DF-4E97-B875-7554082C6139.png?v=1765842218",
+            "altText": null,
+            "width": 2400,
+            "height": 1792
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53075389841774",
+            "title": "Default Title",
+            "price": {
+              "amount": "22.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14942570971502",
+      "handle": "vintage-valentine-postage-stamp-magnet-set-watercolor-love-collection-set-of-6",
+      "title": "Vintage Valentine Postage Stamp Magnet Set | Watercolor Love Collection | Set of 6",
+      "description": "Send a little love to your fridge this season. Our \"Love Letters\" Collection brings the nostalgic charm of vintage postage and hand-painted watercolors to your home. Featuring delicate shades of bl...",
+      "productType": "",
+      "tags": [],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/vintage-valentine-postage-stamp-magnet-set-watercolor-love-collection-set-of-6",
+      "createdAt": "2026-01-28T13:15:25Z",
+      "updatedAt": "2026-02-09T15:33:23Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "24.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "24.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/1BCF54A9-FE9E-4254-8F71-4377B11E358A.png?v=1769606148",
+        "altText": null,
+        "width": 1184,
+        "height": 864
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/1BCF54A9-FE9E-4254-8F71-4377B11E358A.png?v=1769606148",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/0037985C-3D54-4DFB-8B8D-6190BDF43643.png?v=1769606148",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/25F5F766-2789-4759-A456-2F3401A3FB23.png?v=1769606148",
+            "altText": null,
+            "width": 1184,
+            "height": 864
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53247124406638",
+            "title": "Default Title",
+            "price": {
+              "amount": "24.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14919794950510",
+      "handle": "seasonal-holiday-magnets-copy",
+      "title": "Retro Wildflower Magnet Set (Set of 8)",
+      "description": "Bring a touch of eternal spring to your kitchen! This Retro Wildflower Magnet Set features a curated collection of groovy blooms and botanical patterns in warm, nostalgic tones. From terracotta ora...",
+      "productType": "",
+      "tags": [
+        "70s Style",
+        "Boho",
+        "Botanical",
+        "Cottagecore",
+        "Cute Stationery",
+        "Floral",
+        "Fridge Magnets",
+        "Gift for Her",
+        "Housewarming Gift",
+        "Kitchen Decor",
+        "Magnet Set",
+        "Office Decor",
+        "Retro",
+        "Spring Decor",
+        "Stocking Stuffer",
+        "Teacher Gift",
+        "Vintage Style",
+        "Wildflower"
+      ],
+      "availableForSale": true,
+      "totalInventory": 10,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/seasonal-holiday-magnets-copy",
+      "createdAt": "2026-01-01T17:12:37Z",
+      "updatedAt": "2026-02-09T15:38:01Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "25.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "25.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/flowers.jpg?v=1767287605",
+        "altText": "Set of 8 square fridge magnets with retro floral and wildflower patterns in pink, orange, and blue on a stainless steel refrigerator.",
+        "width": 1000,
+        "height": 747
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/flowers.jpg?v=1767287605",
+            "altText": "Set of 8 square fridge magnets with retro floral and wildflower patterns in pink, orange, and blue on a stainless steel refrigerator.",
+            "width": 1000,
+            "height": 747
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53153217020270",
+            "title": "Default Title",
+            "price": {
+              "amount": "25.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14912725975406",
+      "handle": "the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
+      "title": "\"The Office\" Collection- (Set of 9)",
+      "description": "\"Bears. Beets. Battlestar Galactica.\" Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotab...",
+      "productType": "",
+      "tags": [
+        "Dunder Mifflin",
+        "Dwight Schrute",
+        "Michael scott",
+        "Pam Beasley",
+        "Prison Mike",
+        "The office"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
+      "createdAt": "2025-12-22T21:27:27Z",
+      "updatedAt": "2026-02-09T15:38:23Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "28.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "28.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/AD690B16-7E17-46B7-83AD-51D3F37ECEEB.png?v=1766438867",
+        "altText": "The Office TV show 9-piece fridge magnet set featuring Dwight Schrute and Michael Scott.",
+        "width": 1792,
+        "height": 2400
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/AD690B16-7E17-46B7-83AD-51D3F37ECEEB.png?v=1766438867",
+            "altText": "The Office TV show 9-piece fridge magnet set featuring Dwight Schrute and Michael Scott.",
+            "width": 1792,
+            "height": 2400
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/3B05AACB-6BE2-41F2-BCF6-58E81DB8AE2E.png?v=1766438867",
+            "altText": "Close up of Schrute Farms and Prison Mike funny magnets.",
+            "width": 2400,
+            "height": 1792
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53110668525934",
+            "title": "Default Title",
+            "price": {
+              "amount": "28.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14901907784046",
+      "handle": "the-eras-stamp-collection",
+      "title": "The Eras Stamp Collection (Set of 12)",
+      "description": "Capture the magic of every era with this exclusive collection of postage-stamp style magnets. Whether you are in your Reputation era or feeling the Folklore vibes, these magnets are the perfect way...",
+      "productType": "",
+      "tags": [
+        "Eras Tour Merch",
+        "Music Lover",
+        "Swiftie gift ideas"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.us/products/the-eras-stamp-collection",
+      "createdAt": "2025-12-09T03:15:34Z",
+      "updatedAt": "2026-02-09T15:39:00Z",
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "32.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "32.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/80A8B396-FFA4-4797-9F6D-26B077194D8A.jpg?v=1767287149",
+        "altText": "Set of 12 postage stamp magnets with Taylor Swift inspired designs.",
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/80A8B396-FFA4-4797-9F6D-26B077194D8A.jpg?v=1767287149",
+            "altText": "Set of 12 postage stamp magnets with Taylor Swift inspired designs.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/C4E6A0E2-151D-4361-9267-47286E34F593.jpg?v=1767287149",
+            "altText": "Set of 12 postage stamp magnets with Taylor Swift inspired designs on a wooden surface",
+            "width": 5712,
+            "height": 4284
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53061552734574",
+            "title": "Default Title",
+            "price": {
+              "amount": "32.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    }
+  ]
+}

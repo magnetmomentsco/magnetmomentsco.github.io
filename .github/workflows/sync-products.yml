@@ -1,0 +1,63 @@
+name: Sync Products from Shopify
+
+# ──────────────────────────────────────────────────────────
+# Triggers:
+#   1. Scheduled — every 6 hours (catches most changes quickly)
+#   2. Manual    — click "Run workflow" in GitHub Actions tab
+#   3. Webhook   — Shopify → Cloudflare Worker → repository_dispatch (future)
+#   4. On push   — to scripts/sync-products.py (self-test on code change)
+# ──────────────────────────────────────────────────────────
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'       # Every 6 hours: 00:00, 06:00, 12:00, 18:00 UTC
+  workflow_dispatch:              # Manual trigger from GitHub UI
+  repository_dispatch:
+    types: [shopify-product-update]   # Future webhook integration
+  push:
+    paths:
+      - 'scripts/sync-products.py'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Sync products from Shopify
+        env:
+          SHOPIFY_DOMAIN: dbx3hf-qe.myshopify.com
+          SHOPIFY_STOREFRONT_TOKEN: ${{ secrets.SHOPIFY_STOREFRONT_TOKEN || '3ed866388b8a983188443f1d808fd561' }}
+        run: python scripts/sync-products.py
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "Shopify Sync Bot"
+          git config user.email "sync@magnetmomentsco.us"
+          
+          # Get a quick summary of what changed
+          PRODUCT_COUNT=$(python3 -c "import json; d=json.load(open('_data/products.json')); print(d['productCount'])")
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
+          
+          git add -A
+          git commit -m "🔄 Auto-sync: ${PRODUCT_COUNT} products from Shopify
+
+          Synced at ${TIMESTAMP}
+          Triggered by: ${{ github.event_name }}"
+          
+          git push
