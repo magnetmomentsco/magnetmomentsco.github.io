@@ -20,10 +20,19 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   sync:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changes.outputs.changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -61,3 +70,29 @@ jobs:
           Triggered by: ${{ github.event_name }}"
           
           git push
+
+  # Deploy to GitHub Pages after sync (even if no product changes,
+  # this ensures Pages is always up to date)
+  deploy:
+    needs: sync
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout (latest, including any sync commit)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
