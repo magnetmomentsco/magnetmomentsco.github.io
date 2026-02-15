@@ -657,6 +657,8 @@
       <li><a href="#future">Discussion: Self-Hosted Image Uploads</a></li>
       <li><a href="#no-shopify">Discussion: Removing Shopify Entirely</a></li>
       <li><a href="#auto-sync">Automatic Product Sync — How Inventory Stays Updated</a></li>
+      <li><a href="#product-pages">Individual Product Pages — SEO-Optimized Detail Pages</a></li>
+      <li><a href="#seo-keywords">SEO Keywords &amp; Nationwide Shipping</a></li>
       <li><a href="#testing">Accessibility &amp; Mobile Testing Results</a></li>
     </ol>
   </nav>
@@ -2106,10 +2108,220 @@ window.location.href = url; <span class="cm">// → Stripe's hosted checkout pag
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════ -->
-    <!--  SECTION 10 — ACCESSIBILITY & MOBILE TESTING                  -->
+    <!--  SECTION 10 — INDIVIDUAL PRODUCT PAGES                        -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="product-pages">
+      <span class="section-num">10</span>
+      <h2>Individual Product Pages — SEO-Optimized Detail Pages</h2>
+
+      <p>
+        A major SEO gap was identified: the site had no individual product pages. All 11 products were only shown as cards 
+        on the <code>/shop/</code> collection page. This meant:
+      </p>
+      <ul>
+        <li><strong>No indexable URLs</strong> — Google had no unique page to associate with each product</li>
+        <li><strong>No product descriptions in search results</strong> — the rich Shopify descriptions weren't visible to crawlers</li>
+        <li><strong>No Google Shopping eligibility</strong> — Google Shopping requires individual product URLs with structured data</li>
+        <li><strong>No long-tail keyword targeting</strong> — couldn't rank for searches like "Golden Girls magnet set"</li>
+      </ul>
+
+      <h3>What we built</h3>
+      <p>
+        The sync script (<code>sync-products.py</code>) now auto-generates a full HTML product detail page (PDP) for each product 
+        at <code>/shop/{product-handle}/index.html</code>. These pages are generated every time the sync runs (every 6 hours or on push).
+      </p>
+
+      <h3>Each product page includes</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>SEO Impact</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unique URL (<code>/shop/golden-girls-magnet-set/</code>)</td>
+            <td>Google can index, rank, and link directly to each product</td>
+          </tr>
+          <tr>
+            <td>Full product description (from Shopify's <code>descriptionHtml</code>)</td>
+            <td>Rich content for Google to understand what the product is</td>
+          </tr>
+          <tr>
+            <td>Unique <code>&lt;title&gt;</code> and <code>&lt;meta description&gt;</code> per product</td>
+            <td>Custom snippets in search results for each product</td>
+          </tr>
+          <tr>
+            <td>JSON-LD <code>Product</code> schema (individual, not list)</td>
+            <td>Rich results in Google — price, availability, reviews</td>
+          </tr>
+          <tr>
+            <td>Open Graph <code>product</code> type + price meta tags</td>
+            <td>Beautiful social media previews when shared on Facebook/Pinterest</td>
+          </tr>
+          <tr>
+            <td>Per-product <code>meta keywords</code></td>
+            <td>Product name + gift keywords + nationwide shipping signals</td>
+          </tr>
+          <tr>
+            <td>Image gallery with thumbnails</td>
+            <td>Google Images indexing — all product photos discoverable</td>
+          </tr>
+          <tr>
+            <td>Canonical URL per product</td>
+            <td>Prevents duplicate content issues between Shopify and our site</td>
+          </tr>
+          <tr>
+            <td>"You May Also Like" related products section</td>
+            <td>Internal linking boosts SEO for all product pages</td>
+          </tr>
+          <tr>
+            <td>Breadcrumb navigation</td>
+            <td>Google shows breadcrumbs in search results — better click-through rate</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>How product cards link to detail pages</h3>
+      <p>
+        Every product card on the Shop page and Home page is now wrapped in a link to its detail page. 
+        Clicking the product image or title takes you to the full page; the "Add to Cart" button still works directly from the card. 
+        This gives customers two paths: quick add-to-cart or browse the full details first.
+      </p>
+
+      <h3>Auto-generated, zero maintenance</h3>
+      <p>
+        Just like the product cards, these pages are <strong>fully automatic</strong>. When Alyssa adds a new product in Shopify, 
+        the next sync cycle will create a new product page with all the SEO elements. When she updates a description, 
+        the page regenerates. No developer involvement needed.
+      </p>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        Every product now has its own SEO-optimized page with rich descriptions, structured data, and social sharing tags. 
+        Google can index, rank, and display each product individually — a massive improvement for organic search traffic 
+        and Google Shopping eligibility.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 11 — SEO KEYWORDS & NATIONWIDE SHIPPING              -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="seo-keywords">
+      <span class="section-num">11</span>
+      <h2>SEO Keywords &amp; Nationwide Shipping</h2>
+
+      <p>
+        A comprehensive SEO keyword audit was performed across all pages. Two major opportunities were identified:
+      </p>
+      <ul>
+        <li><strong>Gift-related keywords were missing</strong> — searches like "gifts for him," "gifts for her," "unique gifts," 
+        and "family gifts" are high-volume, high-intent queries that the site wasn't targeting</li>
+        <li><strong>The site appeared limited to Austin, TX</strong> — meta descriptions, structured data, and visible text 
+        all said "Handcrafted in Austin, TX" without mentioning nationwide shipping, which could deter out-of-state customers</li>
+      </ul>
+
+      <h3>What we changed — meta descriptions</h3>
+      <p>
+        Every page's <code>&lt;meta name="description"&gt;</code> was rewritten to include gift keywords and nationwide shipping language. 
+        These are the snippets Google shows in search results:
+      </p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Page</th><th>Key phrases added</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Home</td><td>"Perfect gifts for him, her, family &amp; friends. Ships nationwide across the USA."</td></tr>
+          <tr><td>Shop</td><td>"Perfect gifts for him, her, family &amp; friends… Ships nationwide across the USA."</td></tr>
+          <tr><td>About</td><td>"Based in Austin, TX — shipping nationwide across the USA."</td></tr>
+          <tr><td>Events</td><td>"Available for events nationwide"</td></tr>
+          <tr><td>Wholesale</td><td>"Free shipping on all bulk orders nationwide across the USA."</td></tr>
+          <tr><td>Contact</td><td>"We ship nationwide across the USA."</td></tr>
+          <tr><td>FAQ</td><td>"Nationwide shipping across the USA"</td></tr>
+          <tr><td>Shipping Policy</td><td>"We ship nationwide across the USA via USPS."</td></tr>
+          <tr><td>All 11 product pages</td><td>"gifts for him, gifts for her, gifts for family, ships nationwide USA"</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>What we changed — meta keywords</h3>
+      <p>
+        Previously, only the Home page had a <code>&lt;meta name="keywords"&gt;</code> tag. Now <strong>every page</strong> has one, 
+        targeting relevant long-tail keywords:
+      </p>
+      <ul>
+        <li><strong>Gift keywords:</strong> gifts for him, gifts for her, gifts for family, unique gifts, birthday gifts, anniversary gifts</li>
+        <li><strong>Product keywords:</strong> custom photo magnets, personalized magnets, fridge magnets, magnet sets</li>
+        <li><strong>Shipping keywords:</strong> ships nationwide, USA shipping, nationwide shipping USA</li>
+        <li><strong>Event keywords:</strong> wedding favors, event magnets, photo booth magnets, corporate event gifts</li>
+      </ul>
+
+      <h3>What we changed — visible content</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Element</th><th>Before</th><th>After</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hero badge</td>
+            <td>"Handcrafted in Austin, TX"</td>
+            <td>"Handcrafted in Austin, TX · Ships Nationwide"</td>
+          </tr>
+          <tr>
+            <td>Hero description</td>
+            <td>"…magnets that bring joy to your fridge…"</td>
+            <td>"…the perfect gift for him, her, or the whole family. Ships anywhere in the USA."</td>
+          </tr>
+          <tr>
+            <td>Scrolling marquee</td>
+            <td>Generic items</td>
+            <td>"Perfect Gifts for Him &amp; Her" · "Ships Nationwide" · "Gifts for Family &amp; Friends"</td>
+          </tr>
+          <tr>
+            <td>Value prop section</td>
+            <td>"Fast Shipping" — 3-5 days</td>
+            <td>"Nationwide Shipping" — anywhere in the USA, free on $35+</td>
+          </tr>
+          <tr>
+            <td>Shop subtitle</td>
+            <td>"…each one handcrafted with care"</td>
+            <td>"…perfect gifts for him, her, and the whole family. Shipped nationwide."</td>
+          </tr>
+          <tr>
+            <td>Product page features</td>
+            <td>3 features (shipping, handcrafted, quality)</td>
+            <td>4 features: "Ships nationwide" · "Free shipping $35+" · "Perfect gift for him, her &amp; family" · "Handcrafted in Austin"</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>What we changed — structured data</h3>
+      <p>
+        The JSON-LD <code>LocalBusiness</code> schema on the Home page was updated to include:
+      </p>
+      <ul>
+        <li><code>areaServed</code> → <code>{"@type": "Country", "name": "United States"}</code> — tells Google we serve the entire US, not just Austin</li>
+        <li>Updated description with gift and nationwide keywords</li>
+        <li>All product JSON-LD URLs now point to individual product pages instead of <code>/shop/</code></li>
+      </ul>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        The site now targets high-intent gift searches ("gifts for him," "gifts for her," "unique gifts for family") 
+        and clearly communicates nationwide shipping throughout — in meta tags, visible content, and structured data. 
+        This should improve organic search rankings, click-through rates from Google, and conversion from out-of-state visitors 
+        who previously may have assumed we only serve Austin.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 12 — ACCESSIBILITY & MOBILE TESTING                  -->
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <section class="section" id="testing">
-      <div class="section-num">10</div>
+      <div class="section-num">12</div>
       <h2>Accessibility &amp; Mobile Testing Results</h2>
 
       <p>
