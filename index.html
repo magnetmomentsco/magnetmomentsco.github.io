@@ -323,7 +323,7 @@
             <p>Happy Customers</p>
           </div>
           <div class="hero-stat">
-            <span class="hero-stat-number" data-count="11" data-suffix="">0</span>
+            <span class="hero-stat-number" id="product-count-stat" data-count="11" data-suffix="">0</span>
             <p>Unique Products</p>
           </div>
           <div class="hero-stat">
@@ -886,6 +886,13 @@
   </button>
 
   <!-- Scripts -->
+  <script>
+    // Dynamic product count — fetch real count from products.json
+    fetch('/_data/products.json').then(r=>r.json()).then(d=>{
+      const el=document.getElementById('product-count-stat');
+      if(el&&d&&d.length) el.dataset.count=d.length;
+    }).catch(()=>{});
+  </script>
   <script src="assets/js/main.js"></script>
 
   <!-- ========== CART DRAWER ========== -->
