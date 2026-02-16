@@ -662,6 +662,9 @@
       <li><a href="#dns-safe-urls">DNS-Safe Custom Product URLs</a></li>
       <li><a href="#cart-modal">Cart-Aware Custom Product Modal</a></li>
       <li><a href="#cicd-cleanup">CI/CD Workflow Cleanup</a></li>
+      <li><a href="#footer-credit">Designer Footer Credit</a></li>
+      <li><a href="#how-it-works">How It Works Section &amp; Dual Order CTAs</a></li>
+      <li><a href="#b2b-keywords">B2B &amp; Business SEO Keywords</a></li>
       <li><a href="#testing">Accessibility &amp; Mobile Testing Results</a></li>
     </ol>
   </nav>
@@ -2500,10 +2503,172 @@ Sync bot pushes → deploy-pages.yml triggers → one clean deploy
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════ -->
-    <!--  SECTION 15 — ACCESSIBILITY & MOBILE TESTING                  -->
+    <!--  SECTION 15 — DESIGNER FOOTER CREDIT                         -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="footer-credit">
+      <span class="section-num">15</span>
+      <h2>Designer Footer Credit</h2>
+
+      <p>
+        Added a "Designed by <a href="https://ajayadesign.github.io" target="_blank" rel="noopener">AjayaDesign</a>" credit line 
+        to the footer of <strong>every page on the site</strong> (23 HTML files total). The credit appears below the copyright 
+        line in a subtle, brand-consistent style.
+      </p>
+
+      <h3>Implementation</h3>
+      <ul>
+        <li><strong>Sync script template</strong> — updated to include the credit in the 13 auto-generated product pages</li>
+        <li><strong>All static pages</strong> — manually updated: home, shop, about, contact, events, faq, wholesale, 404, 
+        and all 4 policy pages (shipping, refund, terms, privacy)</li>
+        <li><strong>CSS</strong> — <code>.footer-credit</code> class with <code>font-size: 0.75rem</code>, centered, 
+        muted color, with a hover accent on the link</li>
+      </ul>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Result</div>
+        Consistent designer attribution across all 23 pages, auto-included in future product pages via the sync template.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 16 — HOW IT WORKS SECTION & DUAL ORDER CTAs          -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="how-it-works">
+      <span class="section-num">16</span>
+      <h2>How It Works Section &amp; Dual Order CTAs</h2>
+
+      <p>
+        Added a visual step-by-step <strong>"How It Works"</strong> section to the home page, guiding visitors through 
+        the ordering process. Also added prominent <strong>dual "Order Now" call-to-action buttons</strong> that link 
+        directly to the shop page.
+      </p>
+
+      <h3>How It Works — 3-step process</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Step</th><th>Title</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Choose Your Photos</td><td>Guides users to select their favorite photos for custom magnets</td></tr>
+          <tr><td>2</td><td>We Create Your Magnets</td><td>Explains the handcrafted production process</td></tr>
+          <tr><td>3</td><td>Enjoy Your Keepsakes</td><td>Highlights the final product experience — sticking memories on the fridge</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Dual Order Now CTAs</h3>
+      <p>
+        Two strategically placed "Order Now" buttons were added to the home page to increase conversion:
+      </p>
+      <ul>
+        <li><strong>Above the fold</strong> — immediately visible CTA near the hero section</li>
+        <li><strong>Below How It Works</strong> — captures users who've just seen the process and are ready to buy</li>
+      </ul>
+
+      <h3>Files changed</h3>
+      <ul>
+        <li><code>index.html</code> — +59 lines of HTML for the How It Works section and CTA buttons</li>
+        <li><code>assets/css/style.css</code> — +119 lines for step cards, animations, and responsive CTA button styles</li>
+      </ul>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Impact</div>
+        Clearer user journey on the home page. Visitors now understand the 3-step ordering process at a glance, 
+        with prominent CTAs to drive conversions.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 17 — B2B & BUSINESS SEO KEYWORDS                    -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="b2b-keywords">
+      <span class="section-num">17</span>
+      <h2>B2B &amp; Business SEO Keywords</h2>
+
+      <p>
+        A comprehensive audit revealed <strong>zero B2B or business-related keywords</strong> across the entire site. 
+        This meant the site was invisible to anyone searching for "promotional magnets," "business swag," 
+        "trade show giveaways," "branded magnets," or similar commercial terms — a major missed audience.
+      </p>
+
+      <h3>Keywords added</h3>
+      <p>The following B2B/business terms were woven into meta descriptions, meta keywords, visible copy, and structured data:</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Keywords Added</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Promotional</strong></td>
+            <td>promotional magnets, promotional products, business swag, company swag, conference swag</td>
+          </tr>
+          <tr>
+            <td><strong>Corporate</strong></td>
+            <td>corporate gifts, corporate giveaways, branded magnets, custom logo magnets, company logo magnets</td>
+          </tr>
+          <tr>
+            <td><strong>Events</strong></td>
+            <td>trade show giveaways, conference giveaways, team building gifts, company event swag</td>
+          </tr>
+          <tr>
+            <td><strong>Gifting</strong></td>
+            <td>client appreciation gifts, employee gifts, realtor closing gifts, employee onboarding kits</td>
+          </tr>
+          <tr>
+            <td><strong>Inquiries</strong></td>
+            <td>business magnet inquiry, promotional magnet order, branded magnet quote, bulk order request</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Pages updated</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Page</th><th>Changes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Home</td><td>Meta description + keywords: added promotional magnets, business swag, corporate gifts, branded magnets</td></tr>
+          <tr><td>Shop</td><td>Meta description + keywords: added promotional magnets, business gifts, office magnets, branded magnets</td></tr>
+          <tr><td>Wholesale</td><td>Major expansion — 11 new keyword terms, 8 new "Perfect For" use cases, updated subtitle</td></tr>
+          <tr><td>Events</td><td>Meta description + keywords: trade show, conference, team building, corporate swag</td></tr>
+          <tr><td>FAQ</td><td>New FAQ: "Can I order custom magnets with my business logo?" — HTML + JSON-LD schema</td></tr>
+          <tr><td>Contact</td><td>Meta keywords: business magnet inquiry, promotional magnet order, branded magnet quote</td></tr>
+          <tr><td>About</td><td>Meta description + keywords: business magnets, promotional products, small business partner</td></tr>
+          <tr><td>All 11 PDPs</td><td>Sync script template updated — every product page now includes promotional magnets, business swag, corporate gifts, branded magnets</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Wholesale page — expanded "Perfect For" section</h3>
+      <p>Added 8 new B2B-specific use cases to the visible "Perfect For" grid:</p>
+      <ul>
+        <li>Trade show giveaways</li>
+        <li>Client appreciation gifts</li>
+        <li>Employee onboarding kits</li>
+        <li>Realtor closing gifts</li>
+        <li>Conference &amp; expo swag</li>
+        <li>Company logo magnets</li>
+        <li>Nonprofit fundraiser items</li>
+        <li>Team building keepsakes</li>
+      </ul>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Impact</div>
+        The site is now discoverable for B2B search queries. Businesses searching for promotional magnets, 
+        trade show swag, corporate gifts, or branded magnets will find Magnet Moments Co. in search results — 
+        an entirely new customer segment unlocked.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 18 — ACCESSIBILITY & MOBILE TESTING                  -->
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <section class="section" id="testing">
-      <div class="section-num">15</div>
+      <div class="section-num">18</div>
       <h2>Accessibility &amp; Mobile Testing Results</h2>
 
       <p>

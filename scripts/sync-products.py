@@ -443,7 +443,7 @@ def build_product_page_html(product, all_products):
   <meta name="theme-color" content="#C77D8A">
   <title>{seo_title} — Magnet Moments Co.</title>
   <meta name="description" content="{seo_description}">
-  <meta name="keywords" content="{title}, custom magnets, photo magnets, gifts for him, gifts for her, gifts for family, unique gifts, fridge magnets, ships nationwide USA">
+  <meta name="keywords" content="{title}, custom magnets, photo magnets, gifts for him, gifts for her, gifts for family, unique gifts, fridge magnets, promotional magnets, business swag, corporate gifts, branded magnets, ships nationwide USA">
   <link rel="canonical" href="https://magnetmomentsco.us/shop/{handle}/">
   <meta property="og:type" content="product">
   <meta property="og:title" content="{seo_title} — Magnet Moments Co.">
