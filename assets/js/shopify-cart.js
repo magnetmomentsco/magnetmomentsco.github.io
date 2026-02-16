@@ -88,7 +88,7 @@
     }
     return {
       id: raw.id,
-      checkoutUrl: raw.checkoutUrl,
+      checkoutUrl: (raw.checkoutUrl || '').replace(/https?:\/\/magnetmomentsco\.us/, 'https://' + SHOPIFY_DOMAIN),
       lines: lines,
       subtotal: (raw.cost && raw.cost.subtotalAmount && raw.cost.subtotalAmount.amount) || '0.00',
       total: (raw.cost && raw.cost.totalAmount && raw.cost.totalAmount.amount) || '0.00',

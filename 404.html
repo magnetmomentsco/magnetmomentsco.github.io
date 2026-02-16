@@ -13,6 +13,44 @@
   <meta name="theme-color" content="#C77D8A">
   <title>Page Not Found — Magnet Moments Co.</title>
   <meta name="robots" content="noindex">
+  <script>
+    // Redirect old Shopify URLs to the correct destination
+    (function() {
+      var path = window.location.pathname;
+      var shopify = 'https://dbx3hf-qe.myshopify.com';
+
+      // /cart/... → Shopify checkout
+      if (path.startsWith('/cart/')) {
+        window.location.replace(shopify + path + window.location.search);
+        return;
+      }
+      // /products/<handle> → our /shop/<handle>/
+      if (path.startsWith('/products/')) {
+        var handle = path.replace('/products/', '').replace(/\/$/, '');
+        if (handle) {
+          window.location.replace('/shop/' + handle + '/');
+          return;
+        }
+      }
+      // /collections/... → our /shop/
+      if (path.startsWith('/collections/')) {
+        window.location.replace('/shop/');
+        return;
+      }
+      // /pages/... → map known pages
+      if (path.startsWith('/pages/')) {
+        var map = {
+          'about-us': '/about/',
+          'contact-us': '/contact/',
+          'faqs': '/faq/',
+          'wholesale-bulk-orders': '/wholesale/',
+          'book-us-for-your-next-event': '/events/'
+        };
+        var slug = path.replace('/pages/', '').replace(/\/$/, '');
+        if (map[slug]) { window.location.replace(map[slug]); return; }
+      }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
