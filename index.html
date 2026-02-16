@@ -890,7 +890,8 @@
     // Dynamic product count — fetch real count from products.json
     fetch('/_data/products.json').then(r=>r.json()).then(d=>{
       const el=document.getElementById('product-count-stat');
-      if(el&&d&&d.length) el.dataset.count=d.length;
+      const count=d&&(d.productCount||(d.products&&d.products.length));
+      if(el&&count) el.dataset.count=count;
     }).catch(()=>{});
   </script>
   <script src="assets/js/main.js"></script>
