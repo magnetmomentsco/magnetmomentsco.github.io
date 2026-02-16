@@ -1100,6 +1100,125 @@ section {
   line-height: 1.7;
 }
 
+/* ---------- How It Works ---------- */
+.how-it-works {
+  background: var(--color-cream);
+}
+
+.hiw-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.hiw-step {
+  flex: 0 1 280px;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hiw-step:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hiw-number {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(199, 125, 138, 0.35);
+}
+
+.hiw-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0.75rem auto 1.25rem;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiw-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.hiw-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-charcoal);
+}
+
+.hiw-desc {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.hiw-connector {
+  flex: 0 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  color: var(--color-primary-light);
+}
+
+.hiw-connector svg {
+  width: 60px;
+  height: 24px;
+}
+
+.hiw-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+/* Mobile: stack vertically, rotate arrows */
+@media (max-width: 768px) {
+  .hiw-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hiw-step {
+    flex: none;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .hiw-connector {
+    margin-top: 0;
+    transform: rotate(90deg);
+    flex: 0 0 40px;
+  }
+}
+
 /* ---------- About / Story Section ---------- */
 .about-section {
   background: var(--color-white);
