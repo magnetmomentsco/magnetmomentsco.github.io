@@ -119,25 +119,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!dismissed) {
       setTimeout(() => {
         popup.classList.add('active');
+        document.dispatchEvent(new CustomEvent('mm:popup-shown'));
       }, 4000);
     }
 
-    const closePopup = () => {
+    const closePopup = (method) => {
       popup.classList.remove('active');
       sessionStorage.setItem('popup-dismissed', '1');
+      document.dispatchEvent(new CustomEvent('mm:popup-dismissed', { detail: { method: method || 'unknown' } }));
     };
 
-    popup.querySelector('.popup-close')?.addEventListener('click', closePopup);
+    popup.querySelector('.popup-close')?.addEventListener('click', () => closePopup('x'));
     popup.addEventListener('click', (e) => {
-      if (e.target === popup) closePopup();
+      if (e.target === popup) closePopup('click-outside');
     });
 
     // Escape key to close popup
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && popup.classList.contains('active')) {
-        closePopup();
+        closePopup('escape');
       }
     });
+
+    // Newsletter form submit
+    const popupForm = popup.querySelector('form');
+    if (popupForm) {
+      popupForm.addEventListener('submit', () => {
+        document.dispatchEvent(new CustomEvent('mm:popup-submitted'));
+      });
+    }
   }
 
   // ---- Smooth scroll for anchor links ----

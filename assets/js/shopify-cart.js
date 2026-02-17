@@ -156,6 +156,8 @@
       updateCartUI();
       openCartDrawer();
       showAddedFeedback();
+      document.dispatchEvent(new CustomEvent('mm:add-to-cart', { detail: { variantId: variantId, quantity: quantity } }));
+      document.dispatchEvent(new CustomEvent('mm:cart-update', { detail: { action: 'add', items: cart.lines, total: cart.totalAmount } }));
       return cart;
     }).catch(function (err) {
       console.error('Add to cart failed:', err);
@@ -334,6 +336,9 @@
     var checkoutBtn = document.getElementById('cart-checkout-btn');
     if (checkoutBtn && cart.checkoutUrl) {
       checkoutBtn.href = cart.checkoutUrl;
+      checkoutBtn.addEventListener('click', function() {
+        document.dispatchEvent(new CustomEvent('mm:checkout-start'));
+      });
     }
   }
 

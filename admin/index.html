@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Command Center — Magnet Moments Co.</title>
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1a2e">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1a1a2e;
+      --bg-card: #16213e;
+      --bg-card-hover: #1a2747;
+      --bg-surface: #0f3460;
+      --text: #e0e0e0;
+      --text-muted: #8899aa;
+      --text-dim: #556677;
+      --pink: #C77D8A;
+      --green: #7A9D54;
+      --gold: #D4A574;
+      --cream: #FFF8F0;
+      --red: #e74c3c;
+      --yellow: #f1c40f;
+      --blue: #3498db;
+      --purple: #9b59b6;
+      --border: #1e3a5f;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; }
+    a { color: var(--pink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── Password Overlay ─── */
+    #auth-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10, 10, 25, 0.97);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    #auth-overlay.hidden { display: none; }
+    .auth-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      max-width: 420px; width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .auth-card .logo { font-size: 48px; margin-bottom: 8px; }
+    .auth-card h2 { color: var(--cream); margin-bottom: 4px; font-size: 1.5rem; }
+    .auth-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+    .auth-card input {
+      width: 100%; padding: 14px 18px;
+      background: var(--bg); color: var(--text);
+      border: 1px solid var(--border); border-radius: 8px;
+      font-size: 1rem; outline: none; transition: border-color 0.2s;
+    }
+    .auth-card input:focus { border-color: var(--pink); }
+    .auth-card input::placeholder { color: var(--text-dim); }
+    .auth-card button {
+      margin-top: 16px; width: 100%; padding: 14px;
+      background: var(--pink); color: #fff; border: none;
+      border-radius: 8px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .auth-card button:hover { background: #b06a77; }
+    .auth-error { color: var(--red); font-size: 0.85rem; margin-top: 12px; display: none; }
+
+    /* ─── Top Bar ─── */
+    .topbar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; }
+    .topbar-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--cream); }
+    .topbar-logo span { font-size: 1.3rem; }
+    .topbar-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .live-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(122, 157, 84, 0.15); border: 1px solid rgba(122, 157, 84, 0.3);
+      padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; color: var(--green);
+    }
+    .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .topbar-date { color: var(--text-muted); font-size: 0.85rem; }
+    .btn-logout {
+      background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+      padding: 6px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover { border-color: var(--red); color: var(--red); }
+
+    /* ─── Main Layout ─── */
+    .dashboard { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+    /* ─── Quick Stats ─── */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 24px;
+      box-shadow: var(--shadow); transition: transform 0.2s, border-color 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-2px); border-color: var(--pink); }
+    .stat-card .stat-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .stat-card .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-card .stat-value { font-size: 2rem; font-weight: 700; color: var(--cream); margin: 4px 0; font-family: 'Inter', sans-serif; }
+    .stat-card .stat-sub { font-size: 0.8rem; color: var(--text-dim); }
+
+    /* ─── Sections ─── */
+    .section {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 20px;
+      box-shadow: var(--shadow); overflow: hidden;
+    }
+    .section-header {
+      padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; user-select: none;
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(15, 52, 96, 0.3) 100%);
+      border-bottom: 1px solid transparent;
+      transition: background 0.2s;
+    }
+    .section-header:hover { background: var(--bg-card-hover); }
+    .section-header h3 {
+      font-size: 1.1rem; color: var(--cream); display: flex; align-items: center; gap: 10px;
+    }
+    .section-header .badge {
+      background: var(--red); color: #fff; font-size: 0.7rem; font-family: 'Inter', sans-serif;
+      padding: 2px 8px; border-radius: 10px; font-weight: 600;
+    }
+    .section-toggle {
+      font-size: 1.2rem; color: var(--text-muted); transition: transform 0.3s;
+    }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+    .section-body { padding: 24px; }
+    .section.collapsed .section-body { display: none; }
+    .section.collapsed .section-header { border-bottom: none; }
+    .section-header.open { border-bottom: 1px solid var(--border); }
+
+    /* ─── Loading State ─── */
+    .loading {
+      text-align: center; padding: 32px; color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .loading::before { content: '⏳ '; }
+    .spinner {
+      display: inline-block; width: 20px; height: 20px;
+      border: 2px solid var(--border); border-top-color: var(--pink);
+      border-radius: 50%; animation: spin 0.8s linear infinite;
+      margin-right: 8px; vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── Firebase Warning ─── */
+    .firebase-warning {
+      background: rgba(231, 76, 60, 0.1); border: 1px solid rgba(231, 76, 60, 0.3);
+      border-radius: 8px; padding: 20px; margin-bottom: 20px;
+      color: var(--red); text-align: center;
+    }
+    .firebase-warning code { background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; }
+
+    /* ─── Tables ─── */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .data-table th {
+      text-align: left; padding: 10px 14px; color: var(--text-muted);
+      border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .data-table td {
+      padding: 10px 14px; border-bottom: 1px solid rgba(30, 58, 95, 0.5);
+      vertical-align: middle;
+    }
+    .data-table tr:hover td { background: rgba(199, 125, 138, 0.05); }
+    .data-table .truncate { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* ─── Charts ─── */
+    .chart-container { position: relative; width: 100%; max-height: 350px; margin: 16px 0; }
+    .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .chart-col { min-width: 0; }
+
+    /* ─── Funnel ─── */
+    .funnel-bar {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+    }
+    .funnel-label { width: 160px; font-size: 0.85rem; text-align: right; color: var(--text-muted); flex-shrink: 0; }
+    .funnel-track { flex: 1; background: rgba(255,255,255,0.05); border-radius: 6px; height: 32px; overflow: hidden; }
+    .funnel-fill {
+      height: 100%; border-radius: 6px; display: flex; align-items: center;
+      padding: 0 12px; font-size: 0.8rem; font-weight: 600; color: #fff;
+      transition: width 0.8s ease;
+    }
+
+    /* ─── Gauge Cards ─── */
+    .gauge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .gauge-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px; text-align: center;
+    }
+    .gauge-card .gauge-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .gauge-card .gauge-value { font-size: 2rem; font-weight: 700; margin: 8px 0; font-family: 'Inter', sans-serif; }
+    .gauge-card .gauge-unit { font-size: 0.8rem; color: var(--text-dim); }
+    .gauge-card.green .gauge-value { color: var(--green); }
+    .gauge-card.yellow .gauge-value { color: var(--yellow); }
+    .gauge-card.red .gauge-value { color: var(--red); }
+
+    /* ─── SEO Table ─── */
+    .seo-pass { color: var(--green); }
+    .seo-fail { color: var(--red); }
+    .seo-score { font-weight: 700; }
+
+    /* ─── Quick Links Grid ─── */
+    .links-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .link-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+      transition: all 0.2s; text-decoration: none;
+    }
+    .link-card:hover { border-color: var(--pink); transform: translateY(-2px); text-decoration: none; }
+    .link-card .link-icon { font-size: 1.5rem; }
+    .link-card .link-info { flex: 1; }
+    .link-card .link-title { font-size: 0.9rem; font-weight: 600; color: var(--cream); }
+    .link-card .link-url { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .link-card .link-arrow { color: var(--text-dim); font-size: 1.2rem; }
+
+    /* ─── Newsletter Cards ─── */
+    .nl-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .nl-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+    .nl-card .nl-val { font-size: 1.5rem; font-weight: 700; color: var(--cream); font-family: 'Inter', sans-serif; }
+    .nl-card .nl-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
+
+    /* ─── Social Proof Config ─── */
+    .config-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid rgba(30, 58, 95, 0.5);
+    }
+    .config-row:last-child { border-bottom: none; }
+    .config-label { font-size: 0.9rem; }
+    .config-label small { display: block; color: var(--text-dim); font-size: 0.78rem; }
+    .toggle-switch {
+      position: relative; width: 48px; height: 26px; cursor: pointer;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; inset: 0; background: var(--border); border-radius: 13px;
+      transition: 0.3s;
+    }
+    .toggle-slider::before {
+      content: ''; position: absolute; width: 20px; height: 20px;
+      left: 3px; bottom: 3px; background: var(--text-muted);
+      border-radius: 50%; transition: 0.3s;
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--green); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(22px); background: #fff; }
+
+    input[type="number"].config-input {
+      background: var(--bg); color: var(--text); border: 1px solid var(--border);
+      border-radius: 6px; padding: 6px 10px; width: 80px; font-size: 0.85rem;
+    }
+
+    /* ─── Digest Textarea ─── */
+    .digest-area {
+      width: 100%; min-height: 300px; background: var(--bg); color: var(--text);
+      border: 1px solid var(--border); border-radius: 8px; padding: 16px;
+      font-family: 'Inter', monospace; font-size: 0.85rem; resize: vertical;
+    }
+    .btn {
+      padding: 10px 24px; border: none; border-radius: 8px; font-size: 0.9rem;
+      font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--pink); color: #fff; }
+    .btn-primary:hover { background: #b06a77; }
+    .btn-secondary { background: var(--bg-surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--pink); }
+    .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
+
+    /* ─── Filters ─── */
+    .filter-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+    .filter-bar select, .filter-bar input[type="text"] {
+      background: var(--bg); color: var(--text); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 14px; font-size: 0.85rem;
+    }
+    .filter-bar input[type="text"] { flex: 1; min-width: 200px; }
+    .filter-bar input[type="text"]::placeholder { color: var(--text-dim); }
+
+    /* ─── Product Thumbnails ─── */
+    .prod-thumb {
+      width: 48px; height: 48px; border-radius: 6px; object-fit: cover;
+      background: var(--bg); border: 1px solid var(--border);
+    }
+
+    /* ─── Status Badges ─── */
+    .status-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 12px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+    .status-badge.success { background: rgba(122, 157, 84, 0.15); color: var(--green); }
+    .status-badge.failure { background: rgba(231, 76, 60, 0.15); color: var(--red); }
+    .status-badge.in-stock { background: rgba(122, 157, 84, 0.15); color: var(--green); }
+    .status-badge.out-of-stock { background: rgba(231, 76, 60, 0.15); color: var(--red); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .dashboard { padding: 12px; }
+      .topbar { padding: 10px 14px; }
+      .topbar-logo { font-size: 1rem; }
+      .chart-row { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .section-body { padding: 16px; }
+      .data-table { font-size: 0.78rem; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+      .funnel-label { width: 100px; font-size: 0.78rem; }
+      .links-grid { grid-template-columns: 1fr; }
+      .nl-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-card .stat-value { font-size: 1.5rem; }
+      .gauge-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+    /* ─── Table overflow ─── */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* ─── Utility ─── */
+    .mt-16 { margin-top: 16px; }
+    .mb-16 { margin-bottom: 16px; }
+    .text-center { text-align: center; }
+    .text-muted { color: var(--text-muted); }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; }
+    .gap-12 { gap: 12px; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<!-- PASSWORD OVERLAY                                                       -->
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<div id="auth-overlay">
+  <div class="auth-card">
+    <div class="logo">⚙️</div>
+    <h2>Command Center</h2>
+    <p>Magnet Moments Co. — Admin Dashboard</p>
+    <form id="auth-form" autocomplete="off">
+      <input type="password" id="auth-password" placeholder="Enter admin password" autofocus>
+      <button type="submit">Unlock Dashboard</button>
+    </form>
+    <div class="auth-error" id="auth-error">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<!-- MAIN DASHBOARD (hidden until authenticated)                            -->
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<div id="app" style="display:none;">
+
+  <!-- ─── Top Bar ─── -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo"><span>⚙️</span> Command Center</div>
+    </div>
+    <div class="topbar-right">
+      <div class="live-badge">
+        <div class="live-dot"></div>
+        <span id="live-count">0 visitors online</span>
+      </div>
+      <div class="topbar-date" id="topbar-date"></div>
+      <button class="btn-logout" id="btn-logout">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- ─── Firebase Warning (hidden by default) ─── -->
+    <div class="firebase-warning" id="firebase-warning" style="display:none;">
+      <strong>⚠️ Firebase Not Configured</strong>
+      <p style="margin-top:8px;">Analytics data is unavailable. Update the Firebase config in <code>mm-tracker.js</code> and this dashboard with your real credentials.</p>
+    </div>
+
+    <!-- ─── Quick Stats Row ─── -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">👁</div>
+        <div class="stat-label">Today's Visitors</div>
+        <div class="stat-value" id="stat-visitors">—</div>
+        <div class="stat-sub" id="stat-visitors-sub">Loading…</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-label">Total Products</div>
+        <div class="stat-value" id="stat-products">—</div>
+        <div class="stat-sub" id="stat-products-sub">Loading…</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🕐</div>
+        <div class="stat-label">Last Sync</div>
+        <div class="stat-value" id="stat-sync" style="font-size:1.2rem;">—</div>
+        <div class="stat-sub" id="stat-sync-sub">Product data</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🚀</div>
+        <div class="stat-label">Last Deploy</div>
+        <div class="stat-value" id="stat-deploy" style="font-size:1.2rem;">—</div>
+        <div class="stat-sub" id="stat-deploy-sub">GitHub Actions</div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Live Visitors ═══ -->
+    <div class="section" id="section-live-visitors">
+      <div class="section-header open" onclick="toggleSection('section-live-visitors')">
+        <h3>👥 Live Visitors</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div id="live-visitors-content"><div class="loading">Connecting to real-time data…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Traffic Overview ═══ -->
+    <div class="section" id="section-traffic">
+      <div class="section-header open" onclick="toggleSection('section-traffic')">
+        <h3>📈 Traffic Overview</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="chart-container"><canvas id="chart-traffic"></canvas></div>
+        <div class="chart-row mt-16">
+          <div class="chart-col">
+            <h4 style="font-size:0.95rem;color:var(--text-muted);margin-bottom:10px;">Top 5 Pages Today</h4>
+            <div id="top-pages"><div class="loading">Loading…</div></div>
+          </div>
+          <div class="chart-col">
+            <h4 style="font-size:0.95rem;color:var(--text-muted);margin-bottom:10px;">Top 5 Referrers Today</h4>
+            <div id="top-referrers"><div class="loading">Loading…</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Traffic Sources ═══ -->
+    <div class="section" id="section-traffic-sources">
+      <div class="section-header open" onclick="toggleSection('section-traffic-sources')">
+        <h3>🌐 Traffic Sources</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="chart-row">
+          <div class="chart-col" style="max-width:400px;margin:0 auto;">
+            <div class="chart-container"><canvas id="chart-sources"></canvas></div>
+          </div>
+          <div class="chart-col" id="sources-breakdown"><div class="loading">Loading…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Scroll Depth ═══ -->
+    <div class="section" id="section-scroll-depth">
+      <div class="section-header open" onclick="toggleSection('section-scroll-depth')">
+        <h3>📜 Scroll Depth</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="chart-container"><canvas id="chart-scroll"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Click Heatmap ═══ -->
+    <div class="section" id="section-click-heatmap">
+      <div class="section-header open" onclick="toggleSection('section-click-heatmap')">
+        <h3>🖱️ Click Heatmap</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="filter-bar">
+          <select id="heatmap-page-select"><option value="">Select a page…</option></select>
+          <button class="btn btn-sm btn-secondary" onclick="loadClickHeatmap()">Load</button>
+        </div>
+        <div class="chart-container"><canvas id="chart-clicks"></canvas></div>
+        <h4 style="font-size:0.95rem;color:var(--text-muted);margin:16px 0 10px;">Rage Clicks</h4>
+        <div id="rage-clicks-content" class="table-wrap"><div class="loading">Select a page to load data…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Product Engagement Funnel ═══ -->
+    <div class="section" id="section-funnel">
+      <div class="section-header open" onclick="toggleSection('section-funnel')">
+        <h3>🔄 Product Engagement Funnel</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div id="funnel-bars"><div class="loading">Loading…</div></div>
+        <h4 style="font-size:0.95rem;color:var(--text-muted);margin:20px 0 10px;">Per-Product Breakdown</h4>
+        <div id="funnel-table" class="table-wrap"><div class="loading">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Newsletter Popup ═══ -->
+    <div class="section" id="section-newsletter">
+      <div class="section-header open" onclick="toggleSection('section-newsletter')">
+        <h3>💌 Newsletter Popup</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="nl-stats" id="nl-stats"><div class="loading" style="grid-column:1/-1;">Loading…</div></div>
+        <div class="chart-row mt-16">
+          <div class="chart-col">
+            <div class="chart-container"><canvas id="chart-newsletter-trend"></canvas></div>
+          </div>
+          <div class="chart-col" style="max-width:350px;margin:0 auto;">
+            <div class="chart-container"><canvas id="chart-newsletter-dismiss"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Visitor Intent ═══ -->
+    <div class="section" id="section-intent">
+      <div class="section-header open" onclick="toggleSection('section-intent')">
+        <h3>🎯 Visitor Intent</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="chart-row">
+          <div class="chart-col" style="max-width:350px;margin:0 auto;">
+            <div class="chart-container"><canvas id="chart-intent"></canvas></div>
+          </div>
+          <div class="chart-col" id="intent-details"><div class="loading">Loading…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Cart Analytics ═══ -->
+    <div class="section" id="section-cart">
+      <div class="section-header open" onclick="toggleSection('section-cart')">
+        <h3>🛒 Cart Analytics</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="chart-row">
+          <div class="chart-col">
+            <h4 style="font-size:0.95rem;color:var(--text-muted);margin-bottom:10px;">Top Products Added to Cart</h4>
+            <div class="chart-container"><canvas id="chart-cart-products"></canvas></div>
+          </div>
+          <div class="chart-col">
+            <h4 style="font-size:0.95rem;color:var(--text-muted);margin-bottom:10px;">Cart Additions by Hour</h4>
+            <div class="chart-container"><canvas id="chart-cart-hours"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Performance Metrics ═══ -->
+    <div class="section" id="section-performance">
+      <div class="section-header open" onclick="toggleSection('section-performance')">
+        <h3>⚡ Performance Metrics</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="gauge-grid" id="perf-gauges"><div class="loading" style="grid-column:1/-1;">Loading…</div></div>
+        <div class="chart-row mt-16">
+          <div class="chart-col" style="max-width:350px;margin:0 auto;">
+            <h4 style="font-size:0.95rem;color:var(--text-muted);margin-bottom:10px;">Device Breakdown</h4>
+            <div class="chart-container"><canvas id="chart-devices"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: SEO Health ═══ -->
+    <div class="section" id="section-seo">
+      <div class="section-header open" onclick="toggleSection('section-seo')">
+        <h3>🔍 SEO Health</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div id="seo-table" class="table-wrap"><div class="loading">Auditing pages…</div></div>
+        <div class="mt-16" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="https://pagespeed.web.dev/analysis?url=https://magnetmomentsco.us" target="_blank" class="btn btn-sm btn-secondary">PageSpeed Insights ↗</a>
+          <a href="https://developers.facebook.com/tools/debug/?q=https://magnetmomentsco.us" target="_blank" class="btn btn-sm btn-secondary">Facebook Debugger ↗</a>
+          <a href="https://search.google.com/test/rich-results?url=https://magnetmomentsco.us" target="_blank" class="btn btn-sm btn-secondary">Rich Results Test ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Error Log ═══ -->
+    <div class="section" id="section-errors">
+      <div class="section-header open" onclick="toggleSection('section-errors')">
+        <h3>🐛 Error Log <span class="badge" id="error-badge" style="display:none;">0</span></h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div id="errors-content" class="table-wrap"><div class="loading">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Social Proof Config ═══ -->
+    <div class="section" id="section-social-proof">
+      <div class="section-header open" onclick="toggleSection('section-social-proof')">
+        <h3>🏷️ Social Proof Config</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div id="social-proof-content">
+          <div class="config-row">
+            <div class="config-label">
+              Enable Social Proof Badges
+              <small>Show "X people viewed today" badges on product cards</small>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="sp-enabled" onchange="saveSocialProofConfig()">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="config-row">
+            <div class="config-label">
+              Minimum Views Threshold
+              <small>Only show badge when a product has at least this many views</small>
+            </div>
+            <input type="number" class="config-input" id="sp-threshold" value="5" min="1" max="100" onchange="saveSocialProofConfig()">
+          </div>
+          <div class="config-row">
+            <div class="config-label">
+              Badge Style
+              <small>How the badge appears on product cards</small>
+            </div>
+            <select id="sp-style" style="background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:0.85rem;" onchange="saveSocialProofConfig()">
+              <option value="subtle">Subtle</option>
+              <option value="bold">Bold</option>
+              <option value="animated">Animated</option>
+            </select>
+          </div>
+          <h4 style="font-size:0.95rem;color:var(--text-muted);margin:20px 0 10px;">Badge Preview</h4>
+          <div id="sp-preview"><div class="loading">Loading product data…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Weekly Digest Generator ═══ -->
+    <div class="section" id="section-digest">
+      <div class="section-header open" onclick="toggleSection('section-digest')">
+        <h3>📊 Weekly Digest Generator</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:16px;">Generate a plain-text summary of the last 7 days of analytics data.</p>
+        <button class="btn btn-primary" id="btn-digest" onclick="generateDigest()">Generate Report</button>
+        <button class="btn btn-secondary" style="margin-left:8px;" onclick="copyDigest()">Copy to Clipboard</button>
+        <textarea class="digest-area mt-16" id="digest-output" placeholder="Click 'Generate Report' to create a weekly summary…" readonly></textarea>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Quick Links ═══ -->
+    <div class="section" id="section-links">
+      <div class="section-header open" onclick="toggleSection('section-links')">
+        <h3>🔗 Quick Links</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="links-grid" id="quick-links-grid"></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Deployment History ═══ -->
+    <div class="section" id="section-deploys">
+      <div class="section-header open" onclick="toggleSection('section-deploys')">
+        <h3>🚢 Deployment History</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div id="deploys-content" class="table-wrap"><div class="loading">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Product Inventory ═══ -->
+    <div class="section" id="section-inventory">
+      <div class="section-header open" onclick="toggleSection('section-inventory')">
+        <h3>📋 Product Inventory</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="filter-bar">
+          <select id="inv-filter" onchange="renderInventory()">
+            <option value="all">All Products</option>
+            <option value="in-stock">In Stock</option>
+            <option value="out-of-stock">Out of Stock</option>
+          </select>
+          <input type="text" id="inv-search" placeholder="Search products…" oninput="renderInventory()">
+        </div>
+        <div id="inventory-content" class="table-wrap"><div class="loading">Loading…</div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<!-- FIREBASE SDK (compat v9)                                               -->
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAGNET MOMENTS CO. — COMMAND CENTER
+   ═══════════════════════════════════════════════════════════════════════════ */
+(function() {
+'use strict';
+
+/* ──────────────────────────────────────────────────────────────────────────
+   1. PASSWORD AUTHENTICATION
+   ────────────────────────────────────────────────────────────────────────── */
+
+const PASS_HASH = 'f4e755d77af59bdff88ec2476b26acaceca7aa52c8cc94b7ce78ccf5befb650b';
+
+async function sha256(message) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function isAuthenticated() {
+  return sessionStorage.getItem('mm_admin_auth') === 'true';
+}
+
+function showApp() {
+  document.getElementById('auth-overlay').classList.add('hidden');
+  document.getElementById('app').style.display = '';
+  initDashboard();
+}
+
+function logout() {
+  sessionStorage.removeItem('mm_admin_auth');
+  location.reload();
+}
+
+document.getElementById('auth-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const pw = document.getElementById('auth-password').value;
+  const hash = await sha256(pw);
+  if (hash === PASS_HASH) {
+    sessionStorage.setItem('mm_admin_auth', 'true');
+    showApp();
+  } else {
+    const errEl = document.getElementById('auth-error');
+    errEl.style.display = 'block';
+    document.getElementById('auth-password').value = '';
+    document.getElementById('auth-password').focus();
+    setTimeout(() => { errEl.style.display = 'none'; }, 3000);
+  }
+});
+
+document.getElementById('btn-logout').addEventListener('click', logout);
+
+// Check session on load
+if (isAuthenticated()) {
+  showApp();
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   2. FIREBASE INITIALIZATION
+   ────────────────────────────────────────────────────────────────────────── */
+
+const FIREBASE_CONFIG = {
+  apiKey: "FIREBASE_API_KEY",
+  authDomain: "magnetmoments-analytics.firebaseapp.com",
+  databaseURL: "https://magnetmoments-analytics-default-rtdb.firebaseio.com",
+  projectId: "magnetmoments-analytics",
+  storageBucket: "magnetmoments-analytics.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "1:000000000000:web:0000000000000000000000"
+};
+
+let db = null;
+let firebaseReady = false;
+
+function initFirebase() {
+  try {
+    if (typeof firebase === 'undefined') {
+      showFirebaseWarning();
+      return false;
+    }
+    if (!firebase.apps.length) {
+      firebase.initializeApp(FIREBASE_CONFIG);
+    }
+    db = firebase.database();
+    firebaseReady = true;
+
+    // Check if actually configured (dummy key check)
+    if (FIREBASE_CONFIG.apiKey === 'FIREBASE_API_KEY') {
+      showFirebaseWarning();
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn('Firebase init failed:', err);
+    showFirebaseWarning();
+    return false;
+  }
+}
+
+function showFirebaseWarning() {
+  document.getElementById('firebase-warning').style.display = 'block';
+}
+
+function fbRef(path) {
+  if (!db) return null;
+  return db.ref(path);
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   3. HELPER UTILITIES
+   ────────────────────────────────────────────────────────────────────────── */
+
+function getToday() {
+  const d = new Date();
+  return d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0');
+}
+
+function getDateOffset(daysAgo) {
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  return d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0');
+}
+
+function formatNumber(n) {
+  if (n === null || n === undefined) return '—';
+  return Number(n).toLocaleString('en-US');
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch { return dateStr; }
+}
+
+function formatDateTime(dateStr) {
+  if (!dateStr) return '—';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
+           d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  } catch { return dateStr; }
+}
+
+function formatTimeAgo(dateStr) {
+  if (!dateStr) return '—';
+  try {
+    const d = new Date(dateStr);
+    const now = Date.now();
+    const diff = now - d.getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'Just now';
+    if (mins < 60) return mins + 'm ago';
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return hours + 'h ago';
+    const days = Math.floor(hours / 24);
+    return days + 'd ago';
+  } catch { return dateStr; }
+}
+
+function formatDuration(seconds) {
+  if (!seconds || seconds < 0) return '0s';
+  if (seconds < 60) return Math.round(seconds) + 's';
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.round(seconds % 60);
+  return mins + 'm ' + secs + 's';
+}
+
+function truncateId(id) {
+  if (!id) return '—';
+  return id.substring(0, 8) + '…';
+}
+
+function slugToTitle(slug) {
+  if (!slug || slug === 'home') return 'Home (/)';
+  return '/' + slug.replace(/-/g, '/') + '/';
+}
+
+const BRAND_COLORS = ['#C77D8A', '#7A9D54', '#D4A574', '#FFF8F0', '#3498db', '#9b59b6', '#e74c3c', '#1abc9c'];
+
+function getBrandColor(i) {
+  return BRAND_COLORS[i % BRAND_COLORS.length];
+}
+
+// Chart instances registry for cleanup
+const chartInstances = {};
+
+function createChart(canvasId, type, data, options = {}) {
+  // Destroy existing chart if present
+  if (chartInstances[canvasId]) {
+    chartInstances[canvasId].destroy();
+  }
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return null;
+
+  const defaults = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        labels: { color: '#8899aa', font: { family: 'Inter', size: 12 } }
+      }
+    },
+    scales: {}
+  };
+
+  // Add default scale colors for chart types with axes
+  if (['line', 'bar'].includes(type)) {
+    defaults.scales = {
+      x: { ticks: { color: '#556677' }, grid: { color: 'rgba(30,58,95,0.4)' } },
+      y: { ticks: { color: '#556677' }, grid: { color: 'rgba(30,58,95,0.4)' } }
+    };
+  }
+
+  const merged = deepMerge(defaults, options);
+
+  chartInstances[canvasId] = new Chart(ctx, { type, data, options: merged });
+  return chartInstances[canvasId];
+}
+
+function deepMerge(target, source) {
+  const result = { ...target };
+  for (const key of Object.keys(source)) {
+    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      result[key] = deepMerge(result[key] || {}, source[key]);
+    } else {
+      result[key] = source[key];
+    }
+  }
+  return result;
+}
+
+// Products data cache
+let productsData = null;
+
+async function fetchProducts() {
+  if (productsData) return productsData;
+  try {
+    const resp = await fetch('/_data/products.json');
+    if (!resp.ok) throw new Error('Failed to fetch products');
+    productsData = await resp.json();
+    return productsData;
+  } catch (err) {
+    console.warn('Failed to load products.json:', err);
+    return null;
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   4. DATA FETCHING FUNCTIONS
+   ────────────────────────────────────────────────────────────────────────── */
+
+// 4a. Today's visitors — count distinct sessions from /pageViews/{today}/
+async function fetchTodaysVisitors() {
+  if (!firebaseReady) return { total: 0, sessions: new Set() };
+  const today = getToday();
+  const snap = await fbRef('/pageViews/' + today).once('value');
+  const data = snap.val();
+  if (!data) return { total: 0, sessions: new Set() };
+  const sessions = new Set();
+  let total = 0;
+  Object.values(data).forEach(pageData => {
+    if (typeof pageData === 'object') {
+      Object.values(pageData).forEach(entry => {
+        total++;
+        if (entry.sessionId) sessions.add(entry.sessionId);
+      });
+    }
+  });
+  return { total, sessions };
+}
+
+// 4b. Live visitors from /presence/
+function subscribeLiveVisitors(callback) {
+  if (!firebaseReady) { callback({}); return; }
+  fbRef('/presence/').on('value', snap => {
+    callback(snap.val() || {});
+  });
+}
+
+// 4c. Traffic over last 30 days
+async function fetchTrafficHistory(days = 30) {
+  if (!firebaseReady) return {};
+  const results = {};
+  const promises = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const date = getDateOffset(i);
+    promises.push(
+      fbRef('/pageViews/' + date).once('value').then(snap => {
+        const data = snap.val();
+        let count = 0;
+        if (data) {
+          Object.values(data).forEach(pageData => {
+            if (typeof pageData === 'object') count += Object.keys(pageData).length;
+          });
+        }
+        results[date] = count;
+      })
+    );
+  }
+  await Promise.all(promises);
+  return results;
+}
+
+// 4d. Top pages today
+async function fetchTopPagesToday() {
+  if (!firebaseReady) return [];
+  const today = getToday();
+  const snap = await fbRef('/pageViews/' + today).once('value');
+  const data = snap.val();
+  if (!data) return [];
+  const pages = {};
+  Object.entries(data).forEach(([slug, entries]) => {
+    if (typeof entries === 'object') {
+      pages[slug] = Object.keys(entries).length;
+    }
+  });
+  return Object.entries(pages).sort((a, b) => b[1] - a[1]).slice(0, 5);
+}
+
+// 4e. Top referrers today
+async function fetchTopReferrersByDay() {
+  if (!firebaseReady) return [];
+  const today = getToday();
+  const snap = await fbRef('/pageViews/' + today).once('value');
+  const data = snap.val();
+  if (!data) return [];
+  const referrers = {};
+  Object.values(data).forEach(pageData => {
+    if (typeof pageData === 'object') {
+      Object.values(pageData).forEach(entry => {
+        const ref = entry.referrer || 'Direct';
+        let host = 'Direct';
+        if (ref !== 'Direct' && ref) {
+          try { host = new URL(ref).hostname; } catch { host = ref; }
+        }
+        referrers[host] = (referrers[host] || 0) + 1;
+      });
+    }
+  });
+  return Object.entries(referrers).sort((a, b) => b[1] - a[1]).slice(0, 5);
+}
+
+// 4f. Traffic sources today
+async function fetchTrafficSources() {
+  if (!firebaseReady) return {};
+  const today = getToday();
+  const snap = await fbRef('/pageViews/' + today).once('value');
+  const data = snap.val();
+  if (!data) return {};
+  const sources = {};
+  Object.values(data).forEach(pageData => {
+    if (typeof pageData === 'object') {
+      Object.values(pageData).forEach(entry => {
+        const src = entry.source || 'direct';
+        sources[src] = (sources[src] || 0) + 1;
+      });
+    }
+  });
+  return sources;
+}
+
+// 4g. Scroll depth today
+async function fetchScrollDepth() {
+  if (!firebaseReady) return {};
+  const today = getToday();
+  const snap = await fbRef('/scrollDepth/' + today).once('value');
+  return snap.val() || {};
+}
+
+// 4h. Clicks for a specific page
+async function fetchClicks(pageSlug) {
+  if (!firebaseReady) return [];
+  const today = getToday();
+  const snap = await fbRef('/clicks/' + today + '/' + pageSlug).once('value');
+  const data = snap.val();
+  if (!data) return [];
+  return Object.values(data);
+}
+
+// 4i. Rage clicks for a specific page
+async function fetchRageClicks(pageSlug) {
+  if (!firebaseReady) return [];
+  const today = getToday();
+  const snap = await fbRef('/rageClicks/' + today + '/' + pageSlug).once('value');
+  const data = snap.val();
+  if (!data) return [];
+  return Object.values(data);
+}
+
+// 4j. Funnel data today
+async function fetchFunnelData() {
+  if (!firebaseReady) return {};
+  const today = getToday();
+  const snap = await fbRef('/funnel/' + today).once('value');
+  return snap.val() || {};
+}
+
+// 4k. Newsletter data
+async function fetchNewsletterData(days = 14) {
+  if (!firebaseReady) return {};
+  const results = {};
+  const promises = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const date = getDateOffset(i);
+    promises.push(
+      fbRef('/newsletter/' + date).once('value').then(snap => {
+        results[date] = snap.val() || {};
+      })
+    );
+  }
+  await Promise.all(promises);
+  return results;
+}
+
+// 4l. Newsletter dismiss details today
+async function fetchDismissDetails() {
+  if (!firebaseReady) return [];
+  const today = getToday();
+  const snap = await fbRef('/newsletter/' + today + '/dismiss_details').once('value');
+  const data = snap.val();
+  if (!data) return [];
+  return Object.values(data);
+}
+
+// 4m. Visitor intent data
+async function fetchIntentData() {
+  if (!firebaseReady) return {};
+  const snap = await fbRef('/visitors/').once('value');
+  return snap.val() || {};
+}
+
+// 4n. Cart data today
+async function fetchCartData() {
+  if (!firebaseReady) return [];
+  const today = getToday();
+  const snap = await fbRef('/cart/' + today).once('value');
+  const data = snap.val();
+  if (!data) return [];
+  return Object.values(data);
+}
+
+// 4o. Performance data today
+async function fetchPerformanceData() {
+  if (!firebaseReady) return {};
+  const today = getToday();
+  const snap = await fbRef('/performance/' + today).once('value');
+  return snap.val() || {};
+}
+
+// 4p. Error log today
+async function fetchErrors() {
+  if (!firebaseReady) return [];
+  const today = getToday();
+  const snap = await fbRef('/errors/' + today).once('value');
+  const data = snap.val();
+  if (!data) return [];
+  return Object.values(data);
+}
+
+// 4q. GitHub deployments
+async function fetchDeployments(count = 10) {
+  try {
+    const resp = await fetch(
+      'https://api.github.com/repos/magnetmomentsco/magnetmomentsco.github.io/actions/runs?per_page=' + count
+    );
+    if (!resp.ok) throw new Error('GitHub API error');
+    const data = await resp.json();
+    return data.workflow_runs || [];
+  } catch (err) {
+    console.warn('Failed to fetch deployments:', err);
+    return [];
+  }
+}
+
+// 4r. Last successful deploy
+async function fetchLastDeploy() {
+  try {
+    const resp = await fetch(
+      'https://api.github.com/repos/magnetmomentsco/magnetmomentsco.github.io/actions/runs?per_page=1&status=success'
+    );
+    if (!resp.ok) throw new Error('GitHub API error');
+    const data = await resp.json();
+    return data.workflow_runs?.[0] || null;
+  } catch (err) {
+    console.warn('Failed to fetch last deploy:', err);
+    return null;
+  }
+}
+
+// 4s. Traffic history for digest (7 days)
+async function fetchTrafficForDigest() {
+  return fetchTrafficHistory(7);
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   5. RENDERING FUNCTIONS
+   ────────────────────────────────────────────────────────────────────────── */
+
+// ─── 5a. Top Bar ───
+function renderTopBar() {
+  const d = new Date();
+  const formatted = d.toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+  document.getElementById('topbar-date').textContent = formatted;
+}
+
+// ─── 5b. Quick Stats ───
+async function renderQuickStats() {
+  // Today's visitors
+  try {
+    const { total, sessions } = await fetchTodaysVisitors();
+    document.getElementById('stat-visitors').textContent = formatNumber(sessions.size);
+    document.getElementById('stat-visitors-sub').textContent = formatNumber(total) + ' total pageviews';
+  } catch {
+    document.getElementById('stat-visitors').textContent = '—';
+    document.getElementById('stat-visitors-sub').textContent = 'Unable to load';
+  }
+
+  // Products
+  try {
+    const data = await fetchProducts();
+    if (data) {
+      const total = data.productCount || data.products?.length || 0;
+      const active = data.products?.filter(p => p.availableForSale).length || 0;
+      const oos = total - active;
+      document.getElementById('stat-products').textContent = total;
+      document.getElementById('stat-products-sub').textContent = active + ' active · ' + oos + ' out of stock';
+    }
+  } catch {
+    document.getElementById('stat-products').textContent = '—';
+  }
+
+  // Last sync
+  try {
+    const data = await fetchProducts();
+    if (data?.lastUpdated) {
+      document.getElementById('stat-sync').textContent = formatTimeAgo(data.lastUpdated);
+      document.getElementById('stat-sync-sub').textContent = formatDateTime(data.lastUpdated);
+    }
+  } catch {}
+
+  // Last deploy
+  try {
+    const deploy = await fetchLastDeploy();
+    if (deploy) {
+      document.getElementById('stat-deploy').textContent = formatTimeAgo(deploy.created_at);
+      document.getElementById('stat-deploy-sub').textContent = formatDateTime(deploy.created_at);
+    } else {
+      document.getElementById('stat-deploy').textContent = '—';
+      document.getElementById('stat-deploy-sub').textContent = 'Unable to fetch';
+    }
+  } catch {
+    document.getElementById('stat-deploy').textContent = '—';
+    document.getElementById('stat-deploy-sub').textContent = 'GitHub API unavailable';
+  }
+}
+
+// ─── 5c. Live Visitors ───
+function renderLiveVisitors(presenceData) {
+  const container = document.getElementById('live-visitors-content');
+  const entries = Object.entries(presenceData);
+
+  // Update topbar count
+  document.getElementById('live-count').textContent = entries.length + ' visitor' + (entries.length !== 1 ? 's' : '') + ' online';
+
+  if (entries.length === 0) {
+    container.innerHTML = '<p class="text-center text-muted" style="padding:20px;">No visitors currently online</p>';
+    return;
+  }
+
+  let html = '<table class="data-table"><thead><tr>';
+  html += '<th>Visitor ID</th><th>Current Page</th><th>Device</th><th>Time on Site</th>';
+  html += '</tr></thead><tbody>';
+
+  entries.forEach(([vid, info]) => {
+    const timeOnSite = info.timestamp ? formatDuration((Date.now() - info.timestamp) / 1000) : '—';
+    html += '<tr>';
+    html += '<td><code style="color:var(--gold);font-size:0.8rem;">' + truncateId(vid) + '</code></td>';
+    html += '<td>' + (info.page || '—') + '</td>';
+    html += '<td>' + (info.device || '—') + '</td>';
+    html += '<td>' + timeOnSite + '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+// ─── 5d. Traffic Overview Chart ───
+async function renderTrafficChart() {
+  const history = await fetchTrafficHistory(30);
+  const labels = Object.keys(history).map(d => {
+    const parts = d.split('-');
+    return parts[1] + '/' + parts[2];
+  });
+  const values = Object.values(history);
+
+  createChart('chart-traffic', 'line', {
+    labels,
+    datasets: [{
+      label: 'Pageviews',
+      data: values,
+      borderColor: '#C77D8A',
+      backgroundColor: 'rgba(199, 125, 138, 0.1)',
+      fill: true,
+      tension: 0.4,
+      pointRadius: 3,
+      pointBackgroundColor: '#C77D8A',
+      pointBorderColor: '#C77D8A',
+      borderWidth: 2
+    }]
+  }, {
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true }
+    }
+  });
+
+  // Top pages
+  const topPages = await fetchTopPagesToday();
+  const pagesEl = document.getElementById('top-pages');
+  if (topPages.length === 0) {
+    pagesEl.innerHTML = '<p class="text-muted">No data yet today</p>';
+  } else {
+    let html = '<table class="data-table"><tbody>';
+    topPages.forEach(([slug, count], i) => {
+      html += '<tr><td style="color:var(--gold);">' + (i + 1) + '.</td><td>' + slugToTitle(slug) + '</td><td style="text-align:right;font-weight:600;">' + formatNumber(count) + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    pagesEl.innerHTML = html;
+  }
+
+  // Top referrers
+  const topRefs = await fetchTopReferrersByDay();
+  const refsEl = document.getElementById('top-referrers');
+  if (topRefs.length === 0) {
+    refsEl.innerHTML = '<p class="text-muted">No referrer data yet today</p>';
+  } else {
+    let html = '<table class="data-table"><tbody>';
+    topRefs.forEach(([host, count], i) => {
+      html += '<tr><td style="color:var(--gold);">' + (i + 1) + '.</td><td>' + host + '</td><td style="text-align:right;font-weight:600;">' + formatNumber(count) + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    refsEl.innerHTML = html;
+  }
+}
+
+// ─── 5e. Traffic Sources ───
+async function renderTrafficSources() {
+  const sources = await fetchTrafficSources();
+  const labels = Object.keys(sources).map(s => s.charAt(0).toUpperCase() + s.slice(1));
+  const values = Object.values(sources);
+  const colors = ['#C77D8A', '#7A9D54', '#D4A574', '#3498db', '#9b59b6'];
+
+  if (labels.length === 0) {
+    document.getElementById('sources-breakdown').innerHTML = '<p class="text-muted text-center">No data yet today</p>';
+    return;
+  }
+
+  createChart('chart-sources', 'doughnut', {
+    labels,
+    datasets: [{
+      data: values,
+      backgroundColor: colors.slice(0, labels.length),
+      borderColor: '#16213e',
+      borderWidth: 2
+    }]
+  }, {
+    plugins: { legend: { position: 'bottom' } },
+    cutout: '60%'
+  });
+
+  // Breakdown details
+  const total = values.reduce((a, b) => a + b, 0);
+  let html = '<table class="data-table"><thead><tr><th>Source</th><th>Visits</th><th>%</th></tr></thead><tbody>';
+  labels.forEach((label, i) => {
+    const pct = total > 0 ? ((values[i] / total) * 100).toFixed(1) : 0;
+    html += '<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + colors[i] + ';margin-right:8px;"></span>' + label + '</td>';
+    html += '<td>' + formatNumber(values[i]) + '</td>';
+    html += '<td>' + pct + '%</td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('sources-breakdown').innerHTML = html;
+}
+
+// ─── 5f. Scroll Depth ───
+async function renderScrollDepth() {
+  const data = await fetchScrollDepth();
+  if (Object.keys(data).length === 0) {
+    const ctx = document.getElementById('chart-scroll');
+    if (ctx) ctx.parentElement.innerHTML = '<p class="text-muted text-center" style="padding:20px;">No scroll data yet today</p>';
+    return;
+  }
+
+  const pages = Object.keys(data).slice(0, 8);
+  const thresholds = ['25', '50', '75', '100'];
+  const colors = ['#7A9D54', '#D4A574', '#C77D8A', '#3498db'];
+
+  const datasets = thresholds.map((t, i) => ({
+    label: t + '%',
+    data: pages.map(p => data[p]?.[t] || 0),
+    backgroundColor: colors[i],
+    borderColor: colors[i],
+    borderWidth: 1
+  }));
+
+  createChart('chart-scroll', 'bar', {
+    labels: pages.map(slugToTitle),
+    datasets
+  }, {
+    indexAxis: 'y',
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { beginAtZero: true, title: { display: true, text: 'Visitors', color: '#556677' } }
+    }
+  });
+}
+
+// ─── 5g. Click Heatmap ───
+async function renderClickHeatmapPageList() {
+  if (!firebaseReady) return;
+  const today = getToday();
+  const snap = await fbRef('/clicks/' + today).once('value');
+  const data = snap.val();
+  if (!data) return;
+
+  const select = document.getElementById('heatmap-page-select');
+  Object.keys(data).forEach(slug => {
+    const opt = document.createElement('option');
+    opt.value = slug;
+    opt.textContent = slugToTitle(slug);
+    select.appendChild(opt);
+  });
+}
+
+async function loadClickHeatmap() {
+  const slug = document.getElementById('heatmap-page-select').value;
+  if (!slug) return;
+
+  const [clicks, rageClicks] = await Promise.all([
+    fetchClicks(slug),
+    fetchRageClicks(slug)
+  ]);
+
+  // Scatter plot of clicks
+  if (clicks.length > 0) {
+    const pointData = clicks.map(c => ({ x: c.x, y: c.y }));
+    createChart('chart-clicks', 'scatter', {
+      datasets: [{
+        label: 'Clicks',
+        data: pointData,
+        backgroundColor: 'rgba(199, 125, 138, 0.5)',
+        pointRadius: 4,
+        pointHoverRadius: 6
+      }]
+    }, {
+      scales: {
+        x: { min: 0, max: 100, title: { display: true, text: 'X Position (%)', color: '#556677' } },
+        y: { min: 0, max: 100, reverse: true, title: { display: true, text: 'Y Position (%)', color: '#556677' } }
+      },
+      plugins: { legend: { display: false } }
+    });
+  }
+
+  // Rage clicks table
+  const rageEl = document.getElementById('rage-clicks-content');
+  if (rageClicks.length === 0) {
+    rageEl.innerHTML = '<p class="text-muted">No rage clicks detected on this page</p>';
+  } else {
+    let html = '<table class="data-table"><thead><tr><th>Position</th><th>Clicks</th><th>Timestamp</th></tr></thead><tbody>';
+    rageClicks.forEach(rc => {
+      html += '<tr>';
+      html += '<td>(' + Math.round(rc.x) + ', ' + Math.round(rc.y) + ')</td>';
+      html += '<td style="font-weight:600;color:var(--red);">' + (rc.count || '—') + '</td>';
+      html += '<td>' + formatDateTime(rc.ts) + '</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    rageEl.innerHTML = html;
+  }
+}
+// Expose to onclick
+window.loadClickHeatmap = loadClickHeatmap;
+
+// ─── 5h. Product Engagement Funnel ───
+async function renderFunnel() {
+  const data = await fetchFunnelData();
+  const container = document.getElementById('funnel-bars');
+  const tableContainer = document.getElementById('funnel-table');
+
+  const steps = [
+    { key: 'product-card-hover', label: 'Product Card Hover', color: '#7A9D54' },
+    { key: 'modal-open', label: 'Modal Open', color: '#D4A574' },
+    { key: 'image-browse', label: 'Image Browse', color: '#C77D8A' },
+    { key: 'add-to-cart', label: 'Add to Cart', color: '#3498db' },
+    { key: 'checkout-start', label: 'Checkout', color: '#9b59b6' }
+  ];
+
+  // Sum totals per step
+  const totals = {};
+  steps.forEach(s => {
+    const stepData = data[s.key] || {};
+    totals[s.key] = Object.values(stepData).reduce((a, b) => a + (typeof b === 'number' ? b : 0), 0);
+  });
+
+  const maxVal = Math.max(...Object.values(totals), 1);
+
+  if (maxVal <= 0 || Object.values(totals).every(v => v === 0)) {
+    container.innerHTML = '<p class="text-muted text-center" style="padding:20px;">No funnel data yet today</p>';
+    tableContainer.innerHTML = '';
+    return;
+  }
+
+  let html = '';
+  steps.forEach(s => {
+    const val = totals[s.key] || 0;
+    const pct = (val / maxVal) * 100;
+    html += '<div class="funnel-bar">';
+    html += '<div class="funnel-label">' + s.label + '</div>';
+    html += '<div class="funnel-track"><div class="funnel-fill" style="width:' + pct + '%;background:' + s.color + ';">' + formatNumber(val) + '</div></div>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+
+  // Per-product breakdown
+  const products = new Set();
+  steps.forEach(s => {
+    const stepData = data[s.key] || {};
+    Object.keys(stepData).forEach(p => products.add(p));
+  });
+
+  if (products.size === 0) {
+    tableContainer.innerHTML = '<p class="text-muted">No per-product data available</p>';
+    return;
+  }
+
+  let tbl = '<table class="data-table"><thead><tr><th>Product</th>';
+  steps.forEach(s => { tbl += '<th>' + s.label + '</th>'; });
+  tbl += '</tr></thead><tbody>';
+
+  products.forEach(prod => {
+    tbl += '<tr><td class="truncate" title="' + prod + '">' + prod + '</td>';
+    steps.forEach(s => {
+      const val = data[s.key]?.[prod] || 0;
+      tbl += '<td>' + formatNumber(val) + '</td>';
+    });
+    tbl += '</tr>';
+  });
+  tbl += '</tbody></table>';
+  tableContainer.innerHTML = tbl;
+}
+
+// ─── 5i. Newsletter Popup ───
+async function renderNewsletter() {
+  const nlData = await fetchNewsletterData(14);
+  const dismissDetails = await fetchDismissDetails();
+
+  const today = getToday();
+  const todayData = nlData[today] || {};
+
+  // Stats cards
+  const shown = todayData.popup_shown || 0;
+  const dismissed = todayData.popup_dismissed || 0;
+  const submitted = todayData.popup_submitted || 0;
+  const rate = shown > 0 ? ((submitted / shown) * 100).toFixed(1) : '0.0';
+
+  document.getElementById('nl-stats').innerHTML = `
+    <div class="nl-card"><div class="nl-val">${formatNumber(shown)}</div><div class="nl-label">Shown</div></div>
+    <div class="nl-card"><div class="nl-val">${formatNumber(dismissed)}</div><div class="nl-label">Dismissed</div></div>
+    <div class="nl-card"><div class="nl-val">${formatNumber(submitted)}</div><div class="nl-label">Submitted</div></div>
+    <div class="nl-card"><div class="nl-val">${rate}%</div><div class="nl-label">Conversion Rate</div></div>
+  `;
+
+  // Trend chart (14 days)
+  const dates = Object.keys(nlData).sort();
+  const shownArr = dates.map(d => nlData[d]?.popup_shown || 0);
+  const submittedArr = dates.map(d => nlData[d]?.popup_submitted || 0);
+  const labels = dates.map(d => { const p = d.split('-'); return p[1] + '/' + p[2]; });
+
+  createChart('chart-newsletter-trend', 'line', {
+    labels,
+    datasets: [
+      {
+        label: 'Shown',
+        data: shownArr,
+        borderColor: '#D4A574',
+        backgroundColor: 'rgba(212, 165, 116, 0.1)',
+        fill: true, tension: 0.4, borderWidth: 2
+      },
+      {
+        label: 'Submitted',
+        data: submittedArr,
+        borderColor: '#7A9D54',
+        backgroundColor: 'rgba(122, 157, 84, 0.1)',
+        fill: true, tension: 0.4, borderWidth: 2
+      }
+    ]
+  }, { scales: { y: { beginAtZero: true } } });
+
+  // Dismiss methods donut
+  const methods = {};
+  dismissDetails.forEach(d => {
+    const m = d.method || 'unknown';
+    methods[m] = (methods[m] || 0) + 1;
+  });
+
+  if (Object.keys(methods).length > 0) {
+    createChart('chart-newsletter-dismiss', 'doughnut', {
+      labels: Object.keys(methods).map(m => m.charAt(0).toUpperCase() + m.slice(1)),
+      datasets: [{
+        data: Object.values(methods),
+        backgroundColor: ['#C77D8A', '#D4A574', '#7A9D54', '#3498db'],
+        borderColor: '#16213e',
+        borderWidth: 2
+      }]
+    }, {
+      plugins: {
+        legend: { position: 'bottom' },
+        title: { display: true, text: 'Dismiss Methods', color: '#8899aa', font: { size: 13 } }
+      },
+      cutout: '55%'
+    });
+  }
+}
+
+// ─── 5j. Visitor Intent ───
+async function renderIntent() {
+  const visitors = await fetchIntentData();
+  const levels = { high: 0, medium: 0, low: 0 };
+
+  Object.values(visitors).forEach(v => {
+    const level = v?.intent?.level || 'low';
+    levels[level] = (levels[level] || 0) + 1;
+  });
+
+  const total = Object.values(levels).reduce((a, b) => a + b, 0);
+
+  createChart('chart-intent', 'doughnut', {
+    labels: ['High Intent', 'Medium Intent', 'Low Intent'],
+    datasets: [{
+      data: [levels.high, levels.medium, levels.low],
+      backgroundColor: ['#7A9D54', '#D4A574', '#C77D8A'],
+      borderColor: '#16213e',
+      borderWidth: 2
+    }]
+  }, {
+    plugins: { legend: { position: 'bottom' } },
+    cutout: '55%'
+  });
+
+  // Details
+  const detailsEl = document.getElementById('intent-details');
+  if (total === 0) {
+    detailsEl.innerHTML = '<p class="text-muted text-center">No visitor intent data available</p>';
+    return;
+  }
+  let html = '<table class="data-table"><thead><tr><th>Intent Level</th><th>Visitors</th><th>%</th></tr></thead><tbody>';
+  [['High', levels.high, '#7A9D54'], ['Medium', levels.medium, '#D4A574'], ['Low', levels.low, '#C77D8A']].forEach(([label, count, color]) => {
+    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
+    html += '<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + color + ';margin-right:8px;"></span>' + label + '</td>';
+    html += '<td>' + formatNumber(count) + '</td><td>' + pct + '%</td></tr>';
+  });
+  html += '</tbody></table>';
+  detailsEl.innerHTML = html;
+}
+
+// ─── 5k. Cart Analytics ───
+async function renderCartAnalytics() {
+  const cartData = await fetchCartData();
+
+  if (cartData.length === 0) {
+    const c1 = document.getElementById('chart-cart-products');
+    const c2 = document.getElementById('chart-cart-hours');
+    if (c1) c1.parentElement.innerHTML = '<p class="text-muted text-center" style="padding:20px;">No cart data yet today</p>';
+    if (c2) c2.parentElement.innerHTML = '<p class="text-muted text-center" style="padding:20px;">No cart data yet today</p>';
+    return;
+  }
+
+  // Top products
+  const productCounts = {};
+  cartData.forEach(entry => {
+    if (entry.items && Array.isArray(entry.items)) {
+      entry.items.forEach(item => {
+        const name = item.title || item.handle || 'Unknown';
+        productCounts[name] = (productCounts[name] || 0) + 1;
+      });
+    }
+  });
+
+  const sortedProducts = Object.entries(productCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+  if (sortedProducts.length > 0) {
+    createChart('chart-cart-products', 'bar', {
+      labels: sortedProducts.map(p => p[0].length > 25 ? p[0].substring(0, 25) + '…' : p[0]),
+      datasets: [{
+        label: 'Cart Additions',
+        data: sortedProducts.map(p => p[1]),
+        backgroundColor: '#C77D8A',
+        borderRadius: 6
+      }]
+    }, {
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true } }
+    });
+  }
+
+  // By hour
+  const hourCounts = new Array(24).fill(0);
+  cartData.forEach(entry => {
+    if (entry.timestamp) {
+      try {
+        const h = new Date(entry.timestamp).getHours();
+        hourCounts[h]++;
+      } catch {}
+    }
+  });
+
+  createChart('chart-cart-hours', 'line', {
+    labels: hourCounts.map((_, i) => (i < 10 ? '0' : '') + i + ':00'),
+    datasets: [{
+      label: 'Cart Additions',
+      data: hourCounts,
+      borderColor: '#D4A574',
+      backgroundColor: 'rgba(212, 165, 116, 0.1)',
+      fill: true, tension: 0.4, borderWidth: 2, pointRadius: 3
+    }]
+  }, {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true } }
+  });
+}
+
+// ─── 5l. Performance Metrics ───
+async function renderPerformance() {
+  const perfData = await fetchPerformanceData();
+  const gaugesEl = document.getElementById('perf-gauges');
+
+  // Aggregate from all page entries
+  const metrics = { lcp: [], fid: [], cls: [], ttfb: [] };
+  const devices = {};
+
+  Object.values(perfData).forEach(pageData => {
+    if (typeof pageData === 'object') {
+      Object.values(pageData).forEach(entry => {
+        if (entry.lcp !== undefined) metrics.lcp.push(entry.lcp);
+        if (entry.fid !== undefined) metrics.fid.push(entry.fid);
+        if (entry.cls !== undefined) metrics.cls.push(entry.cls);
+        if (entry.ttfb !== undefined) metrics.ttfb.push(entry.ttfb);
+        if (entry.device) devices[entry.device] = (devices[entry.device] || 0) + 1;
+      });
+    }
+  });
+
+  const avg = arr => arr.length > 0 ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+
+  const avgLcp = avg(metrics.lcp);
+  const avgFid = avg(metrics.fid);
+  const avgCls = avg(metrics.cls);
+  const avgTtfb = avg(metrics.ttfb);
+
+  function cwvClass(metric, val) {
+    if (val === null) return '';
+    if (metric === 'lcp') return val < 2500 ? 'green' : val < 4000 ? 'yellow' : 'red';
+    if (metric === 'fid') return val < 100 ? 'green' : val < 300 ? 'yellow' : 'red';
+    if (metric === 'cls') return val < 0.1 ? 'green' : val < 0.25 ? 'yellow' : 'red';
+    if (metric === 'ttfb') return val < 800 ? 'green' : val < 1800 ? 'yellow' : 'red';
+    return '';
+  }
+
+  function formatMetric(metric, val) {
+    if (val === null) return '—';
+    if (metric === 'cls') return val.toFixed(3);
+    return Math.round(val).toLocaleString();
+  }
+
+  function metricUnit(metric) {
+    if (metric === 'cls') return 'score';
+    return 'ms';
+  }
+
+  const gaugeConfigs = [
+    { key: 'lcp', label: 'LCP', val: avgLcp },
+    { key: 'fid', label: 'FID', val: avgFid },
+    { key: 'cls', label: 'CLS', val: avgCls },
+    { key: 'ttfb', label: 'TTFB', val: avgTtfb }
+  ];
+
+  if (gaugeConfigs.every(g => g.val === null)) {
+    gaugesEl.innerHTML = '<p class="text-muted text-center" style="grid-column:1/-1;padding:20px;">No performance data yet today</p>';
+  } else {
+    let html = '';
+    gaugeConfigs.forEach(g => {
+      const cls = cwvClass(g.key, g.val);
+      html += '<div class="gauge-card ' + cls + '">';
+      html += '<div class="gauge-label">' + g.label + '</div>';
+      html += '<div class="gauge-value">' + formatMetric(g.key, g.val) + '</div>';
+      html += '<div class="gauge-unit">' + metricUnit(g.key) + '</div>';
+      html += '</div>';
+    });
+    gaugesEl.innerHTML = html;
+  }
+
+  // Device breakdown
+  if (Object.keys(devices).length > 0) {
+    createChart('chart-devices', 'doughnut', {
+      labels: Object.keys(devices).map(d => d.charAt(0).toUpperCase() + d.slice(1)),
+      datasets: [{
+        data: Object.values(devices),
+        backgroundColor: ['#C77D8A', '#7A9D54', '#D4A574'],
+        borderColor: '#16213e',
+        borderWidth: 2
+      }]
+    }, {
+      plugins: { legend: { position: 'bottom' } },
+      cutout: '55%'
+    });
+  }
+}
+
+// ─── 5m. SEO Health ───
+async function renderSEOHealth() {
+  const pages = [
+    { path: '/', label: 'Home' },
+    { path: '/shop/', label: 'Shop' },
+    { path: '/about/', label: 'About' },
+    { path: '/contact/', label: 'Contact' },
+    { path: '/faq/', label: 'FAQ' },
+    { path: '/events/', label: 'Events' },
+    { path: '/wholesale/', label: 'Wholesale' }
+  ];
+
+  const container = document.getElementById('seo-table');
+  let results = [];
+
+  const checks = pages.map(async (page) => {
+    try {
+      const resp = await fetch(page.path);
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const html = await resp.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      const title = !!doc.querySelector('title')?.textContent?.trim();
+      const metaDesc = !!doc.querySelector('meta[name="description"]')?.getAttribute('content')?.trim();
+      const ogImage = !!doc.querySelector('meta[property="og:image"]')?.getAttribute('content')?.trim();
+      const ogTitle = !!doc.querySelector('meta[property="og:title"]')?.getAttribute('content')?.trim();
+      const h1 = !!doc.querySelector('h1');
+      const images = doc.querySelectorAll('img');
+      let imagesWithAlt = 0;
+      let totalImages = images.length;
+      images.forEach(img => { if (img.getAttribute('alt')?.trim()) imagesWithAlt++; });
+      const altScore = totalImages > 0 ? Math.round((imagesWithAlt / totalImages) * 100) : 100;
+
+      let score = 0;
+      if (title) score += 20;
+      if (metaDesc) score += 20;
+      if (ogImage) score += 15;
+      if (ogTitle) score += 15;
+      if (h1) score += 15;
+      score += Math.round(altScore * 0.15);
+
+      results.push({
+        label: page.label,
+        path: page.path,
+        title, metaDesc, ogImage, ogTitle, h1, altScore, score
+      });
+    } catch (err) {
+      results.push({
+        label: page.label, path: page.path,
+        title: false, metaDesc: false, ogImage: false, ogTitle: false,
+        h1: false, altScore: 0, score: 0, error: err.message
+      });
+    }
+  });
+
+  await Promise.all(checks);
+  results.sort((a, b) => pages.findIndex(p => p.label === a.label) - pages.findIndex(p => p.label === b.label));
+
+  const pass = '<span class="seo-pass">✅</span>';
+  const fail = '<span class="seo-fail">❌</span>';
+
+  let html = '<table class="data-table"><thead><tr>';
+  html += '<th>Page</th><th>Title</th><th>Meta Desc</th><th>OG Image</th><th>OG Title</th><th>H1</th><th>Alt Attrs</th><th>Score</th>';
+  html += '</tr></thead><tbody>';
+
+  results.forEach(r => {
+    const scoreColor = r.score >= 80 ? 'var(--green)' : r.score >= 50 ? 'var(--yellow)' : 'var(--red)';
+    html += '<tr>';
+    html += '<td><a href="' + r.path + '" target="_blank">' + r.label + '</a></td>';
+    html += '<td>' + (r.title ? pass : fail) + '</td>';
+    html += '<td>' + (r.metaDesc ? pass : fail) + '</td>';
+    html += '<td>' + (r.ogImage ? pass : fail) + '</td>';
+    html += '<td>' + (r.ogTitle ? pass : fail) + '</td>';
+    html += '<td>' + (r.h1 ? pass : fail) + '</td>';
+    html += '<td>' + r.altScore + '%</td>';
+    html += '<td class="seo-score" style="color:' + scoreColor + ';">' + r.score + '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+// ─── 5n. Error Log ───
+async function renderErrors() {
+  const errors = await fetchErrors();
+  const container = document.getElementById('errors-content');
+  const badge = document.getElementById('error-badge');
+
+  if (errors.length > 0) {
+    badge.style.display = '';
+    badge.textContent = errors.length;
+  }
+
+  if (errors.length === 0) {
+    container.innerHTML = '<p class="text-muted text-center" style="padding:20px;">🎉 No errors today!</p>';
+    return;
+  }
+
+  // Separate 404s and other errors
+  const regularErrors = errors.filter(e => e.kind !== 'image');
+  const imageErrors = errors.filter(e => e.kind === 'image');
+
+  let html = '<table class="data-table"><thead><tr>';
+  html += '<th>Time</th><th>Type</th><th>Message</th><th>Source</th><th>Page</th>';
+  html += '</tr></thead><tbody>';
+
+  regularErrors.slice(0, 50).forEach(err => {
+    html += '<tr>';
+    html += '<td style="white-space:nowrap;">' + formatDateTime(err.timestamp) + '</td>';
+    html += '<td><span class="status-badge failure">' + (err.kind || 'error') + '</span></td>';
+    html += '<td class="truncate" title="' + (err.message || '').replace(/"/g, '&quot;') + '">' + (err.message || '—') + '</td>';
+    html += '<td class="truncate">' + (err.source ? err.source.split('/').pop() + ':' + (err.line || '') : '—') + '</td>';
+    html += '<td>' + (err.page || '—') + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+
+  if (imageErrors.length > 0) {
+    html += '<h4 style="font-size:0.95rem;color:var(--text-muted);margin:20px 0 10px;">🖼️ Image Load Errors (' + imageErrors.length + ')</h4>';
+    html += '<table class="data-table"><thead><tr><th>Time</th><th>Source</th><th>Page</th></tr></thead><tbody>';
+    imageErrors.slice(0, 20).forEach(err => {
+      html += '<tr>';
+      html += '<td>' + formatDateTime(err.timestamp) + '</td>';
+      html += '<td class="truncate">' + (err.src || '—') + '</td>';
+      html += '<td>' + (err.page || '—') + '</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+  }
+
+  container.innerHTML = html;
+}
+
+// ─── 5o. Social Proof Config ───
+function loadSocialProofConfig() {
+  try {
+    const config = JSON.parse(localStorage.getItem('mm_social_proof') || '{}');
+    document.getElementById('sp-enabled').checked = config.enabled !== false;
+    document.getElementById('sp-threshold').value = config.threshold || 5;
+    document.getElementById('sp-style').value = config.style || 'subtle';
+  } catch {}
+}
+
+function saveSocialProofConfig() {
+  const config = {
+    enabled: document.getElementById('sp-enabled').checked,
+    threshold: parseInt(document.getElementById('sp-threshold').value) || 5,
+    style: document.getElementById('sp-style').value
+  };
+  localStorage.setItem('mm_social_proof', JSON.stringify(config));
+  renderSocialProofPreview();
+}
+window.saveSocialProofConfig = saveSocialProofConfig;
+
+async function renderSocialProofPreview() {
+  const container = document.getElementById('sp-preview');
+  const data = await fetchProducts();
+  if (!data?.products) {
+    container.innerHTML = '<p class="text-muted">No product data available</p>';
+    return;
+  }
+
+  const threshold = parseInt(document.getElementById('sp-threshold').value) || 5;
+  const enabled = document.getElementById('sp-enabled').checked;
+  const style = document.getElementById('sp-style').value;
+
+  let html = '<table class="data-table"><thead><tr><th>Product</th><th>Badge Preview</th></tr></thead><tbody>';
+  data.products.forEach(p => {
+    const viewCount = Math.floor(Math.random() * 30) + 1; // Simulated for preview
+    const wouldShow = enabled && viewCount >= threshold;
+    let badgeHtml = '<span class="text-muted" style="font-size:0.8rem;">Hidden (below threshold)</span>';
+    if (wouldShow) {
+      const styles = {
+        subtle: 'background:rgba(122,157,84,0.15);color:var(--green);padding:4px 10px;border-radius:12px;font-size:0.78rem;',
+        bold: 'background:var(--green);color:#fff;padding:4px 10px;border-radius:12px;font-size:0.78rem;font-weight:600;',
+        animated: 'background:rgba(212,165,116,0.2);color:var(--gold);padding:4px 10px;border-radius:12px;font-size:0.78rem;animation:pulse 2s infinite;'
+      };
+      badgeHtml = '<span style="' + (styles[style] || styles.subtle) + '">👁 ' + viewCount + ' viewed today</span>';
+    }
+    html += '<tr><td>' + p.title + '</td><td>' + badgeHtml + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+// ─── 5p. Weekly Digest Generator ───
+async function generateDigest() {
+  const btn = document.getElementById('btn-digest');
+  const output = document.getElementById('digest-output');
+  btn.disabled = true;
+  btn.textContent = 'Generating…';
+  output.value = 'Collecting data…\n';
+
+  try {
+    const traffic = await fetchTrafficForDigest();
+    const products = await fetchProducts();
+    const topPages = await fetchTopPagesToday();
+    const errors = await fetchErrors();
+
+    const dates = Object.keys(traffic).sort();
+    const totalPV = Object.values(traffic).reduce((a, b) => a + b, 0);
+    const avgPV = dates.length > 0 ? Math.round(totalPV / dates.length) : 0;
+
+    // Trend: compare last 3 days to previous 4
+    const recent = dates.slice(-3).reduce((a, d) => a + (traffic[d] || 0), 0);
+    const earlier = dates.slice(0, 4).reduce((a, d) => a + (traffic[d] || 0), 0);
+    const trend = recent > earlier ? '📈 Up' : recent < earlier ? '📉 Down' : '➡️ Flat';
+
+    let report = '';
+    report += '═══════════════════════════════════════════\n';
+    report += '  MAGNET MOMENTS CO. — WEEKLY DIGEST\n';
+    report += '  ' + dates[0] + ' to ' + dates[dates.length - 1] + '\n';
+    report += '═══════════════════════════════════════════\n\n';
+
+    report += '📊 TRAFFIC SUMMARY\n';
+    report += '─────────────────────────────────────────\n';
+    report += '  Total Pageviews:     ' + formatNumber(totalPV) + '\n';
+    report += '  Daily Average:       ' + formatNumber(avgPV) + '\n';
+    report += '  Trend:               ' + trend + '\n\n';
+
+    report += '  Daily Breakdown:\n';
+    dates.forEach(d => {
+      const bar = '█'.repeat(Math.min(Math.round((traffic[d] || 0) / Math.max(avgPV, 1) * 10), 30));
+      report += '    ' + d + '  ' + String(traffic[d] || 0).padStart(6) + '  ' + bar + '\n';
+    });
+    report += '\n';
+
+    report += '📄 TOP PAGES TODAY\n';
+    report += '─────────────────────────────────────────\n';
+    if (topPages.length > 0) {
+      topPages.forEach(([slug, count], i) => {
+        report += '  ' + (i + 1) + '. ' + slugToTitle(slug).padEnd(30) + formatNumber(count) + '\n';
+      });
+    } else {
+      report += '  No page data available\n';
+    }
+    report += '\n';
+
+    report += '📦 PRODUCT CATALOG\n';
+    report += '─────────────────────────────────────────\n';
+    if (products) {
+      report += '  Total Products:      ' + (products.productCount || 0) + '\n';
+      report += '  Active:              ' + (products.products?.filter(p => p.availableForSale).length || 0) + '\n';
+      report += '  Last Sync:           ' + formatDateTime(products.lastUpdated) + '\n';
+      report += '\n  Products:\n';
+      products.products?.forEach(p => {
+        const price = p.priceRange?.minVariantPrice?.amount || '—';
+        const stock = p.availableForSale ? '✅ In Stock' : '❌ Out of Stock';
+        report += '    • ' + p.title + ' — $' + price + ' — ' + stock + '\n';
+      });
+    }
+    report += '\n';
+
+    report += '🐛 ERRORS\n';
+    report += '─────────────────────────────────────────\n';
+    report += '  Errors today:        ' + errors.length + '\n';
+    if (errors.length > 0) {
+      const types = {};
+      errors.forEach(e => { types[e.kind || 'unknown'] = (types[e.kind || 'unknown'] || 0) + 1; });
+      Object.entries(types).forEach(([type, count]) => {
+        report += '    ' + type + ': ' + count + '\n';
+      });
+    } else {
+      report += '  🎉 No errors detected!\n';
+    }
+    report += '\n';
+
+    report += '═══════════════════════════════════════════\n';
+    report += '  Generated: ' + new Date().toISOString() + '\n';
+    report += '  Command Center — Magnet Moments Co.\n';
+    report += '═══════════════════════════════════════════\n';
+
+    output.value = report;
+  } catch (err) {
+    output.value = 'Error generating report: ' + err.message;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Generate Report';
+}
+window.generateDigest = generateDigest;
+
+function copyDigest() {
+  const output = document.getElementById('digest-output');
+  output.select();
+  document.execCommand('copy');
+  const btn = event.target;
+  const orig = btn.textContent;
+  btn.textContent = 'Copied!';
+  setTimeout(() => { btn.textContent = orig; }, 2000);
+}
+window.copyDigest = copyDigest;
+
+// ─── 5q. Quick Links ───
+function renderQuickLinks() {
+  const links = [
+    { icon: '🛍️', title: 'Shopify Admin', url: 'https://dbx3hf-qe.myshopify.com/admin' },
+    { icon: '📊', title: 'Google Analytics', url: 'https://analytics.google.com' },
+    { icon: '🔍', title: 'Google Search Console', url: 'https://search.google.com/search-console' },
+    { icon: '📘', title: 'Facebook Debugger', url: 'https://developers.facebook.com/tools/debug/' },
+    { icon: '🐙', title: 'GitHub Repo', url: 'https://github.com/magnetmomentsco/magnetmomentsco.github.io' },
+    { icon: '⚡', title: 'GitHub Actions', url: 'https://github.com/magnetmomentsco/magnetmomentsco.github.io/actions' },
+    { icon: '🚀', title: 'PageSpeed Insights', url: 'https://pagespeed.web.dev/analysis?url=https://magnetmomentsco.us' },
+    { icon: '✨', title: 'Rich Results Test', url: 'https://search.google.com/test/rich-results?url=https://magnetmomentsco.us' }
+  ];
+
+  let html = '';
+  links.forEach(l => {
+    const shortUrl = l.url.replace(/^https?:\/\//, '').split('/')[0];
+    html += '<a href="' + l.url + '" target="_blank" rel="noopener" class="link-card">';
+    html += '<div class="link-icon">' + l.icon + '</div>';
+    html += '<div class="link-info"><div class="link-title">' + l.title + '</div>';
+    html += '<div class="link-url">' + shortUrl + '</div></div>';
+    html += '<div class="link-arrow">→</div></a>';
+  });
+
+  document.getElementById('quick-links-grid').innerHTML = html;
+}
+
+// ─── 5r. Deployment History ───
+async function renderDeployments() {
+  const container = document.getElementById('deploys-content');
+  const runs = await fetchDeployments(10);
+
+  if (runs.length === 0) {
+    container.innerHTML = '<p class="text-muted text-center" style="padding:20px;">Unable to fetch deployment history</p>';
+    return;
+  }
+
+  let html = '<table class="data-table"><thead><tr>';
+  html += '<th>Commit</th><th>Author</th><th>Status</th><th>Date</th><th>Link</th>';
+  html += '</tr></thead><tbody>';
+
+  runs.forEach(run => {
+    const status = run.conclusion === 'success'
+      ? '<span class="status-badge success">✅ Success</span>'
+      : run.conclusion === 'failure'
+      ? '<span class="status-badge failure">❌ Failed</span>'
+      : '<span class="status-badge" style="background:rgba(241,196,15,0.15);color:var(--yellow);">⏳ ' + (run.status || 'In Progress') + '</span>';
+
+    const message = (run.head_commit?.message || run.display_title || '—').split('\n')[0];
+
+    html += '<tr>';
+    html += '<td class="truncate" title="' + message.replace(/"/g, '&quot;') + '">' + message + '</td>';
+    html += '<td>' + (run.head_commit?.author?.name || run.actor?.login || '—') + '</td>';
+    html += '<td>' + status + '</td>';
+    html += '<td style="white-space:nowrap;">' + formatDateTime(run.created_at) + '</td>';
+    html += '<td><a href="' + run.html_url + '" target="_blank">View ↗</a></td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+// ─── 5s. Product Inventory ───
+async function renderInventory() {
+  const container = document.getElementById('inventory-content');
+  const data = await fetchProducts();
+
+  if (!data?.products) {
+    container.innerHTML = '<p class="text-muted text-center" style="padding:20px;">Unable to load product data</p>';
+    return;
+  }
+
+  const filter = document.getElementById('inv-filter').value;
+  const search = (document.getElementById('inv-search').value || '').toLowerCase();
+
+  let products = data.products;
+
+  // Apply filters
+  if (filter === 'in-stock') products = products.filter(p => p.availableForSale);
+  if (filter === 'out-of-stock') products = products.filter(p => !p.availableForSale);
+  if (search) products = products.filter(p => p.title.toLowerCase().includes(search) || (p.handle || '').toLowerCase().includes(search));
+
+  if (products.length === 0) {
+    container.innerHTML = '<p class="text-muted text-center" style="padding:20px;">No products match the current filter</p>';
+    return;
+  }
+
+  let html = '<table class="data-table"><thead><tr>';
+  html += '<th></th><th>Title</th><th>Price</th><th>Variants</th><th>Stock</th><th>Actions</th>';
+  html += '</tr></thead><tbody>';
+
+  products.forEach(p => {
+    const imgUrl = p.featuredImage?.url || '';
+    const minPrice = p.priceRange?.minVariantPrice?.amount || '0';
+    const maxPrice = p.priceRange?.maxVariantPrice?.amount || '0';
+    const price = minPrice === maxPrice ? '$' + parseFloat(minPrice).toFixed(2) : '$' + parseFloat(minPrice).toFixed(2) + '–$' + parseFloat(maxPrice).toFixed(2);
+    const variants = p.variants?.nodes?.length || 0;
+    const totalInv = p.totalInventory || 0;
+    const stockBadge = p.availableForSale
+      ? '<span class="status-badge in-stock">In Stock (' + totalInv + ')</span>'
+      : '<span class="status-badge out-of-stock">Out of Stock</span>';
+
+    const shopifyId = p.id?.replace('gid://shopify/Product/', '') || '';
+    const shopifyUrl = 'https://' + (data.shopifyDomain || 'dbx3hf-qe.myshopify.com') + '/admin/products/' + shopifyId;
+    const siteUrl = '/shop/' + p.handle + '/';
+
+    html += '<tr>';
+    html += '<td>' + (imgUrl ? '<img src="' + imgUrl + '&width=96" class="prod-thumb" alt="" loading="lazy">' : '') + '</td>';
+    html += '<td><strong>' + p.title + '</strong><br><span style="font-size:0.78rem;color:var(--text-dim);">' + p.handle + '</span></td>';
+    html += '<td style="white-space:nowrap;">' + price + '</td>';
+    html += '<td>' + variants + '</td>';
+    html += '<td>' + stockBadge + '</td>';
+    html += '<td style="white-space:nowrap;">';
+    html += '<a href="' + shopifyUrl + '" target="_blank" class="btn btn-sm btn-secondary" style="margin-right:4px;">Shopify ↗</a>';
+    html += '<a href="' + siteUrl + '" target="_blank" class="btn btn-sm btn-secondary">View ↗</a>';
+    html += '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+window.renderInventory = renderInventory;
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   6. SECTION COLLAPSE TOGGLE
+   ────────────────────────────────────────────────────────────────────────── */
+
+function toggleSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+  section.classList.toggle('collapsed');
+  const header = section.querySelector('.section-header');
+  if (header) header.classList.toggle('open');
+}
+window.toggleSection = toggleSection;
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   7. INITIALIZATION
+   ────────────────────────────────────────────────────────────────────────── */
+
+async function initDashboard() {
+  renderTopBar();
+  renderQuickLinks();
+  loadSocialProofConfig();
+
+  const fbOk = initFirebase();
+
+  // Fire all renderers concurrently
+  const renderers = [
+    renderQuickStats(),
+    renderTrafficChart(),
+    renderTrafficSources(),
+    renderScrollDepth(),
+    renderClickHeatmapPageList(),
+    renderFunnel(),
+    renderNewsletter(),
+    renderIntent(),
+    renderCartAnalytics(),
+    renderPerformance(),
+    renderSEOHealth(),
+    renderErrors(),
+    renderDeployments(),
+    renderInventory(),
+    renderSocialProofPreview()
+  ];
+
+  // Subscribe to live visitors (real-time)
+  if (fbOk) {
+    subscribeLiveVisitors(renderLiveVisitors);
+  } else {
+    document.getElementById('live-visitors-content').innerHTML =
+      '<p class="text-muted text-center" style="padding:20px;">Firebase not configured — live visitor data unavailable</p>';
+  }
+
+  // Settle all renderers (don't let one failure break others)
+  await Promise.allSettled(renderers);
+}
+
+})();
+</script>
+</body>
+</html>
