@@ -723,6 +723,24 @@ def build_jsonld_products(products):
     }
 
 
+def update_product_count_stat(filepath, count):
+    """Update the hero stat product count in the HTML so the animated counter is always correct."""
+    with open(filepath, 'r') as f:
+        html = f.read()
+    # Match: id="product-count-stat" data-count="<any number>"
+    updated, n = re.subn(
+        r'(id="product-count-stat"\s+data-count=")(\d+)(")',
+        rf'\g<1>{count}\3',
+        html
+    )
+    if n:
+        with open(filepath, 'w') as f:
+            f.write(updated)
+        print(f'  ✓ Updated product count stat → {count}')
+    else:
+        print(f'  ⚠ product-count-stat not found in {filepath}')
+
+
 def inject_into_html(filepath, start_marker, end_marker, new_content):
     """Replace content between markers in an HTML file."""
     with open(filepath, 'r') as f:
@@ -843,6 +861,9 @@ def update_shop_page(products):
 def update_home_page(products):
     """Update the home page with featured products."""
     print('\nUpdating home page...')
+
+    # Update the hero stat product count so the animated counter is accurate
+    update_product_count_stat(HOME_HTML, len(products))
 
     # Featured = products tagged 'featured', or first 6 if no featured tags
     featured = [p for p in products if 'featured' in [t.lower() for t in p.get('tags', [])]]
