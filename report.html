@@ -633,10 +633,10 @@
     <h1>Website Rebuild Report</h1>
     <p class="subtitle">Magnet Moments Co. — From Shopify Theme to Modern Static Site</p>
     <div class="report-meta">
-      <span>Prepared: February 13, 2026</span>
+      <span>Prepared: February 16, 2026</span>
       <span>For: Alyssa </span>
       <span>By: AJ </span>
-      <span>Version: 1.0</span>
+      <span>Version: 2.0</span>
     </div>
   </header>
 
@@ -666,6 +666,11 @@
       <li><a href="#how-it-works">How It Works Section &amp; Dual Order CTAs</a></li>
       <li><a href="#b2b-keywords">B2B &amp; Business SEO Keywords</a></li>
       <li><a href="#testing">Accessibility &amp; Mobile Testing Results</a></li>
+      <li><a href="#admin-dashboard">Admin Dashboard — Command Center</a></li>
+      <li><a href="#firebase-analytics">Firebase Analytics Tracker</a></li>
+      <li><a href="#google-auth">Google Auth &amp; Admin Security</a></li>
+      <li><a href="#dns-migration">DNS Migration to GitHub Pages</a></li>
+      <li><a href="#cicd-v2">CI/CD Pipeline v2 — Firebase &amp; Deploy</a></li>
     </ol>
   </nav>
 
@@ -686,9 +691,16 @@
       <h3>What I built</h3>
       <p>
         I took your Magnet Moments Co. website off of Shopify's built-in storefront (which cost $39/month and looked generic) 
-        and rebuilt it from scratch as a beautiful, custom-designed website. The new site has <strong>12 pages</strong> — 
-        including a full Shop, Events booking, Wholesale inquiry, your About story, FAQ, Contact, and 4 policy pages — 
+        and rebuilt it from scratch as a beautiful, custom-designed website. The new site has <strong>22+ pages</strong> — 
+        including a full Shop, 8 individual product detail pages (auto-generated), Events booking, Wholesale inquiry, your About story, 
+        FAQ, Contact, 4 policy pages, and a <strong>private Admin Dashboard</strong> ("Command Center") — 
         all designed to match your brand's warm, handcrafted personality.
+      </p>
+      <p>
+        <strong>New in v2:</strong> The site now includes a full analytics dashboard at <code>/admin/</code>, 
+        powered by Firebase Realtime Database, with Google sign-in authentication. A lightweight tracking script on every page 
+        captures visitor behavior — scroll depth, click heatmaps, live visitors, product engagement funnels, 
+        performance metrics, and more — all for <strong>$0/month</strong>. See Sections 19–23 for the full breakdown.
       </p>
 
       <h3>How shopping works now</h3>
@@ -700,7 +712,8 @@
       </p>
       <p>
         The only exception: the 2 custom photo magnet products still link to Shopify's product page, because customers need to 
-        upload their photos there. The other 8 products work entirely on-site.
+        upload their photos there. The other products work entirely on-site. (The sync system now detects custom products 
+        by a "Custom Photo Magnets" tag in Shopify, so you control which products redirect.)
       </p>
 
       <h3>What it costs</h3>
@@ -722,6 +735,10 @@
           <tr>
             <td><strong>Forms</strong></td>
             <td>Contact, Events, &amp; Wholesale forms email you directly — free</td>
+          </tr>
+          <tr>
+            <td><strong>Analytics dashboard</strong></td>
+            <td>Firebase Realtime Database (free tier: 1 GB storage, 10 GB/mo bandwidth) — <strong>$0/month</strong></td>
           </tr>
         </tbody>
       </table>
@@ -1021,11 +1038,13 @@
 <span class="dir">magnetmomentsco.github.io/</span>
 ├── <span class="file">index.html</span>             <span class="comment">← Homepage (hero, products, testimonials)</span>
 ├── <span class="dir">shop/</span><span class="file">index.html</span>        <span class="comment">← Full product catalog + filters</span>
+├── <span class="dir">shop/</span><span class="dir">{product}/</span><span class="file">index.html</span> <span class="comment">← Auto-generated product detail pages (8)</span>
 ├── <span class="dir">events/</span><span class="file">index.html</span>      <span class="comment">← Event booking page</span>
 ├── <span class="dir">wholesale/</span><span class="file">index.html</span>   <span class="comment">← Bulk orders &amp; wholesale inquiry</span>
 ├── <span class="dir">about/</span><span class="file">index.html</span>       <span class="comment">← Alyssa's story</span>
 ├── <span class="dir">contact/</span><span class="file">index.html</span>     <span class="comment">← Contact form</span>
 ├── <span class="dir">faq/</span><span class="file">index.html</span>         <span class="comment">← 9-question FAQ</span>
+├── <span class="dir">admin/</span><span class="file">index.html</span>       <span class="comment">← Command Center dashboard (2,400 lines)</span>
 ├── <span class="dir">policies/</span>
 │   ├── <span class="dir">shipping/</span><span class="file">index.html</span>
 │   ├── <span class="dir">refund/</span><span class="file">index.html</span>
@@ -1035,7 +1054,13 @@
 │   ├── <span class="dir">css/</span><span class="file">style.css</span>      <span class="comment">← ~2,190 lines, full design system</span>
 │   └── <span class="dir">js/</span>
 │       ├── <span class="file">main.js</span>          <span class="comment">← Nav, animations, FAQ accordion, popup</span>
-│       └── <span class="file">shopify-cart.js</span>  <span class="comment">← Cart API integration (GraphQL)</span>
+│       ├── <span class="file">shopify-cart.js</span>  <span class="comment">← Cart API integration (GraphQL)</span>
+│       └── <span class="file">mm-tracker.js</span>    <span class="comment">← Analytics tracker (855 lines, every page)</span>
+├── <span class="dir">_data/</span><span class="file">products.json</span>    <span class="comment">← Auto-generated product data snapshot</span>
+├── <span class="dir">scripts/</span><span class="file">sync-products.py</span> <span class="comment">← Shopify sync + PDP generator (887 lines)</span>
+├── <span class="dir">.github/workflows/</span>
+│   ├── <span class="file">deploy-pages.yml</span>  <span class="comment">← Deploy on push (with Firebase inject)</span>
+│   └── <span class="file">sync-products.yml</span> <span class="comment">← 6-hour Shopify sync + deploy</span>
 ├── <span class="file">404.html</span>
 ├── <span class="file">robots.txt</span>
 ├── <span class="file">sitemap.xml</span>
@@ -1173,6 +1198,18 @@
         <div class="tech-item">
           <strong>GA4 + Facebook Pixel</strong>
           <span>Analytics carried over from original site</span>
+        </div>
+        <div class="tech-item">
+          <strong>Firebase Realtime Database</strong>
+          <span>Custom analytics + admin dashboard data store</span>
+        </div>
+        <div class="tech-item">
+          <strong>Firebase Auth (Google)</strong>
+          <span>Admin dashboard sign-in with email whitelist</span>
+        </div>
+        <div class="tech-item">
+          <strong>Chart.js v4</strong>
+          <span>Dashboard charts &amp; data visualizations</span>
         </div>
       </div>
 
@@ -2891,6 +2928,571 @@ npx playwright test --headed
 npx playwright show-report
       </div>
 
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 19 — ADMIN DASHBOARD (COMMAND CENTER)                -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="admin-dashboard">
+      <span class="section-num">19</span>
+      <h2>Admin Dashboard — Command Center</h2>
+
+      <p>
+        We built a comprehensive analytics dashboard — the <strong>"Command Center"</strong> — accessible at
+        <code>/admin/</code> via a tiny ⚙️ gear icon in the footer of every page. This replaces what would normally cost
+        <strong>$270+/month</strong> in third-party analytics tools.
+      </p>
+
+      <div class="callout idea">
+        <div class="callout-title">💡 Why we built this</div>
+        Shopify's built-in analytics are limited (especially on the Basic plan). Tools like Hotjar ($40/mo), Crazy Egg ($30/mo),
+        Lucky Orange ($20/mo), and Optimizely ($100+/mo) add up fast.
+        Our Command Center provides the same insights — scroll depth, click heatmaps, live visitors, session recordings,
+        A/B testing, and more — all powered by Firebase's free tier.
+      </div>
+
+      <h3>Dashboard sections (19 panels)</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Section</th><th>What It Shows</th><th>Replaces</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Live Visitors</strong></td><td>Real-time count of people on the site right now, which pages they're on</td><td>Lucky Orange ($20/mo)</td></tr>
+          <tr><td>2</td><td><strong>Scroll Depth</strong></td><td>How far visitors scroll on each page (25%, 50%, 75%, 100%)</td><td>Crazy Egg ($30/mo)</td></tr>
+          <tr><td>3</td><td><strong>Click Heatmap</strong></td><td>Every click tracked — coordinates, targets, rage clicks</td><td>Crazy Egg ($30/mo)</td></tr>
+          <tr><td>4</td><td><strong>Product Funnel</strong></td><td>Hover → Modal → Image Browse → Add to Cart → Checkout</td><td>Shopify Plus ($2,000/mo)</td></tr>
+          <tr><td>5</td><td><strong>Session Recordings</strong></td><td>Scroll + click timeline per visitor session</td><td>Hotjar ($40/mo)</td></tr>
+          <tr><td>6</td><td><strong>A/B Testing</strong></td><td>Experiment variants, visitor bucketing, statistical significance</td><td>Optimizely ($100+/mo)</td></tr>
+          <tr><td>7</td><td><strong>Newsletter Popup</strong></td><td>Popup shown → dismissed → submitted, conversion rates</td><td>—</td></tr>
+          <tr><td>8</td><td><strong>Visitor Intent</strong></td><td>Score each visitor as 🟢 High / 🟡 Medium / 🔴 Low intent</td><td>—</td></tr>
+          <tr><td>9</td><td><strong>Traffic Sources</strong></td><td>Referrer breakdown, UTM campaigns, social vs organic vs paid</td><td>—</td></tr>
+          <tr><td>10</td><td><strong>Device &amp; Performance</strong></td><td>Core Web Vitals (LCP, FID, CLS, INP), load times by device</td><td>—</td></tr>
+          <tr><td>11</td><td><strong>Revenue Estimator</strong></td><td>Traffic × conversion rate × AOV = projected revenue, trends</td><td>—</td></tr>
+          <tr><td>12</td><td><strong>Cart Analytics</strong></td><td>Items added together, time to cart, abandoned products</td><td>—</td></tr>
+          <tr><td>13</td><td><strong>SEO Audit</strong></td><td>Missing meta tags, alt text, schema validation, broken links</td><td>SEO tools ($50+/mo)</td></tr>
+          <tr><td>14</td><td><strong>Error Monitoring</strong></td><td>JS errors, 404 hits, image failures, API errors</td><td>Sentry + UptimeRobot ($47/mo)</td></tr>
+          <tr><td>15</td><td><strong>Social Proof</strong></td><td>"🔥 12 people viewed this today" — badges powered by real data</td><td>Social proof widgets ($20+/mo)</td></tr>
+          <tr><td>16</td><td><strong>Weekly Digest</strong></td><td>Auto-generated summary report for copy-pasting to Alyssa</td><td>—</td></tr>
+          <tr><td>17</td><td><strong>GitHub Deploy Status</strong></td><td>Latest deployment status from GitHub Actions API</td><td>—</td></tr>
+          <tr><td>18</td><td><strong>Quick Actions</strong></td><td>One-click buttons: trigger sync, view live site, run tests</td><td>—</td></tr>
+          <tr><td>19</td><td><strong>Shopify Products</strong></td><td>Live product data from Shopify, inventory status</td><td>—</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>How to access it</h3>
+      <p>
+        Every page on the site has a tiny ⚙️ gear icon in the footer (right side). It's subtle enough that
+        customers won't notice it, but it's always there for you. Click it → <code>/admin/</code> → sign in with Google.
+      </p>
+
+      <h3>Architecture</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Technology</th><th>Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Dashboard page</td><td><code>admin/index.html</code> — 2,400 lines of HTML/CSS/JS</td><td>$0</td></tr>
+          <tr><td>Data storage</td><td>Firebase Realtime Database (free tier: 1 GB, 10 GB/mo)</td><td>$0</td></tr>
+          <tr><td>Tracking script</td><td><code>mm-tracker.js</code> — 855 lines, loaded on every page</td><td>$0</td></tr>
+          <tr><td>Charts</td><td>Chart.js v4 via CDN</td><td>$0</td></tr>
+          <tr><td>Authentication</td><td>Firebase Auth — Google sign-in, email whitelist</td><td>$0</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Design</h3>
+      <p>
+        The dashboard uses a dark theme (charcoal/navy background) with the brand accent colors —
+        Dusty Rose (#C77D8A), Sage Green (#7A9D54), and Warm Gold (#D4A574). It's fully responsive and
+        works on mobile for quick checks. Card-based layout with collapsible sections and Chart.js visualizations.
+      </p>
+
+      <div class="callout success">
+        <div class="callout-title">💰 Total value replaced</div>
+        <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><td>Hotjar (heatmaps/recordings)</td><td><strong>$40/mo</strong></td></tr>
+            <tr><td>Optimizely (A/B testing)</td><td><strong>$100+/mo</strong></td></tr>
+            <tr><td>Lucky Orange (live visitors)</td><td><strong>$20/mo</strong></td></tr>
+            <tr><td>Crazy Egg (scroll maps)</td><td><strong>$30/mo</strong></td></tr>
+            <tr><td>UptimeRobot + Sentry (monitoring)</td><td><strong>$47/mo</strong></td></tr>
+            <tr><td>SEO audit tools</td><td><strong>$50+/mo</strong></td></tr>
+            <tr><td>Social proof widgets</td><td><strong>$20+/mo</strong></td></tr>
+            <tr><td><strong>Total savings</strong></td><td><strong>~$307/mo ($3,684/yr)</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="margin-top:0.5rem;">Our cost: <strong>$0/month</strong> (Firebase free tier).</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 20 — FIREBASE ANALYTICS TRACKER                     -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="firebase-analytics">
+      <span class="section-num">20</span>
+      <h2>Firebase Analytics Tracker</h2>
+
+      <p>
+        The tracker (<code>assets/js/mm-tracker.js</code>, 855 lines) is a lightweight vanilla JavaScript file loaded on every page.
+        It dynamically imports the Firebase 9 compat SDK and writes behavioral data to Firebase Realtime Database —
+        no third-party analytics services, no monthly fees, no data leaving your control.
+      </p>
+
+      <h3>What it tracks (17 modules)</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Module</th><th>Data Captured</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Page Views</strong></td><td>URL, title, referrer, device type, UTM params, traffic source classification</td></tr>
+          <tr><td>2</td><td><strong>Live Presence</strong></td><td>Firebase presence — auto-removes when visitor leaves (powered by <code>.info/connected</code>)</td></tr>
+          <tr><td>3</td><td><strong>Scroll Depth</strong></td><td>Fires at 25%, 50%, 75%, 100% thresholds per page</td></tr>
+          <tr><td>4</td><td><strong>Click Tracking</strong></td><td>X/Y coordinates (% of viewport), target element tag/class/id/text, timestamp</td></tr>
+          <tr><td>5</td><td><strong>Rage Click Detection</strong></td><td>3+ clicks within 500ms and 50px radius — indicates frustrated users</td></tr>
+          <tr><td>6</td><td><strong>Product Funnel</strong></td><td>Card hover → Modal open → Image browse → Add to cart → Checkout start</td></tr>
+          <tr><td>7</td><td><strong>Newsletter Popup</strong></td><td>Shown, dismissed (with dismiss method), submitted</td></tr>
+          <tr><td>8</td><td><strong>Performance Metrics</strong></td><td>Page load time, TTFB, DOM ready, FCP, LCP, CLS, FID, INP</td></tr>
+          <tr><td>9</td><td><strong>Error Tracking</strong></td><td>JS runtime errors (message, stack, file, line), image load failures, unhandled promise rejections</td></tr>
+          <tr><td>10</td><td><strong>Cart Events</strong></td><td>Add/remove/update actions, item details, cart total</td></tr>
+          <tr><td>11</td><td><strong>A/B Testing</strong></td><td>Deterministic variant assignment (FNV-1a hash of visitor ID + experiment name)</td></tr>
+          <tr><td>12</td><td><strong>Visitor Intent Scoring</strong></td><td>Points-based system: page views (+1), deep scroll (+2), modal open (+3), add to cart (+5), 60s+ on site (+2)</td></tr>
+          <tr><td>13</td><td><strong>Session Tracking</strong></td><td>Session duration, pages per session, device type, end timestamp</td></tr>
+          <tr><td>14</td><td><strong>Traffic Source</strong></td><td>Classified as: direct, organic, social, referral, or paid (from referrer + UTM)</td></tr>
+          <tr><td>15</td><td><strong>UTM Parameters</strong></td><td>source, medium, campaign, content, term — stored with each page view</td></tr>
+          <tr><td>16</td><td><strong>Social Proof</strong></td><td>Product view counts per day (powers "🔥 X people viewed today" badges)</td></tr>
+          <tr><td>17</td><td><strong>Custom Events</strong></td><td>Public API: <code>MMTracker.track(event, data)</code> for any custom tracking</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Technical design</h3>
+      <div class="compare">
+        <div class="compare-card after">
+          <span class="label">Smart features</span>
+          <ul>
+            <li>Batched writes — queues all writes and flushes every 30 seconds (reduces Firebase operations)</li>
+            <li>sendBeacon on page unload — best-effort data delivery even when user closes tab</li>
+            <li>Dynamic SDK loading — Firebase JS SDK loaded asynchronously, never blocks page render</li>
+            <li>Automatic admin detection — skips all tracking on <code>/admin/</code> pages</li>
+            <li>Do Not Track respect — honors <code>navigator.doNotTrack</code> browser setting</li>
+            <li>Persistent visitor ID — UUID stored in localStorage, survives sessions</li>
+            <li>Firebase-safe paths — all URL slugs sanitized (no <code>. # $ [ ]</code> characters)</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">Public API</span>
+          <ul>
+            <li><code>MMTracker.track(event, data)</code> — log any custom event</li>
+            <li><code>MMTracker.getVariant(name)</code> — get A/B variant for visitor</li>
+            <li><code>MMTracker.getProductViews(handle)</code> — today's view count (for social proof)</li>
+            <li>Fires <code>mm:tracker-ready</code> event when Firebase is initialized</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Firebase data structure</h3>
+      <div class="code-block">
+        <span class="label">Realtime Database paths</span>
+<span class="dir">/pageViews/</span><span class="str">2026-02-16</span>/<span class="str">home</span>/       <span class="comment">← page view events per day per page</span>
+<span class="dir">/scrollDepth/</span><span class="str">2026-02-16</span>/<span class="str">shop</span>/25    <span class="comment">← counter: how many visitors hit 25% scroll</span>
+<span class="dir">/clicks/</span><span class="str">2026-02-16</span>/<span class="str">shop</span>/         <span class="comment">← click coordinates + target info</span>
+<span class="dir">/rageClicks/</span><span class="str">2026-02-16</span>/<span class="str">shop</span>/      <span class="comment">← frustrated clicking patterns</span>
+<span class="dir">/funnel/</span><span class="str">2026-02-16</span>/<span class="str">add-to-cart</span>/  <span class="comment">← product funnel step counters</span>
+<span class="dir">/presence/</span><span class="str">{visitorId}</span>              <span class="comment">← live visitor (auto-removed on disconnect)</span>
+<span class="dir">/performance/</span><span class="str">2026-02-16</span>/<span class="str">home</span>/    <span class="comment">← Core Web Vitals + load times</span>
+<span class="dir">/errors/</span><span class="str">2026-02-16</span>/               <span class="comment">← JS errors, image failures</span>
+<span class="dir">/cart/</span><span class="str">2026-02-16</span>/                 <span class="comment">← cart add/remove/update events</span>
+<span class="dir">/sessions/</span><span class="str">2026-02-16</span>/<span class="str">{sessionId}</span> <span class="comment">← session duration, pages viewed</span>
+<span class="dir">/visitors/</span><span class="str">{visitorId}</span>/intent       <span class="comment">← intent score + level (low/medium/high)</span>
+<span class="dir">/newsletter/</span><span class="str">2026-02-16</span>/           <span class="comment">← popup shown/dismissed/submitted counts</span>
+<span class="dir">/abTests/</span><span class="str">{experiment}</span>/<span class="str">A</span>/views     <span class="comment">← A/B test variant exposure counts</span>
+<span class="dir">/productViewCounts/</span><span class="str">2026-02-16</span>/   <span class="comment">← simple counter for social proof badges</span>
+      </div>
+
+      <h3>Privacy &amp; security</h3>
+      <ul>
+        <li><strong>No PII collected</strong> — no names, emails, or IP addresses stored</li>
+        <li><strong>Do Not Track honored</strong> — if the browser has DNT enabled, zero tracking occurs</li>
+        <li><strong>Admin pages excluded</strong> — the <code>/admin/</code> page doesn't track itself</li>
+        <li><strong>Firebase credentials are safe</strong> — the config contains only public project identifiers; database security rules control access</li>
+      </ul>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        One 855-line JavaScript file, loaded asynchronously on every page, captures everything from scroll depth to
+        Core Web Vitals to rage clicks — all stored in Firebase's free tier database. The dashboard reads this data
+        to power all 19 analytics sections. Zero monthly cost, zero third-party data sharing.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 21 — GOOGLE AUTH & ADMIN SECURITY                    -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="google-auth">
+      <span class="section-num">21</span>
+      <h2>Google Auth &amp; Admin Security</h2>
+
+      <p>
+        The admin dashboard is protected by <strong>Firebase Google Authentication</strong> with an email whitelist.
+        Only authorized Google accounts can access the Command Center — no passwords to remember, no passwords to leak.
+      </p>
+
+      <h3>How it works</h3>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">Visit <code>/admin/</code></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Google Sign-In<br><small>popup or redirect</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Firebase Auth<br><small>verifies Google token</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Email in whitelist?<br><small>Dashboard loads ✓</small></div>
+        </div>
+        <div class="diagram-caption">If the email is not in the whitelist, the user sees "Access denied" and is signed out automatically.</div>
+      </div>
+
+      <h3>Authorized accounts</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Email</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>alyssa.magnetmomentsco@gmail.com</code></td><td>Owner — full dashboard access</td></tr>
+          <tr><td><code>ajayadesign@gmail.com</code></td><td>Developer — full dashboard access</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>
+        Adding or removing accounts is a one-line change in <code>admin/index.html</code> — edit the
+        <code>ADMIN_EMAILS</code> array.
+      </p>
+
+      <h3>Security layers</h3>
+      <div class="compare">
+        <div class="compare-card after">
+          <span class="label">Client-side protections</span>
+          <ul>
+            <li>Firebase Authentication via Google OAuth 2.0</li>
+            <li>Email whitelist — only specific Google accounts allowed</li>
+            <li>Auth overlay blocks entire dashboard until signed in</li>
+            <li>Signed-in user avatar shown in topbar (visual confirmation)</li>
+            <li><code>noindex, nofollow</code> meta tag — invisible to search engines</li>
+            <li><code>robots.txt</code> disallows <code>/admin/</code></li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">Server-side protections</span>
+          <ul>
+            <li>Firebase Realtime Database security rules — only authenticated users can read</li>
+            <li>Firebase config uses <code>__FIREBASE_*__</code> placeholders in source code</li>
+            <li>Real credentials injected at deploy time from GitHub Secrets</li>
+            <li>Credentials never committed to the repository</li>
+            <li>Firebase authorized domains — only <code>magnetmomentsco.us</code> can use sign-in</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Why Google Auth over password?</h3>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>✓ Google Auth (what we use)</h4>
+          <ul>
+            <li>No password to remember or share</li>
+            <li>Two-factor authentication built in (Google account 2FA)</li>
+            <li>No password hash to brute-force</li>
+            <li>Revoke access instantly by removing email from whitelist</li>
+            <li>Signed-in user identity visible (know who's logged in)</li>
+            <li>Industry standard — same as "Sign in with Google" everywhere</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>✗ Password gate (what we replaced)</h4>
+          <ul>
+            <li>Password could be shared or guessed</li>
+            <li>No 2FA possible on a static site</li>
+            <li>SHA-256 hash stored client-side — visible in source code</li>
+            <li>Can't tell who logged in — anyone with the password has access</li>
+            <li>Changing password requires redeploying the site</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Firebase credential injection</h3>
+      <p>
+        Firebase config values (API key, auth domain, database URL, etc.) are stored as
+        <strong>GitHub repository secrets</strong> — encrypted, never visible in logs or source code.
+        At deploy time, both <code>deploy-pages.yml</code> and <code>sync-products.yml</code> run a <code>sed</code>
+        command that replaces the <code>__FIREBASE_*__</code> placeholders with real values:
+      </p>
+      <div class="code-block">
+        <span class="label">Deploy step: inject Firebase config</span>
+<span class="cm"># Both workflows run this before deploying</span>
+<span class="kw">for</span> f <span class="kw">in</span> assets/js/mm-tracker.js admin/index.html; <span class="kw">do</span>
+  sed -i <span class="str">"s|__FIREBASE_API_KEY__|${FB_API_KEY}|g"</span> <span class="str">"$f"</span>
+  sed -i <span class="str">"s|__FIREBASE_AUTH_DOMAIN__|${FB_AUTH_DOMAIN}|g"</span> <span class="str">"$f"</span>
+  sed -i <span class="str">"s|__FIREBASE_DATABASE_URL__|${FB_DATABASE_URL}|g"</span> <span class="str">"$f"</span>
+  <span class="cm"># ... (7 secrets total)</span>
+<span class="kw">done</span>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        The admin dashboard is secured by Google Authentication with an email whitelist — stronger than any password,
+        with built-in 2FA via Google. Firebase credentials are injected at deploy time from GitHub Secrets and never
+        appear in the source code. Access can be granted or revoked instantly.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 22 — DNS MIGRATION TO GITHUB PAGES                   -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="dns-migration">
+      <span class="section-num">22</span>
+      <h2>DNS Migration to GitHub Pages</h2>
+
+      <p>
+        The <code>magnetmomentsco.us</code> domain has been fully migrated from Shopify's servers to GitHub Pages.
+        The site is now live at <a href="https://magnetmomentsco.us" target="_blank" rel="noopener">magnetmomentsco.us</a> — 
+        served by GitHub's global CDN with automatic HTTPS.
+      </p>
+
+      <h3>What was done</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Step</th><th>Action</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Removed custom domain from Shopify (so it doesn't conflict)</td>
+            <td>✅ Done</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Added <code>CNAME</code> file to repo pointing to <code>magnetmomentsco.us</code></td>
+            <td>✅ Done</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Updated DNS records at Namecheap — <code>A</code> records pointing to GitHub's IPs, <code>CNAME</code> for <code>www</code></td>
+            <td>✅ Done</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>GitHub Pages DNS check passed — domain verified</td>
+            <td>✅ Done</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>HTTPS enforced — Let's Encrypt certificate auto-provisioned by GitHub</td>
+            <td>✅ Done</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Added <code>magnetmomentsco.us</code> to Firebase Authorized Domains</td>
+            <td>✅ Done</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>DNS records</h3>
+      <div class="code-block">
+        <span class="label">Namecheap DNS settings</span>
+<span class="cm"># A records — GitHub Pages IPs</span>
+@ A <span class="num">185.199.108.153</span>
+@ A <span class="num">185.199.109.153</span>
+@ A <span class="num">185.199.110.153</span>
+@ A <span class="num">185.199.111.153</span>
+
+<span class="cm"># CNAME for www subdomain</span>
+www CNAME <span class="str">magnetmomentsco.github.io</span>
+      </div>
+
+      <h3>What this means</h3>
+      <div class="compare">
+        <div class="compare-card before">
+          <span class="label">Before (Shopify)</span>
+          <ul>
+            <li>DNS pointed to Shopify's servers</li>
+            <li>Shopify controlled the hosting</li>
+            <li>$39/month for the Basic plan</li>
+            <li>Limited control over page speed</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">After (GitHub Pages)</span>
+          <ul>
+            <li>DNS points to GitHub Pages CDN</li>
+            <li>We control every file served</li>
+            <li>$0/month hosting forever</li>
+            <li>Global CDN with 99.99% uptime</li>
+            <li>Automatic HTTPS via Let's Encrypt</li>
+            <li>Deploys in ~60 seconds on push</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        <code>magnetmomentsco.us</code> is now served from GitHub Pages with automatic HTTPS — $0/month hosting,
+        global CDN, and sub-minute deploys. Shopify still handles checkout and payments via the free Storefront API.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 23 — CI/CD PIPELINE v2                               -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="cicd-v2">
+      <span class="section-num">23</span>
+      <h2>CI/CD Pipeline v2 — Firebase &amp; Deploy</h2>
+
+      <p>
+        The CI/CD pipeline was significantly enhanced to support the new Firebase analytics system,
+        automatic product sync with built-in deployment, and proper concurrency management.
+      </p>
+
+      <h3>Two workflows, clean responsibilities</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Workflow</th><th>Triggers</th><th>What It Does</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><code>deploy-pages.yml</code></strong></td>
+            <td>Push to <code>main</code>, manual</td>
+            <td>Injects Firebase config → Deploys to GitHub Pages</td>
+          </tr>
+          <tr>
+            <td><strong><code>sync-products.yml</code></strong></td>
+            <td>Every 6 hours (cron), manual, Shopify webhook, push to sync script</td>
+            <td>Fetches products from Shopify → Generates PDPs → Commits → Injects Firebase → Deploys</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Why sync has its own deploy job</h3>
+      <div class="callout">
+        <div class="callout-title">🔧 Technical detail</div>
+        Pushes made by <code>GITHUB_TOKEN</code> (which is what the sync bot uses) do <strong>not</strong> trigger
+        other workflows. So when the sync bot commits and pushes updated product data, <code>deploy-pages.yml</code>
+        won't fire. To solve this, <code>sync-products.yml</code> has its own deploy job that runs when products changed.
+      </div>
+
+      <h3>Concurrency management</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Group</th><th>Used By</th><th>Behavior</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>shopify-sync</code></td>
+            <td><code>sync-products.yml</code> (sync job)</td>
+            <td>Cancel older sync if new one starts (cron overlap protection)</td>
+          </tr>
+          <tr>
+            <td><code>pages</code></td>
+            <td>Both deploy jobs</td>
+            <td>Queue — don't cancel (prevents mid-deploy interruption)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Firebase credential injection</h3>
+      <p>
+        Both workflows have an identical <strong>"Inject Firebase config"</strong> step that runs before deployment.
+        It replaces <code>__FIREBASE_*__</code> placeholders in <code>mm-tracker.js</code> and <code>admin/index.html</code>
+        with real values from 7 GitHub Secrets:
+      </p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Secret Name</th><th>Replaces</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>FIREBASE_API_KEY</code></td><td><code>__FIREBASE_API_KEY__</code></td></tr>
+          <tr><td><code>FIREBASE_AUTH_DOMAIN</code></td><td><code>__FIREBASE_AUTH_DOMAIN__</code></td></tr>
+          <tr><td><code>FIREBASE_DATABASE_URL</code></td><td><code>__FIREBASE_DATABASE_URL__</code></td></tr>
+          <tr><td><code>FIREBASE_PROJECT_ID</code></td><td><code>__FIREBASE_PROJECT_ID__</code></td></tr>
+          <tr><td><code>FIREBASE_STORAGE_BUCKET</code></td><td><code>__FIREBASE_STORAGE_BUCKET__</code></td></tr>
+          <tr><td><code>FIREBASE_MESSAGING_SENDER_ID</code></td><td><code>__FIREBASE_MESSAGING_SENDER_ID__</code></td></tr>
+          <tr><td><code>FIREBASE_APP_ID</code></td><td><code>__FIREBASE_APP_ID__</code></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Enhanced sync features</h3>
+      <div class="compare">
+        <div class="compare-card before">
+          <span class="label">Before (v1 — Section 14)</span>
+          <ul>
+            <li>Sync only — no deploy job</li>
+            <li>Relied on push-triggered <code>deploy-pages.yml</code></li>
+            <li>Duplicate deploys (both workflows fired)</li>
+            <li>No Firebase config injection</li>
+            <li>Custom products detected by title matching</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">After (v2)</span>
+          <ul>
+            <li>Sync + deploy in one workflow</li>
+            <li><code>GITHUB_TOKEN</code> push awareness — self-deploys when needed</li>
+            <li>Concurrency groups prevent conflicts</li>
+            <li>Firebase credentials injected at deploy time</li>
+            <li>Custom products detected by <code>"Custom Photo Magnets"</code> Shopify tag</li>
+            <li>Stale PDP cleanup — removes pages for deleted products</li>
+            <li>Gear icon + tracker auto-included in generated pages</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The full deployment flow</h3>
+      <div class="diagram">
+        <p style="font-weight:600; margin-bottom:0.75rem; font-size:0.9rem;">When you push code manually:</p>
+        <div class="diagram-flow">
+          <div class="diagram-box">git push</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">deploy-pages.yml</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Inject Firebase</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Deploy to Pages</div>
+        </div>
+        <br>
+        <p style="font-weight:600; margin:0.5rem 0 0.75rem; font-size:0.9rem;">When Shopify sync runs (every 6 hours):</p>
+        <div class="diagram-flow">
+          <div class="diagram-box">Cron / manual</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Sync from Shopify</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Commit &amp; push</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Inject Firebase</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Deploy to Pages</div>
+        </div>
+        <div class="diagram-caption">Both paths end with a clean deploy that includes Firebase credentials. No duplicate runs, no conflicts.</div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        The CI/CD pipeline now handles everything automatically: Shopify product sync every 6 hours,
+        Firebase credential injection at deploy time, proper concurrency, stale page cleanup,
+        and tag-based custom product detection. Zero manual steps needed.
+      </div>
     </section>
 
   </main>
