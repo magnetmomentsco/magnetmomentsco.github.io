@@ -116,6 +116,24 @@
     .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
     .topbar-date { color: var(--text-muted); font-size: 0.85rem; }
+    .date-picker-wrap {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .date-picker-wrap label { color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3px; }
+    .date-picker-wrap input[type="date"] {
+      background: var(--bg); color: var(--cream); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 12px; font-size: 0.85rem; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .date-picker-wrap input[type="date"]:hover { border-color: var(--pink); }
+    .date-picker-wrap input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.7); cursor: pointer; }
+    .date-picker-wrap .date-today-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+      padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.78rem;
+      transition: all 0.2s;
+    }
+    .date-picker-wrap .date-today-btn:hover { border-color: var(--pink); color: var(--pink); }
+    .date-picker-wrap .date-today-btn.active { border-color: var(--green); color: var(--green); }
     .btn-logout {
       background: transparent; border: 1px solid var(--border); color: var(--text-muted);
       padding: 6px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;
@@ -531,6 +549,11 @@
         <div class="live-dot"></div>
         <span id="live-count">0 visitors online</span>
       </div>
+      <div class="date-picker-wrap">
+        <label>📅 Viewing:</label>
+        <input type="date" id="global-date" onchange="onGlobalDateChange()">
+        <button class="date-today-btn active" id="btn-today" onclick="jumpToToday()">Today</button>
+      </div>
       <div class="topbar-date" id="topbar-date"></div>
       <button class="btn-logout" id="btn-logout">Logout</button>
     </div>
@@ -548,7 +571,7 @@
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-icon">👁</div>
-        <div class="stat-label">Today's Visitors</div>
+        <div class="stat-label" id="stat-visitors-label">Today's Visitors</div>
         <div class="stat-value" id="stat-visitors">—</div>
         <div class="stat-sub" id="stat-visitors-sub">Loading…</div>
       </div>
@@ -639,6 +662,11 @@
       </div>
       <div class="section-body">
         <div class="filter-bar">
+          <select id="heatmap-date-select" onchange="refreshHeatmapPages()">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="7">Last 7 Days</option>
+          </select>
           <select id="heatmap-page-select"><option value="">Select a page…</option></select>
           <button class="btn btn-sm btn-secondary" onclick="loadClickHeatmap()">Load</button>
         </div>
@@ -865,10 +893,6 @@
       </div>
       <div class="section-body">
         <div class="filter-bar">
-          <select id="session-date-select" onchange="renderSessions()">
-            <option value="today">Today</option>
-            <option value="yesterday">Yesterday</option>
-          </select>
           <select id="session-sort" onchange="renderSessions()">
             <option value="duration">Sort by Duration</option>
             <option value="pages">Sort by Pages</option>
@@ -1156,6 +1180,70 @@ function getDateOffset(daysAgo) {
     String(d.getDate()).padStart(2, '0');
 }
 
+/** Returns the date selected in the global date picker, or today if not set. */
+function getSelectedDate() {
+  const picker = document.getElementById('global-date');
+  if (picker && picker.value) return picker.value;
+  return getToday();
+}
+
+function isViewingToday() {
+  return getSelectedDate() === getToday();
+}
+
+function initDatePicker() {
+  const picker = document.getElementById('global-date');
+  if (picker) {
+    picker.value = getToday();
+    picker.max = getToday();
+  }
+}
+
+function jumpToToday() {
+  const picker = document.getElementById('global-date');
+  if (picker) {
+    picker.value = getToday();
+    onGlobalDateChange();
+  }
+}
+window.jumpToToday = jumpToToday;
+
+function onGlobalDateChange() {
+  const isToday = isViewingToday();
+  const btn = document.getElementById('btn-today');
+  if (btn) {
+    btn.classList.toggle('active', isToday);
+  }
+  // Update visitors label
+  const label = document.getElementById('stat-visitors-label');
+  if (label) {
+    label.textContent = isToday ? "Today's Visitors" : 'Visitors on ' + getSelectedDate();
+  }
+  // Re-render all date-dependent panels
+  refreshAllPanels();
+}
+window.onGlobalDateChange = onGlobalDateChange;
+
+async function refreshAllPanels() {
+  const renderers = [
+    renderQuickStats(),
+    renderTrafficChart(),
+    renderTrafficSources(),
+    renderScrollDepth(),
+    renderClickHeatmapPageList(),
+    renderFunnel(),
+    renderNewsletter(),
+    renderCartAnalytics(),
+    renderPerformance(),
+    renderErrors(),
+    renderSocialProofPreview(),
+    renderSessions(),
+    renderABTesting(),
+    calculateRevenue()
+  ];
+  await Promise.allSettled(renderers);
+}
+
 function formatNumber(n) {
   if (n === null || n === undefined) return '—';
   return Number(n).toLocaleString('en-US');
@@ -1290,7 +1378,7 @@ async function fetchProducts() {
 // 4a. Today's visitors — count distinct sessions from /pageViews/{today}/
 async function fetchTodaysVisitors() {
   if (!firebaseReady) return { total: 0, sessions: new Set() };
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/pageViews/' + today).once('value');
   const data = snap.val();
   if (!data) return { total: 0, sessions: new Set() };
@@ -1342,7 +1430,7 @@ async function fetchTrafficHistory(days = 30) {
 // 4d. Top pages today
 async function fetchTopPagesToday() {
   if (!firebaseReady) return [];
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/pageViews/' + today).once('value');
   const data = snap.val();
   if (!data) return [];
@@ -1358,7 +1446,7 @@ async function fetchTopPagesToday() {
 // 4e. Top referrers today
 async function fetchTopReferrersByDay() {
   if (!firebaseReady) return [];
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/pageViews/' + today).once('value');
   const data = snap.val();
   if (!data) return [];
@@ -1381,7 +1469,7 @@ async function fetchTopReferrersByDay() {
 // 4f. Traffic sources today
 async function fetchTrafficSources() {
   if (!firebaseReady) return {};
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/pageViews/' + today).once('value');
   const data = snap.val();
   if (!data) return {};
@@ -1400,35 +1488,41 @@ async function fetchTrafficSources() {
 // 4g. Scroll depth today
 async function fetchScrollDepth() {
   if (!firebaseReady) return {};
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/scrollDepth/' + today).once('value');
   return snap.val() || {};
 }
 
-// 4h. Clicks for a specific page
-async function fetchClicks(pageSlug) {
+// 4h. Clicks for a specific page (supports multiple dates)
+async function fetchClicks(pageSlug, dates) {
   if (!firebaseReady) return [];
-  const today = getToday();
-  const snap = await fbRef('/clicks/' + today + '/' + pageSlug).once('value');
-  const data = snap.val();
-  if (!data) return [];
-  return Object.values(data);
+  if (!dates) dates = [getSelectedDate()];
+  const all = [];
+  await Promise.all(dates.map(async (d) => {
+    const snap = await fbRef('/clicks/' + d + '/' + pageSlug).once('value');
+    const data = snap.val();
+    if (data) all.push(...Object.values(data));
+  }));
+  return all;
 }
 
-// 4i. Rage clicks for a specific page
-async function fetchRageClicks(pageSlug) {
+// 4i. Rage clicks for a specific page (supports multiple dates)
+async function fetchRageClicks(pageSlug, dates) {
   if (!firebaseReady) return [];
-  const today = getToday();
-  const snap = await fbRef('/rageClicks/' + today + '/' + pageSlug).once('value');
-  const data = snap.val();
-  if (!data) return [];
-  return Object.values(data);
+  if (!dates) dates = [getSelectedDate()];
+  const all = [];
+  await Promise.all(dates.map(async (d) => {
+    const snap = await fbRef('/rageClicks/' + d + '/' + pageSlug).once('value');
+    const data = snap.val();
+    if (data) all.push(...Object.values(data));
+  }));
+  return all;
 }
 
 // 4j. Funnel data today
 async function fetchFunnelData() {
   if (!firebaseReady) return {};
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/funnel/' + today).once('value');
   return snap.val() || {};
 }
@@ -1453,7 +1547,7 @@ async function fetchNewsletterData(days = 14) {
 // 4l. Newsletter dismiss details today
 async function fetchDismissDetails() {
   if (!firebaseReady) return [];
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/newsletter/' + today + '/dismiss_details').once('value');
   const data = snap.val();
   if (!data) return [];
@@ -1470,7 +1564,7 @@ async function fetchIntentData() {
 // 4n. Cart data today
 async function fetchCartData() {
   if (!firebaseReady) return [];
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/cart/' + today).once('value');
   const data = snap.val();
   if (!data) return [];
@@ -1480,7 +1574,7 @@ async function fetchCartData() {
 // 4o. Performance data today
 async function fetchPerformanceData() {
   if (!firebaseReady) return {};
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/performance/' + today).once('value');
   return snap.val() || {};
 }
@@ -1488,7 +1582,7 @@ async function fetchPerformanceData() {
 // 4p. Error log today
 async function fetchErrors() {
   if (!firebaseReady) return [];
-  const today = getToday();
+  const today = getSelectedDate();
   const snap = await fbRef('/errors/' + today).once('value');
   const data = snap.val();
   if (!data) return [];
@@ -1757,29 +1851,62 @@ async function renderScrollDepth() {
 }
 
 // ─── 5g. Click Heatmap ───
+function getHeatmapDates() {
+  const sel = document.getElementById('heatmap-date-select').value;
+  const baseDate = getSelectedDate();
+  if (sel === 'yesterday') {
+    const d = new Date(baseDate + 'T12:00:00');
+    d.setDate(d.getDate() - 1);
+    return [d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')];
+  }
+  if (sel === '7') {
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(baseDate + 'T12:00:00');
+      d.setDate(d.getDate() - i);
+      dates.push(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'));
+    }
+    return dates;
+  }
+  return [baseDate];
+}
+
 async function renderClickHeatmapPageList() {
   if (!firebaseReady) return;
-  const today = getToday();
-  const snap = await fbRef('/clicks/' + today).once('value');
-  const data = snap.val();
-  if (!data) return;
+  const dates = getHeatmapDates();
+  const allSlugs = new Set();
+
+  await Promise.all(dates.map(async (d) => {
+    const snap = await fbRef('/clicks/' + d).once('value');
+    const data = snap.val();
+    if (data) Object.keys(data).forEach(s => allSlugs.add(s));
+  }));
 
   const select = document.getElementById('heatmap-page-select');
-  Object.keys(data).forEach(slug => {
+  const current = select.value;
+  select.innerHTML = '<option value="">Select a page…</option>';
+  Array.from(allSlugs).sort().forEach(slug => {
     const opt = document.createElement('option');
     opt.value = slug;
     opt.textContent = slugToTitle(slug);
+    if (slug === current) opt.selected = true;
     select.appendChild(opt);
   });
 }
 
+async function refreshHeatmapPages() {
+  await renderClickHeatmapPageList();
+}
+window.refreshHeatmapPages = refreshHeatmapPages;
+
 async function loadClickHeatmap() {
   const slug = document.getElementById('heatmap-page-select').value;
   if (!slug) return;
+  const dates = getHeatmapDates();
 
   const [clicks, rageClicks] = await Promise.all([
-    fetchClicks(slug),
-    fetchRageClicks(slug)
+    fetchClicks(slug, dates),
+    fetchRageClicks(slug, dates)
   ]);
 
   // Scatter plot of clicks
@@ -1895,7 +2022,7 @@ async function renderNewsletter() {
   const nlData = await fetchNewsletterData(14);
   const dismissDetails = await fetchDismissDetails();
 
-  const today = getToday();
+  const today = getSelectedDate();
   const todayData = nlData[today] || {};
 
   // Stats cards
@@ -2326,7 +2453,7 @@ async function renderSocialProofPreview() {
   const productViewCache = {};
   if (firebaseReady) {
     try {
-      const today = getToday();
+      const today = getSelectedDate();
       const snap = await fbRef('/productViewCounts/' + today).once('value');
       const counts = snap.val() || {};
       Object.entries(counts).forEach(([slug, count]) => {
@@ -2606,9 +2733,8 @@ async function fetchSessions(dateStr) {
 async function renderSessions() {
   const container = document.getElementById('sessions-content');
   const statsEl = document.getElementById('sessions-stats');
-  const dateSel = document.getElementById('session-date-select').value;
   const sortBy = document.getElementById('session-sort').value;
-  const dateStr = dateSel === 'yesterday' ? getDateOffset(1) : getToday();
+  const dateStr = getSelectedDate();
 
   const data = await fetchSessions(dateStr);
   const sessions = Object.entries(data).map(([id, s]) => ({ id, ...s }));
@@ -2910,7 +3036,7 @@ function renderQuickActions() {
           return;
         }
         try {
-          const today = getToday();
+          const today = getSelectedDate();
           const snap = await fbRef('/pageViews/' + today).once('value');
           const data = snap.val() || {};
           let csv = 'Page,Timestamp,Referrer,Source,Device\n';
@@ -3209,6 +3335,7 @@ window.toggleSection = toggleSection;
    ────────────────────────────────────────────────────────────────────────── */
 
 async function initDashboard() {
+  initDatePicker();
   renderTopBar();
   renderQuickLinks();
   renderQuickActions();
