@@ -53,7 +53,7 @@
     a { color: var(--pink); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ─── Password Overlay ─── */
+    /* ─── Auth Overlay ─── */
     #auth-overlay {
       position: fixed; inset: 0; z-index: 9999;
       background: rgba(10, 10, 25, 0.97);
@@ -73,22 +73,26 @@
     .auth-card .logo { font-size: 48px; margin-bottom: 8px; }
     .auth-card h2 { color: var(--cream); margin-bottom: 4px; font-size: 1.5rem; }
     .auth-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-    .auth-card input {
-      width: 100%; padding: 14px 18px;
-      background: var(--bg); color: var(--text);
-      border: 1px solid var(--border); border-radius: 8px;
-      font-size: 1rem; outline: none; transition: border-color 0.2s;
-    }
-    .auth-card input:focus { border-color: var(--pink); }
-    .auth-card input::placeholder { color: var(--text-dim); }
-    .auth-card button {
-      margin-top: 16px; width: 100%; padding: 14px;
-      background: var(--pink); color: #fff; border: none;
+    .btn-google {
+      display: inline-flex; align-items: center; gap: 12px;
+      width: 100%; padding: 14px 20px;
+      background: #fff; color: #333; border: none;
       border-radius: 8px; font-size: 1rem; font-weight: 600;
-      cursor: pointer; transition: background 0.2s;
+      cursor: pointer; transition: box-shadow 0.2s, transform 0.1s;
+      justify-content: center;
     }
-    .auth-card button:hover { background: #b06a77; }
-    .auth-error { color: var(--red); font-size: 0.85rem; margin-top: 12px; display: none; }
+    .btn-google:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.3); transform: translateY(-1px); }
+    .btn-google:active { transform: translateY(0); }
+    .btn-google svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .auth-error { color: var(--red); font-size: 0.85rem; margin-top: 16px; display: none; }
+    .auth-loading { color: var(--text-muted); font-size: 0.9rem; margin-top: 16px; display: none; }
+    .auth-user {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--text-muted); font-size: 0.85rem;
+    }
+    .auth-user img {
+      width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border);
+    }
 
     /* ─── Top Bar ─── */
     .topbar {
@@ -374,18 +378,19 @@
 <body>
 
 <!-- ════════════════════════════════════════════════════════════════════════ -->
-<!-- PASSWORD OVERLAY                                                       -->
+<!-- GOOGLE AUTH OVERLAY                                                    -->
 <!-- ════════════════════════════════════════════════════════════════════════ -->
 <div id="auth-overlay">
   <div class="auth-card">
     <div class="logo">⚙️</div>
     <h2>Command Center</h2>
     <p>Magnet Moments Co. — Admin Dashboard</p>
-    <form id="auth-form" autocomplete="off">
-      <input type="password" id="auth-password" placeholder="Enter admin password" autofocus>
-      <button type="submit">Unlock Dashboard</button>
-    </form>
-    <div class="auth-error" id="auth-error">Incorrect password. Please try again.</div>
+    <button id="btn-google-signin" class="btn-google">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Sign in with Google
+    </button>
+    <div class="auth-loading" id="auth-loading"><span class="spinner"></span> Signing in...</div>
+    <div class="auth-error" id="auth-error"></div>
   </div>
 </div>
 
@@ -737,6 +742,7 @@
 <!-- FIREBASE SDK (compat v9)                                               -->
 <!-- ════════════════════════════════════════════════════════════════════════ -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
@@ -747,56 +753,89 @@
 'use strict';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   1. PASSWORD AUTHENTICATION
+   1. GOOGLE AUTHENTICATION
    ────────────────────────────────────────────────────────────────────────── */
 
-const PASS_HASH = 'f4e755d77af59bdff88ec2476b26acaceca7aa52c8cc94b7ce78ccf5befb650b';
+/* Whitelisted admin emails — only these can access the dashboard */
+const ADMIN_EMAILS = [
+  'alyssa.magnetmomentsco@gmail.com',
+  'ajayadesign@gmail.com'
+];
 
-async function sha256(message) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+let currentUser = null;
+
+function isAdminEmail(email) {
+  return ADMIN_EMAILS.includes((email || '').toLowerCase());
 }
 
-function isAuthenticated() {
-  return sessionStorage.getItem('mm_admin_auth') === 'true';
-}
-
-function showApp() {
+function showApp(user) {
+  currentUser = user;
   document.getElementById('auth-overlay').classList.add('hidden');
   document.getElementById('app').style.display = '';
+
+  // Update logout button to show user info
+  const logoutBtn = document.getElementById('btn-logout');
+  if (user && user.photoURL) {
+    logoutBtn.innerHTML = '<span class="auth-user"><img src="' + user.photoURL + '" alt=""> Sign Out</span>';
+  } else {
+    logoutBtn.textContent = 'Sign Out';
+  }
+
   initDashboard();
 }
 
-function logout() {
-  sessionStorage.removeItem('mm_admin_auth');
-  location.reload();
+function showError(msg) {
+  const errEl = document.getElementById('auth-error');
+  errEl.textContent = msg;
+  errEl.style.display = 'block';
+  document.getElementById('auth-loading').style.display = 'none';
+  document.getElementById('btn-google-signin').style.display = '';
+  setTimeout(() => { errEl.style.display = 'none'; }, 5000);
 }
 
-document.getElementById('auth-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const pw = document.getElementById('auth-password').value;
-  const hash = await sha256(pw);
-  if (hash === PASS_HASH) {
-    sessionStorage.setItem('mm_admin_auth', 'true');
-    showApp();
+function logout() {
+  if (typeof firebase !== 'undefined' && firebase.auth) {
+    firebase.auth().signOut().then(() => location.reload());
   } else {
-    const errEl = document.getElementById('auth-error');
-    errEl.style.display = 'block';
-    document.getElementById('auth-password').value = '';
-    document.getElementById('auth-password').focus();
-    setTimeout(() => { errEl.style.display = 'none'; }, 3000);
+    location.reload();
   }
+}
+
+/* Google sign-in click handler */
+document.getElementById('btn-google-signin').addEventListener('click', function() {
+  if (typeof firebase === 'undefined' || !firebase.auth) {
+    showError('Firebase not loaded. Please refresh and try again.');
+    return;
+  }
+
+  document.getElementById('btn-google-signin').style.display = 'none';
+  document.getElementById('auth-loading').style.display = 'block';
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
+
+  firebase.auth().signInWithPopup(provider)
+    .then(function(result) {
+      const email = result.user.email;
+      if (!isAdminEmail(email)) {
+        // Not authorized — sign them out immediately
+        firebase.auth().signOut();
+        showError('Access denied. ' + email + ' is not an authorized admin.');
+      }
+      // Auth state listener below will handle showing the app
+    })
+    .catch(function(err) {
+      console.warn('Google sign-in error:', err);
+      if (err.code === 'auth/popup-closed-by-user') {
+        document.getElementById('auth-loading').style.display = 'none';
+        document.getElementById('btn-google-signin').style.display = '';
+      } else {
+        showError(err.message || 'Sign-in failed. Please try again.');
+      }
+    });
 });
 
 document.getElementById('btn-logout').addEventListener('click', logout);
-
-// Check session on load
-if (isAuthenticated()) {
-  showApp();
-}
 
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -804,13 +843,13 @@ if (isAuthenticated()) {
    ────────────────────────────────────────────────────────────────────────── */
 
 const FIREBASE_CONFIG = {
-  apiKey: "FIREBASE_API_KEY",
-  authDomain: "magnetmoments-analytics.firebaseapp.com",
-  databaseURL: "https://magnetmoments-analytics-default-rtdb.firebaseio.com",
-  projectId: "magnetmoments-analytics",
-  storageBucket: "magnetmoments-analytics.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "1:000000000000:web:0000000000000000000000"
+  apiKey: "__FIREBASE_API_KEY__",
+  authDomain: "__FIREBASE_AUTH_DOMAIN__",
+  databaseURL: "__FIREBASE_DATABASE_URL__",
+  projectId: "__FIREBASE_PROJECT_ID__",
+  storageBucket: "__FIREBASE_STORAGE_BUCKET__",
+  messagingSenderId: "__FIREBASE_MESSAGING_SENDER_ID__",
+  appId: "__FIREBASE_APP_ID__"
 };
 
 let db = null;
@@ -822,17 +861,34 @@ function initFirebase() {
       showFirebaseWarning();
       return false;
     }
+    // Check if actually configured (placeholder token check)
+    if (FIREBASE_CONFIG.apiKey.indexOf('__FIREBASE') === 0) {
+      showFirebaseWarning();
+      return false;
+    }
     if (!firebase.apps.length) {
       firebase.initializeApp(FIREBASE_CONFIG);
     }
     db = firebase.database();
     firebaseReady = true;
 
-    // Check if actually configured (dummy key check)
-    if (FIREBASE_CONFIG.apiKey === 'FIREBASE_API_KEY') {
-      showFirebaseWarning();
-      return false;
-    }
+    // Set up auth state listener
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user && isAdminEmail(user.email)) {
+        showApp(user);
+      } else if (user) {
+        // Signed in but not authorized
+        firebase.auth().signOut();
+        showError('Access denied. ' + user.email + ' is not an authorized admin.');
+      } else {
+        // No user signed in — show the auth overlay
+        document.getElementById('auth-overlay').classList.remove('hidden');
+        document.getElementById('app').style.display = 'none';
+        document.getElementById('btn-google-signin').style.display = '';
+        document.getElementById('auth-loading').style.display = 'none';
+      }
+    });
+
     return true;
   } catch (err) {
     console.warn('Firebase init failed:', err);
@@ -2315,7 +2371,8 @@ async function initDashboard() {
   renderQuickLinks();
   loadSocialProofConfig();
 
-  const fbOk = initFirebase();
+  // Firebase is already initialized before auth flow
+  const fbOk = firebaseReady;
 
   // Fire all renderers concurrently
   const renderers = [
@@ -2347,6 +2404,9 @@ async function initDashboard() {
   // Settle all renderers (don't let one failure break others)
   await Promise.allSettled(renderers);
 }
+
+// Initialize Firebase on load — auth state listener handles the rest
+initFirebase();
 
 })();
 </script>

@@ -131,8 +131,16 @@ def is_custom_product(product):
 
     These are the products where the customer uploads their own photos,
     so they must complete the order on Shopify, not via headless cart.
-    Detected by title containing 'Custom Photo' (e.g., '2x2 Custom Photo Magnets').
+
+    Detection (in priority order):
+      1. Tag "Custom Photo Magnets" — Alyssa adds this in Shopify Admin
+      2. Title contains "custom photo" (legacy fallback)
     """
+    # Check tags first — this is the recommended approach
+    tags_lower = [t.lower() for t in product.get('tags', [])]
+    if 'custom photo magnets' in tags_lower:
+        return True
+    # Fallback: check title
     title_lower = product.get('title', '').lower()
     return 'custom photo' in title_lower
 
@@ -765,10 +773,14 @@ def generate_product_pages(products):
     shop_dir = os.path.join(REPO_ROOT, 'shop')
     generated = 0
 
+    # Collect current product handles
+    current_handles = set()
+
     for product in products:
         handle = product.get('handle', '')
         if not handle:
             continue
+        current_handles.add(handle)
 
         page_dir = os.path.join(shop_dir, handle)
         page_file = os.path.join(page_dir, 'index.html')
@@ -781,7 +793,26 @@ def generate_product_pages(products):
         generated += 1
         print(f'  ✓ /shop/{handle}/index.html')
 
+    # Clean up stale PDP pages for products no longer in Shopify
+    removed = 0
+    for entry in os.listdir(shop_dir):
+        entry_path = os.path.join(shop_dir, entry)
+        # Only consider directories that contain an index.html (PDP pages)
+        # Skip the shop index.html itself and non-directory entries
+        if not os.path.isdir(entry_path):
+            continue
+        if entry in current_handles:
+            continue
+        pdp_file = os.path.join(entry_path, 'index.html')
+        if os.path.exists(pdp_file):
+            import shutil
+            shutil.rmtree(entry_path)
+            removed += 1
+            print(f'  🗑 Removed stale /shop/{entry}/')
+
     print(f'  Generated {generated} product pages')
+    if removed:
+        print(f'  Cleaned up {removed} stale product page(s)')
     return generated
 
 

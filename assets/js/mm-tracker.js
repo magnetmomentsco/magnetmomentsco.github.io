@@ -17,13 +17,13 @@
   /* ──────────────────────────── 0. CONSTANTS ──────────────────────────── */
 
   var FIREBASE_CONFIG = {
-    apiKey: 'FIREBASE_API_KEY',
-    authDomain: 'magnetmoments-analytics.firebaseapp.com',
-    databaseURL: 'https://magnetmoments-analytics-default-rtdb.firebaseio.com',
-    projectId: 'magnetmoments-analytics',
-    storageBucket: 'magnetmoments-analytics.appspot.com',
-    messagingSenderId: '000000000000',
-    appId: '1:000000000000:web:0000000000000000000000'
+    apiKey: '__FIREBASE_API_KEY__',
+    authDomain: '__FIREBASE_AUTH_DOMAIN__',
+    databaseURL: '__FIREBASE_DATABASE_URL__',
+    projectId: '__FIREBASE_PROJECT_ID__',
+    storageBucket: '__FIREBASE_STORAGE_BUCKET__',
+    messagingSenderId: '__FIREBASE_MESSAGING_SENDER_ID__',
+    appId: '__FIREBASE_APP_ID__'
   };
 
   var FB_SDK_APP   = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js';
