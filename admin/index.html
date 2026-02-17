@@ -373,6 +373,128 @@
     .text-muted { color: var(--text-muted); }
     .flex-between { display: flex; align-items: center; justify-content: space-between; }
     .gap-12 { gap: 12px; }
+
+    /* ─── Session Recordings ─── */
+    .session-list { display: flex; flex-direction: column; gap: 10px; }
+    .session-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 20px; display: flex; align-items: center; gap: 16px;
+      transition: border-color 0.2s;
+    }
+    .session-card:hover { border-color: var(--pink); }
+    .session-meta { flex: 1; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .session-meta .sm-item { font-size: 0.85rem; }
+    .session-meta .sm-label { color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3px; }
+    .session-meta .sm-val { color: var(--cream); font-weight: 600; }
+    .session-timeline { margin-top: 12px; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+    .session-timeline .tl-event { display: flex; gap: 10px; padding: 4px 0; font-size: 0.82rem; color: var(--text-muted); }
+    .session-timeline .tl-time { color: var(--text-dim); flex-shrink: 0; width: 60px; }
+
+    /* ─── A/B Testing ─── */
+    .ab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+    .ab-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px; transition: border-color 0.2s;
+    }
+    .ab-card:hover { border-color: var(--gold); }
+    .ab-name { font-size: 1rem; font-weight: 600; color: var(--cream); margin-bottom: 12px; }
+    .ab-variants { display: flex; gap: 12px; }
+    .ab-variant {
+      flex: 1; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px; text-align: center;
+    }
+    .ab-variant-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .ab-variant-value { font-size: 1.5rem; font-weight: 700; font-family: 'Inter', sans-serif; margin: 4px 0; }
+    .ab-variant-value.a { color: var(--green); }
+    .ab-variant-value.b { color: var(--pink); }
+    .ab-winner { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-top: 8px; }
+    .ab-input-row { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+    .ab-input-row input[type="text"] {
+      background: var(--bg); color: var(--text); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 14px; font-size: 0.85rem; flex: 1; min-width: 200px;
+    }
+    .ab-input-row input::placeholder { color: var(--text-dim); }
+
+    /* ─── Revenue Estimator ─── */
+    .rev-inputs {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; margin-bottom: 20px;
+    }
+    .rev-input-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+    }
+    .rev-input-card label { display: block; font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+    .rev-input-card input {
+      width: 100%; background: var(--bg-card); color: var(--cream); border: 1px solid var(--border);
+      border-radius: 6px; padding: 10px 14px; font-size: 1.1rem; font-weight: 600;
+      font-family: 'Inter', sans-serif;
+    }
+    .rev-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .rev-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px; text-align: center;
+    }
+    .rev-card .rev-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; }
+    .rev-card .rev-value { font-size: 1.8rem; font-weight: 700; font-family: 'Inter', sans-serif; margin: 6px 0; }
+    .rev-card .rev-sub { font-size: 0.78rem; color: var(--text-dim); }
+
+    /* ─── Quick Actions ─── */
+    .actions-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .action-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s;
+    }
+    .action-card:hover { border-color: var(--pink); transform: translateY(-2px); }
+    .action-card.running { border-color: var(--gold); opacity: 0.7; pointer-events: none; }
+    .action-card .action-icon { font-size: 2rem; margin-bottom: 8px; }
+    .action-card .action-title { font-size: 0.9rem; font-weight: 600; color: var(--cream); }
+    .action-card .action-desc { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; }
+    .action-card .action-status { font-size: 0.78rem; margin-top: 8px; font-weight: 600; }
+    .action-card .action-status.success { color: var(--green); }
+    .action-card .action-status.error { color: var(--red); }
+
+    /* ─── Storage Manager ─── */
+    .storage-gauge-wrap {
+      display: flex; flex-direction: column; align-items: center; margin-bottom: 24px;
+    }
+    .storage-gauge {
+      width: 100%; max-width: 500px; height: 32px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      position: relative;
+    }
+    .storage-gauge-fill {
+      height: 100%; border-radius: 16px; transition: width 0.8s ease;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 12px; font-size: 0.78rem; font-weight: 600; color: #fff;
+      min-width: 40px;
+    }
+    .storage-gauge-fill.green { background: linear-gradient(90deg, #7A9D54, #5a8a30); }
+    .storage-gauge-fill.yellow { background: linear-gradient(90deg, #D4A574, #c08530); }
+    .storage-gauge-fill.red { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+    .storage-labels { display: flex; justify-content: space-between; width: 100%; max-width: 500px; margin-top: 6px; font-size: 0.78rem; color: var(--text-dim); }
+    .storage-breakdown { margin-top: 20px; }
+    .storage-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid rgba(30, 58, 95, 0.5);
+    }
+    .storage-row:last-child { border-bottom: none; }
+    .storage-row .sr-path { font-size: 0.9rem; font-weight: 500; }
+    .storage-row .sr-size { font-size: 0.85rem; color: var(--text-muted); font-family: 'Inter', monospace; }
+    .storage-row .sr-actions { display: flex; gap: 6px; }
+    .btn-danger { background: rgba(231,76,60,0.15); color: var(--red); border: 1px solid rgba(231,76,60,0.3); }
+    .btn-danger:hover { background: rgba(231,76,60,0.3); }
+    .autoprune-bar {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      margin-top: 16px; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    }
+    .autoprune-bar label { font-size: 0.85rem; color: var(--text-muted); }
+    .autoprune-bar select, .autoprune-bar input[type="number"] {
+      background: var(--bg-card); color: var(--text); border: 1px solid var(--border);
+      border-radius: 6px; padding: 6px 10px; font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
@@ -732,6 +854,114 @@
           <input type="text" id="inv-search" placeholder="Search products…" oninput="renderInventory()">
         </div>
         <div id="inventory-content" class="table-wrap"><div class="loading">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Session Recordings ═══ -->
+    <div class="section collapsed" id="section-sessions">
+      <div class="section-header" onclick="toggleSection('section-sessions')">
+        <h3>🎥 Session Recordings</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="filter-bar">
+          <select id="session-date-select" onchange="renderSessions()">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+          </select>
+          <select id="session-sort" onchange="renderSessions()">
+            <option value="duration">Sort by Duration</option>
+            <option value="pages">Sort by Pages</option>
+            <option value="recent">Most Recent</option>
+          </select>
+        </div>
+        <div id="sessions-stats" class="nl-stats" style="margin-bottom:16px;"><div class="loading" style="grid-column:1/-1;">Loading…</div></div>
+        <div id="sessions-content"><div class="loading">Loading session data…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: A/B Testing ═══ -->
+    <div class="section collapsed" id="section-ab-testing">
+      <div class="section-header" onclick="toggleSection('section-ab-testing')">
+        <h3>🧪 A/B Testing</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="ab-input-row">
+          <input type="text" id="ab-new-name" placeholder="Enter experiment name (e.g. hero-cta-color)…">
+          <button class="btn btn-primary btn-sm" onclick="addExperiment()">+ Add Experiment</button>
+        </div>
+        <p style="color:var(--text-dim);font-size:0.78rem;margin-bottom:16px;">Active experiments are stored in localStorage. The tracker auto-assigns visitors to A/B variants using consistent hashing.</p>
+        <div id="ab-active-list" style="margin-bottom:20px;"></div>
+        <h4 style="font-size:0.95rem;color:var(--text-muted);margin:20px 0 10px;">Experiment Results (from Firebase)</h4>
+        <div id="ab-results"><div class="loading">Loading experiment data…</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Revenue Estimator ═══ -->
+    <div class="section collapsed" id="section-revenue">
+      <div class="section-header" onclick="toggleSection('section-revenue')">
+        <h3>💰 Revenue Estimator</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:16px;">Estimate potential revenue based on your traffic data and business metrics.</p>
+        <div class="rev-inputs">
+          <div class="rev-input-card">
+            <label>Conversion Rate (%)</label>
+            <input type="number" id="rev-conv-rate" value="2.5" min="0" max="100" step="0.1" oninput="calculateRevenue()">
+          </div>
+          <div class="rev-input-card">
+            <label>Average Order Value ($)</label>
+            <input type="number" id="rev-aov" value="35" min="0" step="1" oninput="calculateRevenue()">
+          </div>
+          <div class="rev-input-card">
+            <label>Repeat Customer Rate (%)</label>
+            <input type="number" id="rev-repeat" value="15" min="0" max="100" step="1" oninput="calculateRevenue()">
+          </div>
+        </div>
+        <div class="rev-results" id="rev-results"><div class="loading" style="grid-column:1/-1;">Loading traffic data…</div></div>
+        <div class="chart-container mt-16"><canvas id="chart-revenue"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Quick Actions ═══ -->
+    <div class="section" id="section-actions">
+      <div class="section-header open" onclick="toggleSection('section-actions')">
+        <h3>⚡ Quick Actions</h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="actions-grid" id="actions-grid"></div>
+        <div id="action-log" style="margin-top:16px;font-size:0.82rem;color:var(--text-dim);max-height:120px;overflow-y:auto;"></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION: Database Storage Manager ═══ -->
+    <div class="section" id="section-storage">
+      <div class="section-header open" onclick="toggleSection('section-storage')">
+        <h3>💾 Database Storage Manager <span class="badge" id="storage-badge" style="display:none;">!</span></h3>
+        <span class="section-toggle">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="storage-gauge-wrap">
+          <div class="storage-gauge"><div class="storage-gauge-fill green" id="storage-fill" style="width:0%;">0%</div></div>
+          <div class="storage-labels"><span>0 MB</span><span id="storage-total">— / 1,024 MB</span><span>1,024 MB</span></div>
+        </div>
+        <div id="storage-alert" style="display:none;" class="firebase-warning" role="alert"></div>
+        <h4 style="font-size:0.95rem;color:var(--text-muted);margin-bottom:12px;">Data Breakdown by Path</h4>
+        <div id="storage-breakdown"><div class="loading">Estimating storage usage…</div></div>
+        <div class="autoprune-bar">
+          <label>🔄 Auto-Prune: Delete data older than</label>
+          <input type="number" id="prune-days" value="30" min="1" max="365" style="width:70px;">
+          <label>days</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="prune-enabled" onchange="saveAutoprune()">
+            <span class="toggle-slider"></span>
+          </label>
+          <button class="btn btn-sm btn-danger" onclick="runManualPrune()" id="btn-prune">Prune Now</button>
+          <span id="prune-status" style="font-size:0.82rem;color:var(--text-dim);"></span>
+        </div>
       </div>
     </div>
 
@@ -2092,13 +2322,27 @@ async function renderSocialProofPreview() {
     return;
   }
 
+  // Fetch real product view counts from Firebase
+  const productViewCache = {};
+  if (firebaseReady) {
+    try {
+      const today = getToday();
+      const snap = await fbRef('/productViewCounts/' + today).once('value');
+      const counts = snap.val() || {};
+      Object.entries(counts).forEach(([slug, count]) => {
+        productViewCache[slug] = typeof count === 'number' ? count : 0;
+      });
+    } catch (e) { console.warn('Failed to fetch product view counts:', e); }
+  }
+
   const threshold = parseInt(document.getElementById('sp-threshold').value) || 5;
   const enabled = document.getElementById('sp-enabled').checked;
   const style = document.getElementById('sp-style').value;
 
   let html = '<table class="data-table"><thead><tr><th>Product</th><th>Badge Preview</th></tr></thead><tbody>';
   data.products.forEach(p => {
-    const viewCount = Math.floor(Math.random() * 30) + 1; // Simulated for preview
+    // Real data from Firebase productViewCounts
+    const viewCount = productViewCache[('shop-' + p.handle)] || 0;
     const wouldShow = enabled && viewCount >= threshold;
     let badgeHtml = '<span class="text-muted" style="font-size:0.8rem;">Hidden (below threshold)</span>';
     if (wouldShow) {
@@ -2349,6 +2593,604 @@ window.renderInventory = renderInventory;
 
 
 /* ──────────────────────────────────────────────────────────────────────────
+   5t. SESSION RECORDINGS
+   ────────────────────────────────────────────────────────────────────────── */
+
+// Data fetch
+async function fetchSessions(dateStr) {
+  if (!firebaseReady) return {};
+  const snap = await fbRef('/sessions/' + dateStr).once('value');
+  return snap.val() || {};
+}
+
+async function renderSessions() {
+  const container = document.getElementById('sessions-content');
+  const statsEl = document.getElementById('sessions-stats');
+  const dateSel = document.getElementById('session-date-select').value;
+  const sortBy = document.getElementById('session-sort').value;
+  const dateStr = dateSel === 'yesterday' ? getDateOffset(1) : getToday();
+
+  const data = await fetchSessions(dateStr);
+  const sessions = Object.entries(data).map(([id, s]) => ({ id, ...s }));
+
+  // Stats
+  const totalSessions = sessions.length;
+  const avgDuration = totalSessions > 0 ? sessions.reduce((a, s) => a + (s.duration || 0), 0) / totalSessions : 0;
+  const avgPages = totalSessions > 0 ? sessions.reduce((a, s) => a + (s.pages || 0), 0) / totalSessions : 0;
+  const bounced = sessions.filter(s => (s.pages || 0) <= 1).length;
+  const bounceRate = totalSessions > 0 ? ((bounced / totalSessions) * 100).toFixed(1) : '0.0';
+
+  statsEl.innerHTML = `
+    <div class="nl-card"><div class="nl-val">${formatNumber(totalSessions)}</div><div class="nl-label">Sessions</div></div>
+    <div class="nl-card"><div class="nl-val">${formatDuration(avgDuration)}</div><div class="nl-label">Avg Duration</div></div>
+    <div class="nl-card"><div class="nl-val">${avgPages.toFixed(1)}</div><div class="nl-label">Avg Pages</div></div>
+    <div class="nl-card"><div class="nl-val">${bounceRate}%</div><div class="nl-label">Bounce Rate</div></div>
+  `;
+
+  if (sessions.length === 0) {
+    container.innerHTML = '<p class="text-muted text-center" style="padding:20px;">No session data for ' + dateStr + '</p>';
+    return;
+  }
+
+  // Sort
+  if (sortBy === 'duration') sessions.sort((a, b) => (b.duration || 0) - (a.duration || 0));
+  else if (sortBy === 'pages') sessions.sort((a, b) => (b.pages || 0) - (a.pages || 0));
+  else sessions.sort((a, b) => (b.endedAt || '').localeCompare(a.endedAt || ''));
+
+  let html = '<div class="session-list">';
+  sessions.slice(0, 50).forEach(s => {
+    const deviceIcon = s.device === 'mobile' ? '📱' : s.device === 'tablet' ? '📟' : '🖥️';
+    html += '<div class="session-card">';
+    html += '<div style="font-size:1.5rem;">' + deviceIcon + '</div>';
+    html += '<div class="session-meta">';
+    html += '<div class="sm-item"><div class="sm-label">Visitor</div><div class="sm-val"><code style="color:var(--gold);font-size:0.8rem;">' + truncateId(s.visitorId || s.id) + '</code></div></div>';
+    html += '<div class="sm-item"><div class="sm-label">Duration</div><div class="sm-val">' + formatDuration(s.duration) + '</div></div>';
+    html += '<div class="sm-item"><div class="sm-label">Pages</div><div class="sm-val">' + (s.pages || 0) + '</div></div>';
+    html += '<div class="sm-item"><div class="sm-label">Device</div><div class="sm-val">' + (s.device || 'unknown') + '</div></div>';
+    html += '<div class="sm-item"><div class="sm-label">Ended</div><div class="sm-val">' + formatDateTime(s.endedAt) + '</div></div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  if (sessions.length > 50) {
+    html += '<p class="text-muted text-center mt-16">Showing 50 of ' + sessions.length + ' sessions</p>';
+  }
+  container.innerHTML = html;
+}
+window.renderSessions = renderSessions;
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   5u. A/B TESTING
+   ────────────────────────────────────────────────────────────────────────── */
+
+function getActiveExperiments() {
+  try {
+    const raw = localStorage.getItem('mm_experiments');
+    return raw ? JSON.parse(raw) : [];
+  } catch { return []; }
+}
+
+function saveActiveExperiments(list) {
+  localStorage.setItem('mm_experiments', JSON.stringify(list));
+}
+
+function addExperiment() {
+  const input = document.getElementById('ab-new-name');
+  const name = (input.value || '').trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+  if (!name) return;
+  const list = getActiveExperiments();
+  if (!list.includes(name)) {
+    list.push(name);
+    saveActiveExperiments(list);
+  }
+  input.value = '';
+  renderABTesting();
+}
+window.addExperiment = addExperiment;
+
+function removeExperiment(name) {
+  const list = getActiveExperiments().filter(n => n !== name);
+  saveActiveExperiments(list);
+  renderABTesting();
+}
+window.removeExperiment = removeExperiment;
+
+async function fetchABData() {
+  if (!firebaseReady) return {};
+  const snap = await fbRef('/abTests/').once('value');
+  return snap.val() || {};
+}
+
+async function renderABTesting() {
+  const activeList = getActiveExperiments();
+  const activeEl = document.getElementById('ab-active-list');
+  const resultsEl = document.getElementById('ab-results');
+
+  // Active experiments list
+  if (activeList.length === 0) {
+    activeEl.innerHTML = '<p class="text-muted" style="font-size:0.85rem;">No active experiments. Add one above to start A/B testing.</p>';
+  } else {
+    let html = '<div style="display:flex;flex-wrap:wrap;gap:8px;">';
+    activeList.forEach(name => {
+      html += '<span style="background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:0.85rem;display:inline-flex;align-items:center;gap:8px;">';
+      html += '🧪 ' + name;
+      html += ' <button onclick="removeExperiment(\'' + name + '\')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:1rem;line-height:1;" title="Remove">×</button>';
+      html += '</span>';
+    });
+    html += '</div>';
+    activeEl.innerHTML = html;
+  }
+
+  // Results from Firebase
+  const abData = await fetchABData();
+  const experiments = Object.keys(abData);
+
+  if (experiments.length === 0) {
+    resultsEl.innerHTML = '<p class="text-muted text-center" style="padding:20px;">No experiment data recorded yet. Once visitors are assigned variants, results will appear here.</p>';
+    return;
+  }
+
+  let html = '<div class="ab-grid">';
+  experiments.forEach(name => {
+    const exp = abData[name] || {};
+    const aViews = exp.A?.views || 0;
+    const bViews = exp.B?.views || 0;
+    const total = aViews + bViews;
+    const aPct = total > 0 ? ((aViews / total) * 100).toFixed(1) : '50.0';
+    const bPct = total > 0 ? ((bViews / total) * 100).toFixed(1) : '50.0';
+
+    let winner = '';
+    if (total >= 100) {
+      if (aViews > bViews * 1.1) winner = '🏆 Variant A is leading';
+      else if (bViews > aViews * 1.1) winner = '🏆 Variant B is leading';
+      else winner = '⚖️ Too close to call';
+    } else {
+      winner = '📊 Need more data (' + total + '/100 views)';
+    }
+
+    const isActive = activeList.includes(name);
+
+    html += '<div class="ab-card">';
+    html += '<div class="ab-name">🧪 ' + name + (isActive ? ' <span style="color:var(--green);font-size:0.75rem;">● ACTIVE</span>' : '') + '</div>';
+    html += '<div class="ab-variants">';
+    html += '<div class="ab-variant"><div class="ab-variant-label">Variant A</div><div class="ab-variant-value a">' + formatNumber(aViews) + '</div><div style="font-size:0.78rem;color:var(--text-dim);">' + aPct + '% of traffic</div></div>';
+    html += '<div class="ab-variant"><div class="ab-variant-label">Variant B</div><div class="ab-variant-value b">' + formatNumber(bViews) + '</div><div style="font-size:0.78rem;color:var(--text-dim);">' + bPct + '% of traffic</div></div>';
+    html += '</div>';
+    html += '<div class="ab-winner">' + winner + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  resultsEl.innerHTML = html;
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   5v. REVENUE ESTIMATOR
+   ────────────────────────────────────────────────────────────────────────── */
+
+async function calculateRevenue() {
+  const resultsEl = document.getElementById('rev-results');
+  const convRate = parseFloat(document.getElementById('rev-conv-rate').value) || 0;
+  const aov = parseFloat(document.getElementById('rev-aov').value) || 0;
+  const repeatRate = parseFloat(document.getElementById('rev-repeat').value) || 0;
+
+  // Fetch traffic data
+  const history = await fetchTrafficHistory(30);
+  const dates = Object.keys(history).sort();
+  const values = dates.map(d => history[d]);
+  const totalPV = values.reduce((a, b) => a + b, 0);
+  const dailyAvg = dates.length > 0 ? totalPV / dates.length : 0;
+
+  // Calculations
+  const dailyOrders = dailyAvg * (convRate / 100);
+  const dailyRevenue = dailyOrders * aov;
+  const monthlyRevenue = dailyRevenue * 30;
+  const yearlyRevenue = monthlyRevenue * 12;
+  const repeatBonus = yearlyRevenue * (repeatRate / 100);
+  const yearlyTotal = yearlyRevenue + repeatBonus;
+
+  // Render result cards
+  let html = '';
+  html += '<div class="rev-card"><div class="rev-label">Daily Traffic</div><div class="rev-value" style="color:var(--blue);">' + Math.round(dailyAvg) + '</div><div class="rev-sub">avg pageviews</div></div>';
+  html += '<div class="rev-card"><div class="rev-label">Daily Orders</div><div class="rev-value" style="color:var(--gold);">' + dailyOrders.toFixed(1) + '</div><div class="rev-sub">at ' + convRate + '% conv.</div></div>';
+  html += '<div class="rev-card"><div class="rev-label">Monthly Revenue</div><div class="rev-value" style="color:var(--green);">$' + formatNumber(Math.round(monthlyRevenue)) + '</div><div class="rev-sub">$' + Math.round(dailyRevenue) + '/day</div></div>';
+  html += '<div class="rev-card"><div class="rev-label">Yearly Revenue</div><div class="rev-value" style="color:var(--pink);">$' + formatNumber(Math.round(yearlyTotal)) + '</div><div class="rev-sub">inc. ' + repeatRate + '% repeat</div></div>';
+  resultsEl.innerHTML = html;
+
+  // Revenue projection chart (30 days)
+  if (dates.length > 0) {
+    const projLabels = dates.map(d => { const p = d.split('-'); return p[1] + '/' + p[2]; });
+    const revenueData = values.map(v => Math.round(v * (convRate / 100) * aov));
+    const cumulative = [];
+    revenueData.reduce((acc, v, i) => { cumulative.push(acc + v); return acc + v; }, 0);
+
+    createChart('chart-revenue', 'line', {
+      labels: projLabels,
+      datasets: [
+        {
+          label: 'Daily Est. Revenue',
+          data: revenueData,
+          borderColor: '#7A9D54',
+          backgroundColor: 'rgba(122, 157, 84, 0.1)',
+          fill: true, tension: 0.4, borderWidth: 2, yAxisID: 'y'
+        },
+        {
+          label: 'Cumulative Revenue',
+          data: cumulative,
+          borderColor: '#D4A574',
+          borderDash: [6, 3],
+          tension: 0.4, borderWidth: 2, yAxisID: 'y1', pointRadius: 0
+        }
+      ]
+    }, {
+      scales: {
+        y: { beginAtZero: true, position: 'left', title: { display: true, text: 'Daily ($)', color: '#556677' } },
+        y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Cumulative ($)', color: '#556677' } }
+      }
+    });
+  }
+}
+window.calculateRevenue = calculateRevenue;
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   5w. QUICK ACTIONS
+   ────────────────────────────────────────────────────────────────────────── */
+
+function renderQuickActions() {
+  const actions = [
+    {
+      icon: '🔄', title: 'Trigger Product Sync',
+      desc: 'Dispatch sync-products workflow',
+      action: async (card) => {
+        card.classList.add('running');
+        card.querySelector('.action-status').innerHTML = '<span class="spinner"></span> Triggering…';
+        try {
+          const resp = await fetch('https://api.github.com/repos/magnetmomentsco/magnetmomentsco.github.io/actions/workflows/sync-products.yml/dispatches', {
+            method: 'POST',
+            headers: { 'Accept': 'application/vnd.github+json' },
+            body: JSON.stringify({ ref: 'main' })
+          });
+          if (resp.status === 204 || resp.ok) {
+            card.querySelector('.action-status').innerHTML = '<span class="success">✅ Triggered!</span>';
+            logAction('Product sync workflow triggered');
+          } else {
+            throw new Error('HTTP ' + resp.status + ' — needs a PAT with workflow scope');
+          }
+        } catch (err) {
+          card.querySelector('.action-status').innerHTML = '<span class="error">❌ ' + err.message + '</span>';
+        }
+        card.classList.remove('running');
+      }
+    },
+    {
+      icon: '🚀', title: 'Trigger Deploy',
+      desc: 'Dispatch deploy-pages workflow',
+      action: async (card) => {
+        card.classList.add('running');
+        card.querySelector('.action-status').innerHTML = '<span class="spinner"></span> Triggering…';
+        try {
+          const resp = await fetch('https://api.github.com/repos/magnetmomentsco/magnetmomentsco.github.io/actions/workflows/deploy-pages.yml/dispatches', {
+            method: 'POST',
+            headers: { 'Accept': 'application/vnd.github+json' },
+            body: JSON.stringify({ ref: 'main' })
+          });
+          if (resp.status === 204 || resp.ok) {
+            card.querySelector('.action-status').innerHTML = '<span class="success">✅ Triggered!</span>';
+            logAction('Deploy workflow triggered');
+          } else {
+            throw new Error('HTTP ' + resp.status + ' — needs a PAT with workflow scope');
+          }
+        } catch (err) {
+          card.querySelector('.action-status').innerHTML = '<span class="error">❌ ' + err.message + '</span>';
+        }
+        card.classList.remove('running');
+      }
+    },
+    {
+      icon: '🧹', title: 'Clear Local Cache',
+      desc: 'Clear localStorage & sessionStorage',
+      action: (card) => {
+        const keysRemoved = Object.keys(localStorage).length + Object.keys(sessionStorage).length;
+        localStorage.clear();
+        sessionStorage.clear();
+        card.querySelector('.action-status').innerHTML = '<span class="success">✅ Cleared ' + keysRemoved + ' keys</span>';
+        logAction('Local storage cleared (' + keysRemoved + ' keys)');
+      }
+    },
+    {
+      icon: '📊', title: 'Export Analytics CSV',
+      desc: 'Download today\'s pageview data',
+      action: async (card) => {
+        card.classList.add('running');
+        if (!firebaseReady) {
+          card.querySelector('.action-status').innerHTML = '<span class="error">❌ Firebase not ready</span>';
+          card.classList.remove('running');
+          return;
+        }
+        try {
+          const today = getToday();
+          const snap = await fbRef('/pageViews/' + today).once('value');
+          const data = snap.val() || {};
+          let csv = 'Page,Timestamp,Referrer,Source,Device\n';
+          Object.entries(data).forEach(([slug, entries]) => {
+            if (typeof entries === 'object') {
+              Object.values(entries).forEach(e => {
+                csv += '"' + slug + '","' + (e.timestamp || '') + '","' + (e.referrer || '') + '","' + (e.source || '') + '","' + (e.device || '') + '"\n';
+              });
+            }
+          });
+          const blob = new Blob([csv], { type: 'text/csv' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'analytics-' + today + '.csv';
+          a.click();
+          URL.revokeObjectURL(url);
+          card.querySelector('.action-status').innerHTML = '<span class="success">✅ Downloaded!</span>';
+          logAction('Exported analytics CSV for ' + today);
+        } catch (err) {
+          card.querySelector('.action-status').innerHTML = '<span class="error">❌ ' + err.message + '</span>';
+        }
+        card.classList.remove('running');
+      }
+    },
+    {
+      icon: '🔍', title: 'Run SEO Audit',
+      desc: 'Re-check all pages for SEO issues',
+      action: async (card) => {
+        card.classList.add('running');
+        card.querySelector('.action-status').innerHTML = '<span class="spinner"></span> Auditing…';
+        await renderSEOHealth();
+        card.querySelector('.action-status').innerHTML = '<span class="success">✅ Audit complete</span>';
+        card.classList.remove('running');
+        logAction('SEO audit re-run');
+        document.getElementById('section-seo').scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+    {
+      icon: '💾', title: 'Check DB Storage',
+      desc: 'Refresh storage usage estimate',
+      action: async (card) => {
+        card.classList.add('running');
+        card.querySelector('.action-status').innerHTML = '<span class="spinner"></span> Checking…';
+        await renderStorageManager();
+        card.querySelector('.action-status').innerHTML = '<span class="success">✅ Updated!</span>';
+        card.classList.remove('running');
+        logAction('Storage check refreshed');
+      }
+    }
+  ];
+
+  let html = '';
+  actions.forEach((a, i) => {
+    html += '<div class="action-card" id="action-card-' + i + '" onclick="runAction(' + i + ')">';
+    html += '<div class="action-icon">' + a.icon + '</div>';
+    html += '<div class="action-title">' + a.title + '</div>';
+    html += '<div class="action-desc">' + a.desc + '</div>';
+    html += '<div class="action-status"></div>';
+    html += '</div>';
+  });
+  document.getElementById('actions-grid').innerHTML = html;
+
+  // Store action handlers
+  window._quickActions = actions;
+}
+
+function runAction(index) {
+  const action = window._quickActions[index];
+  const card = document.getElementById('action-card-' + index);
+  if (action && card && !card.classList.contains('running')) {
+    action.action(card);
+  }
+}
+window.runAction = runAction;
+
+function logAction(msg) {
+  const log = document.getElementById('action-log');
+  const time = new Date().toLocaleTimeString();
+  log.innerHTML = '<div style="padding:2px 0;">[' + time + '] ' + msg + '</div>' + log.innerHTML;
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   5x. DATABASE STORAGE MANAGER
+   ────────────────────────────────────────────────────────────────────────── */
+
+const FB_FREE_TIER_MB = 1024; // 1 GB
+
+// Estimate JSON size of a Firebase snapshot
+function estimateJsonSize(val) {
+  if (val === null || val === undefined) return 0;
+  try {
+    return new Blob([JSON.stringify(val)]).size;
+  } catch {
+    return JSON.stringify(val).length;
+  }
+}
+
+async function fetchStorageEstimates() {
+  if (!firebaseReady) return [];
+
+  const paths = [
+    { path: '/pageViews/', label: '📄 Page Views', prunable: true },
+    { path: '/presence/', label: '👥 Presence', prunable: false },
+    { path: '/scrollDepth/', label: '📜 Scroll Depth', prunable: true },
+    { path: '/clicks/', label: '🖱️ Clicks', prunable: true },
+    { path: '/rageClicks/', label: '😤 Rage Clicks', prunable: true },
+    { path: '/funnel/', label: '🔄 Funnel', prunable: true },
+    { path: '/newsletter/', label: '💌 Newsletter', prunable: true },
+    { path: '/visitors/', label: '🎯 Visitors', prunable: false },
+    { path: '/cart/', label: '🛒 Cart', prunable: true },
+    { path: '/performance/', label: '⚡ Performance', prunable: true },
+    { path: '/errors/', label: '🐛 Errors', prunable: true },
+    { path: '/abTests/', label: '🧪 A/B Tests', prunable: false },
+    { path: '/sessions/', label: '🎥 Sessions', prunable: true },
+    { path: '/productViewCounts/', label: '🏷️ Product Views', prunable: true },
+    { path: '/events/', label: '📡 Custom Events', prunable: true }
+  ];
+
+  const results = [];
+  const promises = paths.map(async (p) => {
+    try {
+      const snap = await fbRef(p.path).once('value');
+      const val = snap.val();
+      const bytes = val ? estimateJsonSize(val) : 0;
+      const dateKeys = val && typeof val === 'object' ? Object.keys(val).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort() : [];
+      results.push({ ...p, bytes, dateKeys, hasData: val !== null });
+    } catch {
+      results.push({ ...p, bytes: 0, dateKeys: [], hasData: false });
+    }
+  });
+
+  await Promise.all(promises);
+  return results.sort((a, b) => b.bytes - a.bytes);
+}
+
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 B';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+async function renderStorageManager() {
+  const breakdownEl = document.getElementById('storage-breakdown');
+  const fillEl = document.getElementById('storage-fill');
+  const totalEl = document.getElementById('storage-total');
+  const alertEl = document.getElementById('storage-alert');
+  const badgeEl = document.getElementById('storage-badge');
+
+  if (!firebaseReady) {
+    breakdownEl.innerHTML = '<p class="text-muted text-center">Firebase not configured — cannot estimate storage.</p>';
+    return;
+  }
+
+  const estimates = await fetchStorageEstimates();
+  const totalBytes = estimates.reduce((a, e) => a + e.bytes, 0);
+  const totalMB = totalBytes / (1024 * 1024);
+  const pct = Math.min((totalMB / FB_FREE_TIER_MB) * 100, 100);
+
+  // Gauge
+  fillEl.style.width = Math.max(pct, 2) + '%';
+  fillEl.textContent = pct.toFixed(1) + '%';
+  fillEl.className = 'storage-gauge-fill ' + (pct < 60 ? 'green' : pct < 85 ? 'yellow' : 'red');
+  totalEl.textContent = formatBytes(totalBytes) + ' / 1,024 MB';
+
+  // Alert
+  if (pct >= 85) {
+    alertEl.style.display = 'block';
+    alertEl.innerHTML = '<strong>⚠️ Storage Warning!</strong><p style="margin-top:8px;">Database is at ' + pct.toFixed(1) + '% capacity. Consider pruning old data or upgrading your Firebase plan.</p>';
+    badgeEl.style.display = '';
+    badgeEl.textContent = '!';
+
+    // Auto-prune if enabled
+    const pruneEnabled = document.getElementById('prune-enabled').checked;
+    if (pruneEnabled) {
+      const days = parseInt(document.getElementById('prune-days').value) || 30;
+      await pruneOldData(days, true);
+    }
+  } else {
+    alertEl.style.display = 'none';
+    badgeEl.style.display = 'none';
+  }
+
+  // Breakdown table
+  let html = '';
+  estimates.forEach(e => {
+    html += '<div class="storage-row">';
+    html += '<div class="sr-path">' + e.label + '</div>';
+    html += '<div style="display:flex;align-items:center;gap:12px;">';
+    html += '<span class="sr-size">' + formatBytes(e.bytes) + '</span>';
+    if (e.prunable && e.dateKeys.length > 0) {
+      html += '<span style="font-size:0.75rem;color:var(--text-dim);">(' + e.dateKeys.length + ' days)</span>';
+    }
+    html += '</div>';
+    html += '</div>';
+  });
+
+  if (totalBytes === 0) {
+    html = '<p class="text-muted text-center" style="padding:20px;">Database is empty — no data stored yet.</p>';
+  }
+
+  breakdownEl.innerHTML = html;
+  loadAutoprune();
+}
+
+// Auto-prune config
+function loadAutoprune() {
+  try {
+    const config = JSON.parse(localStorage.getItem('mm_autoprune') || '{}');
+    document.getElementById('prune-enabled').checked = config.enabled || false;
+    document.getElementById('prune-days').value = config.days || 30;
+  } catch {}
+}
+
+function saveAutoprune() {
+  const config = {
+    enabled: document.getElementById('prune-enabled').checked,
+    days: parseInt(document.getElementById('prune-days').value) || 30
+  };
+  localStorage.setItem('mm_autoprune', JSON.stringify(config));
+}
+window.saveAutoprune = saveAutoprune;
+
+async function pruneOldData(daysToKeep, isAuto) {
+  if (!firebaseReady) return;
+
+  const statusEl = document.getElementById('prune-status');
+  const btnEl = document.getElementById('btn-prune');
+  btnEl.disabled = true;
+  statusEl.textContent = (isAuto ? '🔄 Auto-pruning' : '🔄 Pruning') + '…';
+
+  const cutoffDate = getDateOffset(daysToKeep);
+  const prunablePaths = [
+    '/pageViews/', '/scrollDepth/', '/clicks/', '/rageClicks/',
+    '/funnel/', '/newsletter/', '/cart/', '/performance/',
+    '/errors/', '/sessions/', '/productViewCounts/', '/events/'
+  ];
+
+  let totalRemoved = 0;
+  const prunePromises = prunablePaths.map(async (path) => {
+    try {
+      const snap = await fbRef(path).once('value');
+      const data = snap.val();
+      if (!data || typeof data !== 'object') return;
+
+      const dateKeys = Object.keys(data).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k));
+      const oldKeys = dateKeys.filter(k => k < cutoffDate);
+
+      for (const key of oldKeys) {
+        await fbRef(path + key).remove();
+        totalRemoved++;
+      }
+    } catch (err) {
+      console.warn('Prune error for ' + path + ':', err);
+    }
+  });
+
+  await Promise.all(prunePromises);
+
+  statusEl.textContent = '✅ Removed ' + totalRemoved + ' old date entries (before ' + cutoffDate + ')';
+  btnEl.disabled = false;
+
+  if (totalRemoved > 0) {
+    logAction((isAuto ? 'Auto-pruned' : 'Manually pruned') + ' ' + totalRemoved + ' old date entries');
+    // Refresh storage display
+    setTimeout(() => renderStorageManager(), 1000);
+  }
+}
+
+async function runManualPrune() {
+  const days = parseInt(document.getElementById('prune-days').value) || 30;
+  if (!confirm('Delete all analytics data older than ' + days + ' days? This cannot be undone.')) return;
+  await pruneOldData(days, false);
+}
+window.runManualPrune = runManualPrune;
+
+
+/* ──────────────────────────────────────────────────────────────────────────
    6. SECTION COLLAPSE TOGGLE
    ────────────────────────────────────────────────────────────────────────── */
 
@@ -2369,6 +3211,7 @@ window.toggleSection = toggleSection;
 async function initDashboard() {
   renderTopBar();
   renderQuickLinks();
+  renderQuickActions();
   loadSocialProofConfig();
 
   // Firebase is already initialized before auth flow
@@ -2390,7 +3233,11 @@ async function initDashboard() {
     renderErrors(),
     renderDeployments(),
     renderInventory(),
-    renderSocialProofPreview()
+    renderSocialProofPreview(),
+    renderSessions(),
+    renderABTesting(),
+    calculateRevenue(),
+    renderStorageManager()
   ];
 
   // Subscribe to live visitors (real-time)
