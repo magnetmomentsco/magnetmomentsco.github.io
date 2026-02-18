@@ -256,6 +256,11 @@
     .gauge-card.green .gauge-value { color: var(--green); }
     .gauge-card.yellow .gauge-value { color: var(--yellow); }
     .gauge-card.red .gauge-value { color: var(--red); }
+    .gauge-card .gauge-tip { position: relative; display: inline-block; cursor: help; margin-left: 4px; }
+    .gauge-card .gauge-tip .tip-icon { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,0.08); color: var(--text-muted); font-size: 0.65rem; font-weight: 700; border: 1px solid var(--border); }
+    .gauge-card .gauge-tip .tip-text { visibility: hidden; opacity: 0; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); width: 240px; background: #1a2332; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 0.75rem; line-height: 1.5; color: var(--text-muted); text-align: left; z-index: 100; transition: opacity 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.4); pointer-events: none; text-transform: none; letter-spacing: normal; font-weight: 400; }
+    .gauge-card .gauge-tip .tip-text::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #1a2332; }
+    .gauge-card .gauge-tip:hover .tip-text { visibility: visible; opacity: 1; }
 
     /* ─── SEO Table ─── */
     .seo-pass { color: var(--green); }
@@ -696,6 +701,9 @@
         <span class="section-toggle">▼</span>
       </div>
       <div class="section-body">
+        <div class="info-banner" style="background:rgba(212,165,116,0.08);border:1px solid rgba(212,165,116,0.25);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:0.85rem;color:var(--text-muted);line-height:1.5;">
+          <strong style="color:var(--accent);">ℹ How it works:</strong> The FREE SHIPPING popup appears <strong>only on the homepage</strong> after 4 seconds for first-time visitors. Once dismissed (via ✕, click-outside, or Escape), it won't reappear for the rest of the session. Subscribers are redirected with <code style="font-size:0.8rem;background:rgba(255,255,255,0.06);padding:2px 5px;border-radius:3px;">?subscribed=true</code>. Data resets daily.
+        </div>
         <div class="nl-stats" id="nl-stats"><div class="loading" style="grid-column:1/-1;">Loading…</div></div>
         <div class="chart-row mt-16">
           <div class="chart-col">
@@ -715,6 +723,15 @@
         <span class="section-toggle">▼</span>
       </div>
       <div class="section-body">
+        <div class="info-banner" style="background:rgba(122,157,84,0.08);border:1px solid rgba(122,157,84,0.25);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:0.85rem;color:var(--text-muted);line-height:1.6;">
+          <strong style="color:#7A9D54;">ℹ How scoring works:</strong> Each visitor accumulates intent points as they interact with the site. Points are persisted across pages via localStorage.
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:10px;">
+            <div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7A9D54;margin-right:6px;"></span><strong>High (10+ pts)</strong> — Likely buyer. Viewed multiple products, scrolled deep, spent 60s+ on site, or added to cart.</div>
+            <div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#D4A574;margin-right:6px;"></span><strong>Medium (5–9 pts)</strong> — Interested browser. Visited a few pages, hovered on products, or browsed images.</div>
+            <div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#C77D8A;margin-right:6px;"></span><strong>Low (&lt;5 pts)</strong> — Casual visitor. Viewed 1–2 pages with minimal engagement.</div>
+          </div>
+          <div style="margin-top:8px;font-size:0.8rem;opacity:0.75;">Points: +1 per page view · +2 for deep scroll (75%+) · +2 for product hover · +3 for product view · +2 for image browse · +5 for add-to-cart · +2 after 60s on site</div>
+        </div>
         <div class="chart-row">
           <div class="chart-col" style="max-width:350px;margin:0 auto;">
             <div class="chart-container"><canvas id="chart-intent"></canvas></div>
@@ -1956,8 +1973,8 @@ async function renderFunnel() {
   const tableContainer = document.getElementById('funnel-table');
 
   const steps = [
-    { key: 'product-card-hover', label: 'Product Card Hover', color: '#7A9D54' },
-    { key: 'modal-open', label: 'Modal Open', color: '#D4A574' },
+    { key: 'product-card-hover', label: 'Card Hover', color: '#7A9D54' },
+    { key: 'product-view', label: 'Product Page View', color: '#D4A574' },
     { key: 'image-browse', label: 'Image Browse', color: '#C77D8A' },
     { key: 'add-to-cart', label: 'Add to Cart', color: '#3498db' },
     { key: 'checkout-start', label: 'Checkout', color: '#9b59b6' }
@@ -2247,10 +2264,14 @@ async function renderPerformance() {
   }
 
   const gaugeConfigs = [
-    { key: 'lcp', label: 'LCP', val: avgLcp },
-    { key: 'fid', label: 'FID', val: avgFid },
-    { key: 'cls', label: 'CLS', val: avgCls },
-    { key: 'ttfb', label: 'TTFB', val: avgTtfb }
+    { key: 'lcp', label: 'LCP', val: avgLcp,
+      tip: '<strong>Largest Contentful Paint</strong> — Time until the largest visible element (hero image, heading) finishes rendering. <em>Target: &lt;2.5s.</em><br><br><strong>Business impact:</strong> Every extra second of LCP delays can reduce conversions by ~7%. Faster load = more sales.' },
+    { key: 'fid', label: 'FID', val: avgFid,
+      tip: '<strong>First Input Delay</strong> — Time from a visitor\'s first tap/click until the browser responds. <em>Target: &lt;100ms.</em><br><br><strong>Business impact:</strong> Sluggish buttons frustrate shoppers mid-purchase. High FID means lost add-to-carts.' },
+    { key: 'cls', label: 'CLS', val: avgCls,
+      tip: '<strong>Cumulative Layout Shift</strong> — Measures unexpected visual movement (images loading, banners popping in). <em>Target: &lt;0.1.</em><br><br><strong>Business impact:</strong> Layout shifts cause mis-clicks and erode trust. Low CLS = smoother shopping experience.' },
+    { key: 'ttfb', label: 'TTFB', val: avgTtfb,
+      tip: '<strong>Time to First Byte</strong> — How fast the server starts sending the page. <em>Target: &lt;800ms.</em><br><br><strong>Business impact:</strong> TTFB is the foundation — it delays every other metric. Slow TTFB = slow everything.' }
   ];
 
   if (gaugeConfigs.every(g => g.val === null)) {
@@ -2260,7 +2281,7 @@ async function renderPerformance() {
     gaugeConfigs.forEach(g => {
       const cls = cwvClass(g.key, g.val);
       html += '<div class="gauge-card ' + cls + '">';
-      html += '<div class="gauge-label">' + g.label + '</div>';
+      html += '<div class="gauge-label">' + g.label + ' <span class="gauge-tip"><span class="tip-icon">?</span><span class="tip-text">' + g.tip + '</span></span></div>';
       html += '<div class="gauge-value">' + formatMetric(g.key, g.val) + '</div>';
       html += '<div class="gauge-unit">' + metricUnit(g.key) + '</div>';
       html += '</div>';

@@ -448,34 +448,68 @@
 
   /* ──────────────── 9. PRODUCT ENGAGEMENT FUNNEL ──────────────────────── */
 
+  /** Extract product handle from nearest product card or PDP link. */
+  function extractHandle(el) {
+    // From a product card link: /shop/<handle>/
+    var card = el && el.closest ? el.closest('.product-card') : null;
+    if (card) {
+      var link = card.querySelector('.product-card-link');
+      if (link) {
+        var m = (link.getAttribute('href') || '').match(/\/shop\/([^\/]+)/);
+        if (m) return m[1];
+      }
+    }
+    // From PDP URL
+    var pdpMatch = location.pathname.match(/\/shop\/([^\/]+)/);
+    if (pdpMatch) return pdpMatch[1];
+    return 'unknown';
+  }
+
+  function funnelEvent(key, handle, intentPts) {
+    enqueue({ type: 'increment', path: '/funnel/' + state.date + '/' + key + '/' + handle });
+    if (intentPts) bumpIntent(intentPts);
+  }
+
   function setupFunnelListeners() {
     if (state.dnt) return;
 
-    var events = [
-      { name: 'mm:product-card-hover', key: 'product-card-hover', intentPts: 0 },
-      { name: 'mm:modal-open',         key: 'modal-open',         intentPts: 3 },
-      { name: 'mm:image-browse',       key: 'image-browse',       intentPts: 0 },
-      { name: 'mm:add-to-cart',        key: 'add-to-cart',        intentPts: 5 },
-      { name: 'mm:checkout-start',     key: 'checkout-start',     intentPts: 0 }
-    ];
+    // 1. Product card hover — delegated mouseenter on .product-card
+    var hoverTracked = {};
+    document.addEventListener('mouseover', function (e) {
+      var card = e.target.closest ? e.target.closest('.product-card') : null;
+      if (!card) return;
+      var handle = extractHandle(card);
+      // Debounce: track once per handle per page load
+      if (hoverTracked[handle]) return;
+      hoverTracked[handle] = true;
+      funnelEvent('product-card-hover', handle, 0);
+    });
 
-    events.forEach(function (evt) {
-      document.addEventListener(evt.name, function (e) {
-        var detail = (e && e.detail) || {};
-        var handle = detail.productHandle || 'unknown';
+    // 2. Product page view (replaces modal-open since we use PDP pages)
+    if (/^\/shop\/[^\/]+/.test(location.pathname) && document.querySelector('.pdp')) {
+      var handle = extractHandle(null);
+      funnelEvent('product-view', handle, 3);
+      bumpIntent(2);
+    }
 
-        enqueue({
-          type: 'increment',
-          path: '/funnel/' + state.date + '/' + evt.key + '/' + handle
-        });
+    // 3. Image gallery browse — thumbnail clicks on PDP
+    document.addEventListener('click', function (e) {
+      var thumb = e.target.closest ? e.target.closest('.pdp-thumb') : null;
+      if (thumb) {
+        funnelEvent('image-browse', extractHandle(null), 0);
+      }
+    });
 
-        if (evt.intentPts) bumpIntent(evt.intentPts);
+    // 4. Add to cart — listen for custom event, extract handle from detail or DOM
+    document.addEventListener('mm:add-to-cart', function (e) {
+      var detail = (e && e.detail) || {};
+      var handle = detail.productHandle || extractHandle(null);
+      funnelEvent('add-to-cart', handle, 5);
+    });
 
-        // Special: product view intent boost (+2)
-        if (evt.key === 'modal-open' || evt.key === 'product-card-hover') {
-          if (evt.key !== 'product-card-hover') bumpIntent(2);
-        }
-      });
+    // 5. Checkout start
+    document.addEventListener('mm:checkout-start', function () {
+      funnelEvent('checkout-start', 'all', 0);
     });
   }
 

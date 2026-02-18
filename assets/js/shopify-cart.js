@@ -125,9 +125,10 @@
   }
 
   // ─── Add to cart ──────────────────────────────────────
-  function addToCart(variantId, quantity) {
+  function addToCart(variantId, quantity, productHandle) {
     if (!cart) return Promise.resolve();
     quantity = quantity || 1;
+    productHandle = productHandle || 'unknown';
     if (variantId.indexOf('gid://') !== 0) {
       variantId = 'gid://shopify/ProductVariant/' + variantId;
     }
@@ -156,8 +157,8 @@
       updateCartUI();
       openCartDrawer();
       showAddedFeedback();
-      document.dispatchEvent(new CustomEvent('mm:add-to-cart', { detail: { variantId: variantId, quantity: quantity } }));
-      document.dispatchEvent(new CustomEvent('mm:cart-update', { detail: { action: 'add', items: cart.lines, total: cart.totalAmount } }));
+      document.dispatchEvent(new CustomEvent('mm:add-to-cart', { detail: { variantId: variantId, quantity: quantity, productHandle: productHandle } }));
+      document.dispatchEvent(new CustomEvent('mm:cart-update', { detail: { action: 'add', productHandle: productHandle, items: cart.lines, total: cart.totalAmount } }));
       return cart;
     }).catch(function (err) {
       console.error('Add to cart failed:', err);
@@ -187,6 +188,7 @@
     }).then(function (data) {
       cart = parseCart(data.cartLinesUpdate.cart);
       updateCartUI();
+      document.dispatchEvent(new CustomEvent('mm:cart-update', { detail: { action: quantity < 1 ? 'remove' : 'update', items: cart ? cart.lines : [], total: cart ? cart.totalAmount : 0 } }));
     });
   }
 
@@ -210,6 +212,7 @@
     }).then(function (data) {
       cart = parseCart(data.cartLinesRemove.cart);
       updateCartUI();
+      document.dispatchEvent(new CustomEvent('mm:cart-update', { detail: { action: 'remove', items: cart ? cart.lines : [], total: cart ? cart.totalAmount : 0 } }));
     });
   }
 
@@ -451,9 +454,19 @@
         e.preventDefault();
         var vid = addBtn.getAttribute('data-variant-id');
         var origText = addBtn.getAttribute('data-original-text') || 'Add to Cart';
+        // Extract product handle from nearest card link or PDP URL
+        var handle = 'unknown';
+        var card = addBtn.closest('.product-card');
+        if (card) {
+          var link = card.querySelector('.product-card-link');
+          if (link) { var hm = (link.getAttribute('href') || '').match(/\/shop\/([^\/]+)/); if (hm) handle = hm[1]; }
+        } else {
+          var pm = location.pathname.match(/\/shop\/([^\/]+)/); if (pm) handle = pm[1];
+        }
+        addBtn.dataset.productHandle = handle;
         addBtn.classList.add('adding');
         addBtn.textContent = 'Adding\u2026';
-        addToCart(vid, 1).then(function () {
+        addToCart(vid, 1, handle).then(function () {
           addBtn.textContent = 'Added \u2713';
           setTimeout(function () {
             addBtn.classList.remove('adding');
