@@ -258,8 +258,8 @@
     .gauge-card.red .gauge-value { color: var(--red); }
     .gauge-card .gauge-tip { position: relative; display: inline-block; cursor: help; margin-left: 4px; }
     .gauge-card .gauge-tip .tip-icon { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,0.08); color: var(--text-muted); font-size: 0.65rem; font-weight: 700; border: 1px solid var(--border); }
-    .gauge-card .gauge-tip .tip-text { visibility: hidden; opacity: 0; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); width: 240px; background: #1a2332; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 0.75rem; line-height: 1.5; color: var(--text-muted); text-align: left; z-index: 100; transition: opacity 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.4); pointer-events: none; text-transform: none; letter-spacing: normal; font-weight: 400; }
-    .gauge-card .gauge-tip .tip-text::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #1a2332; }
+    .gauge-card .gauge-tip .tip-text { visibility: hidden; opacity: 0; position: fixed; width: 260px; background: #1a2332; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 0.75rem; line-height: 1.5; color: var(--text-muted); text-align: left; z-index: 9999; transition: opacity 0.15s; box-shadow: 0 4px 16px rgba(0,0,0,0.5); pointer-events: none; text-transform: none; letter-spacing: normal; font-weight: 400; }
+    .gauge-card .gauge-tip .tip-text::after { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-bottom-color: #1a2332; }
     .gauge-card .gauge-tip:hover .tip-text { visibility: visible; opacity: 1; }
 
     /* ─── SEO Table ─── */
@@ -2287,6 +2287,18 @@ async function renderPerformance() {
       html += '</div>';
     });
     gaugesEl.innerHTML = html;
+
+    // Position fixed tooltips dynamically
+    gaugesEl.querySelectorAll('.gauge-tip').forEach(tip => {
+      const icon = tip.querySelector('.tip-icon');
+      const text = tip.querySelector('.tip-text');
+      if (!icon || !text) return;
+      icon.addEventListener('mouseenter', () => {
+        const r = icon.getBoundingClientRect();
+        text.style.top = (r.bottom + 8) + 'px';
+        text.style.left = Math.max(8, Math.min(r.left + r.width / 2 - 130, window.innerWidth - 268)) + 'px';
+      });
+    });
   }
 
   // Device breakdown
