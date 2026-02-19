@@ -37,6 +37,7 @@
 
   <!-- Early resource hints (before anything else delays discovery) -->
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://dbx3hf-qe.myshopify.com" crossorigin>
   <link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=320" imagesrcset="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=320 320w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=400 400w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=600 600w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=800 800w" imagesizes="(max-width: 768px) 180px, 50vw" fetchpriority="high">
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -899,19 +900,20 @@
   <!-- Analytics + tracking + product sync: lazy-loaded after page paint to free bandwidth for LCP -->
   <script>
   window.addEventListener('load', function() {
-    function _loadAnalytics() {
-      // Product sync (non-critical on homepage — static cards are pre-rendered)
+    // Phase 1 (load + 3s): product sync + Firebase tracker
+    setTimeout(function() {
       var ps = document.createElement('script');
       ps.src = 'assets/js/products.js';
       document.body.appendChild(ps);
 
-      // Firebase analytics tracker
       var t = document.createElement('script');
       t.src = '/assets/js/mm-tracker.js';
       t.defer = true;
       document.body.appendChild(t);
+    }, 3000);
 
-      // GA4 + Google Ads + Merchant Center (single loader, 4 configs)
+    // Phase 2 (load + 5s): GA4 primary tag only
+    setTimeout(function() {
       var g = document.createElement('script');
       g.src = 'https://www.googletagmanager.com/gtag/js?id=G-XMDX96Z78T';
       g.async = true;
@@ -921,14 +923,16 @@
       gtag('js', new Date());
       gtag('config', 'G-XMDX96Z78T');
 
-      // Stagger secondary trackers to spread network + CPU cost
+      // Phase 3 (load + 8s): secondary GA configs
       setTimeout(function() {
         gtag('config', 'G-GNPEVFLK33');
         gtag('config', 'AW-17841486556');
         gtag('config', 'GT-K8D2LRC3');
-      }, 1500);
+      }, 3000);
+    }, 5000);
 
-      // Facebook Pixel
+    // Phase 4 (load + 7s): Facebook Pixel
+    setTimeout(function() {
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
       n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -936,13 +940,7 @@
       document,'script','https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '2110692629737399');
       fbq('track', 'PageView');
-    }
-    // Defer analytics until browser is idle to avoid blocking LCP paint
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(_loadAnalytics, { timeout: 2000 });
-    } else {
-      setTimeout(_loadAnalytics, 1500);
-    }
+    }, 7000);
   });
   </script>
   <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2110692629737399&ev=PageView&noscript=1"></noscript>
