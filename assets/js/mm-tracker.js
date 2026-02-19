@@ -245,9 +245,9 @@
     return state.db.ref(path);
   }
 
-  /** Atomic increment via transaction. */
+  /** Atomic increment via ServerValue (write-only — no read needed). */
   function increment(path) {
-    return ref(path).transaction(function (val) { return (val || 0) + 1; });
+    return ref(path).set(firebase.database.ServerValue.increment(1));
   }
 
   /** Push to a list. */
@@ -270,11 +270,22 @@
     if (!state.fbReady || state.batchQueue.length === 0) return;
     var ops = state.batchQueue.splice(0);
     var updates = {};
+    // Tally increment counts per path so multiple increments to same path accumulate
+    var incCounts = {};
+    var otherOps = [];
     ops.forEach(function (op) {
       if (op.type === 'increment') {
-        // Increments must use transactions — can't batch; run immediately
-        increment(op.path);
-      } else if (op.type === 'push') {
+        incCounts[op.path] = (incCounts[op.path] || 0) + 1;
+      } else {
+        otherOps.push(op);
+      }
+    });
+    // Apply accumulated increments
+    Object.keys(incCounts).forEach(function (path) {
+      updates[path] = firebase.database.ServerValue.increment(incCounts[path]);
+    });
+    otherOps.forEach(function (op) {
+      if (op.type === 'push') {
         var key = ref(op.path).push().key;
         updates[op.path + '/' + key] = op.data;
       } else if (op.type === 'set') {
@@ -292,16 +303,20 @@
     // sendBeacon can't talk to Firebase directly, so we flush remaining via REST
     var ops = state.batchQueue.splice(0);
     var updates = {};
+    var incCounts = {};
     ops.forEach(function (op) {
       if (op.type === 'increment') {
-        // Fallback: set instead of increment (lossy but best-effort on unload)
-        updates[op.path] = { '.sv': 'increment', '_delta': 1 };
+        incCounts[op.path] = (incCounts[op.path] || 0) + 1;
       } else if (op.type === 'push') {
         var key = 'bc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
         updates[op.path + '/' + key] = op.data;
       } else if (op.type === 'set') {
         updates[op.path] = op.data;
       }
+    });
+    // Server-side increment via REST multi-path update
+    Object.keys(incCounts).forEach(function (path) {
+      updates[path] = { '.sv': { 'increment': incCounts[path] } };
     });
     if (Object.keys(updates).length) {
       // Try Firebase REST API via sendBeacon
