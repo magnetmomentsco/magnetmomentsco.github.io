@@ -11,7 +11,7 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://www.google-analytics.com; connect-src 'self' https://dbx3hf-qe.myshopify.com https://*.firebaseio.com wss://*.firebaseio.com https://magnetmomentsco-us-default-rtdb.firebaseio.com wss://magnetmomentsco-us-default-rtdb.firebaseio.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; frame-src 'none'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://connect.facebook.net https://googleads.g.doubleclick.net https://*.firebaseio.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; connect-src 'self' https://dbx3hf-qe.myshopify.com https://*.firebaseio.com wss://*.firebaseio.com https://magnetmomentsco-us-default-rtdb.firebaseio.com wss://magnetmomentsco-us-default-rtdb.firebaseio.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
@@ -284,7 +284,7 @@
   </footer>
 
   <button class="back-to-top" aria-label="Back to top"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
-  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/main.js" defer></script>
   <!-- ========== CART DRAWER ========== -->
   <div id="cart-overlay"></div>
   <aside id="cart-drawer" aria-label="Shopping cart" role="dialog" aria-modal="true">
@@ -309,7 +309,7 @@
       <a id="cart-checkout-btn" href="#" target="_blank" rel="noopener">Checkout &rarr;</a>
     </div>
   </aside>
-  <script src="../assets/js/shopify-cart.js"></script>
+  <script src="../assets/js/shopify-cart.js" defer></script>
   <script src="/assets/js/mm-tracker.js" defer></script>
 </body>
 </html>

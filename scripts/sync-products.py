@@ -449,7 +449,7 @@ def build_product_page_html(product, all_products):
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://www.google-analytics.com; connect-src 'self' https://dbx3hf-qe.myshopify.com https://*.firebaseio.com wss://*.firebaseio.com https://magnetmomentsco-us-default-rtdb.firebaseio.com wss://magnetmomentsco-us-default-rtdb.firebaseio.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; frame-src 'none'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://connect.facebook.net https://googleads.g.doubleclick.net https://*.firebaseio.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; connect-src 'self' https://dbx3hf-qe.myshopify.com https://*.firebaseio.com wss://*.firebaseio.com https://magnetmomentsco-us-default-rtdb.firebaseio.com wss://magnetmomentsco-us-default-rtdb.firebaseio.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.google.com https://*.merchant-center-analytics.goog https://*.doubleclick.net; form-action 'self' https://formsubmit.co; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
@@ -614,7 +614,7 @@ def build_product_page_html(product, all_products):
 
   <button class="back-to-top" aria-label="Back to top"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
 
-  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/main.js" defer></script>
 
   <!-- Image gallery -->
   <script>
@@ -681,8 +681,8 @@ def build_product_page_html(product, all_products):
       <a id="cart-checkout-btn" href="#" target="_blank" rel="noopener">Checkout →</a>
     </div>
   </aside>
-  <script src="/assets/js/shopify-cart.js"></script>
-  <script src="/assets/js/products.js"></script>
+  <script src="/assets/js/shopify-cart.js" defer></script>
+  <script src="/assets/js/products.js" defer></script>
   <script src="/assets/js/mm-tracker.js" defer></script>
 </body>
 </html>'''

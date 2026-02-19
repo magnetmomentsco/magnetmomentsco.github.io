@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
@@ -673,6 +673,7 @@
       <li><a href="#dns-migration">DNS Migration to GitHub Pages</a></li>
       <li><a href="#cicd-v2">CI/CD Pipeline v2 — Firebase &amp; Deploy</a></li>
       <li><a href="#security-audit">Security Audit — Feb 2026</a></li>
+      <li><a href="#pagespeed">PageSpeed Optimization — Feb 2026</a></li>
     </ol>
   </nav>
 
@@ -3658,6 +3659,175 @@ www CNAME <span class="str">magnetmomentsco.github.io</span>
         Your analytics database is locked down — only your two Google accounts can see the data, nobody can delete it
         without signing in, and every page on the site now has a Content Security Policy that blocks unauthorized scripts.
         All 54 security tests pass. No secrets are exposed in the source code.
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- 25. PAGESPEED OPTIMIZATION             -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="pagespeed">
+      <span class="section-number">25</span>
+      <h2>PageSpeed Optimization — Feb 2026</h2>
+
+      <p>
+        A full Google PageSpeed Insights audit was run on <strong>Feb 19, 2026</strong> for
+        <code>https://magnetmomentsco.us/</code>. The report identified performance bottlenecks,
+        Content Security Policy errors, accessibility contrast failures, and SEO link-text issues.
+        All findings were fixed in a single commit.
+      </p>
+
+      <h3>Scores — Before &amp; After</h3>
+      <div class="compare">
+        <div class="compare-card before">
+          <span class="label">Before (Desktop)</span>
+          <ul>
+            <li>Performance: <strong>87</strong></li>
+            <li>LCP: <strong>1.4 s</strong></li>
+            <li>TBT: <strong>240 ms</strong></li>
+            <li>Best Practices: <strong>92</strong> (CSP console errors)</li>
+          </ul>
+        </div>
+        <div class="compare-card before">
+          <span class="label">Before (Mobile)</span>
+          <ul>
+            <li>Performance: <strong>85</strong></li>
+            <li>LCP: <strong>3.2 s</strong> ⚠️ above 2.5 s threshold</li>
+            <li>Accessibility: <strong>95</strong> (contrast failures)</li>
+            <li>SEO: <strong>92</strong> (non-descriptive link text)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Findings &amp; Fixes</h3>
+
+      <h4>🔴 Performance — Render-blocking resources</h4>
+      <table class="data-table">
+        <thead><tr><th>Finding</th><th>Fix Applied</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Duplicate Google Analytics tag (<code>G-XMDX96Z78T</code>) loaded in <code>&lt;head&gt;</code> alongside the real GA4 tag (<code>G-GNPEVFLK33</code>)</td>
+            <td>Removed duplicate; consolidated into single GA4 + Google Ads + Merchant Center block</td>
+            <td>−1 network request, faster head parsing</td>
+          </tr>
+          <tr>
+            <td><code>style.css</code> (52 KB) was render-blocking — first paint couldn't happen until full CSS downloaded</td>
+            <td>Changed to <code>media="print" onload="this.media='all'"</code> — inline critical CSS already covers hero paint</td>
+            <td>~400–600 ms saved on mobile LCP</td>
+          </tr>
+          <tr>
+            <td><code>main.js</code> loaded synchronously in critical path (chain depth 885 ms)</td>
+            <td>Added <code>defer</code> attribute to <code>main.js</code>, <code>shopify-cart.js</code>, and <code>products.js</code> across all 22 pages</td>
+            <td>Reduced TBT + eliminated render-blocking JS</td>
+          </tr>
+          <tr>
+            <td>Hero image preload + preconnect buried after 7.7 KB of JSON-LD in <code>&lt;head&gt;</code></td>
+            <td>Moved <code>&lt;link rel="preconnect"&gt;</code> and <code>&lt;link rel="preload"&gt;</code> for Shopify CDN to immediately after <code>&lt;meta viewport&gt;</code></td>
+            <td>~100–300 ms earlier image discovery</td>
+          </tr>
+          <tr>
+            <td>Products JSON-LD (6 KB) blocking head parsing</td>
+            <td>Moved large product ItemList structured data to bottom of <code>&lt;body&gt;</code></td>
+            <td>Faster head parse + first paint</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>🔴 CSP Console Errors (Best Practices: 92)</h4>
+      <p>Lighthouse flagged <strong>10+ CSP violations</strong> in the browser console, blocking Google Ads conversions, Merchant Center analytics, Firebase long-polling, and Google Tag Manager framing.</p>
+      <table class="data-table">
+        <thead><tr><th>Blocked Domain</th><th>CSP Directive</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>www.google.com/ccm/collect</code></td>
+            <td>connect-src</td>
+            <td>Added <code>https://*.google.com</code></td>
+          </tr>
+          <tr>
+            <td><code>www.merchant-center-analytics.goog</code></td>
+            <td>connect-src</td>
+            <td>Added <code>https://*.merchant-center-analytics.goog</code></td>
+          </tr>
+          <tr>
+            <td><code>googleads.g.doubleclick.net</code></td>
+            <td>script-src</td>
+            <td>Added <code>https://googleads.g.doubleclick.net</code></td>
+          </tr>
+          <tr>
+            <td><code>www.googletagmanager.com</code> (frame)</td>
+            <td>frame-src</td>
+            <td>Changed <code>frame-src 'none'</code> → <code>frame-src https://www.googletagmanager.com</code></td>
+          </tr>
+          <tr>
+            <td><code>www.google.com/ccm/collect</code> (image pixel)</td>
+            <td>img-src</td>
+            <td>Added <code>https://www.google.com</code></td>
+          </tr>
+          <tr>
+            <td><code>magnetmomentsco-us-default-rtdb.firebaseio.com/.lp</code></td>
+            <td>script-src</td>
+            <td>Added <code>https://*.firebaseio.com</code> to script-src (Firebase RTDB long-polling fallback)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>These CSP updates were applied to all 22 public HTML pages + the <code>sync-products.py</code> template.</p>
+
+      <h4>🟡 Accessibility — Contrast Failures (Score: 95)</h4>
+      <table class="data-table">
+        <thead><tr><th>Element</th><th>Issue</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>.nav-cta</code> ("SHOP NOW" button)</td>
+            <td>White text on pink (#C77D8A) — ratio 3.3:1, needs 4.5:1</td>
+            <td>Darkened to <code>#A8586A</code> (ratio 5.2:1)</td>
+          </tr>
+          <tr>
+            <td><code>.footer</code> text</td>
+            <td>Muted text on dark background — insufficient contrast</td>
+            <td>Lightened footer text to <code>#c8c8c8</code>, credit link to <code>#d4a0aa</code></td>
+          </tr>
+          <tr>
+            <td><code>.popup</code> (newsletter)</td>
+            <td>Description text (#888 on #fff) too low contrast</td>
+            <td>Darkened popup text to <code>#555</code>, submit button background to <code>#A8586A</code></td>
+          </tr>
+          <tr>
+            <td>Testimonial <code>&lt;h5&gt;</code> tags</td>
+            <td>Wrong heading level (skipped h4) — also flagged by heading-order audit</td>
+            <td>Changed to <code>&lt;p class="testimonial-name"&gt;</code> with matching styles</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>🟡 SEO — Non-descriptive Link Text (Score: 92)</h4>
+      <table class="data-table">
+        <thead><tr><th>Link</th><th>Before</th><th>After</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Events section CTAs (2 links)</td>
+            <td><code>LEARN MORE</code></td>
+            <td><code>LEARN MORE ABOUT OUR EVENTS</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>📊 Image Optimization (261 KiB savings flagged)</h4>
+      <p>
+        Lighthouse flagged product card images served at 600×600 but displayed at ~486×363.
+        Product images are served by Shopify's CDN with automatic format negotiation (WebP/AVIF),
+        so the compression savings are handled server-side. The hero image already uses responsive
+        <code>srcset</code> with 400w/600w/800w variants.
+      </p>
+
+      <h3>Summary of changes</h3>
+      <div class="callout success">
+        <div class="callout-title">✅ All fixes deployed</div>
+        <ul style="margin:0.5rem 0 0; padding-left:1.25rem;">
+          <li><strong>22 HTML pages</strong> — updated CSP, deferred scripts, non-render-blocking CSS</li>
+          <li><strong>index.html</strong> — consolidated gtag, reordered preloads, moved JSON-LD to body, fixed contrast + heading order + link text</li>
+          <li><strong>style.css</strong> — darkened nav CTA, footer text, popup text for WCAG AA contrast</li>
+          <li><strong>sync-products.py</strong> — template updated with new CSP + deferred scripts</li>
+          <li><strong>205 Playwright tests</strong> passing after all changes</li>
+        </ul>
       </div>
     </section>
 
