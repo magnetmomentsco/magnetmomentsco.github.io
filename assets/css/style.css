@@ -17,7 +17,7 @@
   --color-cream-dark: #F5EDE0;
   --color-charcoal: #2D2D2D;      /* Primary text */
   --color-text: #4A4A4A;          /* Body text */
-  --color-text-light: #7A7A7A;    /* Muted text */
+  --color-text-light: #595959;    /* Muted text (WCAG AA 7:1 on white) */
   --color-white: #FFFFFF;
   --color-border: #E8E0D8;
 
@@ -1468,15 +1468,16 @@ section {
   color: var(--color-white);
 }
 
-.testimonial-author-info h5 {
+.testimonial-author-info .testimonial-name {
   color: var(--color-white);
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
+  margin: 0;
 }
 
 .testimonial-author-info p {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.7);
   font-size: 0.85rem;
   margin: 0;
 }
@@ -1562,7 +1563,7 @@ section {
 /* ---------- Footer ---------- */
 .footer {
   background: var(--color-charcoal);
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.85);
   padding: 4rem 0 1.5rem;
 }
 
@@ -1650,7 +1651,7 @@ section {
   text-align: center;
   margin-top: 1rem;
   font-size: 0.8rem;
-  opacity: 0.6;
+  opacity: 0.75;
   transition: opacity 0.2s;
 }
 .footer-credit:hover { opacity: 1; }
