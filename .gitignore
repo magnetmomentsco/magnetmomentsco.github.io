@@ -14,4 +14,8 @@ report-mobile-*.png
 
 # OS files
 .DS_Store
+
+# Source (unminified) copies — kept locally for development
+assets/css/style.src.css
+assets/js/*.src.js
 Thumbs.db
