@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.shopify.com https://*.googleusercontent.com; connect-src 'self' https://*.firebaseio.com https://api.github.com https://*.googleapis.com; frame-src https://accounts.google.com https://*.firebaseapp.com; object-src 'none'; base-uri 'self'">
   <meta name="robots" content="noindex, nofollow">
   <title>Command Center — Magnet Moments Co.</title>
   <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -14,7 +13,8 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
@@ -572,6 +572,10 @@
       <strong>⚠️ Firebase Not Configured</strong>
       <p style="margin-top:8px;">Analytics data is unavailable. Update the Firebase config in <code>mm-tracker.js</code> and this dashboard with your real credentials.</p>
     </div>
+    <div class="firebase-warning" id="firebase-conn-warning" style="display:none;">
+      <strong>⚠️ Firebase Connection Failed</strong>
+      <p style="margin-top:8px;" id="firebase-conn-detail">Could not reach the database within 12 seconds. Try a <strong>hard refresh</strong> (Ctrl + Shift + R) to clear cached security policies. If this persists, check your network or browser extensions.</p>
+    </div>
 
     <!-- ─── Quick Stats Row ─── -->
     <div class="stats-row">
@@ -1101,8 +1105,12 @@ document.getElementById('btn-google-signin').addEventListener('click', function(
       if (err.code === 'auth/popup-closed-by-user') {
         document.getElementById('auth-loading').style.display = 'none';
         document.getElementById('btn-google-signin').style.display = '';
+      } else if (err.code === 'auth/internal-error') {
+        showError('Auth internal error — check Firebase Console: 1) Authentication → Settings → Authorized domains must include "' + location.hostname + '". 2) Authentication → Sign-in method → Google must be enabled. (code: ' + err.code + ')');
+      } else if (err.code === 'auth/unauthorized-domain') {
+        showError('Domain "' + location.hostname + '" is not authorized. Add it in Firebase Console → Authentication → Settings → Authorized domains.');
       } else {
-        showError(err.message || 'Sign-in failed. Please try again.');
+        showError((err.code || '') + ': ' + (err.message || 'Sign-in failed. Please try again.'));
       }
     });
 });
@@ -1118,7 +1126,7 @@ const FIREBASE_CONFIG = {
   apiKey: "__FIREBASE_API_KEY__",
   authDomain: "__FIREBASE_AUTH_DOMAIN__",
   databaseURL: "__FIREBASE_DATABASE_URL__",
-  projectId: "__FIREBASE_PROJECT_ID__",
+  projectId: "magnetmomentsco-us",
   storageBucket: "__FIREBASE_STORAGE_BUCKET__",
   messagingSenderId: "__FIREBASE_MESSAGING_SENDER_ID__",
   appId: "__FIREBASE_APP_ID__"
@@ -1138,10 +1146,12 @@ function initFirebase() {
       showFirebaseWarning();
       return false;
     }
+
     if (!firebase.apps.length) {
       firebase.initializeApp(FIREBASE_CONFIG);
     }
     db = firebase.database();
+
     firebaseReady = true;
 
     // Set up auth state listener
@@ -1176,6 +1186,47 @@ function showFirebaseWarning() {
 function fbRef(path) {
   if (!db) return null;
   return db.ref(path);
+}
+
+// Timeout-wrapped Firebase read — resolves or rejects within the limit.
+// Prevents the dashboard from hanging indefinitely when the RTDB
+// WebSocket connection can't be established.
+const FB_TIMEOUT = 12000; // 12 s — generous for cold starts
+function fbOnce(path, timeoutMs) {
+  const ms = timeoutMs || FB_TIMEOUT;
+  const r = fbRef(path);
+  if (!r) return Promise.reject(new Error('Firebase not ready'));
+  return Promise.race([
+    r.once('value'),
+    new Promise(function (_, reject) {
+      setTimeout(function () { reject(new Error('Firebase read timed out (' + path + ')')); }, ms);
+    })
+  ]);
+}
+
+// Wrap a render function so errors don't leave panels stuck on "Loading..."
+// If the renderer throws (e.g. Firebase timeout), its DOM containers
+// get updated to show an error state instead of the eternal spinner.
+function safeRender(fn) {
+  return fn().catch(function (e) {
+    console.warn('[Dashboard] ' + (fn.name || 'renderer') + ':', e.message || e);
+  });
+}
+
+// After all renderers settle, replace any elements still showing
+// "Loading…" or "Connecting…" with a user-friendly error message.
+function sweepStaleLoading() {
+  document.querySelectorAll('.loading').forEach(function (el) {
+    el.className = '';
+    el.style.cssText = 'color:var(--text-muted);text-align:center;padding:20px;font-size:0.9rem;';
+    el.textContent = '⚠️ Data unavailable — try a hard refresh (Ctrl + Shift + R)';
+  });
+  // Also sweep stat-sub "Loading…" in quick stat cards
+  document.querySelectorAll('.stat-sub').forEach(function (el) {
+    if (el.textContent.trim().startsWith('Loading')) {
+      el.textContent = 'Unavailable';
+    }
+  });
 }
 
 
@@ -1244,22 +1295,23 @@ window.onGlobalDateChange = onGlobalDateChange;
 
 async function refreshAllPanels() {
   const renderers = [
-    renderQuickStats(),
-    renderTrafficChart(),
-    renderTrafficSources(),
-    renderScrollDepth(),
-    renderClickHeatmapPageList(),
-    renderFunnel(),
-    renderNewsletter(),
-    renderCartAnalytics(),
-    renderPerformance(),
-    renderErrors(),
-    renderSocialProofPreview(),
-    renderSessions(),
-    renderABTesting(),
-    calculateRevenue()
+    safeRender(renderQuickStats),
+    safeRender(renderTrafficChart),
+    safeRender(renderTrafficSources),
+    safeRender(renderScrollDepth),
+    safeRender(renderClickHeatmapPageList),
+    safeRender(renderFunnel),
+    safeRender(renderNewsletter),
+    safeRender(renderCartAnalytics),
+    safeRender(renderPerformance),
+    safeRender(renderErrors),
+    safeRender(renderSocialProofPreview),
+    safeRender(renderSessions),
+    safeRender(renderABTesting),
+    safeRender(calculateRevenue)
   ];
   await Promise.allSettled(renderers);
+  sweepStaleLoading();
 }
 
 function formatNumber(n) {
@@ -1397,7 +1449,7 @@ async function fetchProducts() {
 async function fetchTodaysVisitors() {
   if (!firebaseReady) return { total: 0, sessions: new Set() };
   const today = getSelectedDate();
-  const snap = await fbRef('/pageViews/' + today).once('value');
+  const snap = await fbOnce('/pageViews/' + today);
   const data = snap.val();
   if (!data) return { total: 0, sessions: new Set() };
   const sessions = new Set();
@@ -1429,7 +1481,7 @@ async function fetchTrafficHistory(days = 30) {
   for (let i = days - 1; i >= 0; i--) {
     const date = getDateOffset(i);
     promises.push(
-      fbRef('/pageViews/' + date).once('value').then(snap => {
+      fbOnce('/pageViews/' + date).then(snap => {
         const data = snap.val();
         let count = 0;
         if (data) {
@@ -1449,7 +1501,7 @@ async function fetchTrafficHistory(days = 30) {
 async function fetchTopPagesToday() {
   if (!firebaseReady) return [];
   const today = getSelectedDate();
-  const snap = await fbRef('/pageViews/' + today).once('value');
+  const snap = await fbOnce('/pageViews/' + today);
   const data = snap.val();
   if (!data) return [];
   const pages = {};
@@ -1465,7 +1517,7 @@ async function fetchTopPagesToday() {
 async function fetchTopReferrersByDay() {
   if (!firebaseReady) return [];
   const today = getSelectedDate();
-  const snap = await fbRef('/pageViews/' + today).once('value');
+  const snap = await fbOnce('/pageViews/' + today);
   const data = snap.val();
   if (!data) return [];
   const referrers = {};
@@ -1488,7 +1540,7 @@ async function fetchTopReferrersByDay() {
 async function fetchTrafficSources() {
   if (!firebaseReady) return {};
   const today = getSelectedDate();
-  const snap = await fbRef('/pageViews/' + today).once('value');
+  const snap = await fbOnce('/pageViews/' + today);
   const data = snap.val();
   if (!data) return {};
   const sources = {};
@@ -1507,7 +1559,7 @@ async function fetchTrafficSources() {
 async function fetchScrollDepth() {
   if (!firebaseReady) return {};
   const today = getSelectedDate();
-  const snap = await fbRef('/scrollDepth/' + today).once('value');
+  const snap = await fbOnce('/scrollDepth/' + today);
   return snap.val() || {};
 }
 
@@ -1517,7 +1569,7 @@ async function fetchClicks(pageSlug, dates) {
   if (!dates) dates = [getSelectedDate()];
   const all = [];
   await Promise.all(dates.map(async (d) => {
-    const snap = await fbRef('/clicks/' + d + '/' + pageSlug).once('value');
+    const snap = await fbOnce('/clicks/' + d + '/' + pageSlug);
     const data = snap.val();
     if (data) all.push(...Object.values(data));
   }));
@@ -1530,7 +1582,7 @@ async function fetchRageClicks(pageSlug, dates) {
   if (!dates) dates = [getSelectedDate()];
   const all = [];
   await Promise.all(dates.map(async (d) => {
-    const snap = await fbRef('/rageClicks/' + d + '/' + pageSlug).once('value');
+    const snap = await fbOnce('/rageClicks/' + d + '/' + pageSlug);
     const data = snap.val();
     if (data) all.push(...Object.values(data));
   }));
@@ -1541,7 +1593,7 @@ async function fetchRageClicks(pageSlug, dates) {
 async function fetchFunnelData() {
   if (!firebaseReady) return {};
   const today = getSelectedDate();
-  const snap = await fbRef('/funnel/' + today).once('value');
+  const snap = await fbOnce('/funnel/' + today);
   return snap.val() || {};
 }
 
@@ -1553,7 +1605,7 @@ async function fetchNewsletterData(days = 14) {
   for (let i = days - 1; i >= 0; i--) {
     const date = getDateOffset(i);
     promises.push(
-      fbRef('/newsletter/' + date).once('value').then(snap => {
+      fbOnce('/newsletter/' + date).then(snap => {
         results[date] = snap.val() || {};
       })
     );
@@ -1566,7 +1618,7 @@ async function fetchNewsletterData(days = 14) {
 async function fetchDismissDetails() {
   if (!firebaseReady) return [];
   const today = getSelectedDate();
-  const snap = await fbRef('/newsletter/' + today + '/dismiss_details').once('value');
+  const snap = await fbOnce('/newsletter/' + today + '/dismiss_details');
   const data = snap.val();
   if (!data) return [];
   return Object.values(data);
@@ -1575,7 +1627,7 @@ async function fetchDismissDetails() {
 // 4m. Visitor intent data
 async function fetchIntentData() {
   if (!firebaseReady) return {};
-  const snap = await fbRef('/visitors/').once('value');
+  const snap = await fbOnce('/visitors/');
   return snap.val() || {};
 }
 
@@ -1583,7 +1635,7 @@ async function fetchIntentData() {
 async function fetchCartData() {
   if (!firebaseReady) return [];
   const today = getSelectedDate();
-  const snap = await fbRef('/cart/' + today).once('value');
+  const snap = await fbOnce('/cart/' + today);
   const data = snap.val();
   if (!data) return [];
   return Object.values(data);
@@ -1593,7 +1645,7 @@ async function fetchCartData() {
 async function fetchPerformanceData() {
   if (!firebaseReady) return {};
   const today = getSelectedDate();
-  const snap = await fbRef('/performance/' + today).once('value');
+  const snap = await fbOnce('/performance/' + today);
   return snap.val() || {};
 }
 
@@ -1601,7 +1653,7 @@ async function fetchPerformanceData() {
 async function fetchErrors() {
   if (!firebaseReady) return [];
   const today = getSelectedDate();
-  const snap = await fbRef('/errors/' + today).once('value');
+  const snap = await fbOnce('/errors/' + today);
   const data = snap.val();
   if (!data) return [];
   return Object.values(data);
@@ -1658,53 +1710,55 @@ function renderTopBar() {
 
 // ─── 5b. Quick Stats ───
 async function renderQuickStats() {
-  // Today's visitors
-  try {
-    const { total, sessions } = await fetchTodaysVisitors();
-    document.getElementById('stat-visitors').textContent = formatNumber(sessions.size);
-    document.getElementById('stat-visitors-sub').textContent = formatNumber(total) + ' total pageviews';
-  } catch {
-    document.getElementById('stat-visitors').textContent = '—';
-    document.getElementById('stat-visitors-sub').textContent = 'Unable to load';
-  }
-
-  // Products
-  try {
-    const data = await fetchProducts();
-    if (data) {
-      const total = data.productCount || data.products?.length || 0;
-      const active = data.products?.filter(p => p.availableForSale).length || 0;
-      const oos = total - active;
-      document.getElementById('stat-products').textContent = total;
-      document.getElementById('stat-products-sub').textContent = active + ' active · ' + oos + ' out of stock';
-    }
-  } catch {
-    document.getElementById('stat-products').textContent = '—';
-  }
-
-  // Last sync
-  try {
-    const data = await fetchProducts();
-    if (data?.lastUpdated) {
-      document.getElementById('stat-sync').textContent = formatTimeAgo(data.lastUpdated);
-      document.getElementById('stat-sync-sub').textContent = formatDateTime(data.lastUpdated);
-    }
-  } catch {}
-
-  // Last deploy
-  try {
-    const deploy = await fetchLastDeploy();
-    if (deploy) {
-      document.getElementById('stat-deploy').textContent = formatTimeAgo(deploy.created_at);
-      document.getElementById('stat-deploy-sub').textContent = formatDateTime(deploy.created_at);
-    } else {
-      document.getElementById('stat-deploy').textContent = '—';
-      document.getElementById('stat-deploy-sub').textContent = 'Unable to fetch';
-    }
-  } catch {
-    document.getElementById('stat-deploy').textContent = '—';
-    document.getElementById('stat-deploy-sub').textContent = 'GitHub API unavailable';
-  }
+  // Run all four cards in parallel so a Firebase timeout doesn't block non-Firebase cards
+  await Promise.allSettled([
+    // Today's visitors (Firebase)
+    (async () => {
+      try {
+        const { total, sessions } = await fetchTodaysVisitors();
+        document.getElementById('stat-visitors').textContent = formatNumber(sessions.size);
+        document.getElementById('stat-visitors-sub').textContent = formatNumber(total) + ' total pageviews';
+      } catch (e) {
+        document.getElementById('stat-visitors').textContent = '—';
+        document.getElementById('stat-visitors-sub').textContent = e.message && e.message.includes('timed out') ? 'Connection timed out' : 'Unable to load';
+      }
+    })(),
+    // Products + Last sync (HTTP — no Firebase)
+    (async () => {
+      try {
+        const data = await fetchProducts();
+        if (data) {
+          const total = data.productCount || data.products?.length || 0;
+          const active = data.products?.filter(p => p.availableForSale).length || 0;
+          const oos = total - active;
+          document.getElementById('stat-products').textContent = total;
+          document.getElementById('stat-products-sub').textContent = active + ' active · ' + oos + ' out of stock';
+          if (data.lastUpdated) {
+            document.getElementById('stat-sync').textContent = formatTimeAgo(data.lastUpdated);
+            document.getElementById('stat-sync-sub').textContent = formatDateTime(data.lastUpdated);
+          }
+        }
+      } catch {
+        document.getElementById('stat-products').textContent = '—';
+      }
+    })(),
+    // Last deploy (GitHub API — no Firebase)
+    (async () => {
+      try {
+        const deploy = await fetchLastDeploy();
+        if (deploy) {
+          document.getElementById('stat-deploy').textContent = formatTimeAgo(deploy.created_at);
+          document.getElementById('stat-deploy-sub').textContent = formatDateTime(deploy.created_at);
+        } else {
+          document.getElementById('stat-deploy').textContent = '—';
+          document.getElementById('stat-deploy-sub').textContent = 'Unable to fetch';
+        }
+      } catch {
+        document.getElementById('stat-deploy').textContent = '—';
+        document.getElementById('stat-deploy-sub').textContent = 'GitHub API unavailable';
+      }
+    })()
+  ]);
 }
 
 // ─── 5c. Live Visitors ───
@@ -1908,7 +1962,7 @@ async function renderClickHeatmapPageList() {
   const allSlugs = new Set();
 
   await Promise.all(dates.map(async (d) => {
-    const snap = await fbRef('/clicks/' + d).once('value');
+    const snap = await fbOnce('/clicks/' + d);
     const data = snap.val();
     if (data) Object.keys(data).forEach(s => allSlugs.add(s));
   }));
@@ -2501,7 +2555,7 @@ async function renderSocialProofPreview() {
   if (firebaseReady) {
     try {
       const today = getSelectedDate();
-      const snap = await fbRef('/productViewCounts/' + today).once('value');
+      const snap = await fbOnce('/productViewCounts/' + today);
       const counts = snap.val() || {};
       Object.entries(counts).forEach(([slug, count]) => {
         productViewCache[slug] = typeof count === 'number' ? count : 0;
@@ -2773,7 +2827,7 @@ window.renderInventory = renderInventory;
 // Data fetch
 async function fetchSessions(dateStr) {
   if (!firebaseReady) return {};
-  const snap = await fbRef('/sessions/' + dateStr).once('value');
+  const snap = await fbOnce('/sessions/' + dateStr);
   return snap.val() || {};
 }
 
@@ -2871,7 +2925,7 @@ window.removeExperiment = removeExperiment;
 
 async function fetchABData() {
   if (!firebaseReady) return {};
-  const snap = await fbRef('/abTests/').once('value');
+  const snap = await fbOnce('/abTests/');
   return snap.val() || {};
 }
 
@@ -3084,7 +3138,7 @@ function renderQuickActions() {
         }
         try {
           const today = getSelectedDate();
-          const snap = await fbRef('/pageViews/' + today).once('value');
+          const snap = await fbOnce('/pageViews/' + today);
           const data = snap.val() || {};
           let csv = 'Page,Timestamp,Referrer,Source,Device\n';
           Object.entries(data).forEach(([slug, entries]) => {
@@ -3207,7 +3261,7 @@ async function fetchStorageEstimates() {
   const results = [];
   const promises = paths.map(async (p) => {
     try {
-      const snap = await fbRef(p.path).once('value');
+      const snap = await fbOnce(p.path);
       const val = snap.val();
       const bytes = val ? estimateJsonSize(val) : 0;
       const dateKeys = val && typeof val === 'object' ? Object.keys(val).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)).sort() : [];
@@ -3327,7 +3381,7 @@ async function pruneOldData(daysToKeep, isAuto) {
   let totalRemoved = 0;
   const prunePromises = prunablePaths.map(async (path) => {
     try {
-      const snap = await fbRef(path).once('value');
+      const snap = await fbOnce(path);
       const data = snap.val();
       if (!data || typeof data !== 'object') return;
 
@@ -3391,32 +3445,63 @@ async function initDashboard() {
   // Firebase is already initialized before auth flow
   const fbOk = firebaseReady;
 
-  // Fire all renderers concurrently
+  // Quick connectivity probe — show warning banner if RTDB can't connect
+  if (fbOk) {
+    // Test a real data read (not just .info/connected) to catch rules issues
+    var probeUser = firebase.auth().currentUser;
+    var probeEmail = probeUser ? probeUser.email : '(no user)';
+    fbOnce('/pageViews/', 12000).then(function () {
+      console.log('[Dashboard] Firebase probe OK — signed in as ' + probeEmail);
+    }).catch(function (err) {
+      var msg = err.message || String(err);
+      var el = document.getElementById('firebase-conn-warning');
+      var det = document.getElementById('firebase-conn-detail');
+      el.style.display = 'block';
+      if (msg.indexOf('PERMISSION_DENIED') !== -1 || msg.indexOf('permission_denied') !== -1) {
+        det.innerHTML = 'Signed in as <strong>' + probeEmail + '</strong> but Firebase rules denied the read.<br>' +
+          'Open <a href="https://console.firebase.google.com/project/magnetmomentsco-us/database/magnetmomentsco-us-default-rtdb/rules" target="_blank">Firebase Console → Rules</a> and verify the <code>.read</code> rule includes your email.';
+      } else if (msg.indexOf('timed out') !== -1) {
+        det.innerHTML = 'Could not reach the database within 12 seconds. Try a <strong>hard refresh</strong> (Ctrl+Shift+R). Signed in as: ' + probeEmail;
+      } else {
+        det.innerHTML = 'Error: <code>' + msg + '</code><br>Signed in as: <strong>' + probeEmail + '</strong>';
+      }
+    });
+  }
+
+  // Fire all renderers concurrently — wrapped so a Firebase timeout
+  // in one panel can't leave it stuck on "Loading..."
   const renderers = [
-    renderQuickStats(),
-    renderTrafficChart(),
-    renderTrafficSources(),
-    renderScrollDepth(),
-    renderClickHeatmapPageList(),
-    renderFunnel(),
-    renderNewsletter(),
-    renderIntent(),
-    renderCartAnalytics(),
-    renderPerformance(),
-    renderSEOHealth(),
-    renderErrors(),
-    renderDeployments(),
-    renderInventory(),
-    renderSocialProofPreview(),
-    renderSessions(),
-    renderABTesting(),
-    calculateRevenue(),
-    renderStorageManager()
+    safeRender(renderQuickStats),
+    safeRender(renderTrafficChart),
+    safeRender(renderTrafficSources),
+    safeRender(renderScrollDepth),
+    safeRender(renderClickHeatmapPageList),
+    safeRender(renderFunnel),
+    safeRender(renderNewsletter),
+    safeRender(renderIntent),
+    safeRender(renderCartAnalytics),
+    safeRender(renderPerformance),
+    safeRender(renderSEOHealth),
+    safeRender(renderErrors),
+    safeRender(renderDeployments),
+    safeRender(renderInventory),
+    safeRender(renderSocialProofPreview),
+    safeRender(renderSessions),
+    safeRender(renderABTesting),
+    safeRender(calculateRevenue),
+    safeRender(renderStorageManager)
   ];
 
-  // Subscribe to live visitors (real-time)
+  // Subscribe to live visitors (real-time) with a fallback timeout
   if (fbOk) {
     subscribeLiveVisitors(renderLiveVisitors);
+    // If live data hasn't arrived in 15s, show a meaningful message
+    setTimeout(function () {
+      var el = document.getElementById('live-visitors-content');
+      if (el && el.querySelector('.loading')) {
+        el.innerHTML = '<p class="text-muted text-center" style="padding:20px;">⚠️ Could not connect to real-time data — try a hard refresh (Ctrl+Shift+R)</p>';
+      }
+    }, 15000);
   } else {
     document.getElementById('live-visitors-content').innerHTML =
       '<p class="text-muted text-center" style="padding:20px;">Firebase not configured — live visitor data unavailable</p>';
@@ -3424,6 +3509,9 @@ async function initDashboard() {
 
   // Settle all renderers (don't let one failure break others)
   await Promise.allSettled(renderers);
+
+  // Any panels still showing "Loading" had a silent failure — update them
+  sweepStaleLoading();
 }
 
 // Initialize Firebase on load — auth state listener handles the rest
