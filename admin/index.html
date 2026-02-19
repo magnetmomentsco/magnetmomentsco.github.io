@@ -1808,11 +1808,12 @@ function renderLiveVisitors(presenceData) {
 // ─── 5d. Traffic Overview Chart ───
 async function renderTrafficChart() {
   const history = await fetchTrafficHistory(30);
-  const labels = Object.keys(history).map(d => {
+  const sortedDates = Object.keys(history).sort();
+  const labels = sortedDates.map(d => {
     const parts = d.split('-');
     return parts[1] + '/' + parts[2];
   });
-  const values = Object.values(history);
+  const values = sortedDates.map(d => history[d]);
 
   createChart('chart-traffic', 'line', {
     labels,
