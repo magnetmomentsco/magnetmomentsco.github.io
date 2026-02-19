@@ -39,10 +39,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-  <link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=800" fetchpriority="high">
+  <link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=480" imagesrcset="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=400 400w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=600 600w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=800 800w" imagesizes="(max-width: 768px) 350px, 50vw" fetchpriority="high">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
+  <!-- Critical CSS: hero paint without waiting for full stylesheet -->
+  <style>
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#FDF6F0 0%,#F5EDE4 50%,#f0e0e4 100%)}
+  .hero .container{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1400px;position:relative;z-index:1;width:100%;margin:0 auto;padding:0 1.5rem}
+  .hero .fade-in,.hero .fade-in-right{opacity:1;transform:none}
+  .hero-image-wrapper{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.12);aspect-ratio:4/5}
+  .hero-image-wrapper img{width:100%;height:100%;object-fit:cover}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:1.1;color:#2D2D2D}
+  @media(max-width:768px){.hero .container{grid-template-columns:1fr;text-align:center}.hero-image-wrapper{aspect-ratio:3/4;max-width:350px;margin:0 auto}}
+  </style>
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/style.css">
 
@@ -338,7 +348,7 @@
       </div>
       <div class="hero-image fade-in-right">
         <div class="hero-image-wrapper">
-          <img src="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=800" alt="Personalized 2x2 custom photo magnets scattered on a wooden table" width="800" height="800" loading="eager" fetchpriority="high">
+          <img src="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=600" srcset="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=400 400w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=600 600w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=800 800w" sizes="(max-width: 768px) 350px, 50vw" alt="Personalized 2x2 custom photo magnets scattered on a wooden table" width="800" height="800" loading="eager" fetchpriority="high">
         </div>
         <div class="hero-float-card card-1">
           <div style="display:flex;align-items:center;gap:0.5rem;">
