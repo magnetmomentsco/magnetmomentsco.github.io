@@ -1971,7 +1971,7 @@ async function renderClickHeatmapPageList() {
   allSlugs.forEach(s => { if (s.startsWith('_')) allSlugs.delete(s); });
 
   const select = document.getElementById('heatmap-page-select');
-  const current = select.value;
+  const current = select.value || 'shop';
   select.innerHTML = '<option value="">Select a page…</option>';
   Array.from(allSlugs).sort().forEach(slug => {
     const opt = document.createElement('option');
@@ -1980,6 +1980,7 @@ async function renderClickHeatmapPageList() {
     if (slug === current) opt.selected = true;
     select.appendChild(opt);
   });
+  if (!current || select.value === 'shop') loadClickHeatmap();
 }
 
 async function refreshHeatmapPages() {
