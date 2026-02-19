@@ -1046,7 +1046,7 @@
 ├── <span class="dir">about/</span><span class="file">index.html</span>       <span class="comment">← Alyssa's story</span>
 ├── <span class="dir">contact/</span><span class="file">index.html</span>     <span class="comment">← Contact form</span>
 ├── <span class="dir">faq/</span><span class="file">index.html</span>         <span class="comment">← 9-question FAQ</span>
-├── <span class="dir">admin/</span><span class="file">index.html</span>       <span class="comment">← Command Center dashboard (2,400 lines)</span>
+├── <span class="dir">admin/</span><span class="file">index.html</span>       <span class="comment">← Command Center dashboard (3,500+ lines)</span>
 ├── <span class="dir">policies/</span>
 │   ├── <span class="dir">shipping/</span><span class="file">index.html</span>
 │   ├── <span class="dir">refund/</span><span class="file">index.html</span>
@@ -1057,7 +1057,7 @@
 │   └── <span class="dir">js/</span>
 │       ├── <span class="file">main.js</span>          <span class="comment">← Nav, animations, FAQ accordion, popup</span>
 │       ├── <span class="file">shopify-cart.js</span>  <span class="comment">← Cart API integration (GraphQL)</span>
-│       └── <span class="file">mm-tracker.js</span>    <span class="comment">← Analytics tracker (855 lines, every page)</span>
+│       └── <span class="file">mm-tracker.js</span>    <span class="comment">← Analytics tracker (900+ lines, every page)</span>
 ├── <span class="dir">_data/</span><span class="file">products.json</span>    <span class="comment">← Auto-generated product data snapshot</span>
 ├── <span class="dir">scripts/</span><span class="file">sync-products.py</span> <span class="comment">← Shopify sync + PDP generator (887 lines)</span>
 ├── <span class="dir">.github/workflows/</span>
@@ -3194,8 +3194,8 @@ npx playwright show-report
           <ul>
             <li>Firebase database rules — only your two admin accounts can <em>read</em> analytics data</li>
             <li>Anonymous visitors can <em>write</em> analytics (the tracker needs this) but <strong>cannot delete or overwrite</strong> existing data</li>
-            <li>Content Security Policy (CSP) on every page — browsers block unauthorized scripts, connections, and iframes</li>
-            <li>Firebase config uses <code>__FIREBASE_*__</code> placeholders in source code</li>
+            <li>Content Security Policy (CSP) on all public pages — browsers block unauthorized scripts, connections, and iframes (admin page is excluded from CSP because Firebase Auth + Realtime Database require connections incompatible with <code>&lt;meta&gt;</code> CSP tags across browsers)</li>
+            <li>Firebase config uses <code>__FIREBASE_*__</code> placeholders in source code (6 secrets injected at deploy time; <code>projectId</code> is hardcoded since it&rsquo;s publicly visible in other config fields)</li>
             <li>Real credentials injected at deploy time from GitHub Secrets</li>
             <li>Credentials never committed to the repository</li>
             <li>Firebase authorized domains — only <code>magnetmomentsco.us</code> can use sign-in</li>
@@ -3418,7 +3418,7 @@ www CNAME <span class="str">magnetmomentsco.github.io</span>
       <p>
         Both workflows have an identical <strong>"Inject Firebase config"</strong> step that runs before deployment.
         It replaces <code>__FIREBASE_*__</code> placeholders in <code>mm-tracker.js</code> and <code>admin/index.html</code>
-        with real values from 7 GitHub Secrets:
+        with real values from 6 GitHub Secrets (<code>projectId</code> is hardcoded directly since it&rsquo;s already publicly visible in <code>authDomain</code>, <code>databaseURL</code>, and <code>storageBucket</code>):
       </p>
       <div class="table-wrap">
       <table>
@@ -3429,7 +3429,7 @@ www CNAME <span class="str">magnetmomentsco.github.io</span>
           <tr><td><code>FIREBASE_API_KEY</code></td><td><code>__FIREBASE_API_KEY__</code></td></tr>
           <tr><td><code>FIREBASE_AUTH_DOMAIN</code></td><td><code>__FIREBASE_AUTH_DOMAIN__</code></td></tr>
           <tr><td><code>FIREBASE_DATABASE_URL</code></td><td><code>__FIREBASE_DATABASE_URL__</code></td></tr>
-          <tr><td><code>FIREBASE_PROJECT_ID</code></td><td><code>__FIREBASE_PROJECT_ID__</code></td></tr>
+          <tr><td colspan="2" style="color:#888; font-style:italic"><code>FIREBASE_PROJECT_ID</code> — hardcoded (not a secret; visible in other config fields)</td></tr>
           <tr><td><code>FIREBASE_STORAGE_BUCKET</code></td><td><code>__FIREBASE_STORAGE_BUCKET__</code></td></tr>
           <tr><td><code>FIREBASE_MESSAGING_SENDER_ID</code></td><td><code>__FIREBASE_MESSAGING_SENDER_ID__</code></td></tr>
           <tr><td><code>FIREBASE_APP_ID</code></td><td><code>__FIREBASE_APP_ID__</code></td></tr>
@@ -3599,7 +3599,7 @@ www CNAME <span class="str">magnetmomentsco.github.io</span>
           </tr>
           <tr>
             <td>Admin dashboard</td>
-            <td>Firebase (database + auth), Google Fonts, Chart.js, GitHub API — no analytics or social trackers</td>
+            <td>No CSP — removed because Firebase Auth (popup) and Realtime Database (WebSocket) require cross-origin connections that conflict with <code>&lt;meta&gt;</code> CSP across browsers. The page is protected by Google Auth + email whitelist instead.</td>
           </tr>
           <tr>
             <td>Report page (this page)</td>
