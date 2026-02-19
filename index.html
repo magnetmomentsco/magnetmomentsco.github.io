@@ -37,6 +37,7 @@
 
   <!-- Early resource hints (before anything else delays discovery) -->
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preload" as="style" href="assets/css/style.css">
   <link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=480" imagesrcset="https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=400 400w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=480 480w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=600 600w, https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199&width=800 800w" imagesizes="(max-width: 768px) 180px, 50vw" fetchpriority="high">
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -869,14 +870,6 @@
   </button>
 
   <!-- Scripts -->
-  <script>
-    // Dynamic product count — fetch real count from products.json
-    fetch('/_data/products.json').then(r=>r.json()).then(d=>{
-      const el=document.getElementById('product-count-stat');
-      const count=d&&(d.productCount||(d.products&&d.products.length));
-      if(el&&count) el.dataset.count=count;
-    }).catch(()=>{});
-  </script>
   <script src="assets/js/main.js" defer></script>
 
   <!-- ========== CART DRAWER ========== -->
@@ -904,12 +897,16 @@
     </div>
   </aside>
   <script src="assets/js/shopify-cart.js" defer></script>
-  <script src="assets/js/products.js" defer></script>
 
-  <!-- Analytics + tracking: lazy-loaded after page paint to free bandwidth for LCP on slow connections -->
+  <!-- Analytics + tracking + product sync: lazy-loaded after page paint to free bandwidth for LCP -->
   <script>
   window.addEventListener('load', function() {
     setTimeout(function() {
+      // Product sync (non-critical on homepage — static cards are pre-rendered)
+      var ps = document.createElement('script');
+      ps.src = 'assets/js/products.js';
+      document.body.appendChild(ps);
+
       // Firebase analytics tracker
       var t = document.createElement('script');
       t.src = '/assets/js/mm-tracker.js';
