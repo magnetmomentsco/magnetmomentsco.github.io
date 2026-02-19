@@ -1710,7 +1710,20 @@ async function renderQuickStats() {
 // ─── 5c. Live Visitors ───
 function renderLiveVisitors(presenceData) {
   const container = document.getElementById('live-visitors-content');
-  const entries = Object.entries(presenceData);
+  const now = Date.now();
+  const STALE_MS = 2 * 60 * 1000;   // 2 min — no heartbeat = stale
+  const CLEANUP_MS = 5 * 60 * 1000;  // 5 min — safe to delete
+
+  // Filter: only show visitors with a recent heartbeat
+  const entries = Object.entries(presenceData)
+    .filter(([, info]) => info.timestamp && (now - info.timestamp) < STALE_MS);
+
+  // Authenticated admin cleans up truly stale entries
+  Object.entries(presenceData).forEach(([vid, info]) => {
+    if (!info.timestamp || (now - info.timestamp) >= CLEANUP_MS) {
+      fbRef('/presence/' + vid).remove().catch(() => {});
+    }
+  });
 
   // Update topbar count
   document.getElementById('live-count').textContent = entries.length + ' visitor' + (entries.length !== 1 ? 's' : '') + ' online';

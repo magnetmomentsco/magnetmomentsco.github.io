@@ -356,16 +356,21 @@
     if (state.dnt || !state.fbReady) return;
     var presRef = ref('/presence/' + state.visitorId);
     var connRef = ref('.info/connected');
+    var presData = {
+      page:      location.pathname,
+      slug:      state.slug,
+      device:    deviceType(),
+      timestamp: firebase.database.ServerValue.TIMESTAMP
+    };
 
     connRef.on('value', function (snap) {
       if (snap.val() === true) {
-        presRef.onDisconnect().remove();
-        presRef.set({
-          page:      location.pathname,
-          slug:      state.slug,
-          device:    deviceType(),
-          timestamp: firebase.database.ServerValue.TIMESTAMP
-        });
+        presRef.set(presData);
+        // Heartbeat every 60 s — lets admin detect stale entries
+        if (state.presenceInterval) clearInterval(state.presenceInterval);
+        state.presenceInterval = setInterval(function () {
+          presRef.update({ timestamp: firebase.database.ServerValue.TIMESTAMP });
+        }, 60000);
       }
     });
   }

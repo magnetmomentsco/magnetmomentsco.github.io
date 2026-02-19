@@ -2102,6 +2102,14 @@ section {
 }
 
 /* ---------- Scroll Animations ---------- */
+
+/* Hero is above-the-fold — render instantly for LCP (no fade delay) */
+.hero .fade-in,
+.hero .fade-in-right {
+  opacity: 1;
+  transform: none;
+}
+
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
