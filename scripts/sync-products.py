@@ -441,6 +441,7 @@ def build_product_page_html(product, all_products):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://www.google-analytics.com; connect-src 'self' https://dbx3hf-qe.myshopify.com https://*.firebaseio.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; frame-src 'none'; object-src 'none'; base-uri 'self'">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">

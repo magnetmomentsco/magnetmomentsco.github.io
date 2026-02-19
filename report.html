@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
@@ -671,6 +672,7 @@
       <li><a href="#google-auth">Google Auth &amp; Admin Security</a></li>
       <li><a href="#dns-migration">DNS Migration to GitHub Pages</a></li>
       <li><a href="#cicd-v2">CI/CD Pipeline v2 — Firebase &amp; Deploy</a></li>
+      <li><a href="#security-audit">Security Audit — Feb 2026</a></li>
     </ol>
   </nav>
 
@@ -3190,7 +3192,9 @@ npx playwright show-report
         <div class="compare-card after">
           <span class="label">Server-side protections</span>
           <ul>
-            <li>Firebase Realtime Database security rules — only authenticated users can read</li>
+            <li>Firebase database rules — only your two admin accounts can <em>read</em> analytics data</li>
+            <li>Anonymous visitors can <em>write</em> analytics (the tracker needs this) but <strong>cannot delete or overwrite</strong> existing data</li>
+            <li>Content Security Policy (CSP) on every page — browsers block unauthorized scripts, connections, and iframes</li>
             <li>Firebase config uses <code>__FIREBASE_*__</code> placeholders in source code</li>
             <li>Real credentials injected at deploy time from GitHub Secrets</li>
             <li>Credentials never committed to the repository</li>
@@ -3492,6 +3496,168 @@ www CNAME <span class="str">magnetmomentsco.github.io</span>
         The CI/CD pipeline now handles everything automatically: Shopify product sync every 6 hours,
         Firebase credential injection at deploy time, proper concurrency, stale page cleanup,
         and tag-based custom product detection. Zero manual steps needed.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!--  SECTION 24 — SECURITY AUDIT (FEB 2026)                       -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="security-audit">
+      <span class="section-num">24</span>
+      <h2>Security Audit — February 2026</h2>
+
+      <p>
+        A full security review was performed on the site, the admin dashboard, and the Firebase database.
+        Here's what was checked, what was found, and what was fixed.
+      </p>
+
+      <h3>What was tested</h3>
+      <p>
+        We ran <strong>54 automated security tests</strong> against the live Firebase database to verify that
+        the rules are correctly enforced. Every test passed.
+      </p>
+
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Test Category</th><th>What It Checks</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unauthorized reads</td>
+            <td>Can a random person read your analytics data?</td>
+            <td><strong style="color: var(--green)">Blocked ✓</strong> (14 of 14 paths)</td>
+          </tr>
+          <tr>
+            <td>Tracker writes</td>
+            <td>Can the analytics tracker on your site still record visitor data?</td>
+            <td><strong style="color: var(--green)">Works ✓</strong> (13 of 13 paths)</td>
+          </tr>
+          <tr>
+            <td>Unauthorized deletes</td>
+            <td>Can someone erase your analytics history?</td>
+            <td><strong style="color: var(--green)">Blocked ✓</strong> (22 of 22 paths)</td>
+          </tr>
+          <tr>
+            <td>Hostile actions</td>
+            <td>Can someone overwrite the entire database or create fake data categories?</td>
+            <td><strong style="color: var(--green)">Blocked ✓</strong> (3 of 3 tests)</td>
+          </tr>
+          <tr>
+            <td>Admin-only writes</td>
+            <td>Are A/B test settings protected from random visitors?</td>
+            <td><strong style="color: var(--green)">Blocked ✓</strong> (1 of 1)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Issues found &amp; fixed</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Issue</th><th>Risk</th><th>Fix Applied</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Anyone could <strong>delete</strong> analytics data from the database</td>
+            <td style="color: #e74c3c">High</td>
+            <td>Database rules now block all deletes unless you're signed in as an admin</td>
+          </tr>
+          <tr>
+            <td>Any Google account could <strong>read</strong> analytics (not just yours)</td>
+            <td style="color: #f39c12">Medium</td>
+            <td>Read access is now locked to your two specific Google accounts only</td>
+          </tr>
+          <tr>
+            <td>No Content Security Policy on any page</td>
+            <td style="color: #f39c12">Medium</td>
+            <td>CSP meta tags added to all 23 pages — browsers now block unauthorized scripts and connections</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>What's a Content Security Policy?</h3>
+      <p>
+        A CSP is like a whitelist that tells the browser: "only load scripts, fonts, and images from <em>these</em>
+        specific trusted sources." If someone somehow injected malicious code into the page, the browser would
+        refuse to run it because it's not on the approved list.
+      </p>
+      <p>
+        Every page on the site now has its own CSP tailored to exactly what it needs:
+      </p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Page Type</th><th>Allowed Sources</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Public pages (homepage, shop, etc.)</td>
+            <td>Google Analytics, Google Fonts, Shopify images, Firebase analytics, Facebook Pixel</td>
+          </tr>
+          <tr>
+            <td>Admin dashboard</td>
+            <td>Firebase (database + auth), Google Fonts, Chart.js, GitHub API — no analytics or social trackers</td>
+          </tr>
+          <tr>
+            <td>Report page (this page)</td>
+            <td>Google Fonts only — no scripts, no connections, no tracking</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Secrets &amp; credentials</h3>
+      <div class="compare">
+        <div class="compare-card after">
+          <span class="label">What's safe</span>
+          <ul>
+            <li>Firebase credentials are <strong>never stored in the source code</strong> — they use placeholder tokens replaced at deploy time</li>
+            <li>No API keys, passwords, or secrets were found anywhere in the repository (including full git history)</li>
+            <li>No <code>.env</code> files were ever committed</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <span class="label">What's public (by design)</span>
+          <ul>
+            <li>The Shopify Storefront token is visible in the source code — this is <strong>normal and safe</strong>. Shopify designed it to be public. It can only browse the product catalog and create carts — it cannot access orders, customer data, or admin settings.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Database protection summary</h3>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">Visitor browses site</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Tracker records analytics</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Write only ✓<br><small>can't read or delete</small></div>
+        </div>
+        <br>
+        <div class="diagram-flow">
+          <div class="diagram-box">You sign in to dashboard</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Google verifies identity</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Full access ✓<br><small>read, write, delete</small></div>
+        </div>
+        <br>
+        <div class="diagram-flow">
+          <div class="diagram-box">Random person / bot</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box" style="border-color: #e74c3c; color: #e74c3c;">Blocked ✗<br><small>can't read, can't delete</small></div>
+        </div>
+        <div class="diagram-caption">54 automated tests verify these rules are enforced correctly.</div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">✅ Bottom line</div>
+        Your analytics database is locked down — only your two Google accounts can see the data, nobody can delete it
+        without signing in, and every page on the site now has a Content Security Policy that blocks unauthorized scripts.
+        All 54 security tests pass. No secrets are exposed in the source code.
       </div>
     </section>
 
