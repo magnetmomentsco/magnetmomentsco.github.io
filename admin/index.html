@@ -2083,6 +2083,7 @@ async function renderFunnel() {
     const stepData = data[s.key] || {};
     Object.keys(stepData).forEach(p => products.add(p));
   });
+  products.forEach(p => { if (p.startsWith('_')) products.delete(p); });
 
   if (products.size === 0) {
     tableContainer.innerHTML = '<p class="text-muted">No per-product data available</p>';
