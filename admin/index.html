@@ -1967,6 +1967,9 @@ async function renderClickHeatmapPageList() {
     if (data) Object.keys(data).forEach(s => allSlugs.add(s));
   }));
 
+  // Filter out internal/test paths that aren't real pages
+  allSlugs.forEach(s => { if (s.startsWith('_')) allSlugs.delete(s); });
+
   const select = document.getElementById('heatmap-page-select');
   const current = select.value;
   select.innerHTML = '<option value="">Select a page…</option>';
