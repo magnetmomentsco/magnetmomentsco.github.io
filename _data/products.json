@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-03-01T12:50:03.677233+00:00",
+  "lastUpdated": "2026-03-01T18:08:39.084920+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
-  "productCount": 9,
+  "productCount": 10,
   "products": [
     {
       "id": "gid://shopify/Product/14894449459566",
@@ -692,6 +692,91 @@
             },
             "availableForSale": true,
             "quantityAvailable": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/14978445607278",
+      "handle": "vintage-postage-stamp-easter-gnome-magnets-set-of-8-spring-fridge-decor",
+      "title": "Vintage Postage Stamp Easter Gnome Magnets \u2013 Set of 8 Spring Fridge Decor",
+      "description": "Bring a touch of springtime magic and vintage charm to your kitchen with this adorable set of 8 Easter gnome magnets! Designed to look like classic antique postage stamps, each magnet features a un...",
+      "descriptionHtml": "<p><span>Bring a touch of springtime magic and vintage charm to your kitchen with this adorable set of 8 Easter gnome magnets!</span></p>\n<p><span>Designed to look like classic antique postage stamps, each magnet features a unique, whimsical gnome dressed in pastel spring colors. With sweet details like beautifully decorated Easter eggs, tiny birdhouses, spring flowers, and charming faux postmarks, this set is the perfect way to add a little cottagecore aesthetic to your home for the season.</span></p>\n<p><span>Whether you are decorating your own space or looking for a unique seasonal gift, these little gnomes are ready to deliver some holiday cheer.</span></p>\n<p><span>Features:</span></p>\n<p><span>\u2022 </span><span>Set of 8 Unique Designs:</span><span> Includes a variety of pastel spring gnomes, including one holding a \"Happy Easter\" sign.</span></p>\n<p><span>\u2022 </span><span>Vintage Charm:</span><span> Features a classic postage stamp aesthetic complete with faux cancellation marks and vintage price details (5\u00a2 and 10\u00a2).</span></p>\n<p><span>\u2022 </span><span>Versatile Decor:</span><span> Perfect for holding up photos, grocery lists, or kids' artwork on refrigerators, whiteboards, lockers, or any magnetic surface.</span></p>\n<p><span>\u2022 </span><span>Great for Gifting:</span><span> Makes a fantastic Easter basket stuffer, hostess gift, or treat for gnome collectors!</span></p>",
+      "productType": "",
+      "tags": [
+        "Cottagecore",
+        "Cottagecore easter",
+        "Easter Basket Stuffers",
+        "Easter Magnets",
+        "Gnome Decor",
+        "Spring Decor",
+        "Spring kitchen decor",
+        "Spring refrigerator magnets",
+        "Vintage Stamp Magnets",
+        "Vintage Style"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/vintage-postage-stamp-easter-gnome-magnets-set-of-8-spring-fridge-decor",
+      "createdAt": "2026-03-01T18:01:29Z",
+      "updatedAt": "2026-03-01T18:07:45Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "25.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "25.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/8FAD84A3-D07B-46AA-8B19-2724E10F0C47.png?v=1772388119",
+        "altText": null,
+        "width": 1200,
+        "height": 896
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/8FAD84A3-D07B-46AA-8B19-2724E10F0C47.png?v=1772388119",
+            "altText": null,
+            "width": 1200,
+            "height": 896
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/B10E3180-2C5A-49A5-BD0E-BFE7A225D9E2.png?v=1772388119",
+            "altText": null,
+            "width": 1200,
+            "height": 896
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53371568554350",
+            "title": "Default Title",
+            "price": {
+              "amount": "25.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
           }
         ]
       }
