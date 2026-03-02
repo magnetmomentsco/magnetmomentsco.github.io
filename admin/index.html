@@ -2482,9 +2482,13 @@ async function renderErrors() {
   const container = document.getElementById('errors-content');
   const badge = document.getElementById('error-badge');
 
-  if (errors.length > 0) {
+  // Only count first-party errors in the badge
+  const actionableCount = errors.filter(e => e.kind === 'runtime' || e.kind === 'promise').length;
+  if (actionableCount > 0) {
     badge.style.display = '';
-    badge.textContent = errors.length;
+    badge.textContent = actionableCount;
+  } else {
+    badge.style.display = 'none';
   }
 
   if (errors.length === 0) {
@@ -2492,24 +2496,32 @@ async function renderErrors() {
     return;
   }
 
-  // Separate 404s and other errors
-  const regularErrors = errors.filter(e => e.kind !== 'image');
-  const imageErrors = errors.filter(e => e.kind === 'image');
+  // Categorise errors
+  const firstPartyErrors = errors.filter(e => e.kind === 'runtime' || e.kind === 'promise');
+  const thirdPartyErrors = errors.filter(e => e.kind === 'third-party');
+  const resourceErrors   = errors.filter(e => e.kind === 'resource');
+  const imageErrors      = errors.filter(e => e.kind === 'image');
+  const hiddenCount      = thirdPartyErrors.length + resourceErrors.length;
 
-  let html = '<table class="data-table"><thead><tr>';
-  html += '<th>Time</th><th>Type</th><th>Message</th><th>Source</th><th>Page</th>';
-  html += '</tr></thead><tbody>';
+  let html = '';
 
-  regularErrors.slice(0, 50).forEach(err => {
-    html += '<tr>';
-    html += '<td style="white-space:nowrap;">' + formatDateTime(err.timestamp) + '</td>';
-    html += '<td><span class="status-badge failure">' + (err.kind || 'error') + '</span></td>';
-    html += '<td class="truncate" title="' + (err.message || '').replace(/"/g, '&quot;') + '">' + (err.message || '—') + '</td>';
-    html += '<td class="truncate">' + (err.source ? err.source.split('/').pop() + ':' + (err.line || '') : '—') + '</td>';
-    html += '<td>' + (err.page || '—') + '</td>';
-    html += '</tr>';
-  });
-  html += '</tbody></table>';
+  if (firstPartyErrors.length === 0) {
+    html += '<p class="text-muted text-center" style="padding:12px;">✅ No first-party errors today</p>';
+  } else {
+    html += '<table class="data-table"><thead><tr>';
+    html += '<th>Time</th><th>Type</th><th>Message</th><th>Source</th><th>Page</th>';
+    html += '</tr></thead><tbody>';
+    firstPartyErrors.slice(0, 50).forEach(err => {
+      html += '<tr>';
+      html += '<td style="white-space:nowrap;">' + formatDateTime(err.timestamp) + '</td>';
+      html += '<td><span class="status-badge failure">' + (err.kind || 'error') + '</span></td>';
+      html += '<td class="truncate" title="' + (err.message || '').replace(/"/g, '&quot;') + '">' + (err.message || '—') + '</td>';
+      html += '<td class="truncate">' + (err.source ? err.source.split('/').pop() + ':' + (err.line || '') : '—') + '</td>';
+      html += '<td>' + (err.page || '—') + '</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+  }
 
   if (imageErrors.length > 0) {
     html += '<h4 style="font-size:0.95rem;color:var(--text-muted);margin:20px 0 10px;">🖼️ Image Load Errors (' + imageErrors.length + ')</h4>';
@@ -2522,6 +2534,10 @@ async function renderErrors() {
       html += '</tr>';
     });
     html += '</tbody></table>';
+  }
+
+  if (hiddenCount > 0) {
+    html += '<p class="text-muted" style="font-size:0.85rem;padding:10px 0 0;">🔇 ' + hiddenCount + ' hidden (third-party scripts / ad-blockers)</p>';
   }
 
   container.innerHTML = html;
