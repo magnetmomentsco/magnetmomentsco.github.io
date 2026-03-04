@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-04T02:03:24.063408+00:00",
+  "lastUpdated": "2026-03-04T06:49:37.723929+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 10,
   "products": [
@@ -611,7 +611,7 @@
     },
     {
       "id": "gid://shopify/Product/14919794950510",
-      "handle": "seasonal-holiday-magnets-copy",
+      "handle": "retro-wildflower-magnet-set-set-of-8",
       "title": "Retro Wildflower Magnet Set (Set of 8)",
       "description": "Bring a touch of eternal spring to your kitchen! This Retro Wildflower Magnet Set features a curated collection of groovy blooms and botanical patterns in warm, nostalgic tones. From terracotta ora...",
       "descriptionHtml": "<p data-path-to-node=\"4\">Bring a touch of eternal spring to your kitchen! This <b data-path-to-node=\"4\" data-index-in-node=\"67\">Retro Wildflower Magnet Set</b> features a curated collection of groovy blooms and botanical patterns in warm, nostalgic tones.</p>\n<p data-path-to-node=\"5\">From terracotta oranges to dusty pinks and calming blues, these magnets aren't just for holding up grocery lists\u2014they are miniature pieces of art. Whether you are decorating your fridge, office locker, or magnetic whiteboard, these blooms add a pop of color that never fades.<b data-path-to-node=\"6\" data-index-in-node=\"0\"></b></p>",
@@ -638,9 +638,9 @@
       ],
       "availableForSale": true,
       "totalInventory": 10,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/seasonal-holiday-magnets-copy",
+      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/retro-wildflower-magnet-set-set-of-8",
       "createdAt": "2026-01-01T17:12:37Z",
-      "updatedAt": "2026-02-09T15:38:01Z",
+      "updatedAt": "2026-03-04T06:29:23Z",
       "seo": {
         "title": null,
         "description": null
