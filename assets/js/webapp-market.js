@@ -31,7 +31,7 @@
   // ── State ──────────────────────────────────────────────────────────────────
   var state = {
     size: '2x2',
-    quantity: '6',
+    quantity: 6,
     photos: [],        // Array of { dataUrl, file? }
     subtotal: 0,
     tax: 0,
@@ -122,7 +122,7 @@
     });
     opt.classList.add('active');
     opt.setAttribute('aria-checked', 'true');
-    state.quantity = opt.dataset.qty;
+    state.quantity = parseInt(opt.dataset.qty, 10) || 1;
     updatePrice();
   }
 
@@ -139,7 +139,7 @@
 
   // ── Price Calculation ──────────────────────────────────────────────────────
   function updatePrice() {
-    var price = PRICES[state.size][state.quantity];
+    var price = PRICES[state.size][String(state.quantity)];
     if (price === undefined) return;
 
     state.subtotal = price;
@@ -458,7 +458,7 @@
     // Reset state
     state.photos = [];
     state.size = '2x2';
-    state.quantity = '6';
+    state.quantity = 6;
     state.submitting = false;
 
     // Reset UI
