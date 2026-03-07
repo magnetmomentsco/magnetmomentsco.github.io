@@ -1349,7 +1349,7 @@ function showApp(user) {
   // Update logout button to show user info
   const logoutBtn = document.getElementById('btn-logout');
   if (user && user.photoURL) {
-    logoutBtn.innerHTML = '<span class="auth-user"><img src="' + user.photoURL + '" alt=""> Sign Out</span>';
+    logoutBtn.innerHTML = '<span class="auth-user"><img src="' + escAttr(user.photoURL) + '" alt=""> Sign Out</span>';
   } else {
     logoutBtn.textContent = 'Sign Out';
   }
@@ -3731,15 +3731,15 @@ function loadWebappEvents() {
       return '<div class="event-item">' +
         '<span class="event-status">' + statusIcon + '</span>' +
         '<div class="event-info">' +
-          '<div class="event-title">' + escHtml(ev.name || (isEvent ? 'Unnamed Event' : 'Market Session')) + ' <span style="font-weight:400;color:var(--text-muted);">(' + (ev.date || '—') + ')</span></div>' +
+          '<div class="event-title">' + escHtml(ev.name || (isEvent ? 'Unnamed Event' : 'Market Session')) + ' <span style="font-weight:400;color:var(--text-muted);">(' + escHtml(ev.date || '—') + ')</span></div>' +
           '<div class="event-meta">' + (isEvent ? '📸 Event' : '🛒 Market') + '</div>' +
           '<div class="event-link">' + escHtml(url) + '</div>' +
         '</div>' +
-        '<div class="event-stats" ' + (!isEvent ? 'id="market-photo-count"' : '') + '>📊 ' + (ev.photoCount || 0) + ' photos</div>' +
+        '<div class="event-stats" ' + (!isEvent ? 'id="market-photo-count"' : '') + '>📊 ' + Number(ev.photoCount || 0) + ' photos</div>' +
         '<div class="event-actions">' +
           '<button class="btn-sm" onclick="showQRCode(\'' + escAttr(url) + '\', \'' + escAttr(ev.name || (isEvent ? 'Event' : 'Market')) + '\')">QR Code</button>' +
-          (ev.driveFolderId ? '<a class="btn-sm" href="https://drive.google.com/drive/folders/' + ev.driveFolderId + '" target="_blank" rel="noopener">📂 Drive</a>' : '') +
-          (ev.active ? '<button class="btn-sm btn-danger" onclick="endWebappEvent(\'' + ev._key + '\')">End</button>' : '') +
+          (ev.driveFolderId ? '<a class="btn-sm" href="https://drive.google.com/drive/folders/' + escAttr(ev.driveFolderId) + '" target="_blank" rel="noopener">📂 Drive</a>' : '') +
+          (ev.active ? '<button class="btn-sm btn-danger" onclick="endWebappEvent(\'' + escAttr(ev._key) + '\')">End</button>' : '') +
         '</div>' +
       '</div>';
     }).join('');
@@ -4046,13 +4046,14 @@ function loadOrders() {
     var payLabels = { venmo: 'Venmo', paypal: 'PayPal', 'cash-tap': 'Cash' };
     container.innerHTML = entries.map(function(pair, idx) {
       var key = pair[0], o = pair[1];
-      var status = o.paymentStatus || 'pending';
+      var allowedStatuses = { pending: 'pending', confirmed: 'confirmed' };
+      var status = allowedStatuses[o.paymentStatus] || 'pending';
       var badge = '<span class="order-status ' + status + '">' + status + '</span>';
       var btn = status !== 'confirmed'
-        ? ' <button class="btn-confirm-pay" onclick="confirmPayment(\'' + key + '\');">✓ Confirm Paid</button>'
+        ? ' <button class="btn-confirm-pay" onclick="confirmPayment(\'' + escAttr(key) + '\');">✓ Confirm Paid</button>'
         : '';
       var icon = payIcons[o.paymentMethod] || '💰';
-      var pmLabel = payLabels[o.paymentMethod] || o.paymentMethod || '';
+      var pmLabel = payLabels[o.paymentMethod] || escHtml(String(o.paymentMethod || ''));
       var time = o.timestamp ? new Date(o.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
       var orderNum = entries.length - idx;
       var label = '#' + orderNum + ' — ' + pmLabel;
@@ -4060,13 +4061,14 @@ function loadOrders() {
       // Photo link(s)
       var photoLink = '';
       if (o.driveFileIds && o.driveFileIds.length) {
-        photoLink = ' <a href="https://drive.google.com/file/d/' + o.driveFileIds[0] + '/view" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:0.78rem;" title="View photos">📷 ' + o.driveFileIds.length + ' photo' + (o.driveFileIds.length > 1 ? 's' : '') + '</a>';
+        var fileId = escAttr(String(o.driveFileIds[0]));
+        photoLink = ' <a href="https://drive.google.com/file/d/' + fileId + '/view" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:0.78rem;" title="View photos">📷 ' + Number(o.driveFileIds.length) + ' photo' + (o.driveFileIds.length > 1 ? 's' : '') + '</a>';
       }
 
       return '<div class="order-card">'
         + '<div class="order-card-info">'
         + '<div class="order-card-id">' + icon + ' ' + label + '</div>'
-        + '<div class="order-card-detail">' + (o.size||'') + ' × ' + (o.quantity||'') + ' — $' + (o.total||0).toFixed(2) + ' — ' + time + photoLink + '</div>'
+        + '<div class="order-card-detail">' + escHtml(o.size||'') + ' × ' + Number(o.quantity||0) + ' — $' + Number(o.total||0).toFixed(2) + ' — ' + escHtml(time) + photoLink + '</div>'
         + '</div>'
         + badge + btn
         + '</div>';

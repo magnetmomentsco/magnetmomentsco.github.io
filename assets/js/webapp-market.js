@@ -358,9 +358,9 @@
         });
       })
       .then(function () {
-        // Update market session stats
+        // Update market session stats (best-effort, non-blocking)
         var sessionPath = 'market-sessions/' + MMWebapp.getTodayString();
-        return MMWebapp.fb.get(sessionPath).then(function (session) {
+        MMWebapp.fb.get(sessionPath).then(function (session) {
           var updates = {};
           updates['orderCount'] = (session && session.orderCount || 0) + 1;
           updates['revenue/subtotal'] = Math.round(((session && session.revenue && session.revenue.subtotal || 0) + state.subtotal) * 100) / 100;
@@ -369,7 +369,7 @@
           var pmKey = 'paymentBreakdown/' + paymentMethod;
           updates[pmKey] = (session && session.paymentBreakdown && session.paymentBreakdown[paymentMethod] || 0) + 1;
           return MMWebapp.fb.update(sessionPath, updates);
-        });
+        }).catch(function () { /* non-critical */ });
       })
       .then(function () {
         hideUploadStatus();

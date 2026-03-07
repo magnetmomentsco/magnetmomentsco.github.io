@@ -18,7 +18,7 @@
       }
     },
     "market-sessions": {
-      ".read": true,
+      ".read": "auth != null",
       ".write": true,
       "$dateKey": {
         ".validate": "$dateKey.matches(/^\\d{4}-\\d{2}-\\d{2}$/)",
@@ -35,22 +35,25 @@
     },
     "orders": {
       ".read": "auth != null",
-      ".write": true,
       "$orderId": {
+        ".write": "!data.exists() || auth != null",
         ".validate": "newData.hasChildren(['sessionDate', 'size', 'quantity', 'subtotal', 'tax', 'total', 'paymentMethod', 'timestamp'])",
         "sessionDate": { ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)" },
-        "orderId": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "orderId": { ".validate": "newData.isString() && newData.val().length <= 100 && newData.val().matches(/^[a-z0-9-]+$/)" },
         "size": { ".validate": "newData.isString() && newData.val().length <= 50" },
         "quantity": { ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= 100" },
-        "subtotal": { ".validate": "newData.isNumber() && newData.val() >= 0" },
-        "tax": { ".validate": "newData.isNumber() && newData.val() >= 0" },
-        "total": { ".validate": "newData.isNumber() && newData.val() >= 0" },
-        "paymentMethod": { ".validate": "newData.isString() && newData.val().length <= 50" },
+        "subtotal": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000" },
+        "tax": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000" },
+        "total": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000" },
+        "paymentMethod": { ".validate": "newData.isString() && (newData.val() === 'venmo' || newData.val() === 'paypal' || newData.val() === 'cash-tap')" },
         "paymentStatus": { ".validate": "newData.isString() && (newData.val() === 'pending' || newData.val() === 'confirmed')" },
-        "photoCount": { ".validate": "newData.isNumber() && newData.val() >= 0" },
-        "driveFileIds": { ".validate": true },
-        "id": { ".validate": "newData.isString()" },
-        "timestamp": { ".validate": "newData.isNumber()" }
+        "photoCount": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100" },
+        "driveFileIds": {
+          "$idx": { ".validate": "newData.isString() && newData.val().length <= 200" }
+        },
+        "id": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "timestamp": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
       }
     },
     "pageViews": {
@@ -86,7 +89,8 @@
         "timestamp": { ".validate": "newData.isNumber()" },
         "device": { ".validate": "newData.isString() && newData.val().length <= 50" },
         "tz": { ".validate": "newData.isString() && newData.val().length <= 100" },
-        "lang": { ".validate": "newData.isString() && newData.val().length <= 20" }
+        "lang": { ".validate": "newData.isString() && newData.val().length <= 20" },
+        "$other": { ".validate": false }
       }
     },
     "abTests": {
