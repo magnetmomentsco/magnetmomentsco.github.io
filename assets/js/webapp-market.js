@@ -25,9 +25,8 @@
 
   var TAX_RATE = 0.0825;
 
-  // UPDATE these with real usernames
-  var VENMO_USERNAME = 'MagnetMomentsCo';
-  var PAYPAL_USERNAME = 'MagnetMomentsCo';
+  var VENMO_USERNAME = 'magnetmomentsco';
+  var PAYPAL_ME_URL = 'https://www.paypal.com/biz/profile/magnetmomentsco';
 
   // ── State ──────────────────────────────────────────────────────────────────
   var state = {
@@ -403,14 +402,13 @@
           encodeURIComponent(VENMO_USERNAME) + '&amount=' + amount + '&note=' + note;
         // Fallback to web after brief delay
         setTimeout(function () {
-          window.open('https://venmo.com/' + encodeURIComponent(VENMO_USERNAME) +
+          window.open('https://venmo.com/u/' + encodeURIComponent(VENMO_USERNAME) +
             '?txn=pay&amount=' + amount + '&note=' + note, '_blank');
         }, 1500);
         break;
 
       case 'paypal':
-        window.open('https://paypal.me/' + encodeURIComponent(PAYPAL_USERNAME) +
-          '/' + amount, '_blank');
+        window.open(PAYPAL_ME_URL, '_blank');
         break;
 
       case 'shopify':
