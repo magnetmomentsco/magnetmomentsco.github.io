@@ -17,6 +17,8 @@ const PAGES = [
   { path: '/policies/refund/', name: 'Refund Policy' },
   { path: '/policies/terms/', name: 'Terms of Service' },
   { path: '/policies/privacy/', name: 'Privacy Policy' },
+  { path: '/market/webapp/', name: 'Market Webapp' },
+  { path: '/event/webapp/', name: 'Event Webapp' },
 ];
 
 // ─────────────────────────────────────────────────────────
@@ -72,9 +74,23 @@ test('404 page loads', async ({ page }) => {
 // ─────────────────────────────────────────────────────────
 // 4. Core structure checks
 // ─────────────────────────────────────────────────────────
+// Webapp pages have different structure than main site pages
+const WEBAPP_PATHS = ['/market/webapp/', '/event/webapp/'];
+
 for (const pg of PAGES) {
   test(`Structure: ${pg.name} has skip-link, main, nav`, async ({ page }) => {
     await page.goto(pg.path, { waitUntil: 'domcontentloaded' });
+
+    if (WEBAPP_PATHS.includes(pg.path)) {
+      // Webapp pages: skip link and main landmark exist (different IDs)
+      const skipLink = page.locator('a.skip-link');
+      await expect(skipLink).toHaveCount(1);
+
+      const main = page.locator('main');
+      const mainCount = await main.count();
+      expect(mainCount).toBeGreaterThanOrEqual(1);
+      return;
+    }
 
     // Skip link exists
     const skipLink = page.locator('a.skip-link');

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Order Your Magnets — Magnet Moments Co.</title>
+  <meta name="description" content="Order custom photo magnets from Magnet Moments Co. at our pop-up market.">
+  <meta name="theme-color" content="#C77D8A">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  <!-- Fonts (same as main site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Webapp Styles -->
+  <link rel="stylesheet" href="/assets/css/webapp.css">
+</head>
+<body>
+
+  <a href="#order-form" class="skip-link">Skip to order form</a>
+
+  <div class="webapp">
+
+    <!-- Header -->
+    <header class="webapp-header">
+      <div class="webapp-logo">Magnet <span>Moments</span> Co.</div>
+      <div class="webapp-subtitle">Market Order</div>
+    </header>
+
+    <!-- Order Form (main flow) -->
+    <main id="order-form">
+
+    <!-- Step 1: Choose Magnets -->
+    <section class="webapp-card">
+      <h2 class="webapp-card-title">
+        <span class="icon">🧲</span> Choose Your Magnets
+      </h2>
+
+      <!-- Size Selector -->
+      <div class="size-selector">
+        <button class="size-btn active" data-size="2x2">2×2</button>
+        <button class="size-btn" data-size="2x3">2×3</button>
+      </div>
+
+      <!-- Quantity Options -->
+      <div class="quantity-options" role="radiogroup" aria-label="Magnet quantity">
+        <div class="quantity-option" data-qty="1" role="radio" aria-checked="false" tabindex="0">
+          <span class="qty-radio"></span>
+          <div class="qty-info">
+            <span class="qty-label">Single Magnet</span>
+          </div>
+          <span class="qty-price">$4.00</span>
+        </div>
+        <div class="quantity-option" data-qty="3" role="radio" aria-checked="false" tabindex="0">
+          <span class="qty-radio"></span>
+          <div class="qty-info">
+            <span class="qty-label">Set of 3</span>
+          </div>
+          <span class="qty-price">$12.00</span>
+        </div>
+        <div class="quantity-option active" data-qty="6" role="radio" aria-checked="true" tabindex="0">
+          <span class="qty-radio"></span>
+          <div class="qty-info">
+            <span class="qty-label">Set of 6</span>
+          </div>
+          <span class="qty-price">$19.00</span>
+        </div>
+        <div class="quantity-option" data-qty="9" role="radio" aria-checked="false" tabindex="0">
+          <span class="qty-radio"></span>
+          <div class="qty-info">
+            <span class="qty-label">Set of 9</span>
+          </div>
+          <span class="qty-price">$25.00</span>
+        </div>
+        <div class="quantity-option" data-qty="12" role="radio" aria-checked="false" tabindex="0">
+          <span class="qty-radio"></span>
+          <div class="qty-info">
+            <span class="qty-label">Set of 12</span>
+          </div>
+          <span class="qty-price">$30.00</span>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <div class="order-row">
+          <span class="label">Subtotal</span>
+          <span class="value" id="subtotal">$19.00</span>
+        </div>
+        <div class="order-row">
+          <span class="label">Tax (8.25%)</span>
+          <span class="value" id="tax-amount">$1.57</span>
+        </div>
+        <div class="order-row total">
+          <span class="label">Total</span>
+          <span class="value" id="total-amount">$20.57</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2: Photo Capture -->
+    <section class="webapp-card camera-section">
+      <h2 class="webapp-card-title">
+        <span class="icon">📸</span> Your Photo(s)
+      </h2>
+
+      <!-- Camera Preview (hidden until opened) -->
+      <div class="camera-preview-container" id="camera-container">
+        <video id="camera-video" autoplay playsinline muted></video>
+        <div class="camera-controls">
+          <button class="camera-switch-btn" id="camera-switch-btn" aria-label="Switch camera">🔄</button>
+          <button class="snap-btn" id="snap-btn" aria-label="Take photo"></button>
+          <button class="camera-close-btn" id="camera-close-btn" aria-label="Close camera">✕</button>
+        </div>
+      </div>
+
+      <!-- Camera & Upload Buttons -->
+      <div class="camera-actions">
+        <button class="camera-btn" id="take-photo-btn">
+          <span class="icon">📷</span>
+          Take Photo
+        </button>
+        <button class="camera-btn" id="upload-photo-btn">
+          <span class="icon">📁</span>
+          Upload Photo
+        </button>
+      </div>
+
+      <!-- Hidden file input -->
+      <input type="file" id="file-input" accept="image/*,.heic,.heif" capture="environment" multiple class="hidden" aria-hidden="true">
+
+      <!-- Photo Grid -->
+      <div class="photo-grid" id="photo-grid" role="list" aria-label="Selected photos"></div>
+      <div class="photo-count" id="photo-count" style="display:none;" role="status" aria-live="polite"></div>
+
+      <!-- Upload Status -->
+      <div class="upload-status" id="upload-status" role="status" aria-live="polite">
+        <div class="upload-spinner" aria-hidden="true"></div>
+        <span class="status-text" id="status-text">Uploading...</span>
+      </div>
+    </section>
+
+    <!-- Step 3: Payment -->
+    <section class="webapp-card">
+      <h2 class="webapp-card-title">
+        <span class="icon">💳</span> Pay With
+      </h2>
+
+      <div class="payment-buttons">
+        <a href="#" class="pay-btn pay-btn-venmo" id="pay-venmo">
+          💜 Venmo
+          <span class="btn-amount" id="venmo-amount">$20.57</span>
+        </a>
+        <a href="#" class="pay-btn pay-btn-paypal" id="pay-paypal">
+          💙 PayPal
+          <span class="btn-amount" id="paypal-amount">$20.57</span>
+        </a>
+        <a href="#" class="pay-btn pay-btn-shopify" id="pay-shopify">
+          🛒 Shopify Checkout
+        </a>
+        <a href="#" class="pay-btn pay-btn-cash" id="pay-cash">
+          💵 Cash / Tap
+        </a>
+      </div>
+
+      <p class="payment-instructions">
+        Please send total to selected payment method. If using cash or paying with tap, please see a team member to pay for your order.
+      </p>
+    </section>
+
+    </main><!-- /order-form -->
+
+    <!-- Order Confirmation (hidden until order completes) -->
+    <div id="order-confirmation" class="hidden">
+      <section class="webapp-card confirmation-card">
+        <div class="confirmation-icon">✅</div>
+        <h2 class="confirmation-title">Order Submitted!</h2>
+        <p class="confirmation-subtitle">Your photos are being processed</p>
+
+        <div class="confirmation-details">
+          <div class="conf-row">
+            <span class="conf-label">Size</span>
+            <span class="conf-value" id="conf-size">2×2</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Quantity</span>
+            <span class="conf-value" id="conf-qty">6</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Photos</span>
+            <span class="conf-value" id="conf-photos">0</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Payment</span>
+            <span class="conf-value" id="conf-payment">—</span>
+          </div>
+          <div class="conf-row conf-total">
+            <span class="conf-label">Total</span>
+            <span class="conf-value" id="conf-total">$0.00</span>
+          </div>
+        </div>
+
+        <button class="new-order-btn" id="new-order-btn">Start New Order</button>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="webapp-footer" role="contentinfo">
+      <a href="/">Magnet Moments Co.</a>
+      <div class="footer-tagline">Handcrafted memories, one magnet at a time</div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="/assets/js/webapp-shared.js"></script>
+  <script src="/assets/js/webapp-market.js"></script>
+
+</body>
+</html>

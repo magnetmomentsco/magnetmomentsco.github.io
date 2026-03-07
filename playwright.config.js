@@ -8,7 +8,7 @@ module.exports = defineConfig({
   workers: 1,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:8080',
+    baseURL: 'http://localhost:8083',
     headless: true,
   },
   projects: [
@@ -35,8 +35,8 @@ module.exports = defineConfig({
     },
   ],
   webServer: {
-    command: 'python3 -m http.server 8080',
-    port: 8080,
+    command: 'python3 -m http.server 8083 --directory .',
+    port: 8083,
     reuseExistingServer: true,
   },
 });

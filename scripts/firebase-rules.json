@@ -1,0 +1,113 @@
+{
+  "rules": {
+    "events": {
+      ".read": true,
+      ".write": "auth != null",
+      "$eventId": {
+        ".validate": "newData.hasChildren(['name', 'date', 'type', 'active', 'createdAt'])",
+        "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200" },
+        "date": { ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)" },
+        "type": { ".validate": "newData.val() === 'event' || newData.val() === 'market'" },
+        "driveFolderId": { ".validate": "newData.isString()" },
+        "active": { ".validate": "newData.isBoolean()" },
+        "photoCount": {
+          ".validate": "newData.isNumber() && newData.val() >= 0",
+          ".write": true
+        },
+        "createdAt": { ".validate": "newData.isNumber()" }
+      }
+    },
+    "market-sessions": {
+      ".read": true,
+      ".write": true,
+      "$dateKey": {
+        ".validate": "$dateKey.matches(/^\\d{4}-\\d{2}-\\d{2}$/)",
+        "driveFolderId": { ".validate": "newData.isString() && newData.val().length <= 200" },
+        "orderCount": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "revenue": {
+          "total": { ".validate": "newData.isNumber()" },
+          "tax": { ".validate": "newData.isNumber()" }
+        },
+        "paymentBreakdown": {
+          "$method": { ".validate": "newData.isNumber()" }
+        }
+      }
+    },
+    "orders": {
+      ".read": "auth != null",
+      ".write": true,
+      "$orderId": {
+        ".validate": "newData.hasChildren(['sessionDate', 'size', 'quantity', 'subtotal', 'tax', 'total', 'paymentMethod', 'timestamp'])",
+        "sessionDate": { ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)" },
+        "size": { ".validate": "newData.isString() && newData.val().length <= 50" },
+        "quantity": { ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= 100" },
+        "subtotal": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "tax": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "total": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "paymentMethod": { ".validate": "newData.isString() && newData.val().length <= 50" },
+        "timestamp": { ".validate": "newData.isNumber()" }
+      }
+    },
+    "pageViews": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)",
+        "$slug": {
+          ".validate": "newData.hasChildren(['timestamp', 'visitorId'])"
+        }
+      }
+    },
+    "clicks": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "errors": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "presence": {
+      ".read": true,
+      ".write": true,
+      "$visitorId": {
+        ".validate": "newData.hasChildren(['page', 'timestamp'])",
+        "page": { ".validate": "newData.isString() && newData.val().length <= 500" },
+        "timestamp": { ".validate": "newData.isNumber()" },
+        "device": { ".validate": "newData.isString() && newData.val().length <= 50" },
+        "tz": { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "lang": { ".validate": "newData.isString() && newData.val().length <= 20" }
+      }
+    },
+    "abTests": {
+      ".read": true,
+      ".write": true,
+      "$testName": {
+        ".validate": "$testName.length <= 100"
+      }
+    },
+    "sessions": {
+      ".read": "auth != null",
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "productViewCounts": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "webapp-config": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}

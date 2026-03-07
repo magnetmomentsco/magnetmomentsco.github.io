@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Event Photo Booth — Magnet Moments Co.</title>
+  <meta name="description" content="Capture and share photos at your Magnet Moments Co. event.">
+  <meta name="theme-color" content="#C77D8A">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  <!-- Fonts (same as main site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Webapp Styles -->
+  <link rel="stylesheet" href="/assets/css/webapp.css">
+</head>
+<body>
+
+  <a href="#main-view" class="skip-link">Skip to photo booth</a>
+
+  <div class="webapp">
+
+    <!-- Header -->
+    <header class="webapp-header">
+      <div class="webapp-logo">Magnet <span>Moments</span> Co.</div>
+      <div class="webapp-subtitle">Photo Booth</div>
+    </header>
+
+    <!-- Loading View -->
+    <div id="loading-view" class="webapp-loading" role="status" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Loading event...</p>
+    </div>
+
+    <!-- Error View (hidden by default) -->
+    <div id="error-view" class="webapp-error hidden" role="alert">
+      <h2>Event Not Found</h2>
+      <p>Please scan the QR code provided at the event.</p>
+    </div>
+
+    <!-- Main View (hidden until event loads) -->
+    <main id="main-view" class="hidden">
+
+      <!-- Event Welcome -->
+      <div class="event-welcome">
+        <h2 id="event-name">Loading...</h2>
+        <p id="event-subtitle">Share your best moments!</p>
+      </div>
+
+      <!-- Upload Counter -->
+      <div class="upload-counter" id="upload-counter" style="display:none;" role="status" aria-live="polite">
+        <span class="count-number" id="count-number" aria-label="Photo count">0</span>
+        <span class="count-label">photos shared</span>
+      </div>
+
+      <!-- Camera Card -->
+      <section class="webapp-card camera-section">
+
+        <!-- Camera Preview (hidden until open) -->
+        <div class="camera-preview-container" id="camera-container">
+          <video id="camera-video" autoplay playsinline muted></video>
+          <div class="camera-controls">
+            <button class="camera-switch-btn" id="camera-switch-btn" aria-label="Switch camera">🔄</button>
+            <button class="snap-btn" id="snap-btn" aria-label="Take photo"></button>
+            <button class="camera-close-btn" id="camera-close-btn" aria-label="Close camera">✕</button>
+          </div>
+        </div>
+
+        <!-- Camera & Upload Buttons -->
+        <div class="camera-actions">
+          <button class="camera-btn" id="take-photo-btn">
+            <span class="icon">📷</span>
+            Take Photo
+          </button>
+          <button class="camera-btn" id="upload-photo-btn">
+            <span class="icon">📁</span>
+            Upload Photo
+          </button>
+        </div>
+
+        <!-- Hidden file input -->
+        <input type="file" id="file-input" accept="image/*,.heic,.heif" capture="environment" multiple class="hidden" aria-hidden="true">
+
+        <!-- Upload Status -->
+        <div class="upload-status" id="upload-status" role="status" aria-live="polite">
+          <div class="upload-spinner" aria-hidden="true"></div>
+          <span class="status-text" id="status-text">Uploading...</span>
+        </div>
+
+        <!-- Photo Grid (shows uploaded thumbnails) -->
+        <div class="photo-grid" id="photo-grid" role="list" aria-label="Uploaded photos"></div>
+
+      </section>
+
+    </main>
+    <footer class="webapp-footer" role="contentinfo">
+      <a href="/">Magnet Moments Co.</a>
+      <div class="footer-tagline">Handcrafted memories, one magnet at a time</div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="/assets/js/webapp-shared.js"></script>
+  <script src="/assets/js/webapp-event.js"></script>
+
+</body>
+</html>
