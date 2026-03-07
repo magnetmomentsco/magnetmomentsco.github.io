@@ -289,6 +289,9 @@
       redirect: 'follow'
     }, UPLOAD_TIMEOUT)
     .then(function (response) {
+      if (!response.ok) {
+        throw new Error('Server returned ' + response.status);
+      }
       return response.json();
     })
     .then(function (data) {
@@ -298,6 +301,7 @@
       return data;
     })
     .catch(function (err) {
+      console.warn('Upload attempt ' + (attempt + 1) + ' failed:', err.message);
       if (attempt < MAX_RETRIES) {
         // Exponential backoff: 1s, 2s
         var delay = (attempt + 1) * 1000;
@@ -325,12 +329,12 @@
 
     return fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
       mode: 'no-cors'
     })
     .then(function () {
       // Opaque response — optimistically assume success
+      console.info('Upload sent via no-cors fallback');
       return { success: true, fallback: true };
     })
     .catch(function (err) {
