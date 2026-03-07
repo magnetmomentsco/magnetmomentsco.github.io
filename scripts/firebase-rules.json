@@ -39,12 +39,17 @@
       "$orderId": {
         ".validate": "newData.hasChildren(['sessionDate', 'size', 'quantity', 'subtotal', 'tax', 'total', 'paymentMethod', 'timestamp'])",
         "sessionDate": { ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)" },
+        "orderId": { ".validate": "newData.isString() && newData.val().length <= 100" },
         "size": { ".validate": "newData.isString() && newData.val().length <= 50" },
         "quantity": { ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= 100" },
         "subtotal": { ".validate": "newData.isNumber() && newData.val() >= 0" },
         "tax": { ".validate": "newData.isNumber() && newData.val() >= 0" },
         "total": { ".validate": "newData.isNumber() && newData.val() >= 0" },
         "paymentMethod": { ".validate": "newData.isString() && newData.val().length <= 50" },
+        "paymentStatus": { ".validate": "newData.isString() && (newData.val() === 'pending' || newData.val() === 'sent' || newData.val() === 'confirmed')" },
+        "photoCount": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "driveFileIds": { ".validate": true },
+        "id": { ".validate": "newData.isString()" },
         "timestamp": { ".validate": "newData.isNumber()" }
       }
     },

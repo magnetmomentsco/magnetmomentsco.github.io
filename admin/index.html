@@ -588,11 +588,52 @@
     }
     .payment-badge.venmo { background: rgba(0,140,255,0.15); color: #4db8ff; }
     .payment-badge.paypal { background: rgba(0,48,135,0.15); color: #6699ff; }
-    .payment-badge.shopify { background: rgba(150,191,72,0.15); color: #b0d96a; }
     .payment-badge.cash-tap { background: rgba(122,157,84,0.15); color: #a3c47e; }
     @media (max-width: 768px) {
       .market-session-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ─── Order List Cards ─── */
+    .order-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.82rem;
+    }
+    .order-card-info { flex: 1; min-width: 0; }
+    .order-card-id { font-weight: 700; color: var(--cream); margin-bottom: 2px; }
+    .order-card-detail { color: var(--text-muted); }
+    .order-status {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .order-status.pending { background: rgba(255,193,7,0.18); color: #ffc107; }
+    .order-status.sent { background: rgba(0,140,255,0.15); color: #4db8ff; }
+    .order-status.confirmed { background: rgba(76,175,80,0.18); color: #66bb6a; }
+    .btn-confirm-pay {
+      padding: 5px 12px;
+      border: none;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--bg);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-confirm-pay:hover { opacity: 0.85; }
 
     /* ─── Quick Actions ─── */
     .actions-grid {
@@ -1205,10 +1246,13 @@
           </div>
           <div id="payment-breakdown" style="margin-top:12px;"></div>
           <button class="btn-sm" id="btn-export-csv" onclick="exportSessionCSV()" style="margin-top:12px;">📊 Export CSV</button>
-        </div>
 
-      </div>
-    </div>
+          <!-- Live Order List -->
+          <div style="margin-top:20px;">
+            <h4 style="color:var(--cream);font-size:0.95rem;margin-bottom:10px;">🧾 Today's Orders</h4>
+            <div id="orders-list" style="max-height:400px;overflow-y:auto;"></div>
+          </div>
+        </div>
 
     <!-- QR Code Modal -->
     <div class="qr-modal-overlay" id="qr-modal">
@@ -3744,7 +3788,7 @@ function loadMarketSession() {
 
     // Payment method breakdown
     if (breakdownEl && data.paymentBreakdown) {
-      const labels = { venmo: '💜 Venmo', paypal: '💙 PayPal', shopify: '🛒 Shopify', 'cash-tap': '💵 Cash' };
+      const labels = { venmo: '💜 Venmo', paypal: '💙 PayPal', 'cash-tap': '💵 Cash' };
       breakdownEl.innerHTML = Object.entries(data.paymentBreakdown).map(([method, count]) => {
         const cls = method.replace(/[^a-z-]/g, '');
         return '<span class="payment-badge ' + cls + '">' + (labels[method] || method) + ': ' + count + '</span>';
@@ -3936,9 +3980,10 @@ function exportSessionCSV() {
       const orders = snap.val();
       if (!orders) { alert('No orders found for today.'); return; }
 
-      const rows = [['Order ID','Size','Quantity','Subtotal','Tax','Total','Payment','Photos','Timestamp']];
+      const rows = [['Order ID','Firebase Key','Size','Quantity','Subtotal','Tax','Total','Payment','Status','Photos','Timestamp']];
       Object.entries(orders).forEach(([id, o]) => {
         rows.push([
+          o.orderId || '',
           id,
           o.size || '',
           o.quantity || '',
@@ -3946,6 +3991,7 @@ function exportSessionCSV() {
           (o.tax || 0).toFixed(2),
           (o.total || 0).toFixed(2),
           o.paymentMethod || '',
+          o.paymentStatus || '',
           o.photoCount || 0,
           o.timestamp ? new Date(o.timestamp).toLocaleString() : ''
         ]);
@@ -3965,6 +4011,49 @@ function exportSessionCSV() {
     });
 }
 window.exportSessionCSV = exportSessionCSV;
+
+// ─── Live Order List with Confirm-Payment ───
+var _ordersRef = null;
+function loadOrders() {
+  var today = new Date();
+  var dateStr = today.getFullYear() + '-' +
+    String(today.getMonth() + 1).padStart(2, '0') + '-' +
+    String(today.getDate()).padStart(2, '0');
+  if (_ordersRef) _ordersRef.off();
+  _ordersRef = db.ref('orders').orderByChild('sessionDate').equalTo(dateStr);
+  _ordersRef.on('value', function(snap) {
+    var container = document.getElementById('orders-list');
+    if (!container) return;
+    var data = snap.val();
+    if (!data) { container.innerHTML = '<span style="font-size:0.82rem;color:var(--text-dim);">No orders yet</span>'; return; }
+    var entries = Object.entries(data).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); });
+    var payIcons = { venmo: '💜', paypal: '💙', 'cash-tap': '💵' };
+    container.innerHTML = entries.map(function(pair) {
+      var key = pair[0], o = pair[1];
+      var status = o.paymentStatus || 'unknown';
+      var badge = '<span class="order-status ' + status + '">' + status + '</span>';
+      var btn = status !== 'confirmed'
+        ? ' <button class="btn-confirm-pay" onclick="confirmPayment(\'' + key + '\');">✓ Confirm Paid</button>'
+        : '';
+      var icon = payIcons[o.paymentMethod] || '💰';
+      var time = o.timestamp ? new Date(o.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
+      return '<div class="order-card">'
+        + '<div class="order-card-info">'
+        + '<div class="order-card-id">' + icon + ' ' + (o.orderId || key) + '</div>'
+        + '<div class="order-card-detail">' + (o.size||'') + ' × ' + (o.quantity||'') + ' — $' + (o.total||0).toFixed(2) + ' — ' + time + '</div>'
+        + '</div>'
+        + badge + btn
+        + '</div>';
+    }).join('');
+  });
+}
+
+function confirmPayment(orderKey) {
+  if (!orderKey) return;
+  db.ref('orders/' + orderKey + '/paymentStatus').set('confirmed')
+    .catch(function(e) { alert('Error confirming: ' + e.message); });
+}
+window.confirmPayment = confirmPayment;
 
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -4349,6 +4438,7 @@ async function initDashboard() {
   loadSocialProofConfig();
   loadWebappEvents();
   loadMarketSession();
+  loadOrders();
 
   // Set default date for event creation
   var evtDateInput = document.getElementById('event-date-input');

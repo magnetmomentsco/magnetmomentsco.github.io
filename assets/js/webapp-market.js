@@ -336,11 +336,15 @@
       });
     });
 
+    var fileIds = [];
     Promise.all(uploadPromises)
-      .then(function () {
+      .then(function (results) {
+        fileIds = results.map(function (r) { return r && r.fileId || null; }).filter(Boolean);
         showUploadStatus('Saving order...');
         // Save order to Firebase
+        var isPending = paymentMethod === 'cash-tap';
         return MMWebapp.fb.push('orders', {
+          orderId: orderId,
           sessionDate: MMWebapp.getTodayString(),
           size: state.size,
           quantity: state.quantity,
@@ -348,7 +352,9 @@
           tax: state.tax,
           total: state.total,
           paymentMethod: paymentMethod,
+          paymentStatus: isPending ? 'pending' : 'sent',
           photoCount: state.photos.length,
+          driveFileIds: fileIds,
           timestamp: Date.now()
         });
       })
