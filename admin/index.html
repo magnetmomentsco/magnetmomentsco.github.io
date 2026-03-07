@@ -3755,17 +3755,18 @@ function loadMarketSession() {
   const dateStr = today.getFullYear() + '-' +
     String(today.getMonth() + 1).padStart(2, '0') + '-' +
     String(today.getDate()).padStart(2, '0');
-  const sessionPath = 'market-sessions/' + dateStr;
+
+  // Compute stats directly from orders — always accurate
   if (_marketSessionRef) _marketSessionRef.off();
-  _marketSessionRef = db.ref(sessionPath);
+  _marketSessionRef = db.ref('orders').orderByChild('sessionDate').equalTo(dateStr);
   _marketSessionRef.on('value', snap => {
-    const data = snap.val();
     const ordersEl = document.getElementById('session-orders');
     const revenueEl = document.getElementById('session-revenue');
     const taxEl = document.getElementById('session-tax');
     const avgEl = document.getElementById('session-avg');
     const breakdownEl = document.getElementById('payment-breakdown');
 
+    const data = snap.val();
     if (!data) {
       if (ordersEl) ordersEl.textContent = '0';
       if (revenueEl) revenueEl.textContent = '$0.00';
@@ -3775,22 +3776,31 @@ function loadMarketSession() {
       return;
     }
 
-    const orders = data.orderCount || 0;
-    const revenue = data.revenue && data.revenue.total || 0;
-    const tax = data.revenue && data.revenue.tax || 0;
-    const avg = orders > 0 ? revenue / orders : 0;
+    const orderList = Object.values(data);
+    const count = orderList.length;
+    let revenue = 0, tax = 0;
+    const pmCounts = {};
+    orderList.forEach(o => {
+      revenue += o.total || 0;
+      tax += o.tax || 0;
+      const pm = o.paymentMethod || 'other';
+      pmCounts[pm] = (pmCounts[pm] || 0) + 1;
+    });
+    revenue = Math.round(revenue * 100) / 100;
+    tax = Math.round(tax * 100) / 100;
+    const avg = count > 0 ? revenue / count : 0;
 
-    if (ordersEl) ordersEl.textContent = orders;
+    if (ordersEl) ordersEl.textContent = count;
     if (revenueEl) revenueEl.textContent = '$' + revenue.toFixed(2);
     if (taxEl) taxEl.textContent = '$' + tax.toFixed(2);
     if (avgEl) avgEl.textContent = '$' + avg.toFixed(2);
 
     // Payment method breakdown
-    if (breakdownEl && data.paymentBreakdown) {
+    if (breakdownEl) {
       const labels = { venmo: '💜 Venmo', paypal: '💙 PayPal', 'cash-tap': '💵 Cash' };
-      breakdownEl.innerHTML = Object.entries(data.paymentBreakdown).map(([method, count]) => {
+      breakdownEl.innerHTML = Object.entries(pmCounts).map(([method, cnt]) => {
         const cls = method.replace(/[^a-z-]/g, '');
-        return '<span class="payment-badge ' + cls + '">' + (labels[method] || method) + ': ' + count + '</span>';
+        return '<span class="payment-badge ' + cls + '">' + (labels[method] || method) + ': ' + cnt + '</span>';
       }).join('');
     }
   });
@@ -4027,19 +4037,30 @@ function loadOrders() {
     if (!data) { container.innerHTML = '<span style="font-size:0.82rem;color:var(--text-dim);">No orders yet</span>'; return; }
     var entries = Object.entries(data).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); });
     var payIcons = { venmo: '💜', paypal: '💙', 'cash-tap': '💵' };
-    container.innerHTML = entries.map(function(pair) {
+    var payLabels = { venmo: 'Venmo', paypal: 'PayPal', 'cash-tap': 'Cash' };
+    container.innerHTML = entries.map(function(pair, idx) {
       var key = pair[0], o = pair[1];
-      var status = o.paymentStatus || 'unknown';
+      var status = o.paymentStatus || 'pending';
       var badge = '<span class="order-status ' + status + '">' + status + '</span>';
       var btn = status !== 'confirmed'
         ? ' <button class="btn-confirm-pay" onclick="confirmPayment(\'' + key + '\');">✓ Confirm Paid</button>'
         : '';
       var icon = payIcons[o.paymentMethod] || '💰';
+      var pmLabel = payLabels[o.paymentMethod] || o.paymentMethod || '';
       var time = o.timestamp ? new Date(o.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
+      var orderNum = entries.length - idx;
+      var label = '#' + orderNum + ' — ' + pmLabel;
+
+      // Photo link(s)
+      var photoLink = '';
+      if (o.driveFileIds && o.driveFileIds.length) {
+        photoLink = ' <a href="https://drive.google.com/file/d/' + o.driveFileIds[0] + '/view" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-size:0.78rem;" title="View photos">📷 ' + o.driveFileIds.length + ' photo' + (o.driveFileIds.length > 1 ? 's' : '') + '</a>';
+      }
+
       return '<div class="order-card">'
         + '<div class="order-card-info">'
-        + '<div class="order-card-id">' + icon + ' ' + (o.orderId || key) + '</div>'
-        + '<div class="order-card-detail">' + (o.size||'') + ' × ' + (o.quantity||'') + ' — $' + (o.total||0).toFixed(2) + ' — ' + time + '</div>'
+        + '<div class="order-card-id">' + icon + ' ' + label + '</div>'
+        + '<div class="order-card-detail">' + (o.size||'') + ' × ' + (o.quantity||'') + ' — $' + (o.total||0).toFixed(2) + ' — ' + time + photoLink + '</div>'
         + '</div>'
         + badge + btn
         + '</div>';
