@@ -341,8 +341,7 @@
       .then(function (results) {
         fileIds = results.map(function (r) { return r && r.fileId || null; }).filter(Boolean);
         showUploadStatus('Saving order...');
-        // Save order to Firebase
-        var isPending = paymentMethod === 'cash-tap';
+        // Save order to Firebase — all orders start pending; admin confirms payment
         return MMWebapp.fb.push('orders', {
           orderId: orderId,
           sessionDate: MMWebapp.getTodayString(),
@@ -352,7 +351,7 @@
           tax: state.tax,
           total: state.total,
           paymentMethod: paymentMethod,
-          paymentStatus: isPending ? 'pending' : 'sent',
+          paymentStatus: 'pending',
           photoCount: state.photos.length,
           driveFileIds: fileIds,
           timestamp: Date.now()
