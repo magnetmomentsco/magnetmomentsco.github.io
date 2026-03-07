@@ -61,7 +61,7 @@
     els.cameraCloseBtn = document.getElementById('camera-close-btn');
     els.payVenmo = document.getElementById('pay-venmo');
     els.payPaypal = document.getElementById('pay-paypal');
-    els.payShopify = document.getElementById('pay-shopify');
+
     els.payCash = document.getElementById('pay-cash');
     els.venmoAmount = document.getElementById('venmo-amount');
     els.paypalAmount = document.getElementById('paypal-amount');
@@ -284,12 +284,6 @@
       processOrder('paypal');
     });
 
-    els.payShopify.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (!validateOrder()) return;
-      processOrder('shopify');
-    });
-
     els.payCash.addEventListener('click', function (e) {
       e.preventDefault();
       if (!validateOrder()) return;
@@ -411,11 +405,6 @@
         window.open(PAYPAL_ME_URL, '_blank');
         break;
 
-      case 'shopify':
-        // Redirect to Shopify store
-        window.open('https://magnetmomentsco.us/shop/', '_blank');
-        break;
-
       case 'cash-tap':
         MMWebapp.showToast('Please see a team member to pay', 'info', 5000);
         break;
@@ -436,7 +425,6 @@
     var paymentLabels = {
       'venmo': 'Venmo',
       'paypal': 'PayPal',
-      'shopify': 'Shopify Checkout',
       'cash-tap': 'Cash / Tap'
     };
 
