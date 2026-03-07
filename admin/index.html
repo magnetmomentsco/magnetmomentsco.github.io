@@ -3735,7 +3735,7 @@ function loadWebappEvents() {
           '<div class="event-meta">' + (isEvent ? '📸 Event' : '🛒 Market') + '</div>' +
           '<div class="event-link">' + escHtml(url) + '</div>' +
         '</div>' +
-        '<div class="event-stats">📊 ' + (ev.photoCount || 0) + ' photos</div>' +
+        '<div class="event-stats" ' + (!isEvent ? 'id="market-photo-count"' : '') + '>📊 ' + (ev.photoCount || 0) + ' photos</div>' +
         '<div class="event-actions">' +
           '<button class="btn-sm" onclick="showQRCode(\'' + escAttr(url) + '\', \'' + escAttr(ev.name || (isEvent ? 'Event' : 'Market')) + '\')">QR Code</button>' +
           (ev.driveFolderId ? '<a class="btn-sm" href="https://drive.google.com/drive/folders/' + ev.driveFolderId + '" target="_blank" rel="noopener">📂 Drive</a>' : '') +
@@ -3794,6 +3794,12 @@ function loadMarketSession() {
     if (revenueEl) revenueEl.textContent = '$' + revenue.toFixed(2);
     if (taxEl) taxEl.textContent = '$' + tax.toFixed(2);
     if (avgEl) avgEl.textContent = '$' + avg.toFixed(2);
+
+    // Update market session photo count on event card
+    let totalPhotos = 0;
+    orderList.forEach(o => { totalPhotos += o.photoCount || 0; });
+    const mktPhotoEl = document.getElementById('market-photo-count');
+    if (mktPhotoEl) mktPhotoEl.textContent = '📊 ' + totalPhotos + ' photos';
 
     // Payment method breakdown
     if (breakdownEl) {
