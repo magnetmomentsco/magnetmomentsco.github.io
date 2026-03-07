@@ -273,10 +273,16 @@
   }
 
   function uploadPhotoWithRetry(photoDataUrl, options, attempt) {
+    // Extract actual MIME type from data URL prefix (e.g. "data:image/png;base64,...")
+    var detectedMime = 'image/jpeg';
+    if (typeof photoDataUrl === 'string' && photoDataUrl.indexOf('data:') === 0) {
+      var semi = photoDataUrl.indexOf(';');
+      if (semi > 5) detectedMime = photoDataUrl.substring(5, semi);
+    }
     var payload = {
       action: 'upload',
       photo: photoDataUrl,
-      mimeType: 'image/jpeg',
+      mimeType: detectedMime,
       mode: options.mode,
       date: options.date || getTodayString(),
       paymentMethod: options.paymentMethod || null,
@@ -317,10 +323,15 @@
   }
 
   function uploadPhotoNoCors(photoDataUrl, options) {
+    var detectedMime = 'image/jpeg';
+    if (typeof photoDataUrl === 'string' && photoDataUrl.indexOf('data:') === 0) {
+      var semi = photoDataUrl.indexOf(';');
+      if (semi > 5) detectedMime = photoDataUrl.substring(5, semi);
+    }
     var payload = {
       action: 'upload',
       photo: photoDataUrl,
-      mimeType: 'image/jpeg',
+      mimeType: detectedMime,
       mode: options.mode,
       date: options.date || getTodayString(),
       paymentMethod: options.paymentMethod || null,

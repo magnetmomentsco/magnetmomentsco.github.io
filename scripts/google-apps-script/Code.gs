@@ -97,10 +97,16 @@ function handleUpload(data) {
 
   // Decode base64 photo
   var photoBytes;
+  var dataUrlMime = null;
   try {
     // Strip data URL prefix if present (e.g., "data:image/jpeg;base64,")
     var base64Data = data.photo;
-    if (typeof base64Data === 'string' && base64Data.indexOf(',') !== -1) {
+    if (typeof base64Data === 'string' && base64Data.indexOf('data:') === 0 && base64Data.indexOf(',') !== -1) {
+      // Extract MIME from the data URL itself — most reliable source
+      var semiIdx = base64Data.indexOf(';');
+      if (semiIdx > 5) dataUrlMime = base64Data.substring(5, semiIdx);
+      base64Data = base64Data.substring(base64Data.indexOf(',') + 1);
+    } else if (typeof base64Data === 'string' && base64Data.indexOf(',') !== -1) {
       base64Data = base64Data.substring(base64Data.indexOf(',') + 1);
     }
     photoBytes = Utilities.base64Decode(base64Data);
@@ -119,8 +125,8 @@ function handleUpload(data) {
     }));
   }
 
-  // Determine MIME type
-  var mimeType = data.mimeType || 'image/jpeg';
+  // Determine MIME type — prefer data URL > client claim > default
+  var mimeType = dataUrlMime || data.mimeType || 'image/jpeg';
   if (ALLOWED_MIME_TYPES.indexOf(mimeType) === -1) {
     return buildCorsResponse(JSON.stringify({
       success: false,
@@ -194,8 +200,10 @@ function handleUpload(data) {
   var prefix = data.mode === 'market' ? 'order' : 'guest';
   var fileName = prefix + '-' + timestamp + '-' + randomId + ext;
 
-  // Save file
-  var blob = Utilities.newBlob(photoBytes, mimeType, fileName);
+  // Save file — explicitly set content type on the blob for Drive compatibility
+  var blob = Utilities.newBlob(photoBytes);
+  blob.setName(fileName);
+  blob.setContentType(mimeType);
   var file = targetFolder.createFile(blob);
 
   return buildCorsResponse(JSON.stringify({
