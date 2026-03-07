@@ -20,7 +20,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 
   <!-- QR Code Generator -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 
   <style>
     /* ─── Reset & Base ─── */
@@ -3859,15 +3859,32 @@ function copyQRLink() {
 }
 window.copyQRLink = copyQRLink;
 
-// QR code generator using qrcode.js library
+// QR code generator using qrcode-generator library
 function generateQR(canvas, text) {
-  QRCode.toCanvas(canvas, text, {
-    width: 256,
-    margin: 2,
-    color: { dark: '#1a1a2e', light: '#ffffff' }
-  }, function(err) {
-    if (err) console.error('QR generation error:', err);
-  });
+  try {
+    var qr = qrcode(0, 'M');
+    qr.addData(text);
+    qr.make();
+    var size = 256;
+    var moduleCount = qr.getModuleCount();
+    var cellSize = size / (moduleCount + 4); // +4 for margin
+    var offset = cellSize * 2; // 2-cell margin
+    var ctx = canvas.getContext('2d');
+    canvas.width = size;
+    canvas.height = size;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = '#1a1a2e';
+    for (var r = 0; r < moduleCount; r++) {
+      for (var c = 0; c < moduleCount; c++) {
+        if (qr.isDark(r, c)) {
+          ctx.fillRect(offset + c * cellSize, offset + r * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+  } catch (err) {
+    console.error('QR generation error:', err);
+  }
 }
 
 // Print QR code on a branded template
