@@ -3688,13 +3688,13 @@ function loadWebappEvents() {
       return '<div class="event-item">' +
         '<span class="event-status">' + statusIcon + '</span>' +
         '<div class="event-info">' +
-          '<div class="event-title">' + escHtml(ev.name) + ' <span style="font-weight:400;color:var(--text-muted);">(' + ev.date + ')</span></div>' +
+          '<div class="event-title">' + escHtml(ev.name || (isEvent ? 'Unnamed Event' : 'Market Session')) + ' <span style="font-weight:400;color:var(--text-muted);">(' + (ev.date || '—') + ')</span></div>' +
           '<div class="event-meta">' + (isEvent ? '📸 Event' : '🛒 Market') + '</div>' +
           '<div class="event-link">' + escHtml(url) + '</div>' +
         '</div>' +
         '<div class="event-stats">📊 ' + (ev.photoCount || 0) + ' photos</div>' +
         '<div class="event-actions">' +
-          '<button class="btn-sm" onclick="showQRCode(\'' + escAttr(url) + '\', \'' + escAttr(ev.name) + '\')">QR Code</button>' +
+          '<button class="btn-sm" onclick="showQRCode(\'' + escAttr(url) + '\', \'' + escAttr(ev.name || (isEvent ? 'Event' : 'Market')) + '\')">QR Code</button>' +
           (ev.driveFolderId ? '<a class="btn-sm" href="https://drive.google.com/drive/folders/' + ev.driveFolderId + '" target="_blank" rel="noopener">📂 Drive</a>' : '') +
           (ev.active ? '<button class="btn-sm btn-danger" onclick="endWebappEvent(\'' + ev._key + '\')">End</button>' : '') +
         '</div>' +
