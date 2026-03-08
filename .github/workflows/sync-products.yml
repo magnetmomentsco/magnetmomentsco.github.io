@@ -93,7 +93,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run Firebase rules tests
         run: npm run test:rules:ci
