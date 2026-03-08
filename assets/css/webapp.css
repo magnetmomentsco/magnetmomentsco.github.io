@@ -421,6 +421,58 @@ ul, ol { list-style: none; }
   cursor: pointer;
 }
 
+/* Camera Review (retake / use photo) */
+.camera-review {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.camera-review.hidden {
+  display: none;
+}
+
+.review-btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease, background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.review-btn:active {
+  transform: scale(0.95);
+}
+
+.review-retake {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.review-retake:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.review-use {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.review-use:hover {
+  background: var(--color-secondary-light);
+}
+
 /* Photo Thumbnails */
 .photo-grid {
   display: flex;

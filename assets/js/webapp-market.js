@@ -26,7 +26,7 @@
   var TAX_RATE = 0.0825;
 
   var VENMO_USERNAME = 'magnetmomentsco';
-  var PAYPAL_ME_URL = 'https://www.paypal.com/biz/profile/magnetmomentsco';
+  var PAYPAL_USERNAME = 'magnetmomentsco';
 
   // ── State ──────────────────────────────────────────────────────────────────
   var state = {
@@ -407,7 +407,14 @@
         break;
 
       case 'paypal':
-        window.open(PAYPAL_ME_URL, '_blank');
+        // PayPal deep-link: opens app on mobile, web on desktop
+        window.location.href = 'paypal://paypalme/' +
+          encodeURIComponent(PAYPAL_USERNAME) + '/' + amount;
+        // Fallback to web after brief delay
+        setTimeout(function () {
+          window.open('https://www.paypal.me/' + encodeURIComponent(PAYPAL_USERNAME) +
+            '/' + amount, '_blank');
+        }, 1500);
         break;
 
       case 'cash-tap':

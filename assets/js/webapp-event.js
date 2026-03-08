@@ -15,6 +15,7 @@
 
   // ── DOM References ─────────────────────────────────────────────────────────
   var els = {};
+  var pendingDataUrl = null; // Holds captured photo until user confirms
 
   function init() {
     // Cache DOM
@@ -36,6 +37,11 @@
     els.photoGrid = document.getElementById('photo-grid');
     els.uploadStatus = document.getElementById('upload-status');
     els.statusText = document.getElementById('status-text');
+    els.cameraCanvas = document.getElementById('camera-canvas');
+    els.cameraControls = document.getElementById('camera-controls');
+    els.cameraReview = document.getElementById('camera-review');
+    els.retakeBtn = document.getElementById('retake-btn');
+    els.usePhotoBtn = document.getElementById('use-photo-btn');
 
     // Get event ID from URL
     var params = new URLSearchParams(window.location.search);
@@ -132,12 +138,26 @@
     els.takePhotoBtn.addEventListener('click', openCamera);
 
     els.snapBtn.addEventListener('click', function () {
-      var dataUrl = MMWebapp.capturePhoto(els.cameraVideo);
+      pendingDataUrl = MMWebapp.capturePhoto(els.cameraVideo);
       // Flash effect
       els.cameraContainer.style.opacity = '0.5';
       setTimeout(function () { els.cameraContainer.style.opacity = '1'; }, 100);
-      uploadEventPhoto(dataUrl);
-      MMWebapp.showToast('Photo captured! Take another or close camera.', 'success', 2000);
+      // Show preview on canvas
+      showReview(pendingDataUrl);
+    });
+
+    els.retakeBtn.addEventListener('click', function () {
+      pendingDataUrl = null;
+      hideReview();
+    });
+
+    els.usePhotoBtn.addEventListener('click', function () {
+      if (pendingDataUrl) {
+        uploadEventPhoto(pendingDataUrl);
+        MMWebapp.showToast('Photo captured! Take another or close camera.', 'success', 2000);
+      }
+      pendingDataUrl = null;
+      hideReview();
     });
 
     els.cameraSwitchBtn.addEventListener('click', function () {
@@ -159,8 +179,33 @@
   }
 
   function closeCamera() {
+    pendingDataUrl = null;
+    hideReview();
     MMWebapp.stopCamera();
     els.cameraContainer.classList.remove('active');
+  }
+
+  function showReview(dataUrl) {
+    // Draw captured frame onto canvas
+    var img = new Image();
+    img.onload = function () {
+      els.cameraCanvas.width = img.width;
+      els.cameraCanvas.height = img.height;
+      els.cameraCanvas.getContext('2d').drawImage(img, 0, 0);
+    };
+    img.src = dataUrl;
+    // Swap video for canvas, swap controls for review buttons
+    els.cameraVideo.classList.add('hidden');
+    els.cameraCanvas.classList.remove('hidden');
+    els.cameraControls.classList.add('hidden');
+    els.cameraReview.classList.remove('hidden');
+  }
+
+  function hideReview() {
+    els.cameraCanvas.classList.add('hidden');
+    els.cameraVideo.classList.remove('hidden');
+    els.cameraReview.classList.add('hidden');
+    els.cameraControls.classList.remove('hidden');
   }
 
   // ── File Upload ────────────────────────────────────────────────────────────

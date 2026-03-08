@@ -63,10 +63,15 @@
         <!-- Camera Preview (hidden until open) -->
         <div class="camera-preview-container" id="camera-container">
           <video id="camera-video" autoplay playsinline muted></video>
-          <div class="camera-controls">
+          <canvas id="camera-canvas" class="hidden"></canvas>
+          <div class="camera-controls" id="camera-controls">
             <button class="camera-switch-btn" id="camera-switch-btn" aria-label="Switch camera">🔄</button>
             <button class="snap-btn" id="snap-btn" aria-label="Take photo"></button>
             <button class="camera-close-btn" id="camera-close-btn" aria-label="Close camera">✕</button>
+          </div>
+          <div class="camera-review hidden" id="camera-review">
+            <button class="review-btn review-retake" id="retake-btn">↻ Retake</button>
+            <button class="review-btn review-use" id="use-photo-btn">✓ Use Photo</button>
           </div>
         </div>
 
