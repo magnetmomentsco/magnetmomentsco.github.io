@@ -637,7 +637,7 @@
       <span>Prepared: February 16, 2026</span>
       <span>For: Alyssa </span>
       <span>By: AJ </span>
-      <span>Version: 2.0</span>
+      <span>Version: 3.0</span>
     </div>
   </header>
 
@@ -674,6 +674,7 @@
       <li><a href="#cicd-v2">CI/CD Pipeline v2 — Firebase &amp; Deploy</a></li>
       <li><a href="#security-audit">Security Audit — Feb 2026</a></li>
       <li><a href="#pagespeed">PageSpeed Optimization — Feb 2026</a></li>
+      <li><a href="#dual-mode-webapp">Dual-Mode Webapp — Event &amp; Market (Mar 2026)</a></li>
     </ol>
   </nav>
 
@@ -3931,6 +3932,494 @@ www CNAME <span class="str">magnetmomentsco.github.io</span>
           <li><strong>205 Playwright tests</strong> passing after all changes</li>
         </ul>
       </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- 26. DUAL-MODE WEBAPP — EVENT & MARKET (MAR 2026)              -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="dual-mode-webapp">
+      <span class="section-num">26</span>
+      <h2>Dual-Mode Webapp — Event &amp; Market (Mar 2026)</h2>
+
+      <div class="callout idea">
+        <div class="callout-title">📋 New request — March 5, 2026</div>
+        Alyssa requested two new customer-facing web applications:
+        <strong>(1) an Event Photo Booth</strong> for capturing and uploading guest photos at weddings, corporate events, and parties;
+        and <strong>(2) a Market Order Builder</strong> for pop-up market sales where customers select magnet sizes, quantities,
+        upload their own photos, and pay via Venmo, PayPal, or cash/tap.
+        The following section documents every feature added, the architecture, user flows, and the current status.
+      </div>
+
+      <!-- ── 26.1 Architecture Overview ── -->
+      <h3>Architecture overview</h3>
+      <p>
+        Both apps share a common infrastructure layer (<code>webapp-shared.js</code>) that provides camera access,
+        image compression, Google Drive upload via Apps Script, Firebase RTDB helpers, offline queuing,
+        and toast notifications. Each mode has its own HTML page and dedicated JavaScript module.
+      </p>
+
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>File</th><th>Purpose</th><th>Lines</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>assets/js/webapp-shared.js</code></td>
+            <td>Shared module — Firebase init, camera API (start/stop/switch/capture), image compression (HEIC-safe), Google Drive upload with retry + no-cors fallback, offline queue, toast UI, utilities</td>
+            <td>~560</td>
+          </tr>
+          <tr>
+            <td><code>assets/js/webapp-event.js</code></td>
+            <td>Event mode logic — load event from Firebase, camera with retake flow, photo upload + thumbnail grid, live photo counter, fullscreen preview</td>
+            <td>~310</td>
+          </tr>
+          <tr>
+            <td><code>assets/js/webapp-market.js</code></td>
+            <td>Market mode logic — size/quantity selector, price calculation with tax, photo management, payment deep-links (Venmo, PayPal, cash), order submission to Firebase, confirmation screen</td>
+            <td>~495</td>
+          </tr>
+          <tr>
+            <td><code>event/webapp/index.html</code></td>
+            <td>Event Photo Booth page — camera preview, snap/retake/use controls, upload status, photo grid, live counter</td>
+            <td>~115</td>
+          </tr>
+          <tr>
+            <td><code>market/webapp/index.html</code></td>
+            <td>Market Order Builder page — 3-step form (choose magnets → upload photos → pay), order confirmation</td>
+            <td>~220</td>
+          </tr>
+          <tr>
+            <td><code>assets/css/webapp.css</code></td>
+            <td>Shared styles — mobile-first design matching brand colors, camera UI, payment buttons, animations, review overlay</td>
+            <td>~1020</td>
+          </tr>
+          <tr>
+            <td><code>scripts/google-apps-script/Code.gs</code></td>
+            <td>Google Apps Script backend — receives photo uploads, creates Google Drive folders, returns file IDs</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <!-- ── 26.2 Event Mode ── -->
+      <h3>Event Mode — Photo Booth (<code>/event/webapp/?id=…</code>)</h3>
+
+      <h4>What it does</h4>
+      <p>
+        At each event (wedding, corporate party, birthday, pop-up), Alyssa prints a QR code that links guests
+        to <code>magnetmomentsco.us/event/webapp/?id=EVENT_ID</code>. Guests open the link on their phone,
+        take or upload photos, and the photos are automatically uploaded to Google Drive in a folder specific
+        to that event. A live counter shows how many photos have been shared across all guests in real time.
+      </p>
+
+      <h4>User flow — Event Photo Booth</h4>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">Guest scans<br>QR code</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Event loads<br>from Firebase</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box">Camera opens<br><small>or file picker</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Snap → Review<br><small>Retake / Use</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Photo uploads<br>to Google Drive</div>
+        </div>
+        <div class="diagram-caption">Figure 26-1: Event mode happy path — guest snaps a photo, reviews it, confirms, and it uploads to the event's Drive folder.</div>
+      </div>
+
+      <h4>Feature breakdown</h4>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Detail</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Live camera preview</strong></td>
+            <td>Opens device camera with <code>getUserMedia</code> — back camera default, with switch button for selfie mode. Falls back gracefully on desktop (webcam) and older iOS Safari.</td>
+          </tr>
+          <tr>
+            <td><strong>Photo retake flow</strong> ✨</td>
+            <td>After tapping the shutter, the captured frame is rendered on a <code>&lt;canvas&gt;</code> overlay. Two buttons appear: <strong>↻ Retake</strong> (discards and returns to live camera) and <strong>✓ Use Photo</strong> (accepts and uploads). No photo leaves the phone until the guest explicitly confirms.</td>
+          </tr>
+          <tr>
+            <td><strong>File upload</strong></td>
+            <td>Alternative to camera — guests can pick existing photos from their gallery. Supports multi-select and HEIC/HEIF (iPhone native format).</td>
+          </tr>
+          <tr>
+            <td><strong>Image compression</strong></td>
+            <td>Photos larger than 500 KB are resized to max 2048 px and compressed to JPEG 85% quality via canvas. HEIC files are sent raw (browser can't render them in canvas).</td>
+          </tr>
+          <tr>
+            <td><strong>Thumbnail grid</strong></td>
+            <td>Each uploaded photo appears as a 72×72 thumbnail in a horizontal scroll grid. States: <em>uploading</em> (spinner overlay), <em>uploaded</em> (green border), <em>failed</em> (red border with retry button).</td>
+          </tr>
+          <tr>
+            <td><strong>Live photo counter</strong></td>
+            <td>Firebase RTDB listener on <code>events/{id}/photoCount</code> — shows real-time "X photos shared" count across all guests at the event.</td>
+          </tr>
+          <tr>
+            <td><strong>Upload retry</strong></td>
+            <td>Failed uploads show a ↻ retry button on the thumbnail. Also: automatic 2-retry with exponential backoff (1s, 2s), plus a no-cors fire-and-forget as last resort.</td>
+          </tr>
+          <tr>
+            <td><strong>Offline queue</strong></td>
+            <td>If the device loses connectivity, photos are queued in <code>localStorage</code> and automatically uploaded when connectivity returns (via <code>online</code> event listener).</td>
+          </tr>
+          <tr>
+            <td><strong>Fullscreen preview</strong></td>
+            <td>Tapping an uploaded thumbnail opens a full-screen overlay with the photo. Close via tap anywhere or Escape key.</td>
+          </tr>
+          <tr>
+            <td><strong>Event validation</strong></td>
+            <td>If the event ID is missing, expired, or inactive, a friendly error screen is shown: "Event Not Found" or "Event Ended".</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h4>Camera retake flow — detailed sequence</h4>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">📷 Tap shutter</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Canvas shows<br>frozen frame</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">↻ Retake?</div>
+        </div>
+        <br>
+        <div class="diagram-flow">
+          <div class="diagram-box" style="opacity:0.5;">↻ Retake</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box">Back to live<br>camera feed</div>
+          <span class="diagram-arrow" style="margin:0 1rem;">|</span>
+          <div class="diagram-box green" style="opacity:0.9;">✓ Use Photo</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Upload starts<br>+ back to camera</div>
+        </div>
+        <div class="diagram-caption">Figure 26-2: Retake vs. confirm branch — the photo never uploads until the guest explicitly taps "Use Photo".</div>
+      </div>
+
+      <h4>Firebase data structure — Event Mode</h4>
+      <div class="file-tree">/events
+  /{eventId}
+    /active:        true | false
+    /name:          "Smith Wedding"
+    /date:          "2026-03-15"
+    /photoCount:    47          ← incremented by each upload
+    /driveFolderId: "1a2b3c..." ← Google Drive folder ID</div>
+
+      <!-- ── 26.3 Market Mode ── -->
+      <h3>Market Mode — Order Builder (<code>/market/webapp/</code>)</h3>
+
+      <h4>What it does</h4>
+      <p>
+        At pop-up markets, Alyssa sets up a QR code on her table. Customers scan it to open a self-service order builder
+        where they pick their magnet size (2×2 or 2×3), select a quantity package (1 / 3 / 6 / 9 / 12), upload their photos,
+        and pay via their preferred method. The photos upload to Google Drive, the order is saved to Firebase,
+        and the customer's payment app opens with the correct amount pre-filled.
+      </p>
+
+      <h4>User flow — Market Order</h4>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">Customer scans<br>QR code</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box">Step 1: Pick<br>size &amp; qty</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">Step 2: Upload<br>photos</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Step 3: Pay<br><small>Venmo / PayPal / Cash</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Order confirmed<br><small>Photos in Drive</small></div>
+        </div>
+        <div class="diagram-caption">Figure 26-3: Market mode 3-step flow — choose → upload → pay.</div>
+      </div>
+
+      <h4>Feature breakdown</h4>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Detail</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Size selector</strong></td>
+            <td>Toggle between 2×2 and 2×3 magnet sizes. Prices update dynamically for all quantity tiers.</td>
+          </tr>
+          <tr>
+            <td><strong>Quantity packages</strong></td>
+            <td>Five tiers with descending per-unit pricing: Single ($4), Set of 3 ($12), Set of 6 ($19), Set of 9 ($25), Set of 12 ($30). Radio-button style selection with animated price transitions.</td>
+          </tr>
+          <tr>
+            <td><strong>Live price calculation</strong></td>
+            <td>Subtotal, tax (8.25%), and total update instantly on every selection change with a scale animation on the dollar amounts.</td>
+          </tr>
+          <tr>
+            <td><strong>Photo capture &amp; upload</strong></td>
+            <td>Same camera + file upload UI as event mode. Photos are added to a local collection with remove buttons (×). Count shows guidance: "3 photos ready (add 3 more for your set)".</td>
+          </tr>
+          <tr>
+            <td><strong>Venmo deep link</strong></td>
+            <td><code>venmo://paycharge?txn=pay&amp;recipients=magnetmomentsco&amp;amount=20.57&amp;note=…</code> — opens Venmo app with amount and description pre-filled. Falls back to <code>venmo.com/u/magnetmomentsco</code> web after 1.5s on desktop.</td>
+          </tr>
+          <tr>
+            <td><strong>PayPal deep link</strong> ✨</td>
+            <td><code>paypal://paypalme/magnetmomentsco/20.57</code> — opens PayPal app with amount pre-filled, matching the Venmo behavior. Falls back to <code>paypal.me/magnetmomentsco/20.57</code> web link after 1.5s.</td>
+          </tr>
+          <tr>
+            <td><strong>Cash / Tap payment</strong></td>
+            <td>Shows a toast: "Please see a team member to pay" — no external app opened. Order is still saved to Firebase with status <code>pending</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>Order confirmation</strong></td>
+            <td>After upload + payment link opens, the form slides away and a confirmation card shows: size, quantity, photo count, payment method, and total. "Start New Order" button resets everything.</td>
+          </tr>
+          <tr>
+            <td><strong>Firebase order record</strong></td>
+            <td>Each order is pushed to <code>/orders</code> with: orderId, date, size, quantity, subtotal, tax, total, payment method, payment status (<code>pending</code>), photo count, Drive file IDs, timestamp.</td>
+          </tr>
+          <tr>
+            <td><strong>Market session stats</strong></td>
+            <td>Each order also increments <code>/market-sessions/{date}</code> aggregates: order count, revenue (subtotal/tax/total), and payment method breakdown — visible in the Admin Dashboard.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <!-- ── 26.4 Pricing Table ── -->
+      <h4>Pricing table</h4>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Quantity</th><th>2×2 Price</th><th>2×3 Price</th><th>Per-Unit (2×2)</th><th>Per-Unit (2×3)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 magnet</td><td>$4.00</td><td>$4.50</td><td>$4.00</td><td>$4.50</td></tr>
+          <tr><td>Set of 3</td><td>$12.00</td><td>$13.50</td><td>$4.00</td><td>$4.50</td></tr>
+          <tr><td>Set of 6</td><td>$19.00</td><td>$22.00</td><td>$3.17</td><td>$3.67</td></tr>
+          <tr><td>Set of 9</td><td>$25.00</td><td>$32.00</td><td>$2.78</td><td>$3.56</td></tr>
+          <tr><td>Set of 12</td><td>$30.00</td><td>$40.00</td><td>$2.50</td><td>$3.33</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Tax rate: <strong>8.25%</strong> (applied to all orders).</p>
+
+      <!-- ── 26.5 Payment Flow Comparison ── -->
+      <h4>Payment flow — Venmo vs. PayPal vs. Cash</h4>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box highlight">💜 Venmo</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box"><code>venmo://</code><br>deep link</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">App opens with<br>$, note pre-filled</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Customer confirms<br>in Venmo app</div>
+        </div>
+        <br>
+        <div class="diagram-flow">
+          <div class="diagram-box highlight" style="background:#e0e8f5; border-color:#003087; color:#003087;">💙 PayPal</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box"><code>paypal://</code><br>deep link</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">App opens with<br>$ pre-filled</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Customer confirms<br>in PayPal app</div>
+        </div>
+        <br>
+        <div class="diagram-flow">
+          <div class="diagram-box highlight" style="background:#e8f5e1; border-color:#7A9D54; color:#3d6b1e;">💵 Cash / Tap</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box">Toast notification:<br>"See a team member"</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Alyssa takes<br>payment in person</div>
+        </div>
+        <div class="diagram-caption">Figure 26-4: All three payment methods. Venmo and PayPal open the native app with amount/note pre-filled; both have a 1.5 s fallback to the web version for desktop users. Cash/Tap orders are saved as <code>pending</code> in Firebase for Alyssa to mark as paid.</div>
+      </div>
+
+      <!-- ── 26.6 Event vs Market Comparison ── -->
+      <h3>Event Mode vs. Market Mode — side-by-side</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Aspect</th><th>Event Mode</th><th>Market Mode</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>URL</strong></td><td><code>/event/webapp/?id=EVENT_ID</code></td><td><code>/market/webapp/</code></td></tr>
+          <tr><td><strong>Target user</strong></td><td>Wedding/event guests</td><td>Pop-up market customers</td></tr>
+          <tr><td><strong>Access method</strong></td><td>QR code at event → per-event link</td><td>QR code at market table → static link</td></tr>
+          <tr><td><strong>Payment</strong></td><td>None (free for guests)</td><td>Venmo / PayPal / Cash</td></tr>
+          <tr><td><strong>Product selection</strong></td><td>None</td><td>Size (2×2 / 2×3), Quantity (1–12)</td></tr>
+          <tr><td><strong>Photo upload destination</strong></td><td>Google Drive (event-specific folder)</td><td>Google Drive (market orders folder)</td></tr>
+          <tr><td><strong>Firebase writes</strong></td><td><code>events/{id}/photoCount</code> increment</td><td><code>orders</code> (full order), <code>market-sessions/{date}</code> (aggregates)</td></tr>
+          <tr><td><strong>Photo review</strong></td><td>✅ Retake / Use Photo flow</td><td>✅ Remove button on each photo</td></tr>
+          <tr><td><strong>Live data</strong></td><td>Real-time photo count across all guests</td><td>Order summary with animated price updates</td></tr>
+          <tr><td><strong>Confirmation</strong></td><td>Toast: "Photo uploaded!"</td><td>Full confirmation card with order details</td></tr>
+          <tr><td><strong>Offline support</strong></td><td>✅ Queue + auto-upload on reconnect</td><td>✅ Same infrastructure</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <!-- ── 26.7 Shared Infrastructure ── -->
+      <h3>Shared infrastructure (<code>webapp-shared.js</code>)</h3>
+      <p>
+        Both modes are powered by a shared JavaScript module that provides:
+      </p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Module</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Firebase helpers</strong></td>
+            <td><code>fb.push()</code>, <code>fb.set()</code>, <code>fb.update()</code>, <code>fb.get()</code>, <code>fb.listen()</code>, <code>fb.increment()</code> — lazy-initializes Firebase SDK on first use</td>
+          </tr>
+          <tr>
+            <td><strong>Camera API</strong></td>
+            <td><code>startCamera(videoEl)</code> — getUserMedia with 3-tier fallback (ideal 1080p → simple constraints → any camera). <code>switchCamera()</code> toggles environment↔user facingMode. <code>capturePhoto()</code> draws video frame to canvas.</td>
+          </tr>
+          <tr>
+            <td><strong>Image compression</strong></td>
+            <td><code>compressImage(file)</code> — resizes to max 2048 px, JPEG 85%. Skips files under 500 KB. Returns HEIC raw (can't canvas-render).</td>
+          </tr>
+          <tr>
+            <td><strong>Upload with retry</strong></td>
+            <td><code>uploadPhoto(dataUrl, options)</code> — POST to Google Apps Script. 30 s timeout. 2 retries with exponential backoff (1s, 2s). Final fallback: no-cors fire-and-forget.</td>
+          </tr>
+          <tr>
+            <td><strong>Offline queue</strong></td>
+            <td>Failed uploads are stored in <code>localStorage</code> under <code>mm_upload_queue</code>. Queue processes automatically when the browser fires the <code>online</code> event, and also on page load with a 2 s delay.</td>
+          </tr>
+          <tr>
+            <td><strong>Toast notifications</strong></td>
+            <td><code>showToast(message, type, duration)</code> — animated pill-shaped toast at bottom of screen. Types: <code>success</code> (green), <code>error</code> (red), <code>info</code> (gold).</td>
+          </tr>
+          <tr>
+            <td><strong>Event API</strong></td>
+            <td><code>createEventFolder(name, date)</code> and <code>getEvents()</code> — talk to Apps Script for admin event management.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <!-- ── 26.8 Upload Architecture ── -->
+      <h3>Photo upload architecture</h3>
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-box">📱 Guest/Customer<br>takes photo</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box highlight">webapp-shared.js<br><small>compress + upload</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Google Apps Script<br><small>Code.gs (server)</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Google Drive<br><small>event or market folder</small></div>
+        </div>
+        <br>
+        <div class="diagram-flow">
+          <div class="diagram-box highlight">webapp-shared.js</div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box gold">Firebase RTDB<br><small>orders / events / market-sessions</small></div>
+          <span class="diagram-arrow">→</span>
+          <div class="diagram-box green">Admin Dashboard<br><small>/admin/ reads data</small></div>
+        </div>
+        <div class="diagram-caption">Figure 26-5: Dual data flow — photos go to Google Drive (via Apps Script), while metadata and orders go to Firebase RTDB (read by the Admin Dashboard).</div>
+      </div>
+
+      <!-- ── 26.9 Firebase Rules ── -->
+      <h3>Firebase RTDB rules (security)</h3>
+      <p>
+        The following rules were added to <code>scripts/firebase-rules.json</code> to support the webapp.
+        All market/event write paths are public (customers don't sign in), but read access for sensitive paths
+        (<code>orders</code>, <code>market-sessions</code>, <code>sessions</code>) is restricted to authenticated admin users.
+      </p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Path</th><th>Write</th><th>Read</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/events/$eventId</code></td><td>Public (validated)</td><td>Public</td><td>Event name, date, photo count — guests need to read event info to display the booth</td></tr>
+          <tr><td><code>/orders</code></td><td>Public (push only)</td><td>🔒 Auth only</td><td>Market orders — only Alyssa can read the full list</td></tr>
+          <tr><td><code>/market-sessions/$date</code></td><td>Public (validated)</td><td>🔒 Auth only</td><td>Revenue aggregates, order count, payment breakdown</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>
+        50 regression tests verify these rules pass in CI (GitHub Actions) before every deploy —
+        see <a href="#cicd-v2">Section 23: CI/CD Pipeline v2</a>.
+      </p>
+
+      <!-- ── 26.10 Design ── -->
+      <h3>Design &amp; responsive behavior</h3>
+      <p>
+        Both webapps use the same brand design tokens as the main site — Dusty Rose, Sage Green, Warm Gold, cream backgrounds,
+        Playfair Display headings, Inter body text. The layout is capped at <code>480px</code> max-width (phone-optimized)
+        since 99% of usage is on customers' phones at events/markets.
+      </p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Design Element</th><th>Implementation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Camera shutter button</td><td>64×64 white circle with subtle shadow — mimics native iOS/Android camera button</td></tr>
+          <tr><td>Retake / Use Photo buttons</td><td>Semi-transparent glass-morphism (retake) and solid green (use) — positioned at bottom of camera preview</td></tr>
+          <tr><td>Payment buttons</td><td>Full-width colored buttons: Venmo blue (#008CFF), PayPal navy (#003087), Cash green (#7A9D54)</td></tr>
+          <tr><td>Photo thumbnails</td><td>72×72 rounded squares with upload state indicators (spinner → green check → red retry)</td></tr>
+          <tr><td>Price animations</td><td>Scale 1.1× pulse with primary color flash on value change</td></tr>
+          <tr><td>Toast notifications</td><td>Pill-shaped, spring animation, color-coded by type</td></tr>
+          <tr><td>Safe areas</td><td>Bottom padding respects <code>env(safe-area-inset-bottom)</code> for notched phones</td></tr>
+          <tr><td>Reduced motion</td><td>All animations/transitions disabled for <code>prefers-reduced-motion: reduce</code> users</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <!-- ── 26.11 Cost ── -->
+      <h3>Cost</h3>
+      <div class="callout success">
+        <div class="callout-title">💰 Total cost: $0/month</div>
+        <ul style="margin:0.5rem 0 0; padding-left:1.25rem;">
+          <li><strong>Firebase RTDB</strong> — free tier (1 GB storage, 10 GB/mo transfer)</li>
+          <li><strong>Google Drive</strong> — free tier (15 GB, shared with Gmail)</li>
+          <li><strong>Google Apps Script</strong> — free tier (6 min/execution, 90 min/day)</li>
+          <li><strong>Hosting</strong> — GitHub Pages (already in use, $0)</li>
+          <li><strong>Payment processing</strong> — Venmo/PayPal handle this; no fees to us for person-to-person transfers</li>
+        </ul>
+        <p style="margin-top:0.75rem;">Comparable solutions (Square for Restaurants, Shopify POS, custom order form builders) would cost <strong>$30–$80/month</strong>.</p>
+      </div>
+
+      <!-- ── 26.12 Status ── -->
+      <h3>Current status (as of March 8, 2026)</h3>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Item</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Event mode — camera + upload</td><td>✅ Live</td></tr>
+          <tr><td>Event mode — retake flow</td><td>✅ Live (added Mar 8)</td></tr>
+          <tr><td>Event mode — live photo counter</td><td>✅ Live</td></tr>
+          <tr><td>Event mode — offline queue</td><td>✅ Live</td></tr>
+          <tr><td>Market mode — size/qty selector</td><td>✅ Live</td></tr>
+          <tr><td>Market mode — price calculation</td><td>✅ Live</td></tr>
+          <tr><td>Market mode — photo upload</td><td>✅ Live</td></tr>
+          <tr><td>Market mode — Venmo deep link</td><td>✅ Live</td></tr>
+          <tr><td>Market mode — PayPal deep link</td><td>✅ Live (fixed Mar 8)</td></tr>
+          <tr><td>Market mode — Cash/Tap payment</td><td>✅ Live</td></tr>
+          <tr><td>Market mode — order confirmation</td><td>✅ Live</td></tr>
+          <tr><td>Firebase RTDB rules for webapps</td><td>✅ Live + 50 regression tests</td></tr>
+          <tr><td>Admin Dashboard — reads market orders</td><td>✅ Live</td></tr>
+          <tr><td>CI/CD — rules tested before deploy</td><td>✅ Live (GitHub Actions gate)</td></tr>
+          <tr><td>Shared CSS (<code>webapp.css</code>)</td><td>✅ Live</td></tr>
+        </tbody>
+      </table>
+      </div>
+
     </section>
 
   </main>
