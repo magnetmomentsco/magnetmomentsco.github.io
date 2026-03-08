@@ -75,10 +75,33 @@ jobs:
           
           git push
 
+  # Test Firebase rules before deploying
+  test-rules:
+    needs: sync
+    if: needs.sync.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Firebase rules tests
+        run: npm run test:rules:ci
+
   # Deploy directly after sync — GITHUB_TOKEN pushes don't trigger
   # deploy-pages.yml, so we deploy from here when products change.
   deploy:
-    needs: sync
+    needs: [sync, test-rules]
     if: needs.sync.outputs.changed == 'true'
     runs-on: ubuntu-latest
     # Prevent collision with deploy-pages.yml (manual pushes)

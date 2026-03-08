@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test && npm run test:rules",
+    "test:rules": "firebase emulators:exec --only database --project demo-magnetmomentsco-test \"node --test tests/firebase-rules.spec.js\"",
+    "test:rules:ci": "firebase emulators:exec --only database --project demo-magnetmomentsco-test \"node --test tests/firebase-rules.spec.js\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,8 @@
   "homepage": "https://github.com/magnetmomentsco/magnetmomentsco.github.io#readme",
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",
-    "@playwright/test": "^1.58.2"
+    "@firebase/rules-unit-testing": "^3.0.4",
+    "@playwright/test": "^1.58.2",
+    "firebase-tools": "^13.29.1"
   }
 }

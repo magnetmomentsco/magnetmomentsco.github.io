@@ -17,6 +17,13 @@
         "createdAt": { ".validate": "newData.isNumber()" }
       }
     },
+    "tracker-events": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
     "market-sessions": {
       ".read": "auth != null",
       ".write": true,
@@ -62,11 +69,20 @@
       "$date": {
         ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)",
         "$slug": {
-          ".validate": "newData.hasChildren(['timestamp', 'visitorId'])"
+          "$recordId": {
+            ".validate": "newData.hasChildren(['timestamp', 'visitorId'])"
+          }
         }
       }
     },
     "clicks": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "rageClicks": {
       ".read": true,
       ".write": true,
       "$date": {
@@ -86,11 +102,59 @@
       "$visitorId": {
         ".validate": "newData.hasChildren(['page', 'timestamp'])",
         "page": { ".validate": "newData.isString() && newData.val().length <= 500" },
+        "slug": { ".validate": "newData.isString() && newData.val().length <= 200" },
         "timestamp": { ".validate": "newData.isNumber()" },
         "device": { ".validate": "newData.isString() && newData.val().length <= 50" },
         "tz": { ".validate": "newData.isString() && newData.val().length <= 100" },
         "lang": { ".validate": "newData.isString() && newData.val().length <= 20" },
         "$other": { ".validate": false }
+      }
+    },
+    "scrollDepth": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "funnel": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "newsletter": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "performance": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "cart": {
+      ".read": true,
+      ".write": true,
+      "$date": {
+        ".validate": "$date.matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+      }
+    },
+    "visitors": {
+      ".read": true,
+      ".write": true,
+      "$visitorId": {
+        "intent": {
+          ".validate": "newData.hasChildren(['score', 'level', 'updatedAt'])",
+          "score": { ".validate": "newData.isNumber()" },
+          "level": { ".validate": "newData.isString() && (newData.val() === 'low' || newData.val() === 'medium' || newData.val() === 'high')" },
+          "updatedAt": { ".validate": "newData.isString()" }
+        }
       }
     },
     "abTests": {
