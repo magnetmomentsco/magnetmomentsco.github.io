@@ -59,6 +59,8 @@
     els.snapBtn = document.getElementById('snap-btn');
     els.cameraSwitchBtn = document.getElementById('camera-switch-btn');
     els.cameraCloseBtn = document.getElementById('camera-close-btn');
+    els.customerName = document.getElementById('customer-name');
+    els.customerPhone = document.getElementById('customer-phone');
     els.payVenmo = document.getElementById('pay-venmo');
     els.payPaypal = document.getElementById('pay-paypal');
 
@@ -297,6 +299,16 @@
       MMWebapp.showToast('Please add at least one photo', 'error');
       return false;
     }
+    var name = (els.customerName.value || '').trim();
+    var phone = (els.customerPhone.value || '').trim();
+    els.customerName.classList.toggle('input-error', !name);
+    els.customerPhone.classList.toggle('input-error', !phone);
+    if (!name || !phone) {
+      MMWebapp.showToast('Please enter your name and phone number', 'error');
+      if (!name) els.customerName.focus();
+      else els.customerPhone.focus();
+      return false;
+    }
     return true;
   }
 
@@ -344,6 +356,8 @@
         // Save order to Firebase — all orders start pending; admin confirms payment
         return MMWebapp.fb.push('orders', {
           orderId: orderId,
+          customerName: (els.customerName.value || '').trim(),
+          customerPhone: (els.customerPhone.value || '').trim(),
           sessionDate: MMWebapp.getTodayString(),
           size: state.size,
           quantity: state.quantity,
@@ -379,7 +393,7 @@
         openPaymentLink(paymentMethod);
 
         // Show confirmation screen
-        showConfirmation(paymentMethod);
+        showConfirmation(paymentMethod, orderId);
       })
       .catch(function (err) {
         hideUploadStatus();
@@ -424,10 +438,11 @@
   }
 
   // ── Order Confirmation ─────────────────────────────────────────────────────
-  function showConfirmation(paymentMethod) {
+  function showConfirmation(paymentMethod, orderId) {
     if (!els.orderForm || !els.orderConfirmation) return;
 
     // Populate confirmation details
+    var confOrderId = document.getElementById('conf-order-id');
     var confSize = document.getElementById('conf-size');
     var confQty = document.getElementById('conf-qty');
     var confPhotos = document.getElementById('conf-photos');
@@ -440,6 +455,10 @@
       'cash-tap': 'Cash / Tap'
     };
 
+    var confName = document.getElementById('conf-name');
+
+    if (confOrderId) confOrderId.textContent = orderId;
+    if (confName) confName.textContent = (els.customerName.value || '').trim();
     if (confSize) confSize.textContent = state.size;
     if (confQty) confQty.textContent = state.quantity;
     if (confPhotos) confPhotos.textContent = state.photos.length;
@@ -472,6 +491,8 @@
     });
     updateQuantityPrices();
     updatePrice();
+    if (els.customerName) { els.customerName.value = ''; els.customerName.classList.remove('input-error'); }
+    if (els.customerPhone) { els.customerPhone.value = ''; els.customerPhone.classList.remove('input-error'); }
     renderPhotos();
     setPaymentButtonsEnabled(true);
 

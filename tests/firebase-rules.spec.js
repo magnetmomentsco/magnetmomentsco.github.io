@@ -264,6 +264,8 @@ describe('Webapp — market mode writes (unauthenticated)', () => {
     await assertSucceeds(
       orderRef.set({
         orderId: 'ord-test-001',
+        customerName: 'Jane Doe',
+        customerPhone: '555-123-4567',
         sessionDate: DATE,
         size: '2x3',
         quantity: 6,
@@ -334,6 +336,28 @@ describe('Webapp — market mode writes (unauthenticated)', () => {
         paymentStatus: 'pending',
         photoCount: 1,
         id: 'ord-bad',
+        timestamp: Date.now(),
+      })
+    );
+  });
+
+  it('orders: rejects empty customerName', async () => {
+    const db = unauthedDb();
+    await assertFails(
+      db.ref('orders').push().set({
+        orderId: 'ord-noname',
+        customerName: '',
+        customerPhone: '555-000-0000',
+        sessionDate: DATE,
+        size: '2x2',
+        quantity: 1,
+        subtotal: 4.00,
+        tax: 0.33,
+        total: 4.33,
+        paymentMethod: 'venmo',
+        paymentStatus: 'pending',
+        photoCount: 1,
+        id: 'ord-noname',
         timestamp: Date.now(),
       })
     );

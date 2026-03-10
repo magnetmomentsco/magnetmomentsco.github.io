@@ -140,8 +140,8 @@ jobs:
             sed -i "s|__FIREBASE_APP_ID__|${FB_APP_ID}|g" "$f"
           done
 
-          # Replace placeholders in webapp shared JS
-          for f in assets/js/webapp-shared.js; do
+          # Replace placeholders in webapp shared JS + admin
+          for f in assets/js/webapp-shared.js admin/index.html; do
             [ -f "$f" ] || continue
             sed -i "s|__FIREBASE_API_KEY__|${FB_API_KEY}|g" "$f"
             sed -i "s|__FIREBASE_AUTH_DOMAIN__|${FB_AUTH_DOMAIN}|g" "$f"

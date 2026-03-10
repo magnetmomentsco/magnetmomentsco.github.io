@@ -61,9 +61,10 @@ for f in "${FILES_FIREBASE[@]}"; do
   sed -i "s|__FIREBASE_APP_ID__|${FIREBASE_APP_ID}|g" "$f"
 done
 
-# Apps Script URL (only in webapp-shared.js)
+# Apps Script URL (in webapp-shared.js and admin/index.html)
 if [[ -n "${APPS_SCRIPT_URL:-}" ]]; then
   sed -i "s|__APPS_SCRIPT_URL__|${APPS_SCRIPT_URL}|g" assets/js/webapp-shared.js
+  sed -i "s|__APPS_SCRIPT_URL__|${APPS_SCRIPT_URL}|g" admin/index.html
 fi
 
 echo "✅ Credentials injected into local files"

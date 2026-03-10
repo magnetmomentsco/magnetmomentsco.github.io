@@ -128,10 +128,11 @@
     facingMode = facingMode || currentFacingMode;
     currentFacingMode = facingMode;
 
-    // iOS Safari needs simpler constraints on first attempt
+    // Use { exact } to force the requested camera on Android;
+    // fall back to preference mode then any camera if exact fails.
     var constraints = {
       video: {
-        facingMode: facingMode,
+        facingMode: { exact: facingMode },
         width: { ideal: 1920 },
         height: { ideal: 1080 }
       },
@@ -140,14 +141,14 @@
 
     return navigator.mediaDevices.getUserMedia(constraints)
       .catch(function () {
-        // Fallback: simpler constraints for older browsers / iOS
+        // Fallback 1: preference (not exact) — works on iOS first open
         return navigator.mediaDevices.getUserMedia({
           video: { facingMode: facingMode },
           audio: false
         });
       })
       .catch(function () {
-        // Final fallback: any camera
+        // Fallback 2: any camera
         return navigator.mediaDevices.getUserMedia({
           video: true,
           audio: false

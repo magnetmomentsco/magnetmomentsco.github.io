@@ -3829,9 +3829,7 @@ async function createWebappEvent() {
 
   try {
     // Create Drive folder via Apps Script
-    const appsScriptUrl = document.getElementById('apps-script-url-setting')
-      ? document.getElementById('apps-script-url-setting').value
-      : '';
+    const appsScriptUrl = '__APPS_SCRIPT_URL__';
 
     let driveFolderId = '';
     if (appsScriptUrl) {
@@ -4055,8 +4053,7 @@ function loadOrders() {
       var icon = payIcons[o.paymentMethod] || '💰';
       var pmLabel = payLabels[o.paymentMethod] || escHtml(String(o.paymentMethod || ''));
       var time = o.timestamp ? new Date(o.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
-      var orderNum = entries.length - idx;
-      var label = '#' + orderNum + ' — ' + pmLabel;
+      var label = (o.orderId ? escHtml(o.orderId) : '#' + (entries.length - idx)) + ' — ' + pmLabel;
 
       // Photo link(s)
       var photoLink = '';
@@ -4068,7 +4065,7 @@ function loadOrders() {
       return '<div class="order-card">'
         + '<div class="order-card-info">'
         + '<div class="order-card-id">' + icon + ' ' + label + '</div>'
-        + '<div class="order-card-detail">' + escHtml(o.size||'') + ' × ' + Number(o.quantity||0) + ' — $' + Number(o.total||0).toFixed(2) + ' — ' + escHtml(time) + photoLink + '</div>'
+        + '<div class="order-card-detail">' + (o.customerName ? escHtml(o.customerName) + ' · ' : '') + escHtml(o.size||'') + ' × ' + Number(o.quantity||0) + ' — $' + Number(o.total||0).toFixed(2) + ' — ' + escHtml(time) + photoLink + '</div>'
         + '</div>'
         + badge + btn
         + '</div>';

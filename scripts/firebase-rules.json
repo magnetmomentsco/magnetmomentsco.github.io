@@ -47,6 +47,8 @@
         ".validate": "newData.hasChildren(['sessionDate', 'size', 'quantity', 'subtotal', 'tax', 'total', 'paymentMethod', 'timestamp'])",
         "sessionDate": { ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)" },
         "orderId": { ".validate": "newData.isString() && newData.val().length <= 100 && newData.val().matches(/^[a-z0-9-]+$/)" },
+        "customerName": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200" },
+        "customerPhone": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 30" },
         "size": { ".validate": "newData.isString() && newData.val().length <= 50" },
         "quantity": { ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= 100" },
         "subtotal": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000" },

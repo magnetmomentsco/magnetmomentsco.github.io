@@ -130,7 +130,7 @@
       </div>
 
       <!-- Hidden file input -->
-      <input type="file" id="file-input" accept="image/*,.heic,.heif" capture="environment" multiple class="hidden" aria-hidden="true">
+      <input type="file" id="file-input" accept="image/*,.heic,.heif" multiple class="hidden" aria-hidden="true">
 
       <!-- Photo Grid -->
       <div class="photo-grid" id="photo-grid" role="list" aria-label="Selected photos"></div>
@@ -143,7 +143,20 @@
       </div>
     </section>
 
-    <!-- Step 3: Payment -->
+    <!-- Step 3: Your Info -->
+    <section class="webapp-card">
+      <h2 class="webapp-card-title">
+        <span class="icon">🙋</span> Your Info
+      </h2>
+      <div class="customer-fields">
+        <label class="customer-label" for="customer-name">Name</label>
+        <input type="text" id="customer-name" class="customer-input" placeholder="Your name" autocomplete="name" required>
+        <label class="customer-label" for="customer-phone">Phone</label>
+        <input type="tel" id="customer-phone" class="customer-input" placeholder="(555) 123-4567" autocomplete="tel" required>
+      </div>
+    </section>
+
+    <!-- Step 4: Payment -->
     <section class="webapp-card">
       <h2 class="webapp-card-title">
         <span class="icon">💳</span> Pay With
@@ -178,6 +191,14 @@
         <p class="confirmation-subtitle">Your photos are being processed</p>
 
         <div class="confirmation-details">
+          <div class="conf-row">
+            <span class="conf-label">Order ID</span>
+            <span class="conf-value" id="conf-order-id">—</span>
+          </div>
+          <div class="conf-row">
+            <span class="conf-label">Name</span>
+            <span class="conf-value" id="conf-name">—</span>
+          </div>
           <div class="conf-row">
             <span class="conf-label">Size</span>
             <span class="conf-value" id="conf-size">2×2</span>
