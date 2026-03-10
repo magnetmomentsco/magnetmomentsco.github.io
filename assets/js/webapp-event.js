@@ -174,7 +174,8 @@
     MMWebapp.startCamera(els.cameraVideo).catch(function (err) {
       console.error('Camera error:', err);
       els.cameraContainer.classList.remove('active');
-      MMWebapp.showToast('Camera access denied. Try uploading instead.', 'error', 4000);
+      MMWebapp.showToast('Camera access denied. Opening photo upload…', 'error', 3000);
+      if (els.fileInput) els.fileInput.click();
     });
   }
 

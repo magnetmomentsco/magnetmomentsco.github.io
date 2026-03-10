@@ -119,6 +119,19 @@
     });
   }
 
+  function fbTransactionAdd(path, amount) {
+    return new Promise(function (resolve, reject) {
+      initFirebase(function (database) {
+        var ref = database.ref(path);
+        ref.transaction(function (current) {
+          return Math.round(((current || 0) + amount) * 100) / 100;
+        })
+        .then(function (result) { resolve(result.snapshot.val()); })
+        .catch(reject);
+      });
+    });
+  }
+
   // ── Camera ─────────────────────────────────────────────────────────────────
   function startCamera(videoEl, facingMode) {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -140,14 +153,21 @@
     };
 
     return navigator.mediaDevices.getUserMedia(constraints)
-      .catch(function () {
+      .catch(function (err) {
+        // If permission denied, skip further attempts — they'll all fail too
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+          throw err;
+        }
         // Fallback 1: preference (not exact) — works on iOS first open
         return navigator.mediaDevices.getUserMedia({
           video: { facingMode: facingMode },
           audio: false
         });
       })
-      .catch(function () {
+      .catch(function (err) {
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+          throw err;
+        }
         // Fallback 2: any camera
         return navigator.mediaDevices.getUserMedia({
           video: true,
@@ -287,11 +307,14 @@
       mode: options.mode,
       date: options.date || getTodayString(),
       paymentMethod: options.paymentMethod || null,
-      eventFolderId: options.eventFolderId || null
+      eventFolderId: options.eventFolderId || null,
+      customerName: options.customerName || null,
+      customerPhone: options.customerPhone || null
     };
 
     return fetchWithTimeout(APPS_SCRIPT_URL, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
       redirect: 'follow'
     }, UPLOAD_TIMEOUT)
@@ -336,7 +359,9 @@
       mode: options.mode,
       date: options.date || getTodayString(),
       paymentMethod: options.paymentMethod || null,
-      eventFolderId: options.eventFolderId || null
+      eventFolderId: options.eventFolderId || null,
+      customerName: options.customerName || null,
+      customerPhone: options.customerPhone || null
     };
 
     return fetch(APPS_SCRIPT_URL, {
@@ -531,7 +556,8 @@
       update: fbUpdate,
       get: fbGet,
       listen: fbListen,
-      increment: fbIncrement
+      increment: fbIncrement,
+      transactionAdd: fbTransactionAdd
     },
 
     // Camera

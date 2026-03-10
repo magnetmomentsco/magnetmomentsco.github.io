@@ -33,6 +33,7 @@
         "orderCount": { ".validate": "newData.isNumber() && newData.val() >= 0" },
         "revenue": {
           "total": { ".validate": "newData.isNumber()" },
+          "subtotal": { ".validate": "newData.isNumber()" },
           "tax": { ".validate": "newData.isNumber()" }
         },
         "paymentBreakdown": {

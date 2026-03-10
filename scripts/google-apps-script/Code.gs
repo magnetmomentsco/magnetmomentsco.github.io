@@ -197,7 +197,15 @@ function handleUpload(data) {
   // Generate unique filename
   var timestamp = Utilities.formatDate(new Date(), 'America/Chicago', 'HHmmss');
   var randomId = Math.random().toString(36).substring(2, 8);
-  var prefix = data.mode === 'market' ? 'order' : 'guest';
+  var prefix;
+  if (data.mode === 'market' && data.customerName && data.customerPhone) {
+    // Sanitize name + phone for safe filename: strip non-alphanumerics
+    var safeName = String(data.customerName).replace(/[^a-zA-Z0-9]/g, '');
+    var safePhone = String(data.customerPhone).replace(/[^0-9]/g, '');
+    prefix = (safeName && safePhone) ? safeName + '_' + safePhone : 'order';
+  } else {
+    prefix = data.mode === 'market' ? 'order' : 'guest';
+  }
   var fileName = prefix + '-' + timestamp + '-' + randomId + ext;
 
   // Save file — explicitly set content type on the blob for Drive compatibility
@@ -336,11 +344,12 @@ function getTodayString() {
 
 function sanitizeFolderName(name) {
   // Remove characters not safe for Drive folder names
-  return name
+  var sanitized = name
     .toLowerCase()
     .replace(/[^a-z0-9\s\-]/g, '')
     .replace(/\s+/g, '-')
     .substring(0, 100);
+  return sanitized || 'unnamed';
 }
 
 function detectMimeFromBytes(bytes) {

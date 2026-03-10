@@ -196,7 +196,8 @@
     MMWebapp.startCamera(els.cameraVideo).catch(function (err) {
       console.error('Camera error:', err);
       els.cameraContainer.classList.remove('active');
-      MMWebapp.showToast('Camera access denied. Try uploading instead.', 'error', 4000);
+      MMWebapp.showToast('Camera access denied. Opening photo upload…', 'error', 3000);
+      els.fileInput.click();
     });
   }
 
@@ -340,7 +341,9 @@
       return MMWebapp.uploadPhoto(photo.dataUrl, {
         mode: 'market',
         paymentMethod: paymentMethod,
-        orderId: orderId
+        orderId: orderId,
+        customerName: (els.customerName.value || '').trim(),
+        customerPhone: (els.customerPhone.value || '').trim()
       }).then(function (result) {
         uploaded++;
         showUploadStatus('Uploading... ' + uploaded + '/' + total);
@@ -372,18 +375,16 @@
         });
       })
       .then(function () {
-        // Update market session stats (best-effort, non-blocking)
+        // Update market session stats (best-effort, non-blocking, transaction-safe)
         var sessionPath = 'market-sessions/' + MMWebapp.getTodayString();
-        MMWebapp.fb.get(sessionPath).then(function (session) {
-          var updates = {};
-          updates['orderCount'] = (session && session.orderCount || 0) + 1;
-          updates['revenue/subtotal'] = Math.round(((session && session.revenue && session.revenue.subtotal || 0) + state.subtotal) * 100) / 100;
-          updates['revenue/tax'] = Math.round(((session && session.revenue && session.revenue.tax || 0) + state.tax) * 100) / 100;
-          updates['revenue/total'] = Math.round(((session && session.revenue && session.revenue.total || 0) + state.total) * 100) / 100;
-          var pmKey = 'paymentBreakdown/' + paymentMethod;
-          updates[pmKey] = (session && session.paymentBreakdown && session.paymentBreakdown[paymentMethod] || 0) + 1;
-          return MMWebapp.fb.update(sessionPath, updates);
-        }).catch(function () { /* non-critical */ });
+        var pmKey = sessionPath + '/paymentBreakdown/' + paymentMethod;
+        Promise.all([
+          MMWebapp.fb.increment(sessionPath + '/orderCount'),
+          MMWebapp.fb.transactionAdd(sessionPath + '/revenue/subtotal', state.subtotal),
+          MMWebapp.fb.transactionAdd(sessionPath + '/revenue/tax', state.tax),
+          MMWebapp.fb.transactionAdd(sessionPath + '/revenue/total', state.total),
+          MMWebapp.fb.increment(pmKey)
+        ]).catch(function () { /* non-critical */ });
       })
       .then(function () {
         hideUploadStatus();
