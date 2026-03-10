@@ -170,14 +170,15 @@
   }
 
   function openCamera() {
+    // On mobile, skip getUserMedia — open native camera/file picker directly
+    if (MMWebapp.isMobile()) {
+      if (els.fileInput) els.fileInput.click();
+      return;
+    }
     els.cameraContainer.classList.add('active');
     MMWebapp.startCamera(els.cameraVideo).catch(function (err) {
       console.error('Camera error:', err.name, err.message);
       els.cameraContainer.classList.remove('active');
-      var msg = (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError')
-        ? 'Camera access denied. Opening photo upload…'
-        : 'Camera error: ' + err.message + '. Opening photo upload…';
-      MMWebapp.showToast(msg, 'error', 4000);
       if (els.fileInput) els.fileInput.click();
     });
   }

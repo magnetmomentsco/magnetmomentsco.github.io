@@ -532,6 +532,10 @@
     return '$' + amount.toFixed(2);
   }
 
+  function isMobile() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
   // ── Public API ─────────────────────────────────────────────────────────────
   window.MMWebapp = {
     // Firebase
@@ -570,6 +574,7 @@
     showToast: showToast,
     generateOrderId: generateOrderId,
     formatCurrency: formatCurrency,
+    isMobile: isMobile,
 
     // Config (can override before use)
     config: {
