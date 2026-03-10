@@ -194,9 +194,12 @@
   function openCamera() {
     els.cameraContainer.classList.add('active');
     MMWebapp.startCamera(els.cameraVideo).catch(function (err) {
-      console.error('Camera error:', err);
+      console.error('Camera error:', err.name, err.message);
       els.cameraContainer.classList.remove('active');
-      MMWebapp.showToast('Camera access denied. Opening photo upload…', 'error', 3000);
+      var msg = (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError')
+        ? 'Camera access denied. Opening photo upload…'
+        : 'Camera error: ' + err.message + '. Opening photo upload…';
+      MMWebapp.showToast(msg, 'error', 4000);
       els.fileInput.click();
     });
   }
