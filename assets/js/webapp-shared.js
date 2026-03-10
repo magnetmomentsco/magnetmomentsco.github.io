@@ -133,7 +133,7 @@
   }
 
   // ── Camera ─────────────────────────────────────────────────────────────────
-  function startCamera(videoEl, facingMode) {
+  function startCamera(videoEl, facingMode, useExact) {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       return Promise.reject(new Error('Camera not supported on this device'));
     }
@@ -141,11 +141,11 @@
     facingMode = facingMode || currentFacingMode;
     currentFacingMode = facingMode;
 
-    // Use { exact } to force the requested camera on Android;
-    // fall back to preference mode then any camera if exact fails.
+    // Default: preference mode (works on all devices for initial open).
+    // Exact mode only used by switchCamera() to force the other lens.
     var constraints = {
       video: {
-        facingMode: { exact: facingMode },
+        facingMode: useExact ? { exact: facingMode } : facingMode,
         width: { ideal: 1920 },
         height: { ideal: 1080 }
       },
@@ -154,25 +154,12 @@
 
     return navigator.mediaDevices.getUserMedia(constraints)
       .catch(function (err) {
-        // If permission denied, skip further attempts — they'll all fail too
+        // If permission denied, no point retrying
         if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
           throw err;
         }
-        // Fallback 1: preference (not exact) — works on iOS first open
-        return navigator.mediaDevices.getUserMedia({
-          video: { facingMode: facingMode },
-          audio: false
-        });
-      })
-      .catch(function (err) {
-        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-          throw err;
-        }
-        // Fallback 2: any camera
-        return navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: false
-        });
+        // Fallback: any camera, no constraints
+        return navigator.mediaDevices.getUserMedia({ video: true, audio: false });
       })
       .then(function (stream) {
         cameraStream = stream;
@@ -203,7 +190,7 @@
   function switchCamera(videoEl) {
     stopCamera();
     currentFacingMode = currentFacingMode === 'environment' ? 'user' : 'environment';
-    return startCamera(videoEl, currentFacingMode);
+    return startCamera(videoEl, currentFacingMode, true);
   }
 
   function capturePhoto(videoEl) {
@@ -314,7 +301,6 @@
 
     return fetchWithTimeout(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
       redirect: 'follow'
     }, UPLOAD_TIMEOUT)
