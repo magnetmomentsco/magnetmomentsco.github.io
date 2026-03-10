@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-10T02:02:28.969256+00:00",
+  "lastUpdated": "2026-03-10T06:51:51.995303+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 11,
   "products": [
@@ -12,10 +12,10 @@
       "productType": "",
       "tags": [],
       "availableForSale": true,
-      "totalInventory": -10,
+      "totalInventory": -11,
       "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/james-talarico-unofficial-campaign-magnets",
       "createdAt": "2026-03-09T21:12:08Z",
-      "updatedAt": "2026-03-10T01:26:08Z",
+      "updatedAt": "2026-03-10T04:42:27Z",
       "seo": {
         "title": null,
         "description": null
@@ -114,7 +114,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -3
+            "quantityAvailable": -4
           }
         ]
       }
