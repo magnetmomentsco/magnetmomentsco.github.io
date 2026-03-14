@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-13T18:42:38.744746+00:00",
+  "lastUpdated": "2026-03-14T02:03:24.336519+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 11,
   "products": [
@@ -333,10 +333,10 @@
         "Wedding Favors"
       ],
       "availableForSale": true,
-      "totalInventory": 93,
+      "totalInventory": 92,
       "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/custom-photo-magnets",
       "createdAt": "2025-11-13T19:27:19Z",
-      "updatedAt": "2026-03-10T14:23:33Z",
+      "updatedAt": "2026-03-14T00:00:35Z",
       "seo": {
         "title": null,
         "description": null
@@ -415,7 +415,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": 0
+            "quantityAvailable": -1
           },
           {
             "id": "gid://shopify/ProductVariant/53227461312878",
