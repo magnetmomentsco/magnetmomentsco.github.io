@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-26T02:45:42.999422+00:00",
+  "lastUpdated": "2026-04-26T07:40:02.864334+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 11,
   "products": [
@@ -439,10 +439,10 @@
       "productType": "",
       "tags": [],
       "availableForSale": true,
-      "totalInventory": -4,
+      "totalInventory": -5,
       "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/custom-2-x-3-photo-magnets-set-of-6",
       "createdAt": "2026-01-21T05:02:27Z",
-      "updatedAt": "2026-04-23T21:26:03Z",
+      "updatedAt": "2026-04-26T04:35:08Z",
       "seo": {
         "title": null,
         "description": null
@@ -505,7 +505,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -2
+            "quantityAvailable": -3
           },
           {
             "id": "gid://shopify/ProductVariant/53227452170606",
