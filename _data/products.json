@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-05-14T19:45:19.080582+00:00",
+  "lastUpdated": "2026-05-15T00:36:21.065214+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
-  "productCount": 9,
+  "productCount": 10,
   "products": [
     {
       "id": "gid://shopify/Product/14983916388718",
@@ -194,11 +194,12 @@
       "id": "gid://shopify/Product/14879723127150",
       "handle": "custom-photo-magnets",
       "title": "2x2 Custom Photo Magnets",
-      "description": "Don\u2019t let your favorite memories stay stuck on your phone. Bring your camera roll to life with our Custom Photo Magnets. Whether it\u2019s a candid shot of the kids, a wedding portrait, or a goofy pictu...",
-      "descriptionHtml": "<p data-path-to-node=\"5\"><b data-path-to-node=\"5\" data-index-in-node=\"13\">Don\u2019t let your favorite memories stay stuck on your phone.</b> Bring your camera roll to life with our <b data-path-to-node=\"5\" data-index-in-node=\"112\">Custom Photo Magnets</b>. Whether it\u2019s a candid shot of the kids, a wedding portrait, or a goofy picture of your pet, these 2x2\" magnets turn your fridge into a gallery of the moments that matter most.</p>\n<p data-path-to-node=\"6\">Each magnet is printed with high-definition clarity and built to last, making them the perfect addition to your kitchen, office locker, or magnetic board.<b data-path-to-node=\"9\" data-index-in-node=\"0\"></b></p>\n<p data-path-to-node=\"11\"><b data-path-to-node=\"11\" data-index-in-node=\"0\">Make your moments stick today!</b></p>",
+      "description": "\u2728 Yes, these are the magnets you saw on our feed! Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of...",
+      "descriptionHtml": "<h2>\u2728 Yes, these are the magnets you saw on our feed!</h2>\n<p>Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of the kids, a wedding portrait, or your favorite pet moment, these magnets bring your camera roll to life.</p>\n<h3>\u2b50 Loved by hundreds of happy customers</h3>\n<p><em>\"These came out so much better than I expected! The colors are so vibrant and they stick perfectly. Already ordered a second set!\"</em></p>\n<h3>\ud83e\uddf2 Why you'll love them:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>High-definition print quality</strong> \u2014 vibrant colors that pop</li>\n<li>\ud83d\udcaa <strong>Strong magnetic hold</strong> \u2014 stays put on any magnetic surface</li>\n<li>\ud83c\udf81 <strong>Perfect for gifting</strong> \u2014 birthdays, holidays, Mother's Day &amp; more</li>\n<li>\u26a1 <strong>Fast, easy ordering</strong> \u2014 just upload your photo and we handle the rest</li>\n<li>\u2705 <strong>Built to last</strong> \u2014 durable, scratch-resistant finish</li>\n</ul>\n<h3>\ud83d\udce6 Choose your set size:</h3>\n<p>Available in sets of 6, 9, or 12 \u2014 mix and match your favorite photos!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos at checkout<br>\n</li>\n<li>Add to Cart<meta charset=\"utf-8\">\n</li>\n<li>We'll take care of the rest!</li>\n</ol>\n<p><strong>\ud83d\udc47 Pick your set size and make your memories stick!</strong></p>",
       "productType": "",
       "tags": [
         "2x2 Magnets",
+        "as seen on social",
         "Custom Magnets",
         "Custom Photo Magnets",
         "Fridge Magnets",
@@ -208,6 +209,7 @@
         "Made in Texas",
         "Magnet Moments Co",
         "Personalized Gifts",
+        "personalized magnets",
         "Pet Magnets",
         "Photo Gifts",
         "Save the Date",
@@ -218,10 +220,10 @@
       "totalInventory": 92,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-photo-magnets",
       "createdAt": "2025-11-13T19:27:19Z",
-      "updatedAt": "2026-05-13T21:11:18Z",
+      "updatedAt": "2026-05-14T23:58:13Z",
       "seo": {
-        "title": null,
-        "description": null
+        "title": "2x2 Custom Photo Magnets - Personalized Fridge Magnets | Magnet Moments Co.",
+        "description": "Turn your favorite photos into vibrant 2x2 custom magnets. Sets of 6, 9, or 12. Perfect for fridges, gifts & more. Fast shipping!"
       },
       "priceRange": {
         "minVariantPrice": {
@@ -313,21 +315,127 @@
       }
     },
     {
+      "id": "gid://shopify/Product/15064609358190",
+      "handle": "2-25-round-custom-photo-magnets",
+      "title": "2.25\" Round Custom Photo Magnets",
+      "description": "\u2728 Spotted on our feed? These are the ones everyone's talking about! Turn your favorite photos into beautiful 2.25\" round custom magnets \u2014 the perfect way to display the moments that matter most on ...",
+      "descriptionHtml": "<h2>\u2728 Spotted on our feed? These are the ones everyone's talking about!</h2>\n<p>Turn your favorite photos into beautiful 2.25\" round custom magnets \u2014 the perfect way to display the moments that matter most on your fridge, locker, or whiteboard. From sweet newborn snapshots to wedding portraits, vacation memories to your furry best friend, these little circles pack a whole lot of love.</p>\n<h3>\u2b50 Customers can't get enough</h3>\n<p><em>\"These are absolutely gorgeous \u2014 the quality blew me away! So much better than any magnet I've seen. Already ordered them as gifts for everyone!\"</em></p>\n<h3>\ud83e\uddf2 Not your average magnet \u2014 here's what makes ours special:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>Handcrafted with care</strong> \u2014 every magnet is manually pressed by hand at Magnet Moments Co.</li>\n<li>\ud83d\udee1\ufe0f <strong>Glossy Mylar protective cover</strong> \u2014 keeps your photos vibrant, crisp &amp; scratch-free for years</li>\n<li>\ud83d\udcaa <strong>Premium metal shell</strong> \u2014 durable and strong, not flimsy magnetic sheets</li>\n<li>\ud83c\udf81 <strong>The perfect personalized gift</strong> \u2014 for any occasion, any person</li>\n<li>\u2705 <strong>Strong magnetic backing</strong> \u2014 stays put on fridges, lockers &amp; whiteboards</li>\n</ul>\n<h3>\ud83c\udf89 Perfect for:</h3>\n<ul>\n<li>\n<strong>Gifts</strong> \u2014 Mother's Day, Father's Day, Grandparents, or just because!</li>\n<li>\n<strong>Milestones</strong> \u2014 Save-the-dates, birth announcements &amp; wedding favors</li>\n<li>\n<strong>Everyday</strong> \u2014 Upgrade your fridge with a chic, personalized aesthetic</li>\n</ul>\n<h3>\ud83d\udce6 Product details:</h3>\n<ul>\n<li>\n<strong>Size:</strong> 2.25\" Round</li>\n<li>\n<strong>Materials:</strong> Premium metal shell, high-quality photo print, protective Mylar cover, strong magnetic backing</li>\n<li>\n<strong>Care:</strong> Wipe clean with a soft, dry cloth</li>\n</ul>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your quantity below</li>\n<li>Upload your photos</li>\n<li>Add to cart and check out</li>\n<li>We'll handle the printing &amp; shipping!</li>\n</ol>\n<p><em>\ud83d\udcf7 Pro tip: For the best results, use clear, well-lit, high-resolution photos. We may crop slightly to fit your subject perfectly within the circular frame.</em></p>\n<p><strong>\ud83d\udc47 Choose your quantity and make your memories stick!</strong></p>",
+      "productType": "",
+      "tags": [
+        "as seen on social",
+        "custom photo magnets",
+        "personalized magnets",
+        "photo gifts",
+        "round magnets"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/2-25-round-custom-photo-magnets",
+      "createdAt": "2026-05-15T00:13:44Z",
+      "updatedAt": "2026-05-15T00:25:54Z",
+      "seo": {
+        "title": "2.25\" Round Custom Photo Magnets - Handcrafted Photo Gifts | Magnet Moments Co.",
+        "description": "Handcrafted 2.25\" round custom photo magnets with premium metal shell & Mylar cover. Perfect gifts for any occasion. Fast shipping!"
+      },
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "18.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_8171c28171c28171.png?v=1778803843",
+        "altText": null,
+        "width": 2390,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_8171c28171c28171.png?v=1778803843",
+            "altText": null,
+            "width": 2390,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_wj8d16wj8d16wj8d.png?v=1778803843",
+            "altText": null,
+            "width": 2390,
+            "height": 1792
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53771404771694",
+            "title": "Set of 6",
+            "price": {
+              "amount": "18.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53771404804462",
+            "title": "Set of 9",
+            "price": {
+              "amount": "24.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53771404837230",
+            "title": "Set of 12",
+            "price": {
+              "amount": "29.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
+    {
       "id": "gid://shopify/Product/14937248924014",
       "handle": "custom-2-x-3-photo-magnets-set-of-6",
       "title": "2x3 Custom Photo Magnets",
-      "description": "Moments that Stick, Now in Widescreen! Sometimes a square just isn't enough. Our new 2\" x 3\" Rectangle Magnets offer a larger canvas for your favorite photos, meaning less cropping and more context...",
-      "descriptionHtml": "<p data-path-to-node=\"6\"><b data-index-in-node=\"0\" data-path-to-node=\"6\">Moments that Stick, Now in Widescreen!</b> Sometimes a square just isn't enough. Our new <b data-index-in-node=\"85\" data-path-to-node=\"6\">2\" x 3\" Rectangle Magnets</b> offer a larger canvas for your favorite photos, meaning less cropping and more context. Whether it\u2019s a breathtaking sunset from your vacation, a full-length wedding shot, or a family portrait, this size preserves the details that matter most.</p>\n<p data-path-to-node=\"7\">Hand-crafted with the same high-quality materials you love, these magnets are designed to turn your fridge, filing cabinet, or locker into a curated gallery of your life.</p>\n<p data-path-to-node=\"8\"><b data-index-in-node=\"0\" data-path-to-node=\"8\">Why You\u2019ll Love the 2x3 Size:</b></p>\n<p data-path-to-node=\"9,0,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,0,0\">Versatile Orientation:</b> Works perfectly for both horizontal (landscape) and vertical (portrait) photos.</p>\n<p data-path-to-node=\"9,1,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,1,0\">No Compromise Cropping:</b> Great for group shots where you don't want to cut anyone out of the frame!</p>\n<p data-path-to-node=\"9,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,2,0\">Strong Grip:</b> Durable magnetic backing ensures your photos stay put.</p>\n<p data-path-to-node=\"12\"><b data-index-in-node=\"0\" data-path-to-node=\"12\">How it Works:</b></p>\n<p><b data-index-in-node=\"0\" data-path-to-node=\"13,0,0\"><meta charset=\"utf-8\">1. Select your set size</b> from the menu above.</p>\n<p><b data-index-in-node=\"0\" data-path-to-node=\"13,1,0\">2. Upload your photos</b></p>\n<p data-path-to-node=\"13,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"13,2,0\">3. Sit back and relax:</b> We will professionally crop, print, and press your magnets and ship them straight to your door.</p>\n<p data-path-to-node=\"14\"><b data-index-in-node=\"0\" data-path-to-node=\"14\">The Details:</b></p>\n<p data-path-to-node=\"15,0,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,0,0\">Dimensions:</b> 2 inches x 3 inches.</p>\n<p data-path-to-node=\"15,1,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,1,0\">Finish:</b> Glossy protective coating.</p>\n<p data-path-to-node=\"15,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,2,0\">Origin:</b> Handmade in Austin, TX by Magnet Moments Co.</p>",
+      "description": "\u2728 Spotted on our feed? Here's where to get them! Our 2x3\" Custom Photo Magnets are the perfect size to showcase your favorite memories \u2014 big enough to show off every detail, small enough to display...",
+      "descriptionHtml": "<h2>\u2728 Spotted on our feed? Here's where to get them!</h2>\n<p>Our 2x3\" Custom Photo Magnets are the perfect size to showcase your favorite memories \u2014 big enough to show off every detail, small enough to display a whole collection. From family portraits to vacation snapshots, these magnets transform any magnetic surface into a personal gallery.</p>\n<h3>\u2b50 Customers are obsessed</h3>\n<p><em>\"I ordered these as a gift and they were a huge hit! The quality is amazing \u2014 the photos look so clear and the magnets are super strong. Will definitely be ordering more!\"</em></p>\n<h3>\ud83e\uddf2 Why the 2x3\" is a fan favorite:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>Larger size = more detail</strong> \u2014 perfect for portraits &amp; landscape shots</li>\n<li>\ud83d\udcaa <strong>Extra-strong magnetic hold</strong> \u2014 won't slip or slide</li>\n<li>\ud83c\udf81 <strong>The ultimate personalized gift</strong> \u2014 for any occasion</li>\n<li>\u26a1 <strong>Super easy to order</strong> \u2014 upload your photo, we do the rest</li>\n<li>\u2705 <strong>Premium, durable finish</strong> \u2014 scratch-resistant and long-lasting</li>\n</ul>\n<h3>\ud83d\udce6 Available in sets of 6, 9 or 12:</h3>\n<p>Mix and match your favorite photos for a stunning display \u2014 or give them as a set of gifts!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos<meta charset=\"utf-8\">\n</li>\n<li>Add to Cart</li>\n<li>We'll handle the printing &amp; shipping!</li>\n</ol>\n<p><strong>\ud83d\udc47 Choose your set and make your memories stick!</strong></p>",
       "productType": "",
-      "tags": [],
+      "tags": [
+        "as seen on social",
+        "custom photo magnets",
+        "fridge magnets",
+        "personalized magnets",
+        "photo gifts"
+      ],
       "availableForSale": true,
       "totalInventory": -6,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-2-x-3-photo-magnets-set-of-6",
       "createdAt": "2026-01-21T05:02:27Z",
-      "updatedAt": "2026-05-13T21:11:05Z",
+      "updatedAt": "2026-05-15T00:05:51Z",
       "seo": {
-        "title": null,
-        "description": null
+        "title": "2x3 Custom Photo Magnets - Personalized Photo Gifts | Magnet Moments Co.",
+        "description": "Turn your favorite photos into vibrant 2x3 custom magnets. Sets of 9 or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
       },
       "priceRange": {
         "minVariantPrice": {
