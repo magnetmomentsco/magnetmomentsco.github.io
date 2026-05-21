@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-21T09:40:33.804386+00:00",
+  "lastUpdated": "2026-05-21T15:26:43.157469+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 8,
   "products": [
@@ -101,21 +101,21 @@
         "Wedding Favors"
       ],
       "availableForSale": true,
-      "totalInventory": 90,
+      "totalInventory": 84,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-photo-magnets",
       "createdAt": "2025-11-13T19:27:19Z",
-      "updatedAt": "2026-05-16T14:42:28Z",
+      "updatedAt": "2026-05-21T13:33:17Z",
       "seo": {
         "title": "2x2 Custom Photo Magnets - Personalized Fridge Magnets | Magnet Moments Co.",
         "description": "Turn your favorite photos into vibrant 2x2 custom magnets. Sets of 6, 9, or 12. Perfect for fridges, gifts & more. Fast shipping!"
       },
       "priceRange": {
         "minVariantPrice": {
-          "amount": "16.99",
+          "amount": "14.99",
           "currencyCode": "USD"
         },
         "maxVariantPrice": {
-          "amount": "34.99",
+          "amount": "29.99",
           "currencyCode": "USD"
         }
       },
@@ -169,7 +169,7 @@
             "id": "gid://shopify/ProductVariant/53776565928302",
             "title": "Set of 3",
             "price": {
-              "amount": "16.99",
+              "amount": "14.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
@@ -179,27 +179,27 @@
             "id": "gid://shopify/ProductVariant/53227461247342",
             "title": "Set of 6",
             "price": {
-              "amount": "23.99",
+              "amount": "18.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": 93
+            "quantityAvailable": 90
           },
           {
             "id": "gid://shopify/ProductVariant/53227461280110",
             "title": "Set of 9",
             "price": {
-              "amount": "29.99",
+              "amount": "24.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -3
+            "quantityAvailable": -6
           },
           {
             "id": "gid://shopify/ProductVariant/53227461312878",
             "title": "Set of 12",
             "price": {
-              "amount": "34.99",
+              "amount": "29.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
@@ -223,21 +223,21 @@
         "photo gifts"
       ],
       "availableForSale": true,
-      "totalInventory": -9,
+      "totalInventory": -17,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-2-x-3-photo-magnets-set-of-6",
       "createdAt": "2026-01-21T05:02:27Z",
-      "updatedAt": "2026-05-16T15:21:13Z",
+      "updatedAt": "2026-05-21T13:39:36Z",
       "seo": {
         "title": "2x3 Custom Photo Magnets - Personalized Photo Gifts | Magnet Moments Co.",
         "description": "Turn your favorite photos into vibrant 2x3 custom magnets. Sets of 9 or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
       },
       "priceRange": {
         "minVariantPrice": {
-          "amount": "18.5",
+          "amount": "15.5",
           "currencyCode": "USD"
         },
         "maxVariantPrice": {
-          "amount": "44.99",
+          "amount": "37.99",
           "currencyCode": "USD"
         }
       },
@@ -285,7 +285,7 @@
             "id": "gid://shopify/ProductVariant/53776443113838",
             "title": "Set of 3",
             "price": {
-              "amount": "18.5",
+              "amount": "15.5",
               "currencyCode": "USD"
             },
             "availableForSale": true,
@@ -295,31 +295,31 @@
             "id": "gid://shopify/ProductVariant/53227452137838",
             "title": "Set of 6",
             "price": {
-              "amount": "26.99",
+              "amount": "22.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -7
+            "quantityAvailable": -13
           },
           {
             "id": "gid://shopify/ProductVariant/53227452170606",
             "title": "Set of 9",
             "price": {
-              "amount": "36.99",
+              "amount": "29.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -1
+            "quantityAvailable": -2
           },
           {
             "id": "gid://shopify/ProductVariant/53227452203374",
             "title": "Set of 12",
             "price": {
-              "amount": "44.99",
+              "amount": "37.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -1
+            "quantityAvailable": -2
           }
         ]
       }
