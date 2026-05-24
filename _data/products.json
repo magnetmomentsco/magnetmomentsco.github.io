@@ -1,8 +1,64 @@
 {
-  "lastUpdated": "2026-05-24T13:25:55.865935+00:00",
+  "lastUpdated": "2026-05-24T19:17:06.749774+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
-  "productCount": 8,
+  "productCount": 9,
   "products": [
+    {
+      "id": "gid://shopify/Product/15075334947182",
+      "handle": "test",
+      "title": "Test",
+      "description": "test",
+      "descriptionHtml": "<p>test</p>",
+      "productType": "",
+      "tags": [],
+      "availableForSale": false,
+      "totalInventory": -76,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/test",
+      "createdAt": "2026-05-24T15:36:03Z",
+      "updatedAt": "2026-05-24T16:02:27Z",
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": null,
+      "images": {
+        "nodes": []
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53830939574638",
+            "title": "Default Title",
+            "price": {
+              "amount": "0.0",
+              "currencyCode": "USD"
+            },
+            "availableForSale": false,
+            "quantityAvailable": -76
+          }
+        ]
+      }
+    },
     {
       "id": "gid://shopify/Product/14894449459566",
       "handle": "golden-girls-magnet-set",
