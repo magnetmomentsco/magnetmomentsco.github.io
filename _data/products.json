@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-27T15:42:04.216313+00:00",
+  "lastUpdated": "2026-05-27T20:17:53.379226+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 9,
   "products": [
@@ -12,10 +12,10 @@
       "productType": "",
       "tags": [],
       "availableForSale": false,
-      "totalInventory": -76,
+      "totalInventory": -80,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/test",
       "createdAt": "2026-05-24T15:36:03Z",
-      "updatedAt": "2026-05-24T16:02:27Z",
+      "updatedAt": "2026-05-27T19:33:14Z",
       "seo": {
         "title": null,
         "description": null
@@ -54,7 +54,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": false,
-            "quantityAvailable": -76
+            "quantityAvailable": -80
           }
         ]
       }
