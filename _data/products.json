@@ -1,8 +1,142 @@
 {
-  "lastUpdated": "2026-05-29T20:25:18.680614+00:00",
+  "lastUpdated": "2026-05-30T03:26:31.958029+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 8,
   "products": [
+    {
+      "id": "gid://shopify/Product/14879723127150",
+      "handle": "custom-photo-magnets",
+      "title": "2x2 Custom Photo Magnets",
+      "description": "\u2728 Yes, these are the magnets you saw on our feed! Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of...",
+      "descriptionHtml": "<h2>\u2728 Yes, these are the magnets you saw on our feed!</h2>\n<p>Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of the kids, a wedding portrait, or your favorite pet moment, these magnets bring your camera roll to life.</p>\n<h3>\u2b50 Loved by hundreds of happy customers</h3>\n<p><em>\"These came out so much better than I expected! The colors are so vibrant and they stick perfectly. Already ordered a second set!\"</em></p>\n<h3>\ud83e\uddf2 Why you'll love them:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>High-definition print quality</strong> \u2014 vibrant colors that pop</li>\n<li>\ud83d\udcaa <strong>Strong magnetic hold</strong> \u2014 stays put on any magnetic surface</li>\n<li>\ud83c\udf81 <strong>Perfect for gifting</strong> \u2014 birthdays, holidays, Mother's Day &amp; more</li>\n<li>\u26a1 <strong>Fast, easy ordering</strong> \u2014 just upload your photo and we handle the rest</li>\n<li>\u2705 <strong>Built to last</strong> \u2014 durable, scratch-resistant finish</li>\n</ul>\n<h3>\ud83d\udce6 Choose your set size:</h3>\n<p>Available in sets of 6, 9, or 12 \u2014 mix and match your favorite photos!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos at checkout<br>\n</li>\n<li>Add to Cart<meta charset=\"utf-8\">\n</li>\n<li>We'll take care of the rest!</li>\n</ol>\n<p><strong>\ud83d\udc47 Pick your set size and make your memories stick!</strong></p>",
+      "productType": "",
+      "tags": [
+        "2x2 Magnets",
+        "as seen on social",
+        "Custom Magnets",
+        "Custom Photo Magnets",
+        "Fridge Magnets",
+        "Gifts for Mom",
+        "Instagram Magnets",
+        "Kitchen Decor",
+        "Made in Texas",
+        "Magnet Moments Co",
+        "Personalized Gifts",
+        "personalized magnets",
+        "Pet Magnets",
+        "Photo Gifts",
+        "Save the Date",
+        "Stocking Stuffers",
+        "Wedding Favors"
+      ],
+      "availableForSale": true,
+      "totalInventory": 84,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-photo-magnets",
+      "createdAt": "2025-11-13T19:27:19Z",
+      "updatedAt": "2026-05-29T21:14:13Z",
+      "seo": {
+        "title": "2x2 Custom Photo Magnets - Personalized Fridge Magnets | Magnet Moments Co.",
+        "description": "Turn your favorite photos into vibrant 2x2 custom magnets. Sets of 6, 9, or 12. Perfect for fridges, gifts & more. Fast shipping!"
+      },
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "12.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
+        "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
+            "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_h5svbch5svbch5sv.png?v=1768674199",
+            "altText": "Set of six custom photo magnets arranged on a stainless steel refrigerator featuring wedding, family, and pet portraits.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/4052B3AD-FFBB-46EB-86F2-1960C9A96D50.jpg?v=1768576518",
+            "altText": "Four square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/742F7A2A-17D4-450B-8216-D737D6D1D4FB.jpg?v=1764563633",
+            "altText": "Five square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
+            "width": 1856,
+            "height": 2304
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53776565928302",
+            "title": "Set of 3",
+            "price": {
+              "amount": "12.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461247342",
+            "title": "Set of 6",
+            "price": {
+              "amount": "18.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 90
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461280110",
+            "title": "Set of 9",
+            "price": {
+              "amount": "24.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": -6
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461312878",
+            "title": "Set of 12",
+            "price": {
+              "amount": "29.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          }
+        ]
+      }
+    },
     {
       "id": "gid://shopify/Product/14894449459566",
       "handle": "golden-girls-magnet-set",
@@ -75,140 +209,6 @@
       }
     },
     {
-      "id": "gid://shopify/Product/14879723127150",
-      "handle": "custom-photo-magnets",
-      "title": "2x2 Custom Photo Magnets",
-      "description": "\u2728 Yes, these are the magnets you saw on our feed! Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of...",
-      "descriptionHtml": "<h2>\u2728 Yes, these are the magnets you saw on our feed!</h2>\n<p>Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of the kids, a wedding portrait, or your favorite pet moment, these magnets bring your camera roll to life.</p>\n<h3>\u2b50 Loved by hundreds of happy customers</h3>\n<p><em>\"These came out so much better than I expected! The colors are so vibrant and they stick perfectly. Already ordered a second set!\"</em></p>\n<h3>\ud83e\uddf2 Why you'll love them:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>High-definition print quality</strong> \u2014 vibrant colors that pop</li>\n<li>\ud83d\udcaa <strong>Strong magnetic hold</strong> \u2014 stays put on any magnetic surface</li>\n<li>\ud83c\udf81 <strong>Perfect for gifting</strong> \u2014 birthdays, holidays, Mother's Day &amp; more</li>\n<li>\u26a1 <strong>Fast, easy ordering</strong> \u2014 just upload your photo and we handle the rest</li>\n<li>\u2705 <strong>Built to last</strong> \u2014 durable, scratch-resistant finish</li>\n</ul>\n<h3>\ud83d\udce6 Choose your set size:</h3>\n<p>Available in sets of 6, 9, or 12 \u2014 mix and match your favorite photos!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos at checkout<br>\n</li>\n<li>Add to Cart<meta charset=\"utf-8\">\n</li>\n<li>We'll take care of the rest!</li>\n</ol>\n<p><strong>\ud83d\udc47 Pick your set size and make your memories stick!</strong></p>",
-      "productType": "",
-      "tags": [
-        "2x2 Magnets",
-        "as seen on social",
-        "Custom Magnets",
-        "Custom Photo Magnets",
-        "Fridge Magnets",
-        "Gifts for Mom",
-        "Instagram Magnets",
-        "Kitchen Decor",
-        "Made in Texas",
-        "Magnet Moments Co",
-        "Personalized Gifts",
-        "personalized magnets",
-        "Pet Magnets",
-        "Photo Gifts",
-        "Save the Date",
-        "Stocking Stuffers",
-        "Wedding Favors"
-      ],
-      "availableForSale": true,
-      "totalInventory": 84,
-      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-photo-magnets",
-      "createdAt": "2025-11-13T19:27:19Z",
-      "updatedAt": "2026-05-21T13:33:17Z",
-      "seo": {
-        "title": "2x2 Custom Photo Magnets - Personalized Fridge Magnets | Magnet Moments Co.",
-        "description": "Turn your favorite photos into vibrant 2x2 custom magnets. Sets of 6, 9, or 12. Perfect for fridges, gifts & more. Fast shipping!"
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "14.99",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "29.99",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
-        "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
-        "width": 2400,
-        "height": 1792
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
-            "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
-            "width": 2400,
-            "height": 1792
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_h5svbch5svbch5sv.png?v=1768674199",
-            "altText": "Set of six custom photo magnets arranged on a stainless steel refrigerator featuring wedding, family, and pet portraits.",
-            "width": 2400,
-            "height": 1792
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/4052B3AD-FFBB-46EB-86F2-1960C9A96D50.jpg?v=1768576518",
-            "altText": "Four square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
-            "width": 2400,
-            "height": 1792
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/742F7A2A-17D4-450B-8216-D737D6D1D4FB.jpg?v=1764563633",
-            "altText": "Five square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
-            "width": 1856,
-            "height": 2304
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53776565928302",
-            "title": "Set of 3",
-            "price": {
-              "amount": "14.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53227461247342",
-            "title": "Set of 6",
-            "price": {
-              "amount": "18.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 90
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53227461280110",
-            "title": "Set of 9",
-            "price": {
-              "amount": "24.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": -6
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53227461312878",
-            "title": "Set of 12",
-            "price": {
-              "amount": "29.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
       "id": "gid://shopify/Product/14937248924014",
       "handle": "custom-2-x-3-photo-magnets-set-of-6",
       "title": "2x3 Custom Photo Magnets",
@@ -226,14 +226,14 @@
       "totalInventory": -17,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-2-x-3-photo-magnets-set-of-6",
       "createdAt": "2026-01-21T05:02:27Z",
-      "updatedAt": "2026-05-21T13:39:36Z",
+      "updatedAt": "2026-05-29T21:14:55Z",
       "seo": {
         "title": "2x3 Custom Photo Magnets - Personalized Photo Gifts | Magnet Moments Co.",
         "description": "Turn your favorite photos into vibrant 2x3 custom magnets. Sets of 9 or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
       },
       "priceRange": {
         "minVariantPrice": {
-          "amount": "15.5",
+          "amount": "14.5",
           "currencyCode": "USD"
         },
         "maxVariantPrice": {
@@ -285,7 +285,7 @@
             "id": "gid://shopify/ProductVariant/53776443113838",
             "title": "Set of 3",
             "price": {
-              "amount": "15.5",
+              "amount": "14.5",
               "currencyCode": "USD"
             },
             "availableForSale": true,
