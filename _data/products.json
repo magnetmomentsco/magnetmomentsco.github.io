@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-30T19:15:43.979711+00:00",
+  "lastUpdated": "2026-05-31T03:53:06.036877+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 8,
   "products": [
@@ -102,7 +102,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": 100
+            "quantityAvailable": 99
           },
           {
             "id": "gid://shopify/ProductVariant/53227461247342",
