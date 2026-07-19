@@ -61,7 +61,7 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "Shopify Sync Bot"
-          git config user.email "sync@magnetmomentsco.us"
+          git config user.email "magnetmomentscoatx@gmail.com"
           
           # Get a quick summary of what changed
           PRODUCT_COUNT=$(python3 -c "import json; d=json.load(open('_data/products.json')); print(d['productCount'])")

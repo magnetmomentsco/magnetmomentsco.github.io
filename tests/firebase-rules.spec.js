@@ -31,7 +31,7 @@ function unauthedDb() {
 }
 function authedDb(uid, claims) {
   return testEnv.authenticatedContext(uid || 'admin-uid', claims || {
-    email: 'alyssa.magnetmomentsco@gmail.com',
+    email: 'magnetmomentscoatx@gmail.com',
   }).database();
 }
 
