@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-03-14T18:39:19.133943+00:00",
+  "lastUpdated": "2026-07-19T19:05:14.936445+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
-  "productCount": 11,
+  "productCount": 9,
   "products": [
     {
       "id": "gid://shopify/Product/14983916388718",
@@ -12,10 +12,10 @@
       "productType": "",
       "tags": [],
       "availableForSale": true,
-      "totalInventory": -13,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/james-talarico-unofficial-campaign-magnets",
+      "totalInventory": -14,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/james-talarico-unofficial-campaign-magnets",
       "createdAt": "2026-03-09T21:12:08Z",
-      "updatedAt": "2026-03-12T19:12:58Z",
+      "updatedAt": "2026-07-18T18:42:43Z",
       "seo": {
         "title": null,
         "description": null
@@ -94,7 +94,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -2
+            "quantityAvailable": -3
           },
           {
             "id": "gid://shopify/ProductVariant/53398864265582",
@@ -120,6 +120,140 @@
       }
     },
     {
+      "id": "gid://shopify/Product/14879723127150",
+      "handle": "custom-photo-magnets",
+      "title": "2x2 Custom Photo Magnets",
+      "description": "\u2728 Yes, these are the magnets you saw on our feed! Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of...",
+      "descriptionHtml": "<h2>\u2728 Yes, these are the magnets you saw on our feed!</h2>\n<p>Turn your favorite photos into beautiful 2x2\" custom magnets \u2014 perfect for fridges, lockers, magnetic boards, and gifting. Whether it's a candid of the kids, a wedding portrait, or your favorite pet moment, these magnets bring your camera roll to life.</p>\n<h3>\u2b50 Loved by hundreds of happy customers</h3>\n<p><em>\"These came out so much better than I expected! The colors are so vibrant and they stick perfectly. Already ordered a second set!\"</em></p>\n<h3>\ud83e\uddf2 Why you'll love them:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>High-definition print quality</strong> \u2014 vibrant colors that pop</li>\n<li>\ud83d\udcaa <strong>Strong magnetic hold</strong> \u2014 stays put on any magnetic surface</li>\n<li>\ud83c\udf81 <strong>Perfect for gifting</strong> \u2014 birthdays, holidays, Mother's Day &amp; more</li>\n<li>\u26a1 <strong>Fast, easy ordering</strong> \u2014 just upload your photo and we handle the rest</li>\n<li>\u2705 <strong>Built to last</strong> \u2014 durable, scratch-resistant finish</li>\n</ul>\n<h3>\ud83d\udce6 Choose your set size:</h3>\n<p>Available in sets of 6, 9, or 12 \u2014 mix and match your favorite photos!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos at checkout<br>\n</li>\n<li>Add to Cart<meta charset=\"utf-8\">\n</li>\n<li>We'll take care of the rest!</li>\n</ol>\n<p><strong>\ud83d\udc47 Pick your set size and make your memories stick!</strong></p>",
+      "productType": "",
+      "tags": [
+        "2x2 Magnets",
+        "as seen on social",
+        "Custom Magnets",
+        "Custom Photo Magnets",
+        "Fridge Magnets",
+        "Gifts for Mom",
+        "Instagram Magnets",
+        "Kitchen Decor",
+        "Made in Texas",
+        "Magnet Moments Co",
+        "Personalized Gifts",
+        "personalized magnets",
+        "Pet Magnets",
+        "Photo Gifts",
+        "Save the Date",
+        "Stocking Stuffers",
+        "Wedding Favors"
+      ],
+      "availableForSale": true,
+      "totalInventory": 489,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-photo-magnets",
+      "createdAt": "2025-11-13T19:27:19Z",
+      "updatedAt": "2026-07-08T21:17:48Z",
+      "seo": {
+        "title": "2x2 Custom Photo Magnets - Personalized Fridge Magnets | Magnet Moments Co.",
+        "description": "Turn your favorite photos into vibrant 2x2 custom magnets. Sets of 6, 9, or 12. Perfect for fridges, gifts & more. Fast shipping!"
+      },
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "12.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
+        "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
+        "width": 2400,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
+            "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_h5svbch5svbch5sv.png?v=1768674199",
+            "altText": "Set of six custom photo magnets arranged on a stainless steel refrigerator featuring wedding, family, and pet portraits.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/4052B3AD-FFBB-46EB-86F2-1960C9A96D50.jpg?v=1768576518",
+            "altText": "Four square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
+            "width": 2400,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/742F7A2A-17D4-450B-8216-D737D6D1D4FB.jpg?v=1764563633",
+            "altText": "Five square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
+            "width": 1856,
+            "height": 2304
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53776565928302",
+            "title": "Set of 3",
+            "price": {
+              "amount": "12.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 93
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461247342",
+            "title": "Set of 6",
+            "price": {
+              "amount": "18.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 196
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461280110",
+            "title": "Set of 9",
+            "price": {
+              "amount": "24.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 100
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227461312878",
+            "title": "Set of 12",
+            "price": {
+              "amount": "29.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 100
+          }
+        ]
+      }
+    },
+    {
       "id": "gid://shopify/Product/14894449459566",
       "handle": "golden-girls-magnet-set",
       "title": "Golden Girls Magnet Set (Set of 4)",
@@ -132,9 +266,9 @@
       ],
       "availableForSale": true,
       "totalInventory": 199,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/golden-girls-magnet-set",
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/golden-girls-magnet-set",
       "createdAt": "2025-11-26T22:22:02Z",
-      "updatedAt": "2026-03-10T14:23:56Z",
+      "updatedAt": "2026-07-08T21:17:49Z",
       "seo": {
         "title": null,
         "description": null
@@ -191,269 +325,35 @@
       }
     },
     {
-      "id": "gid://shopify/Product/14966395666798",
-      "handle": "the-signature-magnet-frame-frame-only",
-      "title": "The Signature Magnet Frame- Frame Only",
-      "description": "Introducing the Magnet Moments Co. Magnet Frame Capture life's biggest milestones in a miniature gallery. Our signature magnet frame is designed to turn your favorite digital memories into a tangib...",
-      "descriptionHtml": "<h2 data-path-to-node=\"0\">Introducing the <b data-path-to-node=\"0\" data-index-in-node=\"16\">Magnet Moments Co.</b> Magnet Frame</h2>\n<p data-path-to-node=\"1\">Capture life's biggest milestones in a miniature gallery. Our signature magnet frame is designed to turn your favorite digital memories into a tangible, high-quality display that fits perfectly into your home.</p>\n<p data-path-to-node=\"2\">Whether you\u2019re celebrating a new arrival, a first Christmas, or just the everyday joy of watching your family grow, the <b data-path-to-node=\"2\" data-index-in-node=\"120\">Magnet Moments Co.</b> frame offers a modern, interactive way to showcase what matters most.</p>\n<hr data-path-to-node=\"3\">\n<h3 data-path-to-node=\"4\"><b data-path-to-node=\"4\" data-index-in-node=\"0\">What\u2019s Included:</b></h3>\n<ul data-path-to-node=\"5\">\n<li>\n<p data-path-to-node=\"5,0,0\"><b data-path-to-node=\"5,0,0\" data-index-in-node=\"0\">One Premium Magnetic Frame:</b> Choose from our classic <b data-path-to-node=\"5,0,0\" data-index-in-node=\"52\">Square</b> or <b data-path-to-node=\"5,0,0\" data-index-in-node=\"62\">Panoramic</b> layouts in timeless white or sleek black. Actual photo magnets NOT included!</p>\n</li>\n</ul>\n<h3 data-path-to-node=\"6\"><b data-path-to-node=\"6\" data-index-in-node=\"0\">Why You\u2019ll Love It:</b></h3>\n<ul data-path-to-node=\"7\">\n<li>\n<p data-path-to-node=\"7,0,0\"><b data-path-to-node=\"7,0,0\" data-index-in-node=\"0\">Swap &amp; Style:</b> The magnetic backing allows you to easily rearrange your photos or swap them out as your family hits new milestones.</p>\n</li>\n<li>\n<p data-path-to-node=\"7,1,0\"><b data-path-to-node=\"7,1,0\" data-index-in-node=\"0\">Perfectly Giftable:</b> A thoughtful, personalized gift for grandparents, new parents, or as a beautiful addition to a nursery or office.</p>\n</li>\n<li>\n<p data-path-to-node=\"7,2,0\"><b data-path-to-node=\"7,2,0\" data-index-in-node=\"0\">Seamless Design:</b> The frame provides a clean, matted look that makes your 2x2 magnets pop.</p>\n</li>\n</ul>",
-      "productType": "",
-      "tags": [],
-      "availableForSale": true,
-      "totalInventory": 0,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/the-signature-magnet-frame-frame-only",
-      "createdAt": "2026-02-17T18:20:03Z",
-      "updatedAt": "2026-03-10T15:59:58Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "14.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "14.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/16182C9F-A391-414B-B6E1-FA0C01EF3C77_bdfaa5bc-9ade-4f47-b4a3-52d063200291.png?v=1771352390",
-        "altText": null,
-        "width": 1536,
-        "height": 1024
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/16182C9F-A391-414B-B6E1-FA0C01EF3C77_bdfaa5bc-9ade-4f47-b4a3-52d063200291.png?v=1771352390",
-            "altText": null,
-            "width": 1536,
-            "height": 1024
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/C146E65B-FF3D-4B85-AF82-81264050EC20_5db34d0e-5cd7-45fe-afdc-5d6830de8aa0.png?v=1771352390",
-            "altText": null,
-            "width": 1536,
-            "height": 1024
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/D70621C0-B962-4800-8E8C-0239040196E3_5e33a05d-2609-4ffe-bedb-1ad8534bb872.png?v=1771352390",
-            "altText": null,
-            "width": 1536,
-            "height": 1024
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_5906_f3dc634c-2f7f-488c-9b31-08d1bd750758.jpg?v=1771352390",
-            "altText": null,
-            "width": 5712,
-            "height": 4284
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_5911_a8ebf50f-1dfd-4bfd-a97f-5bf31cc7e2ab.jpg?v=1771352391",
-            "altText": null,
-            "width": 5712,
-            "height": 4284
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_5918_616f1b5e-0e19-4e8f-ba67-3ed259cc29de.jpg?v=1771352390",
-            "altText": null,
-            "width": 5712,
-            "height": 4284
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53318608519534",
-            "title": "Black Panoramic Frame",
-            "price": {
-              "amount": "14.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53318608552302",
-            "title": "White Panoramic Frame",
-            "price": {
-              "amount": "14.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53318608585070",
-            "title": "White Square Frame",
-            "price": {
-              "amount": "14.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
-      "id": "gid://shopify/Product/14879723127150",
-      "handle": "custom-photo-magnets",
-      "title": "2x2 Custom Photo Magnets",
-      "description": "Don\u2019t let your favorite memories stay stuck on your phone. Bring your camera roll to life with our Custom Photo Magnets. Whether it\u2019s a candid shot of the kids, a wedding portrait, or a goofy pictu...",
-      "descriptionHtml": "<p data-path-to-node=\"5\"><b data-path-to-node=\"5\" data-index-in-node=\"13\">Don\u2019t let your favorite memories stay stuck on your phone.</b> Bring your camera roll to life with our <b data-path-to-node=\"5\" data-index-in-node=\"112\">Custom Photo Magnets</b>. Whether it\u2019s a candid shot of the kids, a wedding portrait, or a goofy picture of your pet, these 2x2\" magnets turn your fridge into a gallery of the moments that matter most.</p>\n<p data-path-to-node=\"6\">Each magnet is printed with high-definition clarity and built to last, making them the perfect addition to your kitchen, office locker, or magnetic board.<b data-path-to-node=\"9\" data-index-in-node=\"0\"></b></p>\n<p data-path-to-node=\"11\"><b data-path-to-node=\"11\" data-index-in-node=\"0\">Make your moments stick today!</b></p>",
-      "productType": "",
-      "tags": [
-        "2x2 Magnets",
-        "Custom Magnets",
-        "Custom Photo Magnets",
-        "Fridge Magnets",
-        "Gifts for Mom",
-        "Instagram Magnets",
-        "Kitchen Decor",
-        "Made in Texas",
-        "Magnet Moments Co",
-        "Personalized Gifts",
-        "Pet Magnets",
-        "Photo Gifts",
-        "Save the Date",
-        "Stocking Stuffers",
-        "Wedding Favors"
-      ],
-      "availableForSale": true,
-      "totalInventory": 92,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/custom-photo-magnets",
-      "createdAt": "2025-11-13T19:27:19Z",
-      "updatedAt": "2026-03-14T14:51:33Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "18.99",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "29.99",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
-        "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
-        "width": 2400,
-        "height": 1792
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/60DAC6D6-CCFE-49C1-AC62-D23F8B85988F.jpg?v=1768674199",
-            "altText": "Personalized photo magnets scattered on a wooden table, perfect for custom gifts and keepsakes.",
-            "width": 2400,
-            "height": 1792
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_h5svbch5svbch5sv.png?v=1768674199",
-            "altText": "Set of six custom photo magnets arranged on a stainless steel refrigerator featuring wedding, family, and pet portraits.",
-            "width": 2400,
-            "height": 1792
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/4052B3AD-FFBB-46EB-86F2-1960C9A96D50.jpg?v=1768576518",
-            "altText": "Four square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
-            "width": 2400,
-            "height": 1792
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/742F7A2A-17D4-450B-8216-D737D6D1D4FB.jpg?v=1764563633",
-            "altText": "Five square 2x2 custom photo magnets displayed on a black background showing high-quality glossy print finish.",
-            "width": 1856,
-            "height": 2304
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53227461247342",
-            "title": "Set of 6",
-            "price": {
-              "amount": "18.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 93
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53227461280110",
-            "title": "Set of 9",
-            "price": {
-              "amount": "24.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": -1
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53227461312878",
-            "title": "Set of 12",
-            "price": {
-              "amount": "29.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
       "id": "gid://shopify/Product/14937248924014",
       "handle": "custom-2-x-3-photo-magnets-set-of-6",
       "title": "2x3 Custom Photo Magnets",
-      "description": "Moments that Stick, Now in Widescreen! Sometimes a square just isn't enough. Our new 2\" x 3\" Rectangle Magnets offer a larger canvas for your favorite photos, meaning less cropping and more context...",
-      "descriptionHtml": "<p data-path-to-node=\"6\"><b data-index-in-node=\"0\" data-path-to-node=\"6\">Moments that Stick, Now in Widescreen!</b> Sometimes a square just isn't enough. Our new <b data-index-in-node=\"85\" data-path-to-node=\"6\">2\" x 3\" Rectangle Magnets</b> offer a larger canvas for your favorite photos, meaning less cropping and more context. Whether it\u2019s a breathtaking sunset from your vacation, a full-length wedding shot, or a family portrait, this size preserves the details that matter most.</p>\n<p data-path-to-node=\"7\">Hand-crafted with the same high-quality materials you love, these magnets are designed to turn your fridge, filing cabinet, or locker into a curated gallery of your life.</p>\n<p data-path-to-node=\"8\"><b data-index-in-node=\"0\" data-path-to-node=\"8\">Why You\u2019ll Love the 2x3 Size:</b></p>\n<p data-path-to-node=\"9,0,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,0,0\">Versatile Orientation:</b> Works perfectly for both horizontal (landscape) and vertical (portrait) photos.</p>\n<p data-path-to-node=\"9,1,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,1,0\">No Compromise Cropping:</b> Great for group shots where you don't want to cut anyone out of the frame!</p>\n<p data-path-to-node=\"9,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"9,2,0\">Strong Grip:</b> Durable magnetic backing ensures your photos stay put.</p>\n<p data-path-to-node=\"12\"><b data-index-in-node=\"0\" data-path-to-node=\"12\">How it Works:</b></p>\n<p><b data-index-in-node=\"0\" data-path-to-node=\"13,0,0\"><meta charset=\"utf-8\">1. Select your set size</b> from the menu above.</p>\n<p><b data-index-in-node=\"0\" data-path-to-node=\"13,1,0\">2. Upload your photos</b></p>\n<p data-path-to-node=\"13,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"13,2,0\">3. Sit back and relax:</b> We will professionally crop, print, and press your magnets and ship them straight to your door.</p>\n<p data-path-to-node=\"14\"><b data-index-in-node=\"0\" data-path-to-node=\"14\">The Details:</b></p>\n<p data-path-to-node=\"15,0,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,0,0\">Dimensions:</b> 2 inches x 3 inches.</p>\n<p data-path-to-node=\"15,1,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,1,0\">Finish:</b> Glossy protective coating.</p>\n<p data-path-to-node=\"15,2,0\"><b data-index-in-node=\"0\" data-path-to-node=\"15,2,0\">Origin:</b> Handmade in Austin, TX by Magnet Moments Co.</p>",
+      "description": "\u2728 Spotted on our feed? Here's where to get them! Our 2x3\" Custom Photo Magnets are the perfect size to showcase your favorite memories \u2014 big enough to show off every detail, small enough to display...",
+      "descriptionHtml": "<h2>\u2728 Spotted on our feed? Here's where to get them!</h2>\n<p>Our 2x3\" Custom Photo Magnets are the perfect size to showcase your favorite memories \u2014 big enough to show off every detail, small enough to display a whole collection. From family portraits to vacation snapshots, these magnets transform any magnetic surface into a personal gallery.</p>\n<h3>\u2b50 Customers are obsessed</h3>\n<p><em>\"I ordered these as a gift and they were a huge hit! The quality is amazing \u2014 the photos look so clear and the magnets are super strong. Will definitely be ordering more!\"</em></p>\n<h3>\ud83e\uddf2 Why the 2x3\" is a fan favorite:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>Larger size = more detail</strong> \u2014 perfect for portraits &amp; landscape shots</li>\n<li>\ud83d\udcaa <strong>Extra-strong magnetic hold</strong> \u2014 won't slip or slide</li>\n<li>\ud83c\udf81 <strong>The ultimate personalized gift</strong> \u2014 for any occasion</li>\n<li>\u26a1 <strong>Super easy to order</strong> \u2014 upload your photo, we do the rest</li>\n<li>\u2705 <strong>Premium, durable finish</strong> \u2014 scratch-resistant and long-lasting</li>\n</ul>\n<h3>\ud83d\udce6 Available in sets of 6, 9 or 12:</h3>\n<p>Mix and match your favorite photos for a stunning display \u2014 or give them as a set of gifts!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos<meta charset=\"utf-8\">\n</li>\n<li>Add to Cart</li>\n<li>We'll handle the printing &amp; shipping!</li>\n</ol>\n<p><strong>\ud83d\udc47 Choose your set and make your memories stick!</strong></p>",
       "productType": "",
-      "tags": [],
+      "tags": [
+        "as seen on social",
+        "custom photo magnets",
+        "fridge magnets",
+        "personalized magnets",
+        "photo gifts"
+      ],
       "availableForSale": true,
-      "totalInventory": -3,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/custom-2-x-3-photo-magnets-set-of-6",
+      "totalInventory": 398,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-2-x-3-photo-magnets-set-of-6",
       "createdAt": "2026-01-21T05:02:27Z",
-      "updatedAt": "2026-03-10T14:25:15Z",
+      "updatedAt": "2026-07-18T20:32:57Z",
       "seo": {
-        "title": null,
-        "description": null
+        "title": "2x3 Custom Photo Magnets - Personalized Photo Gifts | Magnet Moments Co.",
+        "description": "Turn your favorite photos into vibrant 2x3 custom magnets. Sets of 9 or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
       },
       "priceRange": {
         "minVariantPrice": {
-          "amount": "21.99",
+          "amount": "14.5",
           "currencyCode": "USD"
         },
         "maxVariantPrice": {
-          "amount": "39.99",
+          "amount": "37.99",
           "currencyCode": "USD"
         }
       },
@@ -498,34 +398,144 @@
       "variants": {
         "nodes": [
           {
-            "id": "gid://shopify/ProductVariant/53227452137838",
-            "title": "Set of 6",
+            "id": "gid://shopify/ProductVariant/53776443113838",
+            "title": "Set of 3",
             "price": {
-              "amount": "21.99",
+              "amount": "14.5",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -1
+            "quantityAvailable": 100
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53227452137838",
+            "title": "Set of 6",
+            "price": {
+              "amount": "22.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 99
           },
           {
             "id": "gid://shopify/ProductVariant/53227452170606",
             "title": "Set of 9",
             "price": {
-              "amount": "31.99",
+              "amount": "29.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -1
+            "quantityAvailable": 100
           },
           {
             "id": "gid://shopify/ProductVariant/53227452203374",
             "title": "Set of 12",
             "price": {
-              "amount": "39.99",
+              "amount": "37.99",
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -1
+            "quantityAvailable": 99
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15064609358190",
+      "handle": "2-25-round-custom-photo-magnets",
+      "title": "2.25\" Round Custom Photo Magnets",
+      "description": "\u2728 Spotted on our feed? These are the ones everyone's talking about! Turn your favorite photos into beautiful 2.25\" round custom magnets \u2014 the perfect way to display the moments that matter most on ...",
+      "descriptionHtml": "<h2>\u2728 Spotted on our feed? These are the ones everyone's talking about!</h2>\n<p>Turn your favorite photos into beautiful 2.25\" round custom magnets \u2014 the perfect way to display the moments that matter most on your fridge, locker, or whiteboard. From sweet newborn snapshots to wedding portraits, vacation memories to your furry best friend, these little circles pack a whole lot of love.</p>\n<h3>\u2b50 Customers can't get enough</h3>\n<p><em>\"These are absolutely gorgeous \u2014 the quality blew me away! So much better than any magnet I've seen. Already ordered them as gifts for everyone!\"</em></p>\n<h3>\ud83e\uddf2 Not your average magnet \u2014 here's what makes ours special:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>Handcrafted with care</strong> \u2014 every magnet is manually pressed by hand at Magnet Moments Co.</li>\n<li>\ud83d\udee1\ufe0f <strong>Glossy Mylar protective cover</strong> \u2014 keeps your photos vibrant, crisp &amp; scratch-free for years</li>\n<li>\ud83d\udcaa <strong>Premium metal shell</strong> \u2014 durable and strong, not flimsy magnetic sheets</li>\n<li>\ud83c\udf81 <strong>The perfect personalized gift</strong> \u2014 for any occasion, any person</li>\n<li>\u2705 <strong>Strong magnetic backing</strong> \u2014 stays put on fridges, lockers &amp; whiteboards</li>\n</ul>\n<h3>\ud83c\udf89 Perfect for:</h3>\n<ul>\n<li>\n<strong>Gifts</strong> \u2014 Mother's Day, Father's Day, Grandparents, or just because!</li>\n<li>\n<strong>Milestones</strong> \u2014 Save-the-dates, birth announcements &amp; wedding favors</li>\n<li>\n<strong>Everyday</strong> \u2014 Upgrade your fridge with a chic, personalized aesthetic</li>\n</ul>\n<h3>\ud83d\udce6 Product details:</h3>\n<ul>\n<li>\n<strong>Size:</strong> 2.25\" Round</li>\n<li>\n<strong>Materials:</strong> Premium metal shell, high-quality photo print, protective Mylar cover, strong magnetic backing</li>\n<li>\n<strong>Care:</strong> Wipe clean with a soft, dry cloth</li>\n</ul>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your quantity below</li>\n<li>Upload your photos</li>\n<li>Add to cart and check out</li>\n<li>We'll handle the printing &amp; shipping!</li>\n</ol>\n<p><em>\ud83d\udcf7 Pro tip: For the best results, use clear, well-lit, high-resolution photos. We may crop slightly to fit your subject perfectly within the circular frame.</em></p>\n<p><strong>\ud83d\udc47 Choose your quantity and make your memories stick!</strong></p>",
+      "productType": "",
+      "tags": [
+        "as seen on social",
+        "custom photo magnets",
+        "personalized magnets",
+        "photo gifts",
+        "round magnets"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/2-25-round-custom-photo-magnets",
+      "createdAt": "2026-05-15T00:13:44Z",
+      "updatedAt": "2026-07-08T21:17:55Z",
+      "seo": {
+        "title": "2.25\" Round Custom Photo Magnets - Handcrafted Photo Gifts | Magnet Moments Co.",
+        "description": "Handcrafted 2.25\" round custom photo magnets with premium metal shell & Mylar cover. Perfect gifts for any occasion. Fast shipping!"
+      },
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "18.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "29.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_8171c28171c28171.png?v=1778803843",
+        "altText": null,
+        "width": 2390,
+        "height": 1792
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_8171c28171c28171.png?v=1778803843",
+            "altText": null,
+            "width": 2390,
+            "height": 1792
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/Gemini_Generated_Image_wj8d16wj8d16wj8d.png?v=1778803843",
+            "altText": null,
+            "width": 2390,
+            "height": 1792
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/53771404771694",
+            "title": "Set of 6",
+            "price": {
+              "amount": "18.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53771404804462",
+            "title": "Set of 9",
+            "price": {
+              "amount": "24.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/53771404837230",
+            "title": "Set of 12",
+            "price": {
+              "amount": "29.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
           }
         ]
       }
@@ -547,9 +557,9 @@
       ],
       "availableForSale": true,
       "totalInventory": 0,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/chicago-football-good-better-best-magnet-set-set-of-6",
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/chicago-football-good-better-best-magnet-set-set-of-6",
       "createdAt": "2025-12-15T23:42:16Z",
-      "updatedAt": "2026-03-10T14:24:26Z",
+      "updatedAt": "2026-07-08T21:17:50Z",
       "seo": {
         "title": null,
         "description": null
@@ -606,126 +616,6 @@
       }
     },
     {
-      "id": "gid://shopify/Product/14965656650094",
-      "handle": "the-signature-magnet-frame-magnet-moments-co",
-      "title": "The Signature Magnet Frame Set with 4- 2x2 Magnets",
-      "description": "Introducing the Magnet Moments Co. Magnet Frame Capture life's biggest milestones in a miniature gallery. Our signature magnet frame is designed to turn your favorite digital memories into a tangib...",
-      "descriptionHtml": "<h2 data-path-to-node=\"0\">Introducing the <b data-path-to-node=\"0\" data-index-in-node=\"16\">Magnet Moments Co.</b> Magnet Frame</h2>\n<p data-path-to-node=\"1\">Capture life's biggest milestones in a miniature gallery. Our signature magnet frame is designed to turn your favorite digital memories into a tangible, high-quality display that fits perfectly into your home.</p>\n<p data-path-to-node=\"2\">Whether you\u2019re celebrating a new arrival, a first Christmas, or just the everyday joy of watching your family grow, the <b data-path-to-node=\"2\" data-index-in-node=\"120\">Magnet Moments Co.</b> frame offers a modern, interactive way to showcase what matters most.</p>\n<h3 data-path-to-node=\"4\"><b data-path-to-node=\"4\" data-index-in-node=\"0\">What\u2019s Included:</b></h3>\n<ul data-path-to-node=\"5\">\n<li>\n<p data-path-to-node=\"5,0,0\"><b data-path-to-node=\"5,0,0\" data-index-in-node=\"0\">One Premium Magnetic Frame:</b> Choose from our classic <b data-path-to-node=\"5,0,0\" data-index-in-node=\"52\">Square</b> or <b data-path-to-node=\"5,0,0\" data-index-in-node=\"62\">Panoramic</b> layouts in timeless white or sleek black.</p>\n</li>\n<li>\n<p data-path-to-node=\"5,1,0\"><b data-path-to-node=\"5,1,0\" data-index-in-node=\"0\">Four Custom 2x2 Photo Magnets:</b> High-definition, custom-printed magnets featuring your own photos, cropped to a perfect 2\"x2\" fit.</p>\n</li>\n</ul>\n<h3 data-path-to-node=\"6\"><b data-path-to-node=\"6\" data-index-in-node=\"0\">Why You\u2019ll Love It:</b></h3>\n<ul data-path-to-node=\"7\">\n<li>\n<p data-path-to-node=\"7,0,0\"><b data-path-to-node=\"7,0,0\" data-index-in-node=\"0\">Swap &amp; Style:</b> The magnetic backing allows you to easily rearrange your photos or swap them out as your family hits new milestones.</p>\n</li>\n<li>\n<p data-path-to-node=\"7,1,0\"><b data-path-to-node=\"7,1,0\" data-index-in-node=\"0\">Perfectly Giftable:</b> A thoughtful, personalized gift for grandparents, new parents, or as a beautiful addition to a nursery or office.</p>\n</li>\n<li>\n<p data-path-to-node=\"7,2,0\"><b data-path-to-node=\"7,2,0\" data-index-in-node=\"0\">Seamless Design:</b> The frame provides a clean, matted look that makes your 2x2 magnets pop.</p>\n</li>\n</ul>",
-      "productType": "",
-      "tags": [
-        "Custom Photo Magnets"
-      ],
-      "availableForSale": true,
-      "totalInventory": 0,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/the-signature-magnet-frame-magnet-moments-co",
-      "createdAt": "2026-02-17T02:25:06Z",
-      "updatedAt": "2026-03-10T15:59:59Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "24.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "24.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/16182C9F-A391-414B-B6E1-FA0C01EF3C77.png?v=1771294117",
-        "altText": null,
-        "width": 1536,
-        "height": 1024
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/16182C9F-A391-414B-B6E1-FA0C01EF3C77.png?v=1771294117",
-            "altText": null,
-            "width": 1536,
-            "height": 1024
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/C146E65B-FF3D-4B85-AF82-81264050EC20.png?v=1771294117",
-            "altText": null,
-            "width": 1536,
-            "height": 1024
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/D70621C0-B962-4800-8E8C-0239040196E3.png?v=1771294118",
-            "altText": null,
-            "width": 1536,
-            "height": 1024
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_5906.jpg?v=1771294118",
-            "altText": null,
-            "width": 5712,
-            "height": 4284
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_5911.jpg?v=1771294118",
-            "altText": null,
-            "width": 5712,
-            "height": 4284
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_5918.jpg?v=1771294118",
-            "altText": null,
-            "width": 5712,
-            "height": 4284
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53312160235886",
-            "title": "White Square Frame",
-            "price": {
-              "amount": "24.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53312160268654",
-            "title": "Black Panoramic Frame",
-            "price": {
-              "amount": "24.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53312160301422",
-            "title": "White Panoramic Frame",
-            "price": {
-              "amount": "24.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
       "id": "gid://shopify/Product/14919794950510",
       "handle": "retro-wildflower-magnet-set-set-of-8",
       "title": "Retro Wildflower Magnet Set (Set of 8)",
@@ -754,9 +644,9 @@
       ],
       "availableForSale": true,
       "totalInventory": 10,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/retro-wildflower-magnet-set-set-of-8",
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/retro-wildflower-magnet-set-set-of-8",
       "createdAt": "2026-01-01T17:12:37Z",
-      "updatedAt": "2026-03-10T14:24:38Z",
+      "updatedAt": "2026-07-08T21:17:51Z",
       "seo": {
         "title": null,
         "description": null
@@ -813,91 +703,6 @@
       }
     },
     {
-      "id": "gid://shopify/Product/14978445607278",
-      "handle": "vintage-postage-stamp-easter-gnome-magnets-set-of-8-spring-fridge-decor",
-      "title": "Vintage Postage Stamp Easter Gnome Magnets \u2013 Set of 8 Spring Fridge Decor",
-      "description": "Bring a touch of springtime magic and vintage charm to your kitchen with this adorable set of 8 Easter gnome magnets! Designed to look like classic antique postage stamps, each magnet features a un...",
-      "descriptionHtml": "<p><span>Bring a touch of springtime magic and vintage charm to your kitchen with this adorable set of 8 Easter gnome magnets!</span></p>\n<p><span>Designed to look like classic antique postage stamps, each magnet features a unique, whimsical gnome dressed in pastel spring colors. With sweet details like beautifully decorated Easter eggs, tiny birdhouses, spring flowers, and charming faux postmarks, this set is the perfect way to add a little cottagecore aesthetic to your home for the season.</span></p>\n<p><span>Whether you are decorating your own space or looking for a unique seasonal gift, these little gnomes are ready to deliver some holiday cheer.</span></p>\n<p><span>Features:</span></p>\n<p><span>\u2022 </span><span>Set of 8 Unique Designs:</span><span> Includes a variety of pastel spring gnomes, including one holding a \"Happy Easter\" sign.</span></p>\n<p><span>\u2022 </span><span>Vintage Charm:</span><span> Features a classic postage stamp aesthetic complete with faux cancellation marks and vintage price details (5\u00a2 and 10\u00a2).</span></p>\n<p><span>\u2022 </span><span>Versatile Decor:</span><span> Perfect for holding up photos, grocery lists, or kids' artwork on refrigerators, whiteboards, lockers, or any magnetic surface.</span></p>\n<p><span>\u2022 </span><span>Great for Gifting:</span><span> Makes a fantastic Easter basket stuffer, hostess gift, or treat for gnome collectors!</span></p>",
-      "productType": "",
-      "tags": [
-        "Cottagecore",
-        "Cottagecore easter",
-        "Easter Basket Stuffers",
-        "Easter Magnets",
-        "Gnome Decor",
-        "Spring Decor",
-        "Spring kitchen decor",
-        "Spring refrigerator magnets",
-        "Vintage Stamp Magnets",
-        "Vintage Style"
-      ],
-      "availableForSale": true,
-      "totalInventory": 0,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/vintage-postage-stamp-easter-gnome-magnets-set-of-8-spring-fridge-decor",
-      "createdAt": "2026-03-01T18:01:29Z",
-      "updatedAt": "2026-03-10T14:26:27Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "25.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "25.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/8FAD84A3-D07B-46AA-8B19-2724E10F0C47.png?v=1772388119",
-        "altText": null,
-        "width": 1200,
-        "height": 896
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/8FAD84A3-D07B-46AA-8B19-2724E10F0C47.png?v=1772388119",
-            "altText": null,
-            "width": 1200,
-            "height": 896
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/B10E3180-2C5A-49A5-BD0E-BFE7A225D9E2.png?v=1772388119",
-            "altText": null,
-            "width": 1200,
-            "height": 896
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53371568554350",
-            "title": "Default Title",
-            "price": {
-              "amount": "25.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
       "id": "gid://shopify/Product/14912725975406",
       "handle": "the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
       "title": "\"The Office\" Collection- (Set of 9)",
@@ -914,9 +719,9 @@
       ],
       "availableForSale": true,
       "totalInventory": 0,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
       "createdAt": "2025-12-22T21:27:27Z",
-      "updatedAt": "2026-03-12T07:06:35Z",
+      "updatedAt": "2026-07-08T21:17:51Z",
       "seo": {
         "title": null,
         "description": "\"Bears. Beets. Battlestar Galactica.\" Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotable moments from The Office (US). Whether you are a superstitious (or just a little stitious) fan of Michael Scott\u2019s management style, or you appreciate the simpler things in life like Schrute Farms agritourism, this set is the perfect addition to your home or cubicle. They are strong enough to hold up your important memos from corporate, but funny enough to make you smile every time you go for a snack. The Perfect Gift for the Superfan These make an excellent gift for birthdays, holidays, or just because you want to tell someone they are the \"World's Best Boss.\" What\u2019s Included in the 9-Piece Set: \u2022 Schrute Farms Logo \u2022 Bears. Beets. Battlestar Galactica. Text \u2022 Dundie Award Winner \u2022 \"I feel God in this Chili\u2019s tonight\" Pam quote \u2022 Dwight \"Ignorant Slut\" CPR Training \u2022 Dwight\u2019s CPR Dummy Face Mask \u2022 Prison Mike (\"Da Belle of da Ball\") \u2022 Wayne Gretzky / Michael Scott Inspirational Quote \u2022 World\u2019s Best Boss Mug Product Details: \u2022 Set includes 9 individual square magnets. \u2022 Dimensions: Each magnet measures approximately 2x2 inches. \u2022 Glossy, durable finish. \u2022 Strong magnetic backing"
@@ -992,9 +797,9 @@
       ],
       "availableForSale": true,
       "totalInventory": 0,
-      "onlineStoreUrl": "https://dbx3hf-qe.myshopify.com/products/the-eras-stamp-collection",
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/the-eras-stamp-collection",
       "createdAt": "2025-12-09T03:15:34Z",
-      "updatedAt": "2026-03-10T14:24:13Z",
+      "updatedAt": "2026-07-08T21:17:50Z",
       "seo": {
         "title": null,
         "description": null
