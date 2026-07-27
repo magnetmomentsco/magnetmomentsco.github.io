@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-26T19:09:06.921046+00:00",
+  "lastUpdated": "2026-07-27T02:54:01.328168+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 9,
   "products": [
@@ -146,10 +146,10 @@
         "Wedding Favors"
       ],
       "availableForSale": true,
-      "totalInventory": 489,
+      "totalInventory": 488,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-photo-magnets",
       "createdAt": "2025-11-13T19:27:19Z",
-      "updatedAt": "2026-07-25T01:03:07Z",
+      "updatedAt": "2026-07-26T21:41:37Z",
       "seo": {
         "title": "2x2 Custom Photo Magnets - Personalized Fridge Magnets | Magnet Moments Co.",
         "description": "Turn your favorite photos into vibrant 2x2 custom magnets. Sets of 6, 9, or 12. Perfect for fridges, gifts & more. Fast shipping!"
@@ -238,7 +238,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": 100
+            "quantityAvailable": 99
           },
           {
             "id": "gid://shopify/ProductVariant/53227461312878",
