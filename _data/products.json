@@ -1,124 +1,8 @@
 {
-  "lastUpdated": "2026-09-06T15:00:07.035040+00:00",
+  "lastUpdated": "2026-09-06T19:00:24.900338+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
-  "productCount": 9,
+  "productCount": 4,
   "products": [
-    {
-      "id": "gid://shopify/Product/14983916388718",
-      "handle": "james-talarico-unofficial-campaign-magnets",
-      "title": "James Talarico Unofficial Campaign Magnets",
-      "description": "Whether you're a lifelong constituent or a new fan of his advocacy, these James Talarico Unofficial Campaign Magnets are the perfect way to show your support. Known for his \"common sense\" approach ...",
-      "descriptionHtml": "<p data-path-to-node=\"3\">Whether you're a lifelong constituent or a new fan of his advocacy, these <b data-path-to-node=\"3\" data-index-in-node=\"74\">James Talarico Unofficial Campaign Magnets</b> are the perfect way to show your support. Known for his \"common sense\" approach and dedication to Texas public schools, Representative Talarico has become a standout voice in our community; and now you can bring that energy to your home or workspace.</p>\n<p data-path-to-node=\"4\">Designed right here in the <b data-path-to-node=\"4\" data-index-in-node=\"27\">Manor/Austin area</b>, these magnets are crafted for supporters who want to display their local pride with high-quality, durable gear.</p>\n<h3 data-path-to-node=\"5\"><b data-path-to-node=\"5\" data-index-in-node=\"0\">Magnets with a Mission</b></h3>\n<p data-path-to-node=\"6\"><b data-path-to-node=\"6\" data-index-in-node=\"0\">We believe in the message.</b> That\u2019s why Magnet Moments Co. is proud to announce that <b data-path-to-node=\"6\" data-index-in-node=\"83\">$2 from every magnet sold will be donated directly to the James Talarico Campaign.</b> Your purchase doesn't just show your support, it actively contributes to the movement.</p>\n<h3 data-path-to-node=\"7\"><b data-path-to-node=\"7\" data-index-in-node=\"0\">Product Highlights:</b></h3>\n<ul data-path-to-node=\"8\">\n<li>\n<p data-path-to-node=\"8,0,0\"><b data-path-to-node=\"8,0,0\" data-index-in-node=\"0\">Locally Inspired:</b> Designed by Magnet Moments Co. for our Texas neighbors.</p>\n</li>\n<li>\n<p data-path-to-node=\"8,1,0\"><b data-path-to-node=\"8,1,0\" data-index-in-node=\"0\">High-Quality Finish:</b> Features a crisp, vibrant design that won\u2019t fade, ensuring the message stays front and center.</p>\n</li>\n<li>\n<p data-path-to-node=\"8,2,0\"><b data-path-to-node=\"8,2,0\" data-index-in-node=\"0\">Strong Magnetic Hold:</b> Perfect for holding up schedules, photos, or your \"To-Do\" list without sliding.</p>\n</li>\n<li>\n<p data-path-to-node=\"8,3,0\"><b data-path-to-node=\"8,3,0\" data-index-in-node=\"0\">The Ideal Size:</b> Available in our signature <b data-path-to-node=\"8,3,0\" data-index-in-node=\"43\">2x2 or 2x3 sizes</b>, making them a versatile addition to any magnetic surface.</p>\n</li>\n</ul>\n<h3 data-path-to-node=\"9\"><b data-path-to-node=\"9\" data-index-in-node=\"0\">Why You\u2019ll Love It:</b></h3>\n<p data-path-to-node=\"10\">Whether you're gearing up for the next town hall or just want to spark a conversation in the breakroom, these magnets are a subtle yet bold way to represent the future of Texas leadership.</p>\n<hr data-path-to-node=\"11\">\n<blockquote data-path-to-node=\"12\">\n<p data-path-to-node=\"12,0\"><i data-path-to-node=\"12,0\" data-index-in-node=\"0\">Disclaimer: These are unofficial campaign materials produced by Magnet Moments Co. While a portion of the proceeds is donated to the campaign, this product is not officially affiliated with or commissioned by James Talarico or his official campaign committee.</i></p>\n</blockquote>",
-      "productType": "",
-      "tags": [],
-      "availableForSale": true,
-      "totalInventory": -14,
-      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/james-talarico-unofficial-campaign-magnets",
-      "createdAt": "2026-03-09T21:12:08Z",
-      "updatedAt": "2026-07-18T18:42:43Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "4.5",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "12.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_6265.jpg?v=1773090428",
-        "altText": null,
-        "width": 3024,
-        "height": 4032
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_6265.jpg?v=1773090428",
-            "altText": null,
-            "width": 3024,
-            "height": 4032
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_6263.jpg?v=1773090429",
-            "altText": null,
-            "width": 3024,
-            "height": 4032
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_6268.jpg?v=1773090429",
-            "altText": null,
-            "width": 3024,
-            "height": 4032
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_6269.jpg?v=1773090429",
-            "altText": null,
-            "width": 3024,
-            "height": 4032
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53398864200046",
-            "title": "Talarico for Texas 2x2\"",
-            "price": {
-              "amount": "4.5",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": -2
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53398864232814",
-            "title": "Talarico for Texas 2x3\"",
-            "price": {
-              "amount": "5.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": -3
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53398864265582",
-            "title": "Flipping Tables 2x3\"",
-            "price": {
-              "amount": "5.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": -5
-          },
-          {
-            "id": "gid://shopify/ProductVariant/53398864298350",
-            "title": "SPECIAL: Get all 3!",
-            "price": {
-              "amount": "12.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": -4
-          }
-        ]
-      }
-    },
     {
       "id": "gid://shopify/Product/14879723127150",
       "handle": "custom-photo-magnets",
@@ -254,82 +138,11 @@
       }
     },
     {
-      "id": "gid://shopify/Product/14894449459566",
-      "handle": "golden-girls-magnet-set",
-      "title": "Golden Girls Magnet Set (Set of 4)",
-      "description": "Stay golden! This cute Golden Girls magnet set features all four ladies with their classic quotes. A fun, nostalgic addition to any fridge or workspace\u2014and the perfect gift for fans of the show.",
-      "descriptionHtml": "<p><span>Stay golden! This cute Golden Girls magnet set features all four ladies with their classic quotes. A fun, nostalgic addition to any fridge or workspace\u2014and the perfect gift for fans of the show.</span></p>",
-      "productType": "",
-      "tags": [
-        "Christmas",
-        "Golden Girls"
-      ],
-      "availableForSale": true,
-      "totalInventory": 199,
-      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/golden-girls-magnet-set",
-      "createdAt": "2025-11-26T22:22:02Z",
-      "updatedAt": "2026-07-08T21:17:49Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "14.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "14.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/6AAD4B73-32FC-4F3F-BEF6-DDD2FBA70AC4.jpg?v=1764515325",
-        "altText": "Four square magnets with the Golden Girls and quotes on a light gray background with eucalyptus leaves and a spoon.",
-        "width": 2400,
-        "height": 1792
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/6AAD4B73-32FC-4F3F-BEF6-DDD2FBA70AC4.jpg?v=1764515325",
-            "altText": "Four square magnets with the Golden Girls and quotes on a light gray background with eucalyptus leaves and a spoon.",
-            "width": 2400,
-            "height": 1792
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53030049448302",
-            "title": "Default Title",
-            "price": {
-              "amount": "14.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 199
-          }
-        ]
-      }
-    },
-    {
       "id": "gid://shopify/Product/14937248924014",
       "handle": "custom-2-x-3-photo-magnets-set-of-6",
       "title": "2x3 Custom Photo Magnets",
       "description": "\u2728 Spotted on our feed? Here's where to get them! Our 2x3\" Custom Photo Magnets are the perfect size to showcase your favorite memories \u2014 big enough to show off every detail, small enough to display...",
-      "descriptionHtml": "<h2>\u2728 Spotted on our feed? Here's where to get them!</h2>\n<p>Our 2x3\" Custom Photo Magnets are the perfect size to showcase your favorite memories \u2014 big enough to show off every detail, small enough to display a whole collection. From family portraits to vacation snapshots, these magnets transform any magnetic surface into a personal gallery.</p>\n<h3>\u2b50 Customers are obsessed</h3>\n<p><em>\"I ordered these as a gift and they were a huge hit! The quality is amazing \u2014 the photos look so clear and the magnets are super strong. Will definitely be ordering more!\"</em></p>\n<h3>\ud83e\uddf2 Why the 2x3\" is a fan favorite:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>Larger size = more detail</strong> \u2014 perfect for portraits &amp; landscape shots</li>\n<li>\ud83d\udcaa <strong>Extra-strong magnetic hold</strong> \u2014 won't slip or slide</li>\n<li>\ud83c\udf81 <strong>The ultimate personalized gift</strong> \u2014 for any occasion</li>\n<li>\u26a1 <strong>Super easy to order</strong> \u2014 upload your photo, we do the rest</li>\n<li>\u2705 <strong>Premium, durable finish</strong> \u2014 scratch-resistant and long-lasting</li>\n</ul>\n<h3>\ud83d\udce6 Available in sets of 6, 9 or 12:</h3>\n<p>Mix and match your favorite photos for a stunning display \u2014 or give them as a set of gifts!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos<meta charset=\"utf-8\">\n</li>\n<li>Add to Cart</li>\n<li>We'll handle the printing &amp; shipping!</li>\n</ol>\n<p><strong>\ud83d\udc47 Choose your set and make your memories stick!</strong></p>",
+      "descriptionHtml": "<h2>\u2728 Spotted on our feed? Here's where to get them!</h2>\n<p>Our 2x3\" Custom Photo Magnets are the perfect size to showcase your favorite memories \u2014 big enough to show off every detail, small enough to display a whole collection. From family portraits to vacation snapshots, these magnets transform any magnetic surface into a personal gallery.</p>\n<h3>\u2b50 Customers are obsessed</h3>\n<p><em>\"I ordered these as a gift and they were a huge hit! The quality is amazing \u2014 the photos look so clear and the magnets are super strong. Will definitely be ordering more!\"</em></p>\n<h3>\ud83e\uddf2 Why the 2x3\" is a fan favorite:</h3>\n<ul>\n<li>\ud83d\udcf8 <strong>Larger size = more detail</strong> \u2014 perfect for portraits &amp; landscape shots</li>\n<li>\ud83d\udcaa <strong>Extra-strong magnetic hold</strong> \u2014 won't slip or slide</li>\n<li>\ud83c\udf81 <strong>The ultimate personalized gift</strong> \u2014 for any occasion</li>\n<li>\u26a1 <strong>Super easy to order</strong> \u2014 upload your photo, we do the rest</li>\n<li>\u2705 <strong>Premium, durable finish</strong> \u2014 scratch-resistant and long-lasting</li>\n</ul>\n<h3>\ud83d\udce6 Available in sets of 3, 6, 9 or 12:</h3>\n<p>Mix and match your favorite photos for a stunning display \u2014 or give them as a set of gifts!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos<meta charset=\"utf-8\">\n</li>\n<li>Add to Cart</li>\n<li>We'll handle the printing &amp; shipping!</li>\n</ol>\n<p><strong>\ud83d\udc47 Choose your set and make your memories stick!</strong></p>",
       "productType": "",
       "tags": [
         "as seen on social",
@@ -342,10 +155,10 @@
       "totalInventory": 394,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/custom-2-x-3-photo-magnets-set-of-6",
       "createdAt": "2026-01-21T05:02:27Z",
-      "updatedAt": "2026-09-02T23:44:46Z",
+      "updatedAt": "2026-09-06T18:44:09Z",
       "seo": {
         "title": "2x3 Custom Photo Magnets - Personalized Photo Gifts | Magnet Moments Co.",
-        "description": "Turn your favorite photos into vibrant 2x3 custom magnets. Sets of 9 or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
+        "description": "Turn your favorite photos into vibrant 2x3 custom magnets. Sets of 3, 6, 9, or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
       },
       "priceRange": {
         "minVariantPrice": {
@@ -436,6 +249,128 @@
             },
             "availableForSale": true,
             "quantityAvailable": 99
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15221724971374",
+      "handle": "2-5x3-5-custom-photo-magnets",
+      "title": "2.5x3.5 Custom Photo Magnets",
+      "description": "Turn your favorite photos into keepsakes you can enjoy every day with our 2.5\" x 3.5\" custom photo magnets. This larger photo magnet size gives your memories more room to shine and is perfect for f...",
+      "descriptionHtml": "<p class=\"PDq2pG_selectionAnchorContainer\">Turn your favorite photos into keepsakes you can enjoy every day with our <strong>2.5\" x 3.5\" custom photo magnets</strong>.<span class=\"PDq2pG_selectionAnchor\"></span></p>\n<p>This larger photo magnet size gives your memories more room to shine and is perfect for family photos, weddings, babies, pets, graduations, vacations, holidays, and all of life\u2019s special moments. Whether you\u2019re decorating your own fridge or creating a thoughtful personalized gift, these magnets are a simple way to keep the people and memories you love close.</p>\n<p>Each magnet is handmade using your photo and features a durable metal shell, clear protective Mylar cover, and strong magnetic backing.</p>\n<p><strong>Product Details</strong></p>\n<ul>\n<li>Measures approximately <strong>2.5\" x 3.5\"</strong>\n</li>\n<li>Personalized with your own photo</li>\n<li>Available in vertical or horizontal orientation</li>\n<li>Full-color printing</li>\n<li>Metal shell with protective Mylar finish</li>\n<li>Strong magnetic backing</li>\n<li>Handmade by Magnet Moments Co.</li>\n</ul>\n<p><strong>Perfect For:</strong><br>Family photos \u2022 Wedding memories \u2022 New babies \u2022 Pets \u2022 Graduation photos \u2022 Senior pictures \u2022 Vacations \u2022 Holidays \u2022 Grandparent gifts \u2022 Mother\u2019s Day \u2022 Father\u2019s Day \u2022 Memorial keepsakes \u2022 Stocking stuffers</p>\n<h3>\ud83d\udce6 Available in sets of 3, 6, 9 or 12:</h3>\n<p>Mix and match your favorite photos for a stunning display \u2014 or give them as a set of gifts!</p>\n<h3>\ud83d\uded2 How to order:</h3>\n<ol>\n<li>Select your set size below</li>\n<li>Upload your photos<meta charset=\"utf-8\">\n</li>\n<li>Add to Cart</li>\n<li>We'll handle the printing &amp; shipping!</li>\n</ol>\n<p><strong>\ud83d\udc47 Choose your set and make your memories stick!</strong></p>",
+      "productType": "",
+      "tags": [
+        "as seen on social",
+        "custom photo magnets",
+        "fridge magnets",
+        "personalized magnets",
+        "photo gifts"
+      ],
+      "availableForSale": true,
+      "totalInventory": 0,
+      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/2-5x3-5-custom-photo-magnets",
+      "createdAt": "2026-09-06T18:44:28Z",
+      "updatedAt": "2026-09-06T18:58:42Z",
+      "seo": {
+        "title": "2.5x3.5 Custom Photo Magnets - Personalized Photo Gifts | Magnet Moments Co.",
+        "description": "Turn your favorite photos into vibrant 2.5x3.5 custom magnets. Sets of 3, 6, 9, or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
+      },
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": "16.99",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "45.99",
+          "currencyCode": "USD"
+        }
+      },
+      "compareAtPriceRange": {
+        "minVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        },
+        "maxVariantPrice": {
+          "amount": "0.0",
+          "currencyCode": "USD"
+        }
+      },
+      "featuredImage": {
+        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/ChatGPTImageSep5_2026_09_31_06PM.png?v=1788720299",
+        "altText": "A stainless steel refrigerator in a bright kitchen, decorated with multiple rectangular photo magnets showing family, pet, and milestone photographs.",
+        "width": 1122,
+        "height": 1402
+      },
+      "images": {
+        "nodes": [
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/ChatGPTImageSep5_2026_09_31_06PM.png?v=1788720299",
+            "altText": "A stainless steel refrigerator in a bright kitchen, decorated with multiple rectangular photo magnets showing family, pet, and milestone photographs.",
+            "width": 1122,
+            "height": 1402
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/ChatGPTImageSep5_2026_09_30_55PM.png?v=1788720299",
+            "altText": null,
+            "width": 1122,
+            "height": 1402
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_8337.jpg?v=1788720385",
+            "altText": "A set of custom square photo prints arranged in a grid on a textured light gray surface. The prints showcase various portrait and family photographs, including a woman in a white dress, a black-and-white dog, a couple, a baby, and a couple in a field, with one print showing a surreal black-and-white scene.",
+            "width": 3727,
+            "height": 4021
+          },
+          {
+            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/IMG_8338.jpg?v=1788720385",
+            "altText": "A collage of seven square custom photo prints arranged on a speckled granite countertop. The prints feature various family and pet photographs, including a couple in a field, a wedding, a baby, a woman in a white dress, a Dalmatian dog, and a person with a white dog.",
+            "width": 4070,
+            "height": 4110
+          }
+        ]
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/54723057385838",
+            "title": "Set of 3",
+            "price": {
+              "amount": "16.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54723057418606",
+            "title": "Set of 6",
+            "price": {
+              "amount": "27.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54723057451374",
+            "title": "Set of 9",
+            "price": {
+              "amount": "35.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54723057484142",
+            "title": "Set of 12",
+            "price": {
+              "amount": "45.99",
+              "currencyCode": "USD"
+            },
+            "availableForSale": true,
+            "quantityAvailable": 0
           }
         ]
       }
@@ -532,327 +467,6 @@
             "title": "Set of 12",
             "price": {
               "amount": "29.99",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
-      "id": "gid://shopify/Product/14905943654766",
-      "handle": "chicago-football-good-better-best-magnet-set-set-of-6",
-      "title": "Chicago Football \u201cGood, Better, Best\u201d Magnet Set (Set of 6)",
-      "description": "Bring the spirit of Soldier Field right to your kitchen! Whether you are celebrating the 1985 glory days or surviving another season of \"cardiac arrest\" football, this set is the perfect way to sho...",
-      "descriptionHtml": "<p><span>Bring the spirit of Soldier Field right to your kitchen! Whether you are celebrating the 1985 glory days or surviving another season of \"cardiac arrest\" football, this set is the perfect way to show your Chi-Town pride.</span></p>\n<p><span>This 6-piece collection captures the true essence of being a Chicago fan\u2014the history, the hustle, and the humor. Featuring iconic \"Bear Down\" slogans, vintage helmet artwork, and the classic motivational quote to keep your spirits high, these magnets are a touchdown for any man cave, office, or fridge.</span></p>\n<p><span>The \"Monsters of the Midway\" Collection Includes:</span></p>\n<p><span>\u2022 </span><span>The Classic Roar:</span><span> Iconic Bear head logo.</span></p>\n<p><span>\u2022 </span><span>The Reality Check:</span><span> \"Rebuilding Since 1985\" (Funny because it\u2019s true!).</span></p>\n<p><span>\u2022 </span><span>The Fan Life:</span><span> \"Good. Better. Best. Cardiac Arrest\" \u2013 for the games that keep you on the edge of your seat.</span></p>\n<p><span>\u2022 </span><span>The History:</span><span> Vintage-style \"Chicago Football 1920\" with helmet graphic.</span></p>\n<p><span>\u2022 </span><span>The Motivation:</span><span> Two variations of the legendary \"Good, Better, Best\" quote.</span></p>\n<p><span>Product Details:</span></p>\n<p><span>\u2022 </span><span>Quantity:</span><span> Set of 6 Magnets</span></p>\n<p><span>\u2022 </span><span>Size:</span><span> 2\" x 2\" (Square)</span></p>\n<p><span>\u2022 </span><span>Material:</span><span> High-quality durable finish with a strong magnetic backing.</span></p>\n<p><span>\u2022 </span><span>Use:</span><span> Perfect for holding up photos, game schedules, or tickets on any magnetic surface.</span></p>\n<p><span>Why You\u2019ll Love Them:</span></p>\n<p><span>At </span><span>Magnet Moments Co.</span><span>, we believe in \"Moments that Stick!\" These aren't just magnets; they are a badge of honor for the loyal fan who sticks by their team through the good, the bad, and the rebuilding years. Grab a set for yourself or gift one to the die-hard fan in your life!</span></p>",
-      "productType": "",
-      "tags": [
-        "Chi town",
-        "Chicago",
-        "Chicago Bears",
-        "Da Bears",
-        "Good Better Best",
-        "Monsters of the midway"
-      ],
-      "availableForSale": true,
-      "totalInventory": 0,
-      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/chicago-football-good-better-best-magnet-set-set-of-6",
-      "createdAt": "2025-12-15T23:42:16Z",
-      "updatedAt": "2026-07-08T21:17:50Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "22.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "22.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/A8326654-E9DF-4E97-B875-7554082C6139.png?v=1765842218",
-        "altText": null,
-        "width": 2400,
-        "height": 1792
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/A8326654-E9DF-4E97-B875-7554082C6139.png?v=1765842218",
-            "altText": null,
-            "width": 2400,
-            "height": 1792
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53075389841774",
-            "title": "Default Title",
-            "price": {
-              "amount": "22.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
-      "id": "gid://shopify/Product/14919794950510",
-      "handle": "retro-wildflower-magnet-set-set-of-8",
-      "title": "Retro Wildflower Magnet Set (Set of 8)",
-      "description": "Bring a touch of eternal spring to your kitchen! This Retro Wildflower Magnet Set features a curated collection of groovy blooms and botanical patterns in warm, nostalgic tones. From terracotta ora...",
-      "descriptionHtml": "<p data-path-to-node=\"4\">Bring a touch of eternal spring to your kitchen! This <b data-path-to-node=\"4\" data-index-in-node=\"67\">Retro Wildflower Magnet Set</b> features a curated collection of groovy blooms and botanical patterns in warm, nostalgic tones.</p>\n<p data-path-to-node=\"5\">From terracotta oranges to dusty pinks and calming blues, these magnets aren't just for holding up grocery lists\u2014they are miniature pieces of art. Whether you are decorating your fridge, office locker, or magnetic whiteboard, these blooms add a pop of color that never fades.<b data-path-to-node=\"6\" data-index-in-node=\"0\"></b></p>",
-      "productType": "",
-      "tags": [
-        "70s Style",
-        "Boho",
-        "Botanical",
-        "Cottagecore",
-        "Cute Stationery",
-        "Floral",
-        "Fridge Magnets",
-        "Gift for Her",
-        "Housewarming Gift",
-        "Kitchen Decor",
-        "Magnet Set",
-        "Office Decor",
-        "Retro",
-        "Spring Decor",
-        "Stocking Stuffer",
-        "Teacher Gift",
-        "Vintage Style",
-        "Wildflower"
-      ],
-      "availableForSale": true,
-      "totalInventory": 10,
-      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/retro-wildflower-magnet-set-set-of-8",
-      "createdAt": "2026-01-01T17:12:37Z",
-      "updatedAt": "2026-07-08T21:17:51Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "25.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "25.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/flowers.jpg?v=1767287605",
-        "altText": "Set of 8 square fridge magnets with retro floral and wildflower patterns in pink, orange, and blue on a stainless steel refrigerator.",
-        "width": 1000,
-        "height": 747
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/flowers.jpg?v=1767287605",
-            "altText": "Set of 8 square fridge magnets with retro floral and wildflower patterns in pink, orange, and blue on a stainless steel refrigerator.",
-            "width": 1000,
-            "height": 747
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53153217020270",
-            "title": "Default Title",
-            "price": {
-              "amount": "25.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 10
-          }
-        ]
-      }
-    },
-    {
-      "id": "gid://shopify/Product/14912725975406",
-      "handle": "the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
-      "title": "\"The Office\" Collection- (Set of 9)",
-      "description": "\"Bears. Beets. Battlestar Galactica.\" Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotab...",
-      "descriptionHtml": "<p><strong>\"Bears. Beets. Battlestar Galactica.\"</strong></p>\n<p><span>Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotable moments from The Office (US).</span></p>\n<p><span>Whether you are a superstitious (or just a little stitious) fan of Michael Scott\u2019s management style, or you appreciate the simpler things in life like Schrute Farms agritourism, this set is the perfect addition to your home or cubicle.</span></p>\n<p><span>They are strong enough to hold up your important memos from corporate, but funny enough to make you smile every time you go for a snack.</span></p>\n<p><strong>The Perfect Gift for the Superfan</strong></p>\n<p><span>These make an excellent gift for birthdays, holidays, or just because you want to tell someone they are the \"World's Best Boss.\"</span><strong></strong></p>",
-      "productType": "",
-      "tags": [
-        "Dunder Mifflin",
-        "Dwight Schrute",
-        "Michael scott",
-        "Pam Beasley",
-        "Prison Mike",
-        "The office"
-      ],
-      "availableForSale": true,
-      "totalInventory": 0,
-      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/the-ultimate-scranton-magnet-set-9-piece-the-office-collection",
-      "createdAt": "2025-12-22T21:27:27Z",
-      "updatedAt": "2026-07-08T21:17:51Z",
-      "seo": {
-        "title": null,
-        "description": "\"Bears. Beets. Battlestar Galactica.\" Transform your refrigerator into the breakroom at Dunder Mifflin. This curated set of nine high-quality magnets captures the most iconic, hilarious, and quotable moments from The Office (US). Whether you are a superstitious (or just a little stitious) fan of Michael Scott\u2019s management style, or you appreciate the simpler things in life like Schrute Farms agritourism, this set is the perfect addition to your home or cubicle. They are strong enough to hold up your important memos from corporate, but funny enough to make you smile every time you go for a snack. The Perfect Gift for the Superfan These make an excellent gift for birthdays, holidays, or just because you want to tell someone they are the \"World's Best Boss.\" What\u2019s Included in the 9-Piece Set: \u2022 Schrute Farms Logo \u2022 Bears. Beets. Battlestar Galactica. Text \u2022 Dundie Award Winner \u2022 \"I feel God in this Chili\u2019s tonight\" Pam quote \u2022 Dwight \"Ignorant Slut\" CPR Training \u2022 Dwight\u2019s CPR Dummy Face Mask \u2022 Prison Mike (\"Da Belle of da Ball\") \u2022 Wayne Gretzky / Michael Scott Inspirational Quote \u2022 World\u2019s Best Boss Mug Product Details: \u2022 Set includes 9 individual square magnets. \u2022 Dimensions: Each magnet measures approximately 2x2 inches. \u2022 Glossy, durable finish. \u2022 Strong magnetic backing"
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "28.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "28.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/AD690B16-7E17-46B7-83AD-51D3F37ECEEB.png?v=1766438867",
-        "altText": "The Office TV show 9-piece fridge magnet set featuring Dwight Schrute and Michael Scott.",
-        "width": 1792,
-        "height": 2400
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/AD690B16-7E17-46B7-83AD-51D3F37ECEEB.png?v=1766438867",
-            "altText": "The Office TV show 9-piece fridge magnet set featuring Dwight Schrute and Michael Scott.",
-            "width": 1792,
-            "height": 2400
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/3B05AACB-6BE2-41F2-BCF6-58E81DB8AE2E.png?v=1766438867",
-            "altText": "Close up of Schrute Farms and Prison Mike funny magnets.",
-            "width": 2400,
-            "height": 1792
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53110668525934",
-            "title": "Default Title",
-            "price": {
-              "amount": "28.0",
-              "currencyCode": "USD"
-            },
-            "availableForSale": true,
-            "quantityAvailable": 0
-          }
-        ]
-      }
-    },
-    {
-      "id": "gid://shopify/Product/14901907784046",
-      "handle": "the-eras-stamp-collection",
-      "title": "The Eras Stamp Collection (Set of 12)",
-      "description": "Capture the magic of every era with this exclusive collection of postage-stamp style magnets. Whether you are in your Reputation era or feeling the Folklore vibes, these magnets are the perfect way...",
-      "descriptionHtml": "<p><span>Capture the magic of every era with this exclusive collection of postage-stamp style magnets. Whether you are in your Reputation era or feeling the Folklore vibes, these magnets are the perfect way to display your fandom on your fridge, locker, or whiteboard.</span></p>\n<p><span>Each magnet features a hand-drawn, minimalist icon representing a specific chapter of the journey\u2014from the cowboy boots and guitars of the beginning to the typewriter of the Tortured Poets Department.</span></p>\n<p><span>Why You\u2019ll Love Them:</span></p>\n<p><span>\u2022 </span><span>The Full Set:</span><span> Includes designs representing all the iconic albums, including the latest TTPD and Life of a Showgirl motifs.</span></p>\n<p><span>\u2022 </span><span>Unique Design:</span><span> The postage stamp border adds a vintage, collectible aesthetic that stands out from standard photo magnets.</span></p>\n<p><span>\u2022 </span><span>Strong Grip:</span><span> Perfect for holding up your concert tickets, Polaroids, or grocery lists.</span><span></span></p>",
-      "productType": "",
-      "tags": [
-        "Eras Tour Merch",
-        "Music Lover",
-        "Swiftie gift ideas"
-      ],
-      "availableForSale": true,
-      "totalInventory": 0,
-      "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/the-eras-stamp-collection",
-      "createdAt": "2025-12-09T03:15:34Z",
-      "updatedAt": "2026-07-08T21:17:50Z",
-      "seo": {
-        "title": null,
-        "description": null
-      },
-      "priceRange": {
-        "minVariantPrice": {
-          "amount": "32.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "32.0",
-          "currencyCode": "USD"
-        }
-      },
-      "compareAtPriceRange": {
-        "minVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        },
-        "maxVariantPrice": {
-          "amount": "0.0",
-          "currencyCode": "USD"
-        }
-      },
-      "featuredImage": {
-        "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/80A8B396-FFA4-4797-9F6D-26B077194D8A.jpg?v=1767287149",
-        "altText": "Set of 12 postage stamp magnets with Taylor Swift inspired designs.",
-        "width": 2400,
-        "height": 1792
-      },
-      "images": {
-        "nodes": [
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/80A8B396-FFA4-4797-9F6D-26B077194D8A.jpg?v=1767287149",
-            "altText": "Set of 12 postage stamp magnets with Taylor Swift inspired designs.",
-            "width": 2400,
-            "height": 1792
-          },
-          {
-            "url": "https://cdn.shopify.com/s/files/1/0954/5501/9374/files/C4E6A0E2-151D-4361-9267-47286E34F593.jpg?v=1767287149",
-            "altText": "Set of 12 postage stamp magnets with Taylor Swift inspired designs on a wooden surface",
-            "width": 5712,
-            "height": 4284
-          }
-        ]
-      },
-      "variants": {
-        "nodes": [
-          {
-            "id": "gid://shopify/ProductVariant/53061552734574",
-            "title": "Default Title",
-            "price": {
-              "amount": "32.0",
               "currencyCode": "USD"
             },
             "availableForSale": true,
