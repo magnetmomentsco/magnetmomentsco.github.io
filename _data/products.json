@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-13T05:20:23.115980+00:00",
+  "lastUpdated": "2026-11-13T13:59:26.166867+00:00",
   "shopifyDomain": "dbx3hf-qe.myshopify.com",
   "productCount": 4,
   "products": [
@@ -268,10 +268,10 @@
         "photo gifts"
       ],
       "availableForSale": true,
-      "totalInventory": -1,
+      "totalInventory": -2,
       "onlineStoreUrl": "https://magnetmomentsco.myshopify.com/products/2-5x3-5-custom-photo-magnets",
       "createdAt": "2026-09-06T18:44:28Z",
-      "updatedAt": "2026-09-19T20:58:26Z",
+      "updatedAt": "2026-11-13T06:56:56Z",
       "seo": {
         "title": "2.5x3.5 Custom Photo Magnets - Personalized Photo Gifts | Magnet Moments Co.",
         "description": "Turn your favorite photos into vibrant 2.5x3.5 custom magnets. Sets of 3, 6, 9, or 12. Perfect for fridges, gifts & any occasion. Fast shipping!"
@@ -340,7 +340,7 @@
               "currencyCode": "USD"
             },
             "availableForSale": true,
-            "quantityAvailable": -1
+            "quantityAvailable": -2
           },
           {
             "id": "gid://shopify/ProductVariant/54723057418606",
